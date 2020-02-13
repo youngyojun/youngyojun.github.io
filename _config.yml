@@ -79,7 +79,7 @@ plugins:
 favicon: /assets/favicon.ico
 
 # Set default keywords (Use a comma to separate)
-keywords: "Jekyll, NexT"
+keywords: "PS, Algorithm"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -87,7 +87,7 @@ keywords: "Jekyll, NexT"
 rss:
 
 # Specify the date when the site was setup
-#since: 2015
+since: 2020
 
 # icon between year and author @Footer
 authoricon: heart
@@ -119,7 +119,7 @@ index_with_subtitle: false
 menu:
   home: /
   #categories: /categories/
-  #about: /about/
+  about: /about/
   archives: /archives/
   tags: /tags/
   #sitemap: /sitemap.xml
@@ -381,7 +381,7 @@ han: false
 # Disqus
 disqus:
   enable: true
-  shortname: Gyojun Youn
+  shortname: youngyojun-github-io
   count: true
   # hide comments (visitors need to click to load the comments)
   # count need to be false when hide is true
