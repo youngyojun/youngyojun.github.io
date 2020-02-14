@@ -14,7 +14,7 @@ type: about
 </p>
 
 <p>
-  Baekjoon Online Judge : <a href = "https://icpc.me/yclock">yclock</a><br>
+  Baekjoon Online Judge : <a href = "https://www.acmicpc.net/user/yclock">yclock</a><br>
   Codeforces : <a href = "https://codeforces.com/profile/GyojunYoun">GyojunYoun</a><br>
   IOI Statistics : <a href = "https://stats.ioinformatics.org/people/6638">Gyojun Youn</a><br>
 </p>
