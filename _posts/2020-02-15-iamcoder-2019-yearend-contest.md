@@ -47,7 +47,7 @@ tags:
 
 여담이지만, "촛불과 그림자"를 제외한 모든 문제의 출제자 정해 코드는 아주 짧다. ("촛불과 그림자" 제외) 평균 C++ 코드 길이는 700 bytes밖에 되지 않는다. 대회 문제의 퀄리티와 풀이의 깔끔함을 강조하고 싶다.
 
-세빈이가 모든 문제의 풀이를 아주 깔끔하게 정리해주었다. <a href="/downloadable_files/iamcoder_2019_yearend_solution.pdf" download>[세빈이의 풀이 슬라이드]</a>
+세빈이가 모든 문제의 풀이를 아주 깔끔하게 정리해주었다. <a href="../downloadable_files/iamcoder_2019_yearend_solution.pdf" download>[세빈이의 풀이 슬라이드]</a>
 
 
 
