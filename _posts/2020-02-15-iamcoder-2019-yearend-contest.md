@@ -1,3 +1,11 @@
+---
+title: "나는코더다 2019 송년대회 이야기"
+categories:
+ - Contest
+ - Review
+tags: 대회, 풀이, 출제, 나는코더다
+---
+
 ### 머릿말
 
 2019년 12월 12일과 14일에 진행되었던 나는코더다 2019 송년대회([교내](https://www.acmicpc.net/contest/view/493) / [Open](https://www.acmicpc.net/contest/view/494))에 관하여, 이제나마 글을 적는다.
