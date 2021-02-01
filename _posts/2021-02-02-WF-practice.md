@@ -47,7 +47,7 @@ tags:
 
 치킨을 먹고 업솔빙을 하면서 다시 풀어보니, Cyclic fragment 조건을 naive하게 확인해도 $O(N \lg N)$라는 사실을 깨달았다. 단지, 한 번 계산한 문자열은 다시 계산하지 않는다는 아이디어를 적용하면 된다.
 
-$O(N^2)$개의 문자열을 비교해야 하기 때문에, $10^9$-scale의 소수 두 개를 이용하여 hash를 구현하였다. 시간 복잡도는 $O(N \lg N)$이며, unordered map/set을 사용하면 $O(N)$이다.
+$O(N^2)$번의 문자열 비교를 해야 하기 때문에, $10^9$-scale의 소수 두 개를 이용하여 hash를 구현하였다. 시간 복잡도는 $O(N \lg N)$이며, unordered map/set을 사용하면 $O(N)$이다.
 
 "한 번 계산한 문자열은 다시 계산하지 않는다" 아이디어와, 문제 조건에서 "A cyclic fragment is a word such that **ALL** its cyclic rotations are subwords"을 올바르게 구현하는데 사소한 실수가 있어서 두 번 틀렸다. 업솔빙을 할 때에도 침착할 필요가 있다.
 
