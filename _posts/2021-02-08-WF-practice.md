@@ -69,7 +69,7 @@ $N \times N$ Binary matrix $M$가 주어질 때, $M$의 permanent $\text{perm } 
 
 $-1 \equiv 1 \mod 2$이므로, $\det M \equiv \text{perm } M \mod 2$이다. 따라서, $\det M \equiv 0 \mod 2$라고 가정해도 좋다.
 
-선형 대수학의 기본 원리에 따르면, $\mathbb{Z}_2^N$에서 $M\mathbf{v} = 0$인 비자명한 해 $\mathbf{v}$가 존재한다. 이러한 벡터를 구하자.
+선형대수학의 기본 정리에 따르면, $\mathbb{Z}_2^N$에서 $M\mathbf{v} = 0$인 비자명한 해 $\mathbf{v}$가 존재한다. 이러한 벡터를 구하자.
 
 $\mathbf{w} := \sum_{i} v_i \mathbf{m}_i$라고 하자. $\mathbf{w}$의 모든 성분은 짝수이다. 편의상, $\mathbf{w}/2 := \frac{1}{2} \mathbf{w}$라고 하자.
 
