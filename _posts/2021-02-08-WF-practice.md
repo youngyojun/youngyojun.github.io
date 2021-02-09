@@ -67,5 +67,9 @@ $N \times N$ Binary matrix $M$가 주어질 때, $M$의 permanent $\text{perm } 
 
 먼저, Determinant $\det M$과 다르게, $\text{perm } M$을 Polynomial time에 계산하는 것은 P = NP보다 더 어려운 문제임이 알려져 있다. 따라서, 조금은 tricky하게 문제를 접근해야 한다.
 
+$-1 \equiv 1 \mod 2$이므로, $\det M \equiv \text{perm } M \mod 2$이다. 따라서, $\det M \equiv 0 \mod 2$라고 가정해도 좋다.
+
+선형 대수학의 기본 원리에 따르면, $\mathbb{Z}_2^N$에서 $M\mathbf{v} = 0$인 비자명한 해 $\mathbf{v}$가 존재한다.
+
 
 
