@@ -73,7 +73,7 @@ $-1 \equiv 1 \mod 2$이므로, $\det M \equiv \text{perm } M \mod 2$이다. 따�
 
 $\mathbf{w} := \sum_ {i} v_i \mathbf{m}_i$라고 하자. $\mathbf{w}$의 모든 성분은 짝수이다. 편의상, $\mathbf{w}/2 := \frac{1}{2} \mathbf{w}$라고 하자.
 
-$\text{perm } \left( \mathbf{w}, \mathbf{m}_ 2, \mathbf{m}_ 3, \cdots, \mathbf{m}_ N \right) = \sum_ {i} v_ i \text{perm } \left( \mathbf{m}_ i, \mathbf{m}_ 2, \mathbf{m}_ 3, \cdots, \mathbf{m}_ N \right)$이다. $v_1 = 1$라면, 이러한 식을 이용하여, $\text{perm } M = \text{perm } \left( \mathbf{m}_ 1, \mathbf{m}_ 2, \cdots, \mathbf{m}_ N \right)$의 값을 알아낼 수 있을 것이다. $\mathbf{v}$가 Non-zero이므로, $v_i = 1$인 $i$가 하나 이상 존재하기에, 이러한 논리는 유효하다.
+$\text{perm } \left( \mathbf{w}, \mathbf{m}_ 2, \mathbf{m}_ 3, \cdots, \mathbf{m}_ N \right) = \sum_ {i} v_ i \text{ perm } \left( \mathbf{m}_ i, \mathbf{m}_ 2, \mathbf{m}_ 3, \cdots, \mathbf{m}_ N \right)$이다. $v_1 = 1$라면, 이러한 식을 이용하여, $\text{perm } M = \text{perm } \left( \mathbf{m}_ 1, \mathbf{m}_ 2, \cdots, \mathbf{m}_ N \right)$의 값을 알아낼 수 있을 것이다. $\mathbf{v}$가 Non-zero이므로, $v_i = 1$인 $i$가 하나 이상 존재하기에, 이러한 논리는 유효하다.
 
 이제, 재미있는 관찰을 하자. $\text{perm } \left( \mathbf{w}, \mathbf{m}_ 2, \mathbf{m}_ 3, \cdots, \mathbf{m}_ N \right) = 2 \text{ perm } \left( \mathbf{w}/2, \mathbf{m}_ 2, \mathbf{m}_ 3, \cdots, \mathbf{m}_ N \right)$이다. 따라서, $\det \left( \mathbf{w}/2, \mathbf{m}_ 2, \mathbf{m}_ 3, \cdots, \mathbf{m}_ N \right) \mod 2$를 계산하면 충분하다.
 
