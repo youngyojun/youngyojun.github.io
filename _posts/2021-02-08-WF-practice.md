@@ -73,9 +73,12 @@ $-1 \equiv 1 \mod 2$이므로, $\det M \equiv \text{perm } M \mod 2$이다. 따�
 
 $\mathbf{w} := \sum_{i} v_i \mathbf{m}_i$라고 하자. $\mathbf{w}$의 모든 성분은 짝수이다. 편의상, $\mathbf{w}/2 := \frac{1}{2} \mathbf{w}$라고 하자.
 
-$\text{perm } \left( \mathbf{w}, v_2, v_3, \cdots, v_N \right) = \sum_{i} v_i \text{perm } \left( v_i, v_2, v_3, \cdots, v_N \right)$이다. $v_1 = 1$라면, 이러한 식을 이용하여, $\text{perm } M = \text{perm } \left( v_1, v_2, \cdots, v_N \right)$의 값을 알아낼 수 있을 것이다. $\mathbf{v}$가 Non-zero이므로, $v_i = 1$인 $i$가 하나 이상 존재하기에, 이러한 논리는 유효하다.
+$\text{perm } \left( \mathbf{w}, \mathbf{m}_2, \mathbf{m}_3, \cdots, \mathbf{m}_N \right) = \sum_{i} v_i \text{perm } \left( \mathbf{m}_i, \mathbf{m}_2, \mathbf{m}_3, \cdots, \mathbf{m}_N \right)$이다. $v_1 = 1$라면, 이러한 식을 이용하여, $\text{perm } M = \text{perm } \left( \mathbf{m}_1, \mathbf{m}_2, \cdots, \mathbf{m}_N \right)$의 값을 알아낼 수 있을 것이다. $\mathbf{v}$가 Non-zero이므로, $v_i = 1$인 $i$가 하나 이상 존재하기에, 이러한 논리는 유효하다.
 
+이제, 재미있는 관찰을 하자. $\text{perm } \left( \mathbf{w}, \mathbf{m}_2, \mathbf{m}_3, \cdots, \mathbf{m}_N \right) = 2 \text{perm } \left( \mathbf{w}/2, \mathbf{m}_2, \mathbf{m}_3, \cdots, \mathbf{m}_N \right)$이다. 따라서, $\det \left( \mathbf{w}/2, \mathbf{m}_2, \mathbf{m}_3, \cdots, \mathbf{m}_N \right) \mod 2$를 계산하면 충분하다.
 
+비슷하게, $\text{perm } \left( \mathbf{m}_i, \mathbf{m}_2, \mathbf{m}_3, \cdots, \mathbf{m}_N \right)$도, 벡터 $\mathbf{m}_i$가 두 번 들어가 있는 형태이므로, 짝수이다. 따라서, Determinant로 치환해서 계산할 수 있다.
 
+이대로 구현하면, Determinant를 $O\left( N^2 \right)$번 계산해야 한다. 하지만, 창의성을 발휘하면, Determinant를 $O(N)$번만 계산해서 잘 처리할 수 있다.
 
-
+나는 Gaussian elimination을 총 $N-1$번 수행한다. 전체 시간복잡도는 $O\left( \frac{N^3}{32} \right)$이다. BOJ는 TL가 1초로 아주 빡빡하게 설정되어 있어, TL 연장 요청을 넣었다.
