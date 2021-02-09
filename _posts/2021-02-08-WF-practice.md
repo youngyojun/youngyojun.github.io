@@ -51,5 +51,17 @@ Convex hull trick의 deque를 Segment tree 형태로 구축하면, 문제를 효
 
 $g \le h^n$을 만족하는 최소 $n$을 찾자. 비둘기집 원리에 의하여, $h$진법으로 $n+1$자리 수이면서, 가장 큰 자릿수가 1이고, 또한 $g$의 배수인 수가 항상 존재한다. 이 수를 $gk$라고 두면 된다.
 
-$h = R(gk, h)$까지 왔다. $R(gk, h) = R(x, gk)$임과 동시에 $\gcd
+$h = R(gk, h)$까지 왔다. $R(gk, h) = R(x, gk)$임과 동시에 $\gcd (x, gk) = g$라야 한다.
+
+먼저, $k = 1$라면, $R(g, h) = R(gh, g)$이며, $\gcd (gh, g) = g$다. 따라서, $x = gh$.
+
+$k > 1$라면, $R(gk, h) = R(ghk + g, gk)$이며, $\gcd (ghk + g, gk) = g$다. 따라서, $x = ghk + g$.
+
+따라서, $O(1)$에 문제를 해결할 수 있다. 46분 AC.
+
+
+
+### [(False) faces](https://www.acmicpc.net/problem/7875)
+
+$N \times N$ Binary matrix $M$가 주어질 때, $\perm M$가 4의 배수인지 판별하는 문제이다.
 
