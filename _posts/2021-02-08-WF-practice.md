@@ -81,4 +81,4 @@ $\text{perm } \left( \mathbf{w}, \mathbf{m}_ 2, \mathbf{m}_ 3, \cdots, \mathbf{m
 
 이대로 구현하면, Determinant를 $O\left( N^2 \right)$번 계산해야 한다. 하지만, 창의성을 발휘하면, Determinant를 $O(N)$번만 계산해서 잘 처리할 수 있다.
 
-나는 Gaussian elimination을 총 $N-1$번 수행한다. 전체 시간복잡도는 $O\left( \frac{N^3}{32} \right)$이다. BOJ는 TL가 1초로 아주 빡빡하게 설정되어 있어, TL 연장 요청을 넣었다.
+나는 Gaussian elimination을 총 $N-1$번 수행한다. 전체 시간복잡도는 $O\left( \frac{N^4}{32} \right)$이다. BOJ는 TL가 1초로 아주 빡빡하게 설정되어 있어, TL 연장 요청을 넣었다.
