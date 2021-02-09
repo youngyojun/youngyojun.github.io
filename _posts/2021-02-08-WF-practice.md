@@ -77,7 +77,7 @@ $\text{perm } \left( \mathbf{w}, \mathbf{m}_ 2, \mathbf{m}_ 3, \cdots, \mathbf{m
 
 이제, 재미있는 관찰을 하자. $\text{perm } \left( \mathbf{w}, \mathbf{m}_ 2, \mathbf{m}_ 3, \cdots, \mathbf{m}_ N \right) = 2 \text{ perm } \left( \mathbf{w}/2, \mathbf{m}_ 2, \mathbf{m}_ 3, \cdots, \mathbf{m}_ N \right)$이다. 따라서, $\det \left( \mathbf{w}/2, \mathbf{m}_ 2, \mathbf{m}_ 3, \cdots, \mathbf{m}_ N \right) \mod 2$를 계산하면 충분하다.
 
-비슷하게, $\text{perm } \left( \mathbf{m}_ 1, \mathbf{m}_ 2, \mathbf{m}_ 3, \cdots, \mathbf{m}_ N \right)$도, 벡터 $\mathbf{m}_i$가 두 번 들어가 있는 형태이므로, 짝수이다. 따라서, Determinant로 치환해서 계산할 수 있다.
+비슷하게, $\text{perm } \left( \mathbf{m}_ 1, \mathbf{m}_ 2, \mathbf{m}_ 3, \cdots, \mathbf{m}_ N \right)$도 벡터 $\mathbf{m}_i$가 두 번 들어가 있는 형태이므로 짝수이다. 따라서, Determinant로 치환해서 계산할 수 있다.
 
 이대로 구현하면, Determinant를 $O\left( N^2 \right)$번 계산해야 한다. 하지만, 창의성을 발휘하면, Determinant를 $O(N)$번만 계산해서 잘 처리할 수 있다.
 
