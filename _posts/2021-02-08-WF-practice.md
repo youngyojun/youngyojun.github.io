@@ -63,7 +63,9 @@ $k > 1$라면, $R(gk, h) = R(ghk + g, gk)$이며, $\gcd (ghk + g, gk) = g$다. �
 
 ### [(False) faces](https://www.acmicpc.net/problem/7875)
 
-$N \times N$ Binary matrix $M$가 주어질 때, $M$의 permanent $\text{perm} M$가 4의 배수인지 판별하는 문제이다.
+$N \times N$ Binary matrix $M$가 주어질 때, $M$의 permanent $\text{perm } M$가 4의 배수인지 판별하는 문제이다.
+
+먼저, Determinant $\det M$과 다르게, $\text{perm } M$을 Polynomial time에 계산하는 것은 P = NP보다 더 어려운 문제임이 알려져 있다. 따라서, 조금은 tricky하게 문제를 접근해야 한다.
 
 
 
