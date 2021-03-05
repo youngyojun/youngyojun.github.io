@@ -47,7 +47,7 @@ $K+1$개의 음이 아닌 실수 $P_0, P_1, \cdots, P_K$가 주어질 때, 다�
 
 구해야 하는 다항식을 $P(x)$라고 하자. 또한, $P^N = c_0 x^0 + c_1 x^1 + \cdots + c_T x^T + \cdots $라고 하자.
 
-$N P^N P' = \left( P^N \right)' P$이므로, 계수 비교를 하면, $c_i$를 $c _{i-K}, \cdots, c _{i-1}$의 선형 결합으로 표현할 수 있다.
+$N P^N P' = \left( P^N \right)' P$이므로, 계수 비교를 하면, $c_i$를 $c _{i-K-1}, \cdots, c _{i-1}$의 선형 결합으로 표현할 수 있다.
 
 따라서, 전체 시간 복잡도는 $O\left( TK \right)$이다.
 
