@@ -27,7 +27,7 @@ $N = n$일 때의 답을 $D_n$이라고 하자. 자명하게, $D_0 = D_1 = 1$이
 
 다음과 같은 점화식은 쉽게 관찰할 수 있다: $D_n = \sum_{l = 1}^{ \lfloor { (n+K) / 2 } \rfloor } D _l D _{n - l}$
 
-$K$가 아주 작으므로, 식을 다음과 같이 변형할 수 있다: $D_n = \sum_{l = 1}^{ n } D _l D _{n - l} + O(K)\text{개의 항}$
+$K$가 아주 작으므로, 식을 다음과 같이 변형할 수 있다: $D_n = \frac{1}{2} \sum_{l = 1}^{ n } D _l D _{n - l} + O(K)\text{개의 항}$
 
 이제, Online FFT Technique을 적용하면, $O\left( NK \lg N \right)$에 해결할 수 있다.
 
