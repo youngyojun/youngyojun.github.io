@@ -11,6 +11,8 @@ tags:
 
 ---
 
+$\newcommand{\abs}[1]{\left\lvert #1 \rvert\right}$
+
 ### [Flip Flow](https://www.acmicpc.net/problem/20906)
 
 모래시계를 시뮬레이션 하는 문제이다.
@@ -67,7 +69,7 @@ Index $i$에 대하여 적용한 값을 $v_i$라고 하자. $-M < v_i < M$이며
     * 즉, $\min f$를 $O \left( N \lg N \right)$에 구할 수 있다.
 * $A_0 = -1$인 경우,
   * $v_0 = -v_0 + B_0$, $2 v_0 = B_0$이므로, 가능한 $v_0$의 값은 최대 두 개이다.
-  * 가능한 모든 $v_0$에 대해, $\sum_i \left | \min \left( v_i, M - v_i \right) \right |$의 값을 계산하면 충분하다.
+  * 가능한 모든 $v_0$에 대해, $\sum_i \abs{ \min \left( v_i, M - v_i \right) }$의 값을 계산하면 충분하다.
 
 
 
