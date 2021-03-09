@@ -61,7 +61,7 @@ Index $i$에 대하여 적용한 값을 $v_i$라고 하자. $-M < v_i < M$이며
 * $A_0 = 1$인 경우,
   * $B_0 \ne 0$이라면, 해가 존재하지 않는다.
   * $B_0 = 0$이라면, 모든 $v_0$에 대해 해가 존재한다. (즉, 해가 총 $M$개 존재한다.)
-    * $f\left( v_0 \right) := \sum_i \left \lvert \min( v_i, M - v_i \right) \right \rvert$라고 하자.
+    * $f\left( v_0 \right) := \sum_i \left \lvert \min \left( v_i, M - v_i \right) \right \rvert$라고 하자.
     * 함수 $f$는 $N$개의 Piecewise-linear function의 합으로 표현할 수 있다.
     * 따라서, $f$의 모든 local minima와 maxima를 전부 알아낼 수 있다.
     * 즉, $\min f$를 $O \left( N \lg N \right)$에 구할 수 있다.
