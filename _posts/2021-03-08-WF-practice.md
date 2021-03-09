@@ -24,7 +24,7 @@ tags:
 다음 조건을 모두 만족하는 길이 $N$의 수열 $\{ a_i \}$의 가짓수를 구하는 문제이다:
 
 * 모든 원소는 음이 아닌 정수이다.
-* $a_i \le A_{i-1} + 1$. $A_i$는 $a_1 \cdots a_i$에서 증가한 횟수.
+* $a_i \le A_{i-1} + 1$. 여기서, $A_i$는 $a_1 \cdots a_i$에서 증가한 횟수.
 * "201 패턴"이 존재하면 안된다.
 
 
@@ -52,7 +52,7 @@ tags:
 
 
 
-Index $i$에 대하여 적용한 값을 $v_i$라고 하자. $-M < v_i < M$이며, $b_i = a_i + v_i + v_{i-1}$를 만족하면서 $\sum_i \left|\min \left( v_i, M - v_i \right) \right|$가 최소가 되는 $\{ v_i \}$를 찾으면 된다.
+Index $i$에 대하여 적용한 값을 $v_i$라고 하자. $-M < v_i < M$이며, $b_i = a_i + v_i + v_{i-1}$를 만족하면서 $\sum_i \left | \min \left( v_i, M - v_i \right) \right |$가 최소가 되는 $\{ v_i \}$를 찾으면 된다.
 
 식을 조금 변형하면, $v_{i-1} + v_i = b_i - a_i =: c_i$를 얻을 수 있다. 즉, $v_i = A_i v_0 + B_i$ 형태로 나타낼 수 있으며, 또한 $A_i = \pm 1$가 성립한다.
 
@@ -61,13 +61,13 @@ Index $i$에 대하여 적용한 값을 $v_i$라고 하자. $-M < v_i < M$이며
 * $A_0 = 1$인 경우,
   * $B_0 \ne 0$이라면, 해가 존재하지 않는다.
   * $B_0 = 0$이라면, 모든 $v_0$에 대해 해가 존재한다. (즉, 해가 총 $M$개 존재한다.)
-    * $f\left( v_0 \right) := \sum_i \left| \min( v_i, M - v_i \right) \right|$라고 하자.
+    * $f\left( v_0 \right) := \sum_i \left | \min( v_i, M - v_i \right) \right |$라고 하자.
     * 함수 $f$는 $N$개의 Piecewise-linear function의 합으로 표현할 수 있다.
     * 따라서, $f$의 모든 local minima와 maxima를 전부 알아낼 수 있다.
     * 즉, $\min f$를 $O \left( N \lg N \right)$에 구할 수 있다.
 * $A_0 = -1$인 경우,
   * $v_0 = -v_0 + B_0$, $2 v_0 = B_0$이므로, 가능한 $v_0$의 값은 최대 두 개이다.
-  * 가능한 모든 $v_0$에 대해, $\sum_i \left| \min \left( v_i, M - v_i \right) \right|$의 값을 계산하면 충분하다.
+  * 가능한 모든 $v_0$에 대해, $\sum_i \left | \min \left( v_i, M - v_i \right) \right |$의 값을 계산하면 충분하다.
 
 
 
@@ -112,7 +112,7 @@ Segment Tree의 이러한 연산은 Lazy Propagation Technique를 이용하면 �
 
 을 들고 있어야 한다.
 
-전체 시간 복잡도는 $O\left( N \lg N right)$, 공간 복잡도는 $O\left( N \right)$이다.
+전체 시간 복잡도는 $O \left( N \lg N \right)$, 공간 복잡도는 $O \left( N \right)$이다.
 
 
 
