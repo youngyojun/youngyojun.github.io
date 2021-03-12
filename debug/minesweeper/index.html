@@ -5,24 +5,73 @@
 	
 	<style type="text/css">
 body {	background-color: #C0C0C0;	}
-#wrapAknaKereso a { text-decoration: none; cursor: default; } /* Remove underline from menus */
-#wrapAknaKereso a:link, #wrapAknaKereso a:visited, #wrapAknaKereso a:active { color: #000000; }
-#wrapAknaKereso a:hover { color: #0000CC; }
-#wrapAknaKereso .focus_box { width: 40; position: absolute; z-index: 2; top: 10; left: -200; }
-#wrapAknaKereso {
+#wrapMinesweeper a { text-decoration: none; cursor: default; } /* Remove underline from menus */
+#wrapMinesweeper a:link, #wrapMinesweeper a:visited, #wrapMinesweeper a:active { color: #000000; }
+#wrapMinesweeper a:hover { color: #0000CC; }
+#wrapMinesweeper .focus_box { width: 40; position: absolute; z-index: 2; top: 10; left: -200; }
+#wrapMinesweeper {
+	float: left;
+	margin-right: 10px;
 	background-color: #C0C0C0;
+}
+
+.rankTable {
+	float: left;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 200px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.rankTable thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+.rankTable th,
+.rankTable td {
+    padding: 6px 8px;
+}
+.rankTable tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.rankTable tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.rankTable tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+.rankTable tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
 }
 	</style>
 </head>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<!-- <script type="text/javascript" src="script.js"></script> -->
-<script type="text/javascript" src="https://raw.githack.com/youngyojun/youngyojun.github.io/master/debug/minesweeper/script.js"></script>
-<body onload="initMines('Expert');">
+<script type="text/javascript" src="script.js" charset="utf-8"></script>
+<body onload="init();">
 
-<div id="wrapAknaKereso">
-	<div id="aknaKereso">
+<div id="wrapMinesweeper">
+	<div id="minesweeper">
 	</div>
+</div>
+
+<div id="WrapRanking">
+	<table class="rankTable">
+		<thead>
+			<tr>
+				<th>Rank</th>
+				<th>Name</th>
+				<th>Time</th>
+			</tr>
+		</thead>
+		<tbody id="rankTableBody">
+		</tbody>
+	</table>
 </div>
 
 </body>

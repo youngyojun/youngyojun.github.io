@@ -69,6 +69,8 @@ let openRemainingUsed = false;            // Was openRemaining used by the playe
 
 
 // Variables for the clock time
+let clockStartTime = 0;
+let clockEndTime = 0;
 let clockMoving  = false;                 // Is it moving?
 let clockActive  = false;                 // Should it be moving?
 let killLastClock= false;                 // To start new time w/ old still running
@@ -258,8 +260,50 @@ function cursorClearLoc(x, y) {
 function winShowWindow() {
    win = true;
 
+   const clearTime = ((clockEndTime - clockStartTime) / 1000).toFixed(3);
+   const nowISOString = (new Date()).toISOString();
+
+
+   // TODO : level to playedLevel
+   const username = prompt(
+      `축하합니다! ${numMoves}번의 조작으로 ${clearTime}초만에 ${gameFormat} 단계를 완료하였습니다.\n이름을 입력해주세요:`,
+      '이름',
+   );
+
    // TODO
-   console.log(clockCurrent, numMoves, openRemainingUsed);
+   console.log(username, clearTime, numMoves, openRemainingUsed, expertRankList);
+
+   //if(true || expertRankList.length < 10 || clearTime <= expertRankList[9].time) {
+   {
+      const data = {
+         timestamp: nowISOString,
+         time: clearTime,
+         name: username,
+      };
+
+      console.log(data);
+
+      let formBody = [];
+      for(const property in data) {
+         const encodedKey = encodeURIComponent(property);
+         const encodedValue = encodeURIComponent(data[property]);
+         formBody.push(encodedKey + "=" + encodedValue);
+      }
+      formBody = formBody.join("&");
+
+      console.log('post', data, formBody);
+
+      fetch("https://script.google.com/macros/s/AKfycbyNKXnUccdbfNX0uLuUhGcK2qN73slaitATIIYvJAv_dYbz8335GUXItQqu4ERLEvC3/exec?sheetName=rank/Expert", {
+         method: "POST",
+         headers: {
+            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+         },
+         body: formBody,
+      }).then((response) => console.log(response))
+   }
+
+
+
    /*
    ("gameTime",clockCurrent);
    ("numMoves",numMoves);
@@ -850,13 +894,14 @@ function updateNumBombs() {
 function ticClock() {
    if(!killLastClock) {
       if(clockMoving) {
-         clockCurrent++;
+         const now = new Date();
+         clockCurrent = Math.floor((now - clockStartTime) / 1000);
       }
       if((clockMoving) && (clockCurrent < 1000)) // Max out display at 999
          updateClock(); 
       clockActive = clockMoving;
       if(clockActive)  {              // Always do the recursive call last
-         id = setTimeout("ticClock()",1000);
+         id = setTimeout("ticClock()", 500);
       }
    }
 
@@ -867,6 +912,7 @@ function ticClock() {
 //   SPECIAL NOTE: This function doesn't actually stop the clock: it
 //   directs the ticClock fn to stop ticking upon its next recusrive call.
 function clockStop() {
+   clockEndTime = new Date();
    clockMoving = false;
 }
 
@@ -888,6 +934,9 @@ function clockStart() {
    // Stop the clock (sets a temp variable for later interigation)
    clockWasActive = clockActive;
    clockMoving = true;
+
+   clockStartTime = new Date();
+
    ticClock();
    // harder part: We're still running.  Tells ticClock to kill old clock.
    if(clockWasActive) {
@@ -939,10 +988,75 @@ function initMines(level) {
 	stri += '<img src="images/minesweeper/borderbr.gif" alt="" /><br />\n';
 	stri += '</td></tr></table>\n';
 	stri += '</div>\n';
-	document.getElementById("aknaKereso").innerHTML = stri;
+	document.getElementById("minesweeper").innerHTML = stri;
 	document.getElementById("divBoard").style.visibility = "visible";
 	
    boardImages = document.images; // TODO
    
    faceClick_first();
+}
+
+
+
+let expertRankList = [];
+
+
+function makeRankingTable() {
+   const oldTbody = document.getElementById('rankTableBody')
+
+   const tbody = document.createElement('tbody');
+   tbody.setAttribute('id', 'rankTableBody');
+   
+   // Add list
+   for(let i = 0; i < expertRankList.length; i++) {
+      const row = tbody.insertRow(i);
+
+      const cellRank = row.insertCell(0);
+      const cellName = row.insertCell(1);
+      const cellTime = row.insertCell(2);
+
+      cellRank.innerHTML = String(expertRankList[i].rank);
+      cellName.innerHTML = expertRankList[i].name;
+      cellTime.innerHTML = String(expertRankList[i].time);
+   }
+
+   oldTbody.parentNode.replaceChild(tbody, oldTbody);
+}
+
+
+function init() {
+   fetch("https://script.google.com/macros/s/AKfycbyNKXnUccdbfNX0uLuUhGcK2qN73slaitATIIYvJAv_dYbz8335GUXItQqu4ERLEvC3/exec?sheetName=rank/Expert")
+   .then(response => response.json())
+   .then(data => {
+      if(data.ok) {
+         const rankList = data.data;
+         rankList.sort(function (a, b) {
+            if(a.time != b.time)
+               return a.time - b.time;
+            
+            if(a.timestamp != b.timestamp)
+               return a.timestamp < b.timestamp ? -1 : 1;
+            
+            if(a.name != b.name)
+               return a.name < b.name ? -1 : 1;
+            
+            return 0;
+         });
+         if(10 < rankList.length) {
+            rankList.length = 10;
+         }
+         rankList.forEach((value, index) => {
+            value.rank = index + 1;
+         });
+         expertRankList = rankList;
+
+         makeRankingTable();
+      }
+   })
+   .catch(e => {
+      console.log('FETCH ERROR', e);
+   });
+
+
+   initMines('Expert');
 }
