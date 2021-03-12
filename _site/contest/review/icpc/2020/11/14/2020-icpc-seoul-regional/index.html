@@ -1,0 +1,1510 @@
+
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next muse use-motion" lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/assets/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/assets/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="대회,풀이,ICPC,후기," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ICPC Seoul 인터넷 예선">
+<meta name="keywords" content="대회, 풀이, ICPC, 후기">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2020 ICPC Seoul Regional 후기">
+<meta property="og:url" content="http://localhost:4000/contest/review/icpc/2020/11/14/2020-icpc-seoul-regional/">
+<meta property="og:site_name" content="Gyojun Youn's PS Blog">
+<meta property="og:description" content="ICPC Seoul 인터넷 예선">
+<meta property="og:locale" content="ko">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2020 ICPC Seoul Regional 후기">
+<meta name="twitter:description" content="ICPC Seoul 인터넷 예선">
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '작성자'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://localhost:4000/"/>
+
+
+
+
+
+  <title>2020 ICPC Seoul Regional 후기 | Gyojun Youn's PS Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-158383928-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="ko">
+
+  
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gyojun Youn's PS Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">@youngyojun, @GyojunYoun, and @yclock's PS Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            홈
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            카테고리
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            아카이브
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            태그
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            검색
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="" spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+<div id="posts" class="posts-expand">
+  
+  
+
+  
+
+  
+  
+  
+
+  <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/contest/review/icpc/2020/11/14/2020-icpc-seoul-regional/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gyojun Youn">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="assets/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gyojun Youn's PS Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+          
+          
+            2020 ICPC Seoul Regional 후기
+          
+        </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">작성일</span>
+              
+              <time title="" itemprop="dateCreated datePublished" datetime="2020-11-14T20:52:30+09:00">
+                2020-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/Contest" itemprop="url" rel="index">
+                    <span itemprop="name">Contest</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/Review" itemprop="url" rel="index">
+                    <span itemprop="name">Review</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/ICPC" itemprop="url" rel="index">
+                    <span itemprop="name">ICPC</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/contest/review/icpc/2020/11/14/2020-icpc-seoul-regional/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="/contest/review/icpc/2020/11/14/2020-icpc-seoul-regional/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+            
+                <div class="post-description">
+                    
+                </div>
+            
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <h3 id="icpc-seoul-인터넷-예선">ICPC Seoul 인터넷 예선</h3>
+
+<p>나는 dlalswp25, sebinkim와 함께 “Let Us Win ICPC WF”라는 팀명으로 처음으로 ICPC에 참가하였다.</p>
+
+<p>인터넷 예선 때에는 8문제를 풀어 서울대학교 턱걸이로 본선에 진출하였다. 원래라면 10문제 이상 풀어야 함이 맞지만, 우리가 이렇게 말렸던 이유는 크게 세 가지라고 생각한다:</p>
+
+<ol>
+  <li>8문제만 풀어도 안정권으로 본선에 진출할 것이라고 착각하였으며, 실제로 어떠한 위기 의식도 느끼지 못했다.</li>
+  <li>dlalswp25가 크게 캐리한 반면, 나와 sebinkim은 크게 말렸다. sebinkim은 초반부터 2시간 가까이 A를 잡았고, 나는 풀이가 나온 B, G를 오랜 시간 코딩했지만 결국 맞지 못했다. sebinkim가 J의 $O((N+K) \lg^2 N)$ 풀이를 알아내고, 상당 시간 투자하여 구현을 했는데, TLE 판정을 받은 것 또한 아쉬웠다. 대회 말미에 dlalswp25가 A를 맞음으로써 8 solves로 마무리할 수 있었는데, 지금 돌이켜보면 상당히 아찔한 상황이 아닐까 싶다. ㅋㅋ;</li>
+  <li>팀원 모두가 대회 환경에 익숙치 않았다. 대회용 컴퓨터로 sebinkim의 Ubuntu 환경 노트북을 사용하였는데, 나와 dlalswp25는 단축키 등에 익숙하지 않아 자주 sebinkim을 불렀다. 신양학술정보관에서 시험을 친 지라 프린트를 할 수 있는 환경이었지만, 프린트 전용 충전 카드(?)를 미리 준비하지 않아, 노트북 화면을 반으로 나누어 한쪽은 코딩을 하고 한쪽은 문제를 띄우는 형식으로 대회를 치루었다. 결과적으로 코딩의 흐름도 끊기고 문제 이해에도 시간 지연이 발생하였다.</li>
+</ol>
+
+<p>솔직히 말해서 팀원 셋 중 한 명만 대회에 참가하고, 나머지 둘은 옆에서 놀고만 있었어도 이보다 좋은 성적을 거두지 않았을까 생각한다. 많은 주변 사람들은 “윤교준 똑떨”을 기대했지만, 어찌어찌 붙어서 다행이다.</p>
+
+<h3 id="prepare-the-contest">Prepare the contest</h3>
+<p>인터넷 예선 결과를 보고 부족한 점이 정말 많음을 깨달았다. 팀원 세 명이 모두 Codeforces red coder으로, 개개인의 PS 역량만을 본다면 전혀 꿇릴게 없다고 나는 장담한다. 아마 우리 모두 ‘팀 연습의 부재’가 가장 큰 패인이라고 깨달은 듯 하다.</p>
+
+<p>팀원 세 명 모두 각자의 스케쥴에 치어 살아, 팀 연습은 커녕 개인 PS 연습할 시간도 부족하였다. 그럼에도 불구하고, 두 번의 팀 연습을 진행하면서, 이것저것 암묵의 룰을 만들었던 것 같다. 컴퓨터 독점하지 않기, 나보다 쉽고 빠른 구현이 가능한 문제를 잡은 사람에게 우선적으로 컴퓨터를 넘겨주기, 구현의 대략적인 틀을 완성하고 키보드를 잡기, 문제를 읽거나 풀이를 생각하거나 손코딩을 해보는 등 시간을 낭비하지 않기, …</p>
+
+<h3 id="before-the-contest">Before the contest</h3>
+
+<p>인터넷 예선처럼, 본선 대회도 신양학술정보관을 사용하려고 전날에 예약을 해두었다. 그런데, 당일 오전 10시 반에 dlalswp25와 함께 가보니, 왁스칠을 해서 예약한 방을 하루종일 사용할 수 없다는 청천벽력의 이야기를 들었다. 거의 멘붕의 상태로, 프린터가 되는 독립적인 공간을 찾고자 한 시간동안 노력했지만, 결국 바로 옆 공대 건물의 빈 강의실을 무단 점거해서 시험을 치뤘다. 이 과정에서 나는 1년치에 해당하는 운동을 했고, 많은 체력 소모가 있었다.</p>
+
+<h3 id="timeline">Timeline</h3>
+
+<h4 id="0--4-min">0 ~ 4 min.</h4>
+
+<p>대회 직전에 장소 소동이 있었던지라, 대회 환경 세팅을 아마도 꼴찌로 한 듯 싶다. 덕분에, 대회가 시작하고서 신원 검사와 책상 위 확인이 이루어졌다.</p>
+
+<p>sebinkim가 12문제의 Description pdf를 하나씩 다운받아 USB에 옮기는 작업을 하였다. 통합본 pdf가 없는 건지, 있는데 우리가 못 찾은 건지는 모르겠지만, 아무튼 초반의 꽤 긴 시간이 의미없게 흘러갔다.</p>
+
+<h4 id="4--10-min">4 ~ 10 min.</h4>
+
+<p>USB에 담긴 12개의 pdf를 인쇄하기 위해, 강의실에서 신양학술정보관 2층으로 뛰어가, 컴퓨터에 USB를 꽂고, 12개의 pdf를 하나하나 열어 Ctrl+P를 한 후, 용지 크기를 A4로 설정하여 인쇄를 시도하고, 복합기의 ‘작업 현황’에 들어간 다음, 다시 12개의 인쇄 작업을 모두 활성화해서, 문제를 모두 인쇄하였다.</p>
+
+<p>근데 망할 자리 비움은 3분만 가능한데, 강의실에서 신양학술정보관으로 전속력으로 뛰면 정확하게 왕복 2분이 걸린다. 그래서 강의실에서 뛰어가서, 인쇄 버튼 6개 누르고, 다시 강의실로 돌아와서 3분 체크하고, 다시 뛰어가서, 나머지 6개 인쇄하고, 다시 돌아오는 미친 짓을 했다.</p>
+
+<h4 id="7-min">7 min.</h4>
+
+<p>강의실에서 노트북으로 문제를 읽는 sebinkim과 dlalswp25는 각각 A, B가 쉬움을 깨닫고 이 문제를 잡았다.</p>
+
+<p>B는 실버 난이도의 주는 문제였고, dlalswp25가 코딩해서 맞았다.</p>
+
+<h4 id="10--15-min">10 ~ 15 min.</h4>
+
+<p>이미 체력 소모를 한 상태에서 4분 왕복 달리기를 한 나는, 체력 방전이 너무 심했다. dlalswp25가 출력물을 가지러 신양학술정보관으로 다녀올 동안, 나는 블랙 보리를 마시면서 헉헉대기만 했다. 이게 PS 대회인지 달리기 대회인지…</p>
+
+<p>문제 분배는 sebinkim가 ABCD, dlalswp25가 EFGH, 내가 IJKL을 잡도록 이루어졌다.</p>
+
+<h4 id="23-min">23 min.</h4>
+
+<p>I, J는 영어가 어려워 제대로 읽지 않았고, K는 레전드 타일링 문제, L은 문제가 상당히 단순한 수열 문제임을 알았다.</p>
+
+<p>sebinkim은 A를 코딩했지만, 예제가 나오지 않았고, 쉬운 문제 E를 푼 dlalswp25에게 바로 노트북을 넘겨주었다.</p>
+
+<p>dlalswp25는 E를 뚝딱 짜더니 한 번에 맞았다.</p>
+
+<p>E는 말을 쓸때없기 길게 늘여쓴 재미 없는 게임 문제인데, dlalswp25가 쉽다고 하지 않았다면, 나는 이게 쉬운 문제인 줄 몰랐을 듯 하다. dlalswp25가 이런 유형의 문제에 강하다는 것을 세삼 느꼈다.</p>
+
+<h4 id="32-min">32 min.</h4>
+
+<p>나는 문제를 풀고 있을 동안, sebinkim과 dlalswp25가 번갈아가면서 노트북을 잡았다.</p>
+
+<p>dlalswp25가 C를 맞았다고 해서 그냥 그런가보다 싶었는데, 10분만에 읽고 어케 짜서 맞았는지 모르겠다ㅋㅋ.</p>
+
+<p>C는 Description이 아주 더럽게 쓰여있는데, 두 아파트 단지 사이에 존재하는 모든 정점은 좋은 지역이라는 사실을 관찰하면 쉽게 풀 수 있다.</p>
+
+<h4 id="42-min">42 min.</h4>
+
+<p>지금까지 문제를 제출하면서 스코어보드 염탐을 계속 하고 있었는데, 우리 팀은 1211789 팀의 꽁무니를 열심히 잘 쫒고 있었다.</p>
+
+<p>스코어보드에서 J가 풀렸다는 이야기를 듣고, 영어 때문에 포기했던 문제인 J를 다시 한 번 읽어보았다.</p>
+
+<p>문제에서 요구하는 것이 “Do you know RREF? I know Gaussian Elimination!”임을 깨닫고, 가우스 소거법을 뚝딱 짜서 맞았다.</p>
+
+<p>bitset을 썼기 때문에, 시간 복잡도는 $O \left( \frac{N^3}{64} \right)$며, 상당히 간결한 코딩을 할 수 있었다.</p>
+
+<p>대회에서 첫 코딩이었는데 말리지 않아서 기분이 좋았다.</p>
+
+<h4 id="46-min">46 min.</h4>
+
+<p>내가 코딩이 끝나자마자, sebinkim가 노트북을 잡고 G를 짰다.</p>
+
+<p>G는 Description이 상당히 마음에 들지 않게 적혀 있는데, 암튼 $X_i \pm d \times i$의 평균을 관찰하면 된다.</p>
+
+<h4 id="1-hour-중간-점검">1 hour 중간 점검</h4>
+
+<p>대회 초반 한 시간동안 BCEGJ 다섯 문제를 풀었고, 놀랍게도 한 번도 틀리거나 말리지 않았다.</p>
+
+<p>당시 1등인 1211789 팀과 같은 수의 문제를 풀었는데, 패널티 차이가 조금씩 벌어지기 시작해서, ‘문제 수로 이겨야 한다’는 마인드로 앞으로의 시간을 임했다.</p>
+
+<h4 id="70-min">70 min.</h4>
+
+<p>우리는 ‘쉬운 문제는 전부 풀었다’라고 생각하는 시기었는데, rkm0959 팀이 H를 풀었다는 소식을 들었다.</p>
+
+<p>sebinkim과 dlalswp25는 H를 읽다가 기하 같아서 뒤로 미루어 두었다길래, 내가 읽었고, 수열 $A$, $B$, $C$가 주어질 때, $A_i - 2 B_j + C_k = 0$을 만족하는 세 순서쌍 $(i, j, k)$의 개수를 찾는 문제임을 깨달았다.</p>
+
+<p>각 수의 범위가 상당히 작다는 사실을 보고, FFT 기초 문제라는 것을 알았다. 팀노트에 적힌 코드를 이용해서, $O(N + X \log X)$에 해결하였다.</p>
+
+<h4 id="88-min">88 min.</h4>
+
+<p>sebinkim가 한 번의 WA를 받고, 뚝딱뚝딱 하더니 결국 고쳐서 A를 맞았다.</p>
+
+<p>A는 500개의 수직/수평 선분이 주어질 때, 문제에서 하라는 것을 짜면 되는 구현 문제이다. 다만, 상당히 할 게 많고 실수할 요소 또한 많다고 생각한다.</p>
+
+<h4 id="98-min">98 min.</h4>
+
+<p>나는 L을 읽고, ICPC WF 2017 D “Money for Nothing”임을 깨달았지만, 분할 정복을 통한 $O(N \lg^2 N)$ 풀이밖에 관찰하지 못하였다. 아무리 생각해도 더 좋은 접근을 찾을 수 없어, dlalswp25한테 넘겼었다.</p>
+
+<p>나는 수열을 2~3개의 구간으로 나눌 생각을 했던 반면에, dlalswp25는 수열의 최댓값에 집중하였다. 답은 항상 수열의 최댓값을 한쪽 끝으로 갖거나, 최댓값을 기준으로 좌우로 분포함을 관찰하였고, 여기에 “Money for Nothing” 풀이를 적용해서 $O(N \lg N)$ 풀이를 얻었다.</p>
+
+<p>바로 코딩에 들어가서 뚝딱 짜고 냈는데, WA가 나와서 살짝 흔들렸었다. 88 ~ 98 min. 때, Naïve 풀이와 DM을 짜서 돌려보았고, 운 좋게 반례를 얻을 수 있었다.</p>
+
+<p>Divide &amp; Conqure 과정에서 인덱싱이 잘못 되어있음을 알아냈고, 고쳐서 맞았다. 하면 안되는 실수를 해서 속상했다.</p>
+
+<h4 id="100-min-중간-점검">100 min. 중간 점검</h4>
+
+<p>이제 정말로, 쉬운 문제는 전부 해치웠다고 생각했다. 이때 우리는 ABCEGHJL, 8문제를 해결했고, 당시 1등이었다.</p>
+
+<p>2등인 1211789 팀은 7문제를 풀어, 우리가 한 문제 앞서 나가고 있었고, I 빼고 남들이 푼 문제는 전부 풀은 상태였다.</p>
+
+<p>I는 내가 잡았던 문제로, 열심히 고민했지만 $O((N^2 + M) \lg N)$ 풀이는 발견하지 못했고, 그렇다고 $O((N^2 + M) \lg^2 N)$을 구현하기에는 TLE를 받을 거 같았다.</p>
+
+<p>내가 H, L을 코딩할 동안, sebinkim과 dlalswp25가 열심히 토론하더니, 2D Fenwick $O((N^2 + M) \lg^2 N)$ 풀이를 발견하였다. 자료구조가 Fenwick으로 상당히 가벼운 점은 좋았으나, ‘이게 정말 맞을까?’와 ‘이게 정말 의도된 풀이일까?’라는 생각 때문에, 바로 구현할 용기가 나지 않았다.</p>
+
+<p>적당한 논의 끝에, sebinkim가 I를 한 번 짜보기로 하고, 나와 dlalswp25는 남은 DFK를 의논하기 시작하였다.</p>
+
+<h4 id="117-min">117 min.</h4>
+
+<p>I 구현을 마친 sebinkim가, “나 구현 다했어. 이거 내볼까?” 하길래, “맞으면 장땡이다, 한 번 내봐 ㄱㄱ”했다.</p>
+
+<p>기대 반, 의심 반으로 제출 결과를 기다렸는데, 어머나, 맞아버렸다.</p>
+
+<p>sebinkim가 I를 맞아버려, 1등과 2등의 차이는 두 문제로 벌어졌고, 아마 이 때부터 승기가 우리 팀으로 넘어오지 않았나 싶다.</p>
+
+<p>나중에 I 코드를 분석해보니, Fenwick의 수행 시간은 인덱스의 켜져 있는 bit 수에 비례한다는 이상한 성질이 잘 적용되어, 전체 시간 복잡도가 $O\left( \frac{ N^2 \lg^2 N }{8} + M \lg^2 N \right)$로 나왔다. 아ㅋㅋ 이거는 인정이지ㅋㅋ.</p>
+
+<h4 id="2-hours-마지막-점검">2 hours 마지막 점검</h4>
+
+<p>대회는 세 시간이 남았고, 문제도 세 개가 남았다. 각자 한 문제씩 맡아서 한 시간씩 코딩해서 해결하자는 전략을 내세웠다.</p>
+
+<p>DF는 문제 조건이 아주 복잡해서, 영어를 못하는 내가 이해하기에는 너무 어려웠다. 결국, 나는 K를, sebinkim과 dlalswp25는 DF를 맡았다.</p>
+
+<h4 id="150-min">150 min.</h4>
+
+<p>많은 어려움이 있었지만, dlalswp25가 DF를 읽어, 팀원 모두에게 문제 내용을 인지시켰다.</p>
+
+<p>나는 K에서 두께가 1이 아닌 부분을 뭉친 후, Tree 형태로 생각해서 Bottom-up으로 해결하면 됨을 관찰하였고, dlalswp25와 논의하면서 풀이를 다듬었다. 논의 끝에, 구현은 상당히 거지같지만 풀이가 정당하다는 확신을 얻었고, 바로 K 구현에 착수하였다.</p>
+
+<p>K가 풀린다는 소식을 널리 알리고, sebinkim과 dlalswp25가 DF에만 집중할 수 있도록 하였다.</p>
+
+<h4 id="190-min">190 min.</h4>
+
+<p>25분만에 더러운 K 구현을 마치고, 손수 만든 $16 \times 16$ 격자판 입력을 넣었는데, 답이 나오지 않음을 알아차렸다.</p>
+
+<p>다행히, assert문을 잔뜩 집어넣어, 디버깅에는 큰 어려움이 없었다. 하지만, K 풀이가 원래 생각했던만큼 단순하지 않다는 것은 확실하게 알 수 있었다.</p>
+
+<p>조금 더 생각한 후, 풀이의 전체적인 틀을 뜯어 고칠 필요는 없음을 알았다. 코드의 예쁨을 포기하고, 예외 처리 구문을 덕지덕지 붙여나갔고, 모든 예외에 대해 해결하고 나니 6000 bytes의 구데기 결과물을 볼 수 있었다.</p>
+
+<p>sebinkim과 dlalswp25에게 K 코딩을 마쳤음을 알리고, 적당한 입력 데이터를 요구하였다. sebinkim가 제안한 입력을 넣었고, 답이 올바름을 확신했다.</p>
+
+<p>K를 제출하고 AC를 받았다. 틀렸다면 엄청난 디버깅 지옥에 빠질 수도 있었던 순간이었는데, 정말 짜릿하고 행복하였다. 덕분에, 바지에 지리지 않고 교양 있게 화장실을 다녀올 수 있었다.</p>
+
+<h4 id="206-min">206 min.</h4>
+
+<p>이제 DF가 남았다. K를 구현하면서 둘의 대화를 전부 엿듣고 있었기 때문에, 합류할 때 큰 어려움은 없었다.</p>
+
+<p>나는 제대로 이해도 못한 F를 sebinkim가 Dominator Tree를 쓰면 풀린다고 주장하였고, 이에 dlalswp25도 수긍하는 분위기 같아서, F는 개입하지 않았다.</p>
+
+<p>sebinkim에게 노트북을 바로 넘겨주었고, 나는 지금까지 나온 D의 접근을 다시 한 번 검증하였다.</p>
+
+<p>팀노트를 보고 뚝딱뚝딱 하더니, sebinkim가 F를 제출해서 맞았다. sebinkim은 자신이 한 것은 랩노트를 베낀 것 뿐이다라고 주장하지만, 나는 F를 읽고 Dominator가 떠오른 sebinkim가 참 대단하게 느껴졌다. 대회가 끝나고 다른 팀의 이야기를 들어보니, F에서 SCC로 말렸다는 이야기가 꽤 나왔다. 난 아직도 F를 읽고 Dominator와 연관이 있음을 떠올리지 못하겠다. ㅋㅋ;</p>
+
+<h4 id="239-min">239 min.</h4>
+
+<p>이제 D만 남았다! 심장이 쿵쾅쿵쾅 뛴다. 평소에도 하지 못한 올솔브를 ICPC Seoul Regional에서 할 수 있다는 점이 믿기지 않았다.</p>
+
+<p>sebinkim가 F 구현을 할 동안, dlalswp25와 논의를 하면서, 결국 $O(N^2 ( \Delta + \lg N))$ 즈음에 동작하는 풀이를 얻었다.</p>
+
+<p>나라면, 아무 생각 없이 2D Segment Tree를 짜서 뚝딱 돌리는 이 풀이를 짰겠지만, sebinkim가 굳이 그럴 필요까지는 없다면서, 풀이를 개선하였다.</p>
+
+<p>마지막 문제인 D를 sebinkim가 구현하기 시작했으며, 구경과 떠드는 것 밖에 할 게 없는 나와 dlalswp25는 D의 입출력을 만들었다.</p>
+
+<p>sebinkim은 뚝딱 잘 짰고, 예제와 만든 입력을 넣어, 올바른 답이 나옴을 확인하였다. 제출해서 WA를 받았지만, 단순한 실수를 저지름을 바로 깨달았고, 고쳐서 AC! 이렇게 우리는 12문제를 4시간만에 전부 풀어버렸다.</p>
+
+<p>D는 재미있는 아이디어가 몇 가지 요구되며, 약간의 전처리가 필요할 뿐, 어려운 구현 테크닉이 요구되지는 않는다. 그러나, 아이디어 자체를 떠올리는 과정이 살짝 까다롭다는 점과, D에서 요구하는 엄청나게 많은 요구사항이, 많은 팀이 D를 포기하게 만들지 않았을까 생각한다.</p>
+
+<h4 id="after-240-min">After 240 min.</h4>
+
+<p>일단 환호성을 엄청 질렀다. 솔직히, 저 상황에서 웃음꽃이 만개하지 않으면 감정이 매마른 사람일 것이다.</p>
+
+<p>우리가 K를 맞은 직후, 스코어보드가 Freeze 되었다. 스코어보드의 정보를 바탕으로, 우리와 다른 팀의 패널티를 계산하였고, Disqualify되지 않는 이상 1등임을 확신하였다.</p>
+
+<p>한 시간 동안, 무얼 했느냐 하면… 그냥 문제와 대회에 대해서 떠들었다. 모든 문제의 내용과 풀이를 공유하였고, 반성과 칭찬의 시간을 가졌고, WF 준비는 어떻게 할 것인가 등등…</p>
+
+<p>WF에 나가게 된 덕분에, 팀명에 대한 걱정이 배로 늘어났다ㅋㅋ. 이거 팀명 바꿀 수는 없는 건가..?</p>
+
+<h4 id="after-the-contest">After the contest</h4>
+
+<p>우리는 1등임을 확신할 수 있기에, 자축의 의미로 바로 소고기를 먹으러 갔다.</p>
+
+<p>고기집에서 스코어보드 공개를 지켜보면서 먹는 소고기는 정말 맛있다.</p>
+
+<p>팀원 sebinkim과 dlalswp25, 오늘 대회 정말로 수고했고, 아주 좋은 퍼포먼스를 보여주어 고맙다.</p>
+
+<p>내년에도 이 구성으로 한 번 더 ICPC에 나갈 수 있음 좋겠다.</p>
+
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            
+            <a href="/tag/#/%EB%8C%80%ED%9A%8C" rel="tag"># 대회</a>
+          
+            
+            <a href="/tag/#/%ED%92%80%EC%9D%B4" rel="tag"># 풀이</a>
+          
+            
+            <a href="/tag/#/ICPC" rel="tag"># ICPC</a>
+          
+            
+            <a href="/tag/#/%ED%9B%84%EA%B8%B0" rel="tag"># 후기</a>
+          
+        </div>
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+        <div class="post-nav" id="post-nav-id">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/icpc/practice/2021/02/02/WF-practice/" rel="next" title="ICPC WF 연습 (2/1)">
+                <i class="fa fa-chevron-left"></i> ICPC WF 연습 (2/1)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/contest/review/2020/02/16/iamcoder-2019-yearend-contest/" rel="prev" title="나는코더다 2019 송년대회 이야기">
+                나는코더다 2019 송년대회 이야기 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+      
+
+      
+    </footer>
+  </article>
+
+  <div class="post-spread">
+    
+  </div>
+</div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        
+        
+        
+
+
+
+
+
+
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            목차
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            흝어보기
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/assets/images/avatar.gif"
+               alt="Gyojun Youn" />
+          <p class="site-author-name" itemprop="name">Gyojun Youn</p>
+           
+              <p class="site-description motion-element" itemprop="description">@youngyojun, @GyojunYoun, and @yclock's PS Blog</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">포스트</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">카테고리</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">태그</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+
+
+
+
+
+
+
+            
+              <div class="post-toc-content">
+    <ol class=nav>
+      <li class="nav-item nav-level-3"> <a class="nav-link" href="#icpc-seoul-인터넷-예선"> <span class="nav-number">1</span> <span class="nav-text">ICPC Seoul 인터넷 예선</span> </a> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#prepare-the-contest"> <span class="nav-number">2</span> <span class="nav-text">Prepare the contest</span> </a> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#before-the-contest"> <span class="nav-number">3</span> <span class="nav-text">Before the contest</span> </a> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#timeline"> <span class="nav-number">4</span> <span class="nav-text">Timeline</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-4"> <a class="nav-link" href="#0--4-min"> <span class="nav-number">4.1</span> <span class="nav-text">0 ~ 4 min.</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#4--10-min"> <span class="nav-number">4.2</span> <span class="nav-text">4 ~ 10 min.</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#7-min"> <span class="nav-number">4.3</span> <span class="nav-text">7 min.</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#10--15-min"> <span class="nav-number">4.4</span> <span class="nav-text">10 ~ 15 min.</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#23-min"> <span class="nav-number">4.5</span> <span class="nav-text">23 min.</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#32-min"> <span class="nav-number">4.6</span> <span class="nav-text">32 min.</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#42-min"> <span class="nav-number">4.7</span> <span class="nav-text">42 min.</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#46-min"> <span class="nav-number">4.8</span> <span class="nav-text">46 min.</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#1-hour-중간-점검"> <span class="nav-number">4.9</span> <span class="nav-text">1 hour 중간 점검</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#70-min"> <span class="nav-number">4.10</span> <span class="nav-text">70 min.</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#88-min"> <span class="nav-number">4.11</span> <span class="nav-text">88 min.</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#98-min"> <span class="nav-number">4.12</span> <span class="nav-text">98 min.</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#100-min-중간-점검"> <span class="nav-number">4.13</span> <span class="nav-text">100 min. 중간 점검</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#117-min"> <span class="nav-number">4.14</span> <span class="nav-text">117 min.</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#2-hours-마지막-점검"> <span class="nav-number">4.15</span> <span class="nav-text">2 hours 마지막 점검</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#150-min"> <span class="nav-number">4.16</span> <span class="nav-text">150 min.</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#190-min"> <span class="nav-number">4.17</span> <span class="nav-text">190 min.</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#206-min"> <span class="nav-number">4.18</span> <span class="nav-text">206 min.</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#239-min"> <span class="nav-number">4.19</span> <span class="nav-text">239 min.</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#after-240-min"> <span class="nav-number">4.20</span> <span class="nav-text">After 240 min.</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#after-the-contest"> <span class="nav-number">4.21</span> <span class="nav-text">After the contest</span> </a> </li> </ol> </li>
+    </ol>
+  </div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  
+  &copy;  2020 - 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gyojun Youn</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://jekyllrb.com">Jekyll</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/simpleyyt/jekyll-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+   
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/assets/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/assets/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/assets/js/src/post-details.js?v=5.1.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://youngyojun-github-io.disqus.com/count.js" async></script>
+    
+
+    
+      
+      <script type="text/javascript">
+          var disqus_config = function () {
+              this.page.url = 'http://localhost:4000/contest/review/icpc/2020/11/14/2020-icpc-seoul-regional/';
+              this.page.identifier = '/contest/review/icpc/2020/11/14/2020-icpc-seoul-regional/';
+              this.page.title = '2020 ICPC Seoul Regional 후기';
+          };
+          var d = document, s = d.createElement('script');
+          s.src = 'https://youngyojun-github-io.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', '' + +new Date());
+          (d.head || d.body).appendChild(s);
+      </script>
+      
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/assets/js/src/js.cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/assets/js/src/scroll-cookie.js?v=5.1.1"></script>
+
+
+  
+
+</body>
+</html>
+
