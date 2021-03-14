@@ -177,3 +177,11 @@ tags:
 [1] Halliday. et al, “일반물리학”, 개정10판, John Wiley & Sons, Inc. p.149.
 
 [2] 동책. p.446.
+
+
+
+# 보고서 원본
+
+* <a href="/downloadable_files/physicslab1/newton_apple_report.docx" download="download">Word (.docx)</a>
+* <a href="/downloadable_files/physicslab1/newton_apple_report.pdf" download="download">PDF (.pdf)</a>
+
