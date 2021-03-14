@@ -72,7 +72,7 @@ tags:
 
 ​	총 세 개의 실험에서 질량이 다른 두 개의 추와, 동일한 풍선 두 개를 사용하였다. $e =1 \texttt{g}$인 전자저울로 질량을 측정하였으며, 그 측정값은 **표 1**과 같다.
 
-<p style="text-align: center;">**표 1: 낙하 물체의 질량 측정값** ($e=1\texttt{g}$)</p>
+<p style="text-align: center;"><b>표 1: 낙하 물체의 질량 측정값 ($e=1\texttt{g}$)</b></p>
 
 |      물체       |                질량                |
 | :-------------: | :--------------------------------: |
@@ -90,7 +90,7 @@ tags:
 
 ![img](https://lh6.googleusercontent.com/pvSVVEfZc4t0AAgbxNVsir4kvb8IycpR-5LHe5owUrCa2jSxy8spJHycRcF4YPaPHKaIrHzRjhTiN51ONC6ODtgv4aEXzvFjstA_pHx8RYqaePkKsg5kdmAyPpDMMek4TaUQf5Q)
 
-<p style="text-align: center;">**그림 1: 추1 낙하 운동의 시간-이동거리 그래프**</p>
+<p style="text-align: center;"><b>그림 1: 추1 낙하 운동의 시간-이동거리 그래프</b></p>
 
 <p style="text-align: center;">세 번의 실험 결과의 그래프가 모두 포물선의 형태를 가진다($R^2=1$).</p>
 
@@ -98,7 +98,7 @@ tags:
 
 ![img](https://lh5.googleusercontent.com/WX2lcINBVlgfa5XcgiTabT1LKPwBum8pmwR_14p3acF_8r-l1R1MmEMquJShsAIo8t5SHrkyz1g4KOtr13UOud09MdpPmVS7-LOmZD7YbJ2AA9BwjDH_8Sj2E9EXGaQ1kHaAmGk)
 
-<p style="text-align: center;">**그림 2: 추1 낙하 운동의 시간-평균속도 그래프**</p>
+<p style="text-align: center;"><b>그림 2: 추1 낙하 운동의 시간-평균속도 그래프</b></p>
 
 <p style="text-align: center;">$R^2 \ge 0.9989$로 선형의 추세선과 강한 상관관계가 있음을 확인할 수 있다.</p>
 
@@ -106,13 +106,13 @@ tags:
 
 ![img](https://lh5.googleusercontent.com/eiqjZHw4W6XgFsfvbx1WNV4p6iWz224Ug7fYOS1hr5AouFJRsXEJZSe-kO-rgADDr3R2slIrlfJmGvmp0SgPeBGx_GIBM3WxIt8WCEuIAa89tIu0S_rC_rfCOrC9KHLvsrxkWEE)
 
-<p style="text-align: center;">**그림 3: 추1 낙하 운동의 시간-순간속도 그래프**</p>
+<p style="text-align: center;"><b>그림 3: 추1 낙하 운동의 시간-순간속도 그래프</b></p>
 
 <p style="text-align: center;">$\displaystyle v=\frac{\mathrm{d}s}{\mathrm{d}t} \approx \frac{\Delta s}{\Delta t}$로 근사하여 순간속도 $v$를 계산하였다. $R^2 \ge 0.997$의 높은 결정계수를 가지나, 중간중간 추세선과 크게 차이나는 값들이 관찰된다.</p>
 
 
 
-<p style="text-align: center;">**표 2: 세 가지 방법으로 계산한 세 실험의 중력 가속도(㎨) 및 오차율(%)**</p>
+<p style="text-align: center;"><b>표 2: 세 가지 방법으로 계산한 세 실험의 중력 가속도(㎨) 및 오차율(%)</b></p>
 
 |      |       $t$-$s$       | $t$-$v_\texttt{mean}$ |      $t$-$v$       |        평균        |
 | :--: | :-----------------: | :-------------------: | :----------------: | :----------------: |
@@ -128,17 +128,17 @@ tags:
 
 ![img](https://lh4.googleusercontent.com/4NkEASsgco9MhWwcA5urcMWjh1Hct8w5i9rdR0vtgQVNt36rLzZvWl0AAMLsQb7b67K4uFwAODaw3jL-lU97ba1U7iG_QD1sytVuBB6CBmDt1H-J-BAK-bgH83CZgCqNmHvUXjU)
 
-<p style="text-align: center;">**그림 4: 추1과 추2의 시간-이동거리 그래프**</p>
+<p style="text-align: center;"><b>그림 4: 추1과 추2의 시간-이동거리 그래프</b></p>
 
 
 
 #### 2-2-4. 실험 ③의 결과
 
-​	**그림 5**는 추2를 매단 두 풍선의 이동거리가 시간에 따라 어떻게 변화하는 지를 보여준다. 공기 풍선의 낙하 시 가속도는 $a _\texttt{air} = 8.9839㎨$, 헬륨 풍선의 가속도는 $a _\texttt{helium} = 8.3535㎨$임을 확인하였다. 공기저항의 크기는 $F _\texttt{resistance} = \left( m_2+m _\texttt{ball} \right) \left( g - a _\texttt{air} \right) - \rho _\texttt{air} V _\texttt{ball} a _\texttt{air}$다. 헬륨 풍선 실험에서 부력을 고려한다면, $\displaystyle V _\texttt{ball} = \frac{ \left( m_2 + m _\texttt{ball} \right) \left( a _\texttt{air} - a _\texttt{helium} \right) }{ \rho _\texttt{air} - \rho _\texttt{helium} \right) g + \rho _\texttt{helium} a _\texttt{helium} - \rho _\texttt{air} a _\texttt{air} \approx 0.04828㎥$로 실제보다 약간 더 큰 값을 얻을 수 있었다.
+​	**그림 5**는 추2를 매단 두 풍선의 이동거리가 시간에 따라 어떻게 변화하는 지를 보여준다. 공기 풍선의 낙하 시 가속도는 $a _\texttt{air} = 8.9839㎨$, 헬륨 풍선의 가속도는 $a _\texttt{helium} = 8.3535㎨$임을 확인하였다. 공기저항의 크기는 $F _\texttt{resistance} = \left( m_2+m _\texttt{ball} \right) \left( g - a _\texttt{air} \right) - \rho _\texttt{air} V _\texttt{ball} a _\texttt{air}$다. 헬륨 풍선 실험에서 부력을 고려한다면, $\displaystyle V _\texttt{ball} = \frac{ \left( m _2 + m _\texttt{ball} \right) \left( a _\texttt{air} - a _\texttt{helium} \right) }{ \rho _\texttt{air} - \rho _\texttt{helium} \right) g + \rho _\texttt{helium} a _\texttt{helium} - \rho _\texttt{air} a _\texttt{air} } \approx 0.04828㎥$로 실제보다 약간 더 큰 값을 얻을 수 있었다.
 
 ![img](https://lh4.googleusercontent.com/rvI3OdvNZdtPZmjDibb3jjoUzc7Ixz5o-b_PFoGzI_2yg9RIdzwCTcCS3H5kGKQKL-0N-_BvOCUBzGk5-enWVyUepaZFbQoNZVBFArkiHaYeAhISRTv0K82vudwLh-sqliZ56RI)
 
-<p style="text-align: center;">**그림 5: 추2와 연결된 두 풍선의 시간-이동거리 그래프**</p>
+<p style="text-align: center;"><b>그림 5: 추2와 연결된 두 풍선의 시간-이동거리 그래프</b></p>
 
 
 
@@ -158,7 +158,7 @@ tags:
 
 #### 2-3-3. 공기에 의한 항력
 
-​	공기는 유체이고, 유체는 내부에서 움직이는 물체에 저항하려는 특징이 있기 때문에, 공기 안에서 낙하하는 추는 운동을 방해받는 항력을 받게 된다. 항력 방정식에 의하여, 추는 $\displaystyle F_d = \frac{1}{2} \rho _\texttt{air} v^2 A _\texttt{bottom} C _d$ 크기의 항력을 받으며, $v=4㎧$, $A _\texttt{bottom}=0.0152㎡$로 계산하면 $F_d < 0.007 \texttt{N}$다[1]. 이는 추1에 약 0.276㎨의 가속도 변화를 일으키는 힘이다. 이 오차는 항력의 크기를 정확하게 계산하여 실험에 반영하거나, 혹은 진공 상태에서 실험을 진행함으로써 해결할 수 있다.
+​	공기는 유체이고, 유체는 내부에서 움직이는 물체에 저항하려는 특징이 있기 때문에, 공기 안에서 낙하하는 추는 운동을 방해받는 항력을 받게 된다. 항력 방정식에 의하여, 추는 $\displaystyle F _d = \frac{1}{2} \rho _\texttt{air} v^2 A _\texttt{bottom} C _d$ 크기의 항력을 받으며, $v=4㎧$, $A _\texttt{bottom}=0.0152㎡$로 계산하면 $F_d < 0.007 \texttt{N}$다[1]. 이는 추1에 약 0.276㎨의 가속도 변화를 일으키는 힘이다. 이 오차는 항력의 크기를 정확하게 계산하여 실험에 반영하거나, 혹은 진공 상태에서 실험을 진행함으로써 해결할 수 있다.
 
 #### 2-3-4. 이상적인 이론과 다른 실험 환경
 
