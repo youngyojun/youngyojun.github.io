@@ -134,7 +134,7 @@ tags:
 
 #### 2-2-4. 실험 ③의 결과
 
-​	**그림 5**는 추2를 매단 두 풍선의 이동거리가 시간에 따라 어떻게 변화하는 지를 보여준다. 공기 풍선의 낙하 시 가속도는 $a _\texttt{air} = 8.9839㎨$, 헬륨 풍선의 가속도는 $a _\texttt{helium} = 8.3535㎨$임을 확인하였다. 공기저항의 크기는 $F _\texttt{resistance} = \left( m_2+m _\texttt{ball} \right) \left( g - a _\texttt{air} \right) - \rho _\texttt{air} V _\texttt{ball} a _\texttt{air}$다. 헬륨 풍선 실험에서 부력을 고려한다면, $\displaystyle V _\texttt{ball} = \frac{ \left( m _2 + m _\texttt{ball} \right) \left( a _\texttt{air} - a _\texttt{helium} \right) }{ \rho _\texttt{air} - \rho _\texttt{helium} \right) g + \rho _\texttt{helium} a _\texttt{helium} - \rho _\texttt{air} a _\texttt{air} } \approx 0.04828㎥$로 실제보다 약간 더 큰 값을 얻을 수 있었다.
+​	**그림 5**는 추2를 매단 두 풍선의 이동거리가 시간에 따라 어떻게 변화하는 지를 보여준다. 공기 풍선의 낙하 시 가속도는 $a _\texttt{air} = 8.9839㎨$, 헬륨 풍선의 가속도는 $a _\texttt{helium} = 8.3535㎨$임을 확인하였다. 공기저항의 크기는 $F _\texttt{resistance} = \left( m_2+m _\texttt{ball} \right) \left( g - a _\texttt{air} \right) - \rho _\texttt{air} V _\texttt{ball} a _\texttt{air}$다. 헬륨 풍선 실험에서 부력을 고려한다면, $\displaystyle V _\texttt{ball} = \frac{ \left( m _2 + m _\texttt{ball} \right) \left( a _\texttt{air} - a _\texttt{helium} \right) }{ \left( \rho _\texttt{air} - \rho _\texttt{helium} \right) g + \rho _\texttt{helium} a _\texttt{helium} - \rho _\texttt{air} a _\texttt{air} } \approx 0.04828㎥$로 실제보다 약간 더 큰 값을 얻을 수 있었다.
 
 ![img](https://lh4.googleusercontent.com/rvI3OdvNZdtPZmjDibb3jjoUzc7Ixz5o-b_PFoGzI_2yg9RIdzwCTcCS3H5kGKQKL-0N-_BvOCUBzGk5-enWVyUepaZFbQoNZVBFArkiHaYeAhISRTv0K82vudwLh-sqliZ56RI)
 

@@ -45,7 +45,7 @@ tags:
 
 ### 물리학실험 1
 
-* 뉴턴의 사과
+* [뉴턴의 사과](https://youngyojun.github.io/study/physicslab/physicslab1/2021/03/14/physicslab1-newton/)
 * 관성 모멘트 측정
 * 시지프스의 고민
 * 당구의 역학
