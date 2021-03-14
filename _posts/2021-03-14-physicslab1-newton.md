@@ -76,7 +76,7 @@ tags:
 
 ​	실험 ①에서는 하나의 물체를 낙하하여 중력 가속도를 측정한다. 한 개의 추를 카메라에 담을 수 있는 적당한 높이에서 자유낙하 시킨다. '3-1. 낙하 운동 분석'에 서술된 과정을 따라 낙하하는 추를 촬영한 후, 시간에 따른 추의 위치를 데이터화한다.
 
-​	시간 $t$동안 추가 낙하한 거리를 $s(t)$라 하자. 가속도 $a$가 일정하다면, 뉴턴의 제2법칙에 의하여 $\displaystyle s(t) = \frac{1}{2} a t^2$가 성립한다. $v(t) = at$이므로, $\displaystyle v(t) = \frac{ \mathrm{d} }{ \mathrm{d} t } s(t) \approx \frac{ \Delta s }{ \Delta t }$을 이용하여 시간-속도 그래프가 선형 형태를 가지는지 확인한다. 이후, $a(t) = \frac{ \mathrm{d} }{ \mathrm{d} t } v(t) \approx \frac{ \Delta v }{ \Delta t }$을 이용하여 가속도가 상수 값을 가지는지 확인한다. 이론 상, 가속도는 시간 $t$와 독립적인 상수 값을 가져야 하며, 이 값이 중력 가속도가 된다.
+​	시간 $t$동안 추가 낙하한 거리를 $s(t)$라 하자. 가속도 $a$가 일정하다면, 뉴턴의 제2법칙에 의하여 $\displaystyle s(t) = \frac{1}{2} a t^2$가 성립한다. $v(t) = at$이므로, $\displaystyle v(t) = \frac{ \mathrm{d} }{ \mathrm{d} t } s(t) \approx \frac{ \Delta s }{ \Delta t }$을 이용하여 시간-속도 그래프가 선형 형태를 가지는지 확인한다. 이후, $\displaystyle a(t) = \frac{ \mathrm{d} }{ \mathrm{d} t } v(t) \approx \frac{ \Delta v }{ \Delta t }$을 이용하여 가속도가 상수 값을 가지는지 확인한다. 이론 상, 가속도는 시간 $t$와 독립적인 상수 값을 가져야 하며, 이 값이 중력 가속도가 된다.
 
 #### 3-3. 실험 ② 질량에 따른 중력 가속도 변화 관찰
 
