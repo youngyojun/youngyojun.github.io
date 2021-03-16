@@ -87,8 +87,8 @@ $$ I = \int \left( \left( x - x_l \right)^2 + \left( y - y_l \right)^2 \right) \
 
 # Prelab 원본
 
-* <a href="/downloadable_files/physicslab1/torque_prelab_prelab.docx" download="download">Word (.docx)</a>
-* <a href="/downloadable_files/physicslab1/torque_prelab_prelab.pdf" download="download">PDF (.pdf)</a>
+* <a href="/downloadable_files/physicslab1/torque_prelab.docx" download="download">Word (.docx)</a>
+* <a href="/downloadable_files/physicslab1/torque_prelab.pdf" download="download">PDF (.pdf)</a>
 
 
 
