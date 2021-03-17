@@ -95,3 +95,72 @@ $$ I = \int \left( \left( x - x_l \right)^2 + \left( y - y_l \right)^2 \right) \
 ------
 
 # 보고서
+
+## 관성 모멘트 측정 실험
+
+### 회전 운동과 관성 모멘트 및 토크
+
+#### Abstract
+
+​	본 실험에서는 고정된 회전축을 기준으로 회전 운동을 하는 강체의 관성 모멘트를 측정한다. 다양한 모양의 시료와 시료들의 배치 방법에 대하여, 관성 모멘트 값을 이론적인 수식을 이용하여 예상하고, 이를 관성 모멘트 측정 장치를 이용하여 직접 측정함으로써 확인하였다. 이론과 다르게 실험에서는 관성 모멘트 값이 이론 값보다 크게 계산되는 오차가 발생하였다. 이러한 오차의 원인으로 ‘시료의 물리량 측정에서 발생한 부정확성’, ‘실의 꼬임과 낙하하는 추의 진동’ 등을 제시하였다.
+
+## 1. 서론
+
+### 1-1. 실험 목적
+
+​	본 실험에서는 자유 낙하하는 추와 회전 장치를 이용하여, 다양한 모양의 시료가 가지는 관성 모멘트를 측정한다. 실험을 통하여 측정한 값과 이론적 값을 비교함으로써, 회전 운동과 관성 모멘트, 토크 간의 연관 관계를 알아보고, 평행축 정리와 회전에 관한 뉴턴 제2법칙 등 이에 대한 여러 이론을 확인하고자 한다.
+
+### 1-2. 이론적 배경
+
+#### 1-2-1. 관성 모멘트
+
+​	고정된 축 $l$을 기준으로 각속도 의 회전 운동을 하는 강체의 총 운동 에너지는
+
+$$ K = \sum_i \frac{1}{2} m_i v_i^2 = \frac{\omega^2}{2} \int r^2 \mathrm{d}m = \frac{\omega^2}{2} \int r^2 \rho \mathrm{d}V $$
+
+다. 마지막 항의 적분식 $\displaystyle \int r^2 \rho \mathrm{d} V$을 강체의 관성 모멘트 $I$로 정의한다. 직선 운동 에너지 $\displaystyle K = \frac{1}{2} mv^2$과 회전 운동 에너지 $\displaystyle K = \frac{1}{2} I \omega^2$은 비슷한 식 형태를 가지며, ‘직선 운동을 하는 강체의 관성에 관한 항’을 질량 $m$으로 생각한다면, 관성 모멘트 $I$는 ‘회전 운동에서 강체의 관성’으로 해석할 수 있다.
+
+​	균일한 밀도 $\rho$를 가지는 질량 $m$의 강체를 중심축에 대하여 회전시킬 때의 관성 모멘트 $I$는, 그 물체의 모양에 따라서 서로 다른 값을 가진다. 가로 $a$, 세로 $b$인 직육면체의 관성 모멘트는
+
+$$ I_\text{cuboid} = \int _0^h \int _{-\frac{a}{2}}^{\frac{a}{2}} \int _{-\frac{b}{2}}^{\frac{b}{2}} \left( x^2+y^2 \right) \rho \mathrm{d}y\mathrm{d}x\mathrm{d}z = \frac{ a b h \rho \left( a^2 + b^2 \right)}{12} = \frac{m}{12} \left( a^2 + b^2 \right) $$
+
+, 반지름 $r$인 원기둥의 관성 모멘트는
+
+$$ I_\text{cylinder} = \int _0^h \int _0^r \int _0^{2\pi} \gamma^2 \rho \left( \gamma \mathrm{d}\theta \mathrm{d}\gamma \right) \mathrm{d}z = \frac{ \pi r^4 h \rho^2 }{2} = \left( \pi r^2 h \rho \right) \frac{r^2}{2} = \frac{m}{2} r^2 $$
+
+, 겉반지름 $r _\text{out}$, 속반지름 $r _\text{in}$인 두께 있는 원통의 관성 모멘트는
+
+$$ I _\text{tube} = \int _0^h \int _{r _\text{in}}^{r _\text{out}} \int _0^{2\pi} \gamma^2 \rho \left( \gamma \mathrm{d}\theta \mathrm{d}\gamma \right) \mathrm{d}z = \frac{ \pi h \rho \left( r _\text{out}^4 - r _\text{in}^4 \right)}{2} = \left( \pi \left( r _\text{out}^2 - r _\text{in}^2 \right) h \rho \right) \frac{ r _\text{in}^2 + r _\text{out}^2 }{2} = \frac{m}{2} \left( r _\text{in}^2 + r _\text{out}^2 \right) $$
+
+임을 유도할 수 있다.
+
+#### 1-2-2. 평행축 정리
+
+​	질량 $m$의 강체가 축 $l_O$을 기준으로 회전할 때의 관성 모멘트가 $I_O$고, 축 $l_O$가 강체의 질량 심을 지난다면, $l_O$와 평행한 모든 축에 대한 관성 모멘트를 추가적인 적분 계산 없이 계산할 수 있다. $l_O$와 평행하고 $\delta$만큼 떨어진 회전축 $l$에 대한 관성 모멘트는
+
+$$ I_l = \int \int \int \left( \left( x - x_l \right)^2 + \left( y - y_l \right)^2 \right) \rho \mathrm{d}x \mathrm{d}y \mathrm{d}z $$
+
+$$ = \left( \int \int \int \left( x^2 + y^2 \right) \mathrm{d}x \mathrm{d}y \mathrm{d}z \right) - 2 x_l \left( \int x \mathrm{d}m \right) - 2 y_l \left( \int y \mathrm{d}m \right) + \left(x_l^2 + y_l^2 \right) \int \mathrm{d}m $$
+
+$$ = I_O + m \delta^2 $$
+
+이다. 축이 질량 중심에서 멀어질수록 관성 모멘트가 증가함을 확인할 수 있다.
+
+#### 1-2-3. 토크
+
+​	토크 $\displaystyle \overrightarrow{r}$는 힘 $\displaystyle \overrightarrow{F}$로 물체를 회전시키는 작용에 관한 모멘트다. 고정점 $O$에 대하여, 위치 $\displaystyle \overrightarrow{r}$의 입자에 힘 $\displaystyle \overrightarrow{F}$을 가할 때의 토크는 $\displaystyle \overrightarrow{\tau} = \overrightarrow{r}\overrightarrow{F}$로 정의되고, 거리 $r$의 위치에서 수직 방향으로 $F \sin \theta$의 힘을 받으며 회전하였다고 해석할 수 있다.
+
+​	회전에 관한 뉴턴 제2법칙에 의하면, 강체에 토크 $\tau _\text{net}$을 가할 때, 회전축에 대한 강체의 관성 모멘트가 $I$, 각가속도가 $\alpha$라면, $\tau _\text{net} = I \alpha$가 성립한다. 이는 뉴턴 제2법칙, $F=ma$에서 $a=\alpha r$을 대입하여 증명할 수 있다. [1]
+
+#### 1-2-4. 실험 장치의 측정 원리
+
+​	**그림 1**은 본 실험에서 사용할 관성 모멘트 측정 장치를 모식화한 것이다. $m$, $g$, $R$의 값을 알고 있을 때, 낙하하는 추의 가속도 $a$의 값을 통하여 회전 장치의 관성 모멘트 $I_0$를 측정하는 것이 목적이다.
+
+​	추에 대하여 뉴턴 제2법칙을 적용하면,
+
+$$ ma = mg - T $$
+
+임을 안다. 또한, 각가속도의 정의에 의하여
+
+$$ a = \alpha R $$
+
