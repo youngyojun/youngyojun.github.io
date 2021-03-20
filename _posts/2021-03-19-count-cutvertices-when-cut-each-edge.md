@@ -167,8 +167,8 @@ BCC의 정의와, **사이클 정리**에 의하여 성립한다.
 
 > 그래프 $G(V, E)$의 모든 BCC를 $G_1 \left( V_1, E_1 \right), G_2 \left( V_2, E_2 \right), \cdots, G_K \left( V_K, E_K \right)$라고 하자. 여기서, 다음이 성립한다:
 >
-> * $\displaystyle \sum _{i = 1}^{K} \left\lvert V _i \right\rvert = \left\lvert V _1 \right\rvert + \left\lvert V _2 \right\rvert + \cdots + \left\lvert V _K \right\rvert \le 2 \left\lvert V \right\rvert
-> * $\displaystyle \sum _{i = 1}^{K} \left\lvert E _i \right\rvert = \left\lvert E _1 \right\rvert + \left\lvert E _2 \right\rvert + \cdots + \left\lvert E _K \right\rvert \le \left\lvert E \right\rvert
+> * $\displaystyle \sum _{i = 1}^{K} \left\lvert V _i \right\rvert = \left\lvert V _1 \right\rvert + \left\lvert V _2 \right\rvert + \cdots + \left\lvert V _K \right\rvert \le 2 \left\lvert V \right\rvert $
+> * $\displaystyle \sum _{i = 1}^{K} \left\lvert E _i \right\rvert = \left\lvert E _1 \right\rvert + \left\lvert E _2 \right\rvert + \cdots + \left\lvert E _K \right\rvert \le \left\lvert E \right\rvert $
 >
 > 또한, 모든 BCC를 알아내는 작업은 $O \left( \left\lvert V \right\rvert + \left\lvert E \right\rvert \right)$의 시간 복잡도로 해결할 수 있다.
 
