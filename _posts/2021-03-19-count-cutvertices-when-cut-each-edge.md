@@ -298,7 +298,7 @@ for v in V:
 
 무방향 연결 그래프 $G(V, E)$가 주어졌을 때, 각 간선 $e \in E$에 대하여, 간선 $e$를 제거한 그래프 $G(V, E \setminus \{ e \})$의 절점의 개수를 모두 구하는 알고리즘을 구상하였고, $O \left( \left( \left\lvert V \right\rvert + \left\lvert E \right\rvert \right) \lg \left\lvert V \right\rvert \right)$의 시간 복잡도로 효율적으로 해결할 수 있음을 알아내었다.
 
-Disjoint Set과 Tarjan's Offline Lowest Common Ancestors Algorithm, 그리고 약간의 창의적인 아이디어를 추가하면, 시간 복잡도를 $O \left( \left\lvert V \right\rvert \alpha \left( \left\lvert V \right\rvert \right) + \left\lvert E \right\rvert \right)$까지 개선할 수 있다. 이는 거의 선형 시간에 가까우며, 또한 이 문제를 해결하는 알고리즘의 최소 하계($ O \left( \left\lvert V \right\rvert + \left\lvert E \right\rvert \right)$)와 거의 비슷하다.
+Disjoint Set과 Tarjan's Offline Lowest Common Ancestors Algorithm, 그리고 약간의 창의적인 아이디어를 추가하면, 시간 복잡도를 $O \left( \left\lvert V \right\rvert \alpha \left( \left\lvert V \right\rvert \right) + \left\lvert E \right\rvert \right)$까지 개선할 수 있다. 이는 거의 선형 시간에 가까우며, 또한 이 문제를 해결하는 알고리즘의 최소 하계 $O \left( \left\lvert V \right\rvert + \left\lvert E \right\rvert \right)$와 거의 비슷하다.
 
 이 문제는 곧 BOJ에 업로드될 예정이다. 직접 코딩한 소스 코드의 정당성을 BOJ에서 확인할 수 있다.
 
