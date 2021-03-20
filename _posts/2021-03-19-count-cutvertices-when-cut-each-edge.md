@@ -78,7 +78,7 @@ $v$와 $e$를 제거한 그래프가 연결 그래프이므로, $G(V \setminus \
 
 ### 따름정리
 
-> 모든 $e \in E$에 대하여, $C\left( G(V, E \setminus \{ e \}) \right) = $C\left( G(V, E) \right) \cup R(e)$가 성립한다.
+> 모든 $e \in E$에 대하여, $C\left( G(V, E \setminus \{ e \}) \right) = C\left( G(V, E) \right) \cup R(e)$가 성립한다.
 >
 > 또한, 두 집합 $C\left( G(V, E) \right)$과 $R(e)$는 서로소이다.
 
