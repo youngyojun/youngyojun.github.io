@@ -36,13 +36,13 @@ tags:
 
 $N$개의 정점과 $M$개의 간선으로 이루어진 무방향 연결 그래프 $G(V, E)$가 주어진다.
 
-각 간선 $e \in E$에 대하여, 간선 $e$를 제거한 그래프 $G(V, E \setminus \{ e \})$의 절점의 개수를 모두 구해보자.
+각 간선 $e \in E$에 대하여, 간선 $e$를 제거한 그래프 $G(V, E \setminus \\{ e \\})$의 절점의 개수를 모두 구해보자.
 
 # 문제 접근
 
 표기의 편의를 위하여, 그래프 $G$의 절점의 집합을 $C(G)$라고 나타내자.
 
-우리의 목표는 모든 $e \in E$에 대하여, $\left\lvert C\left( G(V, E \setminus \{ e \}) \right) \right\rvert$를 효율적으로 구하는 것이다.
+우리의 목표는 모든 $e \in E$에 대하여, $\left\lvert C\left( G(V, E \setminus \\{ e \\}) \right) \right\rvert$를 효율적으로 구하는 것이다.
 
 ## 중요한 접근
 
@@ -52,7 +52,7 @@ $N$개의 정점과 $M$개의 간선으로 이루어진 무방향 연결 그래�
 
 ### 정리 (절점 보존 정리)
 
-> 모든 $e \in E$에 대하여, $C\left( G(V, E) \right) \subset C\left( G(V, E \setminus \{ e \}) \right)$가 성립한다.
+> 모든 $e \in E$에 대하여, $C\left( G(V, E) \right) \subset C\left( G(V, E \setminus \\{ e \\}) \right)$가 성립한다.
 
 즉, 간선을 제거하였다고 절점이 사라지는 일은 발생하지 않는다.
 
@@ -60,13 +60,13 @@ $N$개의 정점과 $M$개의 간선으로 이루어진 무방향 연결 그래�
 
 귀류법을 이용하자.
 
-만일, 어떤 $e \in E$과 $v \in V$에 대하여, $v \in C\left( G(V, E) \right)$이고 $v \not\in C\left( G(V, E \setminus \{ e \}) \right)$라고 하자. 즉, $v$는 이미 절점이었는데, 간선 $e$를 제거함으로써 절점이 아니게 되었다고 가정하자.
+만일, 어떤 $e \in E$과 $v \in V$에 대하여, $v \in C\left( G(V, E) \right)$이고 $v \not\in C\left( G(V, E \setminus \\{ e \\}) \right)$라고 하자. 즉, $v$는 이미 절점이었는데, 간선 $e$를 제거함으로써 절점이 아니게 되었다고 가정하자.
 
-$G(V, E \setminus \{ e \})$에서 $v$가 절점이 아니므로, 정의에 의하여, $v$를 제거한 그래프 $G(V \setminus \{ v \}, E \setminus \{ e \})$는 연결 그래프이다.
+$G(V, E \setminus \\{ e \\})$에서 $v$가 절점이 아니므로, 정의에 의하여, $v$를 제거한 그래프 $G(V \setminus \\{ v \\}, E \setminus \\{ e \\})$는 연결 그래프이다.
 
-$v$와 $e$를 제거한 그래프가 연결 그래프이므로, $G(V \setminus \{ v \}, E \setminus \{ e \})$에서 신장 부분 트리 $T'$를 생성할 수 있다.
+$v$와 $e$를 제거한 그래프가 연결 그래프이므로, $G(V \setminus \\{ v \\}, E \setminus \\{ e \\})$에서 신장 부분 트리 $T'$를 생성할 수 있다.
 
-트리 $T'$는 간선 $e$를 포함하지 않으므로, $T'$는 $G(V \setminus \{ v \}, E)$의 신장 부분 트리이기도 하다.
+트리 $T'$는 간선 $e$를 포함하지 않으므로, $T'$는 $G(V \setminus \\{ v \\}, E)$의 신장 부분 트리이기도 하다.
 
 즉, 그래프 $G(V, E)$에서 정점 $v$를 제거하여도 연결성이 유지되므로, $v$는 $G(V, E)$에서 절점이 아니다.
 
@@ -78,7 +78,7 @@ $v$와 $e$를 제거한 그래프가 연결 그래프이므로, $G(V \setminus \
 
 ### 따름정리
 
-> 모든 $e \in E$에 대하여, $C\left( G(V, E \setminus \{ e \}) \right) = C\left( G(V, E) \right) \cup R(e)$가 성립한다.
+> 모든 $e \in E$에 대하여, $C\left( G(V, E \setminus \\{ e \\}) \right) = C\left( G(V, E) \right) \cup R(e)$가 성립한다.
 >
 > 또한, 두 집합 $C\left( G(V, E) \right)$과 $R(e)$는 서로소이다.
 
@@ -98,7 +98,7 @@ $v$와 $e$를 제거한 그래프가 연결 그래프이므로, $G(V \setminus \
 
 귀류법을 이용하자.
 
-간선 $e \in E$와 단순 사이클 $C = \{ v_1, v_2, \cdots, v_k \}$를 고정하자. 여기서, 집합 $R(e)$에는 포함되나, 사이클 $C$ 위에 존재하지 않는 정점 $v \in V$가 존재한다고 하자. 즉, $v \in R(e)$, $v \not\in C$이다.
+간선 $e \in E$와 단순 사이클 $C = \\{ v_1, v_2, \cdots, v_k \\}$를 고정하자. 여기서, 집합 $R(e)$에는 포함되나, 사이클 $C$ 위에 존재하지 않는 정점 $v \in V$가 존재한다고 하자. 즉, $v \in R(e)$, $v \not\in C$이다.
 
 $v \in R(e)$이므로, 정점 $v$와 간선 $e$를 제거한 그래프는 연결되어 있지 않다. 다시 말하면, $v$가 아닌 두 정점 $x$, $y$가 존재하여, 그래프 $G(V, E)$에서 그 둘을 잇는 모든 경로는 '무조건' 정점 $v$와 간선 $e$를 '모두' 지나야 한다. 왜냐하면, 정점 $v$는 원본 그래프 $G(V, E)$에서는 절점이 아니었기 때문이다.
 
@@ -143,7 +143,7 @@ $u \in R(e)$이므로, 정점 $u$와 간선 $e$를 모두 제거하면, 그래�
 
 ### 따름정리
 
-> 절선 $e = (u, v)$에 대하여, $R(e) = V \setminus \left( C\left( G(V, E) \right) \cup \{ u, v \} \right)$이다.
+> 절선 $e = (u, v)$에 대하여, $R(e) = V \setminus \left( C\left( G(V, E) \right) \cup \\{ u, v \\} \right)$이다.
 
 절선을 제거하면, 이미 그래프가 끊겨버리므로, 모든 정점이 절점이 된다는 의미이다.
 
