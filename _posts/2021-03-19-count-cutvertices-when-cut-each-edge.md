@@ -42,7 +42,7 @@ $N$개의 정점과 $M$개의 간선으로 이루어진 무방향 연결 그래�
 
 표기의 편의를 위하여, 그래프 $G$의 절점의 집합을 $C(G)$라고 나타내자.
 
-우리의 목표는 모든 $e \in E$에 대하여, $\left| C\left( G(V, E \setminus \{ e \}) \right) \right|$를 효율적으로 구하는 것이다.
+우리의 목표는 모든 $e \in E$에 대하여, $\left\lvert C\left( G(V, E \setminus \{ e \}) \right) \right\rvert$를 효율적으로 구하는 것이다.
 
 ## 중요한 접근
 
@@ -84,7 +84,7 @@ $v$와 $e$를 제거한 그래프가 연결 그래프이므로, $G(V \setminus \
 
 ### 알려진 정리 (절점·절선 알고리즘)
 
-> 그래프 $G(V, E)$가 주어졌을 때, 집합 $C\left( G(V, E) \right)$는 단 한 번의 DFS를 통하여, $O \left( | V | + | E | \right)$의 시간 복잡도로 계산할 수 있다.
+> 그래프 $G(V, E)$가 주어졌을 때, 집합 $C\left( G(V, E) \right)$는 단 한 번의 DFS를 통하여, $O \left( \left\lvert V \right\rvert + \left\lvert E \right\rvert \right)$의 시간 복잡도로 계산할 수 있다.
 
 
 
@@ -143,7 +143,7 @@ $u \in R(e)$이므로, 정점 $u$와 간선 $e$를 모두 제거하면, 그래�
 
 ### 따름정리
 
-> 절선 $e = (u, v)$에 대하여, $R(e) = V \setminus \left( C\left( G(V, E) \right) \cup \{ u, v \}$이다.
+> 절선 $e = (u, v)$에 대하여, $R(e) = V \setminus \left( C\left( G(V, E) \right) \cup \{ u, v \} \right)$이다.
 
 절선을 제거하면, 이미 그래프가 끊겨버리므로, 모든 정점이 절점이 된다는 의미이다.
 
@@ -167,10 +167,10 @@ BCC의 정의와, 사이클 정리에 의하여 성립한다.
 
 > 그래프 $G(V, E)$의 모든 BCC를 $G_1 \left( V_1, E_1 \right), G_2 \left( V_2, E_2 \right), \cdots, G_K \left( V_K, E_K \right)$라고 하자. 여기서, 다음이 성립한다:
 >
-> * $\displaystyle \sum _{i = 1}^{K} \left| V _i \right| = \left| V _1 \right| + \left| V _2 \right| + \cdots + \left| V _K \right| \le 2 |V|
-> * $\displaystyle \sum _{i = 1}^{K} \left| E _i \right| = \left| E _1 \right| + \left| E _2 \right| + \cdots + \left| E _K \right| \le |E|
+> * $\displaystyle \sum _{i = 1}^{K} \left\lvert V _i \right\rvert = \left\lvert V _1 \right\rvert + \left\lvert V _2 \right\rvert + \cdots + \left\lvert V _K \right\rvert \le 2 \left\lvert V \right\rvert
+> * $\displaystyle \sum _{i = 1}^{K} \left\lvert E _i \right\rvert = \left\lvert E _1 \right\rvert + \left\lvert E _2 \right\rvert + \cdots + \left\lvert E _K \right\rvert \le \left\lvert E \right\rvert
 >
-> 또한, 모든 BCC를 알아내는 작업은 $O \left( |V| + |E| \right)$의 시간 복잡도로 해결할 수 있다.
+> 또한, 모든 BCC를 알아내는 작업은 $O \left( \left\lvert V \right\rvert + \left\lvert E \right\rvert \right)$의 시간 복잡도로 해결할 수 있다.
 
 
 
@@ -200,7 +200,7 @@ BCC 그래프 $G(V, E)$에서 루트 정점 $r \in V$부터 DFS를 시행하여,
 
 <p style="text-align: center;"><b>그림 2: Back edge $e$를 끊었을 때, 정점 $v$가 새로운 절점이 되는 일반적인 경우</b></p>
 
-이는 다음과 같이 부분 합의 아이디어를 이용하면, $O \left( |V| + |E| \right)$에 처리할 수 있다.
+이는 다음과 같이 부분 합의 아이디어를 이용하면, $O \left( \left\lvert V \right\rvert + \left\lvert E \right\rvert \right)$에 처리할 수 있다.
 
 ```python
 prefix_sum = [0] * N
@@ -265,7 +265,7 @@ Tree edge $e = (v, p(v))$를 끊었을 때, 정점 $v$보다 아래에 존재하
 
 <p style="text-align: center;"><b>그림 4: Tree edge $e$를 끊었을 때, 아래에 존재하는 정점 $t$가 새로운 절점이 되는 일반적인 경우</b></p>
 
-정점 $t$로 가능한 모든 정점은, 일반적으로 DFS Tree $T$에서 경로 $[t _\text{min}, v)$를 이루게 된다. 다음 코드는, 최소 공통 조상의 아이디어를 이용하여, 그 경로의 시작 정점 $t _\text{min}$을 $O \left( ( |V| + |E| ) \lg |V| \right)$에 계산한다.
+정점 $t$로 가능한 모든 정점은, 일반적으로 DFS Tree $T$에서 경로 $\displaystyle \left[ t _\text{min}, v \right)$를 이루게 된다. 다음 코드는, 최소 공통 조상의 아이디어를 이용하여, 그 경로의 시작 정점 $t _\text{min}$을 $O \left( ( \left\lvert V \right\rvert + \left\lvert E \right\rvert ) \lg \left\lvert V \right\rvert \right)$에 계산한다.
 
 ```python
 for v in V:
@@ -290,15 +290,15 @@ for v in V:
 
 
 
-이제, 모든 케이스를 해결하였다! 일반적이지 않은, 특수한 케이스 처리가 필요하나, 위에서 서술한 방법과 아주 유사하게 해결할 수 있다. 따라서, 전체 문제를 $O \left( (|V| + |E|) \lg |V| \right)$에 해결할 수 있다.
+이제, 모든 케이스를 해결하였다! 일반적이지 않은, 특수한 케이스 처리가 필요하나, 위에서 서술한 방법과 아주 유사하게 해결할 수 있다. 따라서, 전체 문제를 $O \left( \left( \left\lvert V \right\rvert + \left\lvert E \right\rvert \right) \lg \left\lvert V \right\rvert \right)$에 해결할 수 있다.
 
 
 
 # 결론
 
-무방향 연결 그래프 $G(V, E)$가 주어졌을 때, 각 간선 $e \in E$에 대하여, 간선 $e$를 제거한 그래프 $G(V, E \setminus \{ e \})$의 절점의 개수를 모두 구하는 알고리즘을 구상하였고, $O \left( ( |V| + |E| ) \lg |V| \right)$의 시간 복잡도로 효율적으로 해결할 수 있음을 알아내었다.
+무방향 연결 그래프 $G(V, E)$가 주어졌을 때, 각 간선 $e \in E$에 대하여, 간선 $e$를 제거한 그래프 $G(V, E \setminus \{ e \})$의 절점의 개수를 모두 구하는 알고리즘을 구상하였고, $O \left( \left( \left\lvert V \right\rvert + \left\lvert E \right\rvert \right) \lg \left\lvert V \right\rvert \right)$의 시간 복잡도로 효율적으로 해결할 수 있음을 알아내었다.
 
-Disjoint Set과 Tarjan's Offline Lowest Common Ancestors Algorithm, 그리고 약간의 창의적인 아이디어를 추가하면, 시간 복잡도를 $O \left( |V| \alpha( |V| ) + |E| \right)$까지 개선할 수 있다. 이는 거의 선형 시간에 가까우며, 또한 이 문제를 해결하는 알고리즘의 최소 하계($ O \left( |V| + |E| \right)$)와 거의 비슷하다.
+Disjoint Set과 Tarjan's Offline Lowest Common Ancestors Algorithm, 그리고 약간의 창의적인 아이디어를 추가하면, 시간 복잡도를 $O \left( \left\lvert V \right\rvert \alpha \left( \left\lvert V \right\rvert \right) + \left\lvert E \right\rvert \right)$까지 개선할 수 있다. 이는 거의 선형 시간에 가까우며, 또한 이 문제를 해결하는 알고리즘의 최소 하계($ O \left( \left\lvert V \right\rvert + \left\lvert E \right\rvert \right)$)와 거의 비슷하다.
 
 이 문제는 곧 BOJ에 업로드될 예정이다. 직접 코딩한 소스 코드의 정당성을 BOJ에서 확인할 수 있다.
 
