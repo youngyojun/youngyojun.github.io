@@ -1,12 +1,15 @@
-```
 ---
-layout: post
-title: 그래프의 간선을 제거할 때 절점의 개수를 세는 효율적인 알고리즘
+title: "그래프의 간선을 제거할 때 절점의 개수를 세는 효율적인 알고리즘"
 date: 2021-03-19 12:43:29
-author: youngyojun
+categories:
+ - Secmem
 tags:
+ - Graph
+ - Cut vertex
+ - Cut edge
+ - Algorithm
+
 ---
-```
 
 # 개요
 
