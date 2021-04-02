@@ -118,7 +118,8 @@ $$ \frac{1}{2} m_1 u_1^2 + \frac{1}{2} m_2 u_2^2 = \frac{1}{2} m_1 v_1^2 + \frac
 #### 1-2-1. 운동량 보존 법칙
 
 ​	질량이 $m$인 물체가 $\overrightarrow{v}$의 속도로 운동한다면, 이 물체의 운동량을 $m \overrightarrow{v}$로 정의한다. 물체 $i$가 물체 $j$에 가한 힘을 $\displaystyle \overrightarrow{F} _{j i}$라고 하면, 뉴턴 운동 법칙의 제2법칙과 제3법칙에 의하여
-$$ \sum _i m _i \overrightarrow{a} _i = \sum _i \left( \overrightarrow{F} _{i, \text{ext}} + \sum _j \overrightarrow{F} _{i j} \right) = \overrightarrow{F} _\text{ext}$$
+
+$$ \sum _i m _i \overrightarrow{a} _i = \sum _i \left( \overrightarrow{F} _{i, \text{ext}} + \sum _j \overrightarrow{F} _{i j} \right) = \overrightarrow{F} _\text{ext} $$
 
 가 성립한다. 따라서 외력이 작용하지 않으면, $\displaystyle \sum _i m _i \overrightarrow{a} _i = \overrightarrow{F} _\text{ext} = \mathbf{O}$를 얻고, $\displaystyle \sum _i m _i \overrightarrow{v} _i$가 항상 일정함을 알 수 있다. 이렇듯 여러 개의 물체가 충돌할 때 운동량의 총합은 보존되며, 이를 운동량 보존 법칙이라고 한다.[1]
 
@@ -158,7 +159,7 @@ $$ \frac{ m _2 }{ m _1 } = \frac{ \sin^2 \left( \theta _2 - \theta _1 \right) - 
 
 #### 1-2-5. 실험 장치에서 원판과 벽의 충돌
 
-​	**그림 2**와 같이, 원판이 벽과 충돌하여 튕겨져 나오는 상황을 가정하자. 벽이 탄성 계수 $f$를 가진다면, $\displaystyle f = \left( \frac{v}{v _0} \right)^2 \right)$다. 또한 속도의 $y$축 성분은 유지되므로 $ v _0 \sin \theta _0 = v \sin \theta $에서, $\displaystyle f = \left( \frac{ \sin \theta _0 }{ \sin \theta } \right)^2 $ 또한 얻을 수 있다.
+​	**그림 2**와 같이, 원판이 벽과 충돌하여 튕겨져 나오는 상황을 가정하자. 벽이 탄성 계수 $f$를 가진다면, $\displaystyle f = \left( \frac{v}{v _0} \right)^2 $다. 또한 속도의 $y$축 성분은 유지되므로 $ v _0 \sin \theta _0 = v \sin \theta $에서, $\displaystyle f = \left( \frac{ \sin \theta _0 }{ \sin \theta } \right)^2 $ 또한 얻을 수 있다.
 
 ## 2. 본론
 
@@ -356,14 +357,14 @@ $$ \overrightarrow{v} _0 - \overrightarrow{v} _2 = x _b \mathbf{i} + y _b \mathb
 
 ​	목표는 다음 함수 $f$가 최솟값을 가지는 $r = r _\text{min}$을 구하는 것이다.
 
-$$ f(r) = \left\lVert x _a \mathbf{i} + y _a \mathbf{j} - r \left( x _b \mathbf{i} + y _b \mathbf{j} \right\rVert ^2 $$
+$$ f(r) = \left\lVert x _a \mathbf{i} + y _a \mathbf{j} - r \left( x _b \mathbf{i} + y _b \mathbf{j} \right) \right\rVert ^2 $$
 
 ​	함수 $f$를 풀어 쓰면 다음과 같다.
 
 $$ f(r) = \left( x _b^2 + y _b^2 \right) r^2 - 2 \left( x _a x _b + y _a y _b \right) r + \left( x _a^2 + y _a^2 \right) $$
 
 ​	따라서,
-$$ r _\text{min} = \frac{ x _a x _b + y _a y _b }{ x _b^2 + y _b^2 } $$
+$$ \displaystyle r _\text{min} = \frac{ x _a x _b + y _a y _b }{ x _b^2 + y _b^2 } $$
 
 ### 5-3. 측정 데이터의 흔들림 보정
 

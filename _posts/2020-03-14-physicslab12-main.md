@@ -11,7 +11,7 @@ tags:
  - 보고서
 ---
 
-(Working... 이번 주 안에 모든 16개의 보고서를 올릴 예정)
+(Working... 이번 주 안에 모든 16개의 보고서를 올릴 예정 / 시험에 치어서 살고 있다... 열심히 올리는중 ㅠㅜ)
 
 ### 개요
 
@@ -50,7 +50,7 @@ tags:
 * [뉴턴의 사과](https://youngyojun.github.io/study/physicslab/physicslab1/2021/03/14/physicslab1-newton/)
 * [관성 모멘트 측정](https://youngyojun.github.io/study/physicslab/physicslab1/2021/03/16/physicslab1-torque/)
 * [시지프스의 고민](https://youngyojun.github.io/study/physicslab/physicslab1/2021/03/21/physicslab1-sisyphus/)
-* 당구의 역학
+* [당구의 역학](https://youngyojun.github.io/study/physicslab/physicslab1/2021/04/02/physicslab1-billiards/)
 * 자이로스코프
 * 에너지 모습
 * 파동
