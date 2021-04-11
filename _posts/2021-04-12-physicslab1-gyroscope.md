@@ -57,7 +57,7 @@ $$ \frac{ \mathrm{d} \overrightarrow{L} }{ \mathrm{d} t } = \overrightarrow{ \ta
 
 ​	세차 운동을 하는 자이로스코프의 세차 각도를 $\phi _p$, 세차 각속도를 $\omega _p$라 하면
 
-$$ \omega _p = \frac{ \mathrm{d} \phi _p }{ \mathrm{d} t } = \frac{ \mathrm{d} }{ \mathrm{d} t } \left( \frac{ \lVert \mathrm{d} \overrightarrow{L} \rVert }{ \lVert \overrightarrow{L} \rVert } \right) = \frac{ 1 }{ \lVert \overrightarrow{L} \rVert } \lVert \frac{ \mathrm{d} \overrightarrow{L} }{ \mathrm{d} t } \rVert = \frac{ \lVert \overrightarrow{ \tau } \rVert }{ I \omega } = \frac{ mgr }{ I \omega } $$
+$$ \omega _p = \frac{ \mathrm{d} \phi _p }{ \mathrm{d} t } = \frac{ \mathrm{d} }{ \mathrm{d} t } \left( \frac{ \left\lVert \mathrm{d} \overrightarrow{L} \right\rVert }{ \left\lVert \overrightarrow{L} \right\rVert } \right) = \frac{ 1 }{ \left\lVert \overrightarrow{L} \right\rVert } \left\lVert \frac{ \mathrm{d} \overrightarrow{L} }{ \mathrm{d} t } \right\rVert = \frac{ \left\lVert \overrightarrow{ \tau } \right\rVert }{ I \omega } = \frac{ mgr }{ I \omega } $$
 
 임을 알 수 있다.
 
@@ -160,7 +160,7 @@ $$ \overrightarrow{ \tau } = \overrightarrow{r} \times \overrightarrow{F} = m \o
 
 ​	**그림 2**과 같이, 좌표계는 **그림 1**과 똑같되, 관성 바퀴가 회전하고 있는 경우를 생각하자. 회전에 의하여 생기는 초기 각운동량 $\displaystyle \overrightarrow{L}$과 토크 $\displaystyle \overrightarrow{ \tau }$에 의하여 생기는 각운동량의 순간 변화량 $\displaystyle \mathrm{d} \overrightarrow{L}$은 항상 서로 수직을 이룬다. 따라서, **그림 2-(b)**과 같이, $\displaystyle \overrightarrow{L}$은 크기를 유지하면서 $xy$ 평면 위에서 회전한다. 이와 같이, 관성 바퀴가 중력 방향으로 떨어지지 않고 일정하게 회전하는 운동을 세차 운동이라고 한다. 이때, 세차 각속도 $\omega _p$에 대하여
 
-$$ \omega _p = \frac{ \mathrm{d} \phi _p }{ \mathrm{d} t } = \frac{ \mathrm{d} }{ \mathrm{d} t } \left( \frac{ \lVert \mathrm{d} \overrightarrow{L} \rVert }{ \lVert \overrightarrow{L} \rVert } \right) = \frac{1}{ \lVert \overrightarrow{L} \rVert } \lVert \frac{ \mathrm{d} \overrightarrow{L} }{ \mathrm{d} t } \rVert = \frac{ \lVert \overrightarrow{ \tau } \rVert }{ I \omega } = \frac{ mgr }{ I \omega } $$
+$$ \omega _p = \frac{ \mathrm{d} \phi _p }{ \mathrm{d} t } = \frac{ \mathrm{d} }{ \mathrm{d} t } \left( \frac{ \left\lVert \mathrm{d} \overrightarrow{L} \right\rVert }{ \left\lVert \overrightarrow{L} \right\rVert } \right) = \frac{1}{ \left\lVert \overrightarrow{L} \right\rVert } \left\lVert \frac{ \mathrm{d} \overrightarrow{L} }{ \mathrm{d} t } \right\rVert = \frac{ \left\lVert \overrightarrow{ \tau } \right\rVert }{ I \omega } = \frac{ mgr }{ I \omega } $$
 
 가 성립한다.
 
