@@ -51,7 +51,7 @@ tags:
 * [관성 모멘트 측정](https://youngyojun.github.io/study/physicslab/physicslab1/2021/03/16/physicslab1-torque/)
 * [시지프스의 고민](https://youngyojun.github.io/study/physicslab/physicslab1/2021/03/21/physicslab1-sisyphus/)
 * [당구의 역학](https://youngyojun.github.io/study/physicslab/physicslab1/2021/04/02/physicslab1-billiards/)
-* 자이로스코프
+* [자이로스코프](https://youngyojun.github.io/study/physicslab/physicslab1/2021/04/12/physicslab1-gyroscope/)
 * 에너지 모습
 * 파동
 
