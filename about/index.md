@@ -4,8 +4,6 @@ layout: page
 type: about
 ---
 
-[TOC]
-
 # Who Am I?
 
 **2001년 6월 10일생, 윤교준. Gyojun Youn.**
@@ -66,8 +64,8 @@ type: about
 
 ~~과거 흑역사 보존용~~
 
-* [NYPC 2019 언박싱, 온라인 설명회 2부](https://www.youtube.com/watch?v=Rfk5BURA830)
-* [[NYPC스타] NYPC 2018 대상 수상자 윤교준 인터뷰](https://www.youtube.com/watch?v=xyKS_KuweWs)
+* **[NYPC 2019 언박싱, 온라인 설명회 2부](https://www.youtube.com/watch?v=Rfk5BURA830)**
+* **[[NYPC스타] NYPC 2018 대상 수상자 윤교준 인터뷰](https://www.youtube.com/watch?v=xyKS_KuweWs)**
 * [넥슨 NYPC 우승한 경기과학고 윤교준 "NYPC 완벽한 대회, 프로그래밍으로 세상에 도움되고 싶다"](http://gamefocus.co.kr/detail.php?number=87445)
 * [NYPC 우승자 윤교준 "쉬운 교육 시스템 만들어 무료 배포하고파"](http://www.gamevu.co.kr/news/articleView.html?idxno=11523)
 * [3회 NYPC 우승자 윤교준 “지오지브라 같은 교육 프로그램 만들고 싶다”](https://www.mk.co.kr/news/it/view/2018/10/671650/)
