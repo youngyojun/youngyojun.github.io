@@ -52,7 +52,7 @@ tags:
 * [시지프스의 고민](https://youngyojun.github.io/study/physicslab/physicslab1/2021/03/21/physicslab1-sisyphus/)
 * [당구의 역학](https://youngyojun.github.io/study/physicslab/physicslab1/2021/04/02/physicslab1-billiards/)
 * [자이로스코프](https://youngyojun.github.io/study/physicslab/physicslab1/2021/04/12/physicslab1-gyroscope/)
-* 에너지 모습
+* [에너지 모습](https://youngyojun.github.io/study/physicslab/physicslab1/2021/04/18/physicslab1-energy/)
 * 파동
 
 
