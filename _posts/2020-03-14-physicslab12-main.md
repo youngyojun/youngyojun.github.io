@@ -53,7 +53,7 @@ tags:
 * [당구의 역학](https://youngyojun.github.io/study/physicslab/physicslab1/2021/04/02/physicslab1-billiards/)
 * [자이로스코프](https://youngyojun.github.io/study/physicslab/physicslab1/2021/04/12/physicslab1-gyroscope/)
 * [에너지 모습](https://youngyojun.github.io/study/physicslab/physicslab1/2021/04/18/physicslab1-energy/)
-* 파동
+* [파동](https://youngyojun.github.io/study/physicslab/physicslab1/2021/05/05/physicslab1-wave/)
 
 
 
