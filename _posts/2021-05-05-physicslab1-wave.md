@@ -342,7 +342,7 @@ $$ \lambda = \frac{ \sum _i x _i y _i }{ \sum _i x _i ^2 } $$
 
 로 정해진다. 따라서 $\lambda$의 오차는
 
-$ E ( \lambda ) = \frac{ E \left( \sum _i x _i y _i \right) }{ \sum _i x _i ^2 } \le \frac{ \sum _i x _i E \left( y _i \right) }{ \sum _i x _i ^ 2 } = \frac{ N }{ \sum _i x _i } \varepsilon = \frac{ \varepsilon }{ \overline{ x } } $$
+$$ E ( \lambda ) = \frac{ E \left( \sum _i x _i y _i \right) }{ \sum _i x _i ^2 } \le \frac{ \sum _i x _i E \left( y _i \right) }{ \sum _i x _i ^ 2 } = \frac{ N }{ \sum _i x _i } \varepsilon = \frac{ \varepsilon }{ \overline{ x } } $$
 
 다. 본 실험에서는 $N=3$, $\overline{x} \approx 2$이므로, $E(\lambda) = 2$다. ±4mm의 좌표 오차는 약 2.8mm의 파장 오차를 야기하였고, 이는 22%의 오차에 해당한다.
 
