@@ -222,7 +222,7 @@ $F(x)$는 EGF이므로, 정리하면 $\displaystyle F(x) = \frac{1}{k!} C(x)^k$�
 
 수열 $g$의 EGF를 $G(x)$라고 하자. 편의를 위하여, 다항 전개가 가능한 식 $f(x)$에 대하여, $f(x)$의 $x^n$의 계수를 $\displaystyle \left[ x^n \right] f(x)$라고 표기하자. 이전과 동일한 논리를 사용하면, 다음 등식을 얻는다:
 
-$$ \left[ x^n \right] G(x) = \left[ x^n \right] \sum _{k = 1}^{n} k \cdot \frac{ C(x)^k }{ k! } = \left[ x^n \right] = \sum _{k = 1}^{\infty} \frac{1}{(k-1)!} C(x)^k $$
+$$ \left[ x^n \right] G(x) = \left[ x^n \right] \sum _{k = 1}^{n} k \cdot \frac{ C(x)^k }{ k! } = \left[ x^n \right] \sum _{k = 1}^{\infty} \frac{1}{(k-1)!} C(x)^k $$
 
 $$ = \left[ x^n \right] C(x) \left( \sum _{k = 0}^{\infty} \frac{ C(x)^k }{ k! } \right) = [x^n] C(x) e^{ C(x) } $$
 
