@@ -230,7 +230,7 @@ $c _n = (n-1)!$라는 사실로부터, 다음을 알 수 있다:
 
 $$ C(x) = \sum _{k = 1}^{\infty} \frac{ c _k }{ k! } x^k = \sum _{k = 1}^{\infty} \frac{ (k-1)! }{k!} x^k = \sum _{k = 1}^{\infty} \frac{ x^k }{k} = - \ln \left( 1 - x \right) $$
 
-따라서, $\displaystyle C(x) e^{ C(x) } = - \frac{ \ln (1-x) }{ 1-x }$다.
+따라서, $\displaystyle C(x) e^{ C(x) } = - \frac{ \ln (1-x) }{ 1-x }$이다.
 
 $\ln (1+x)$의 매클로린 급수는 $\displaystyle x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \cdots$이므로, $n \ge 1$라면 $\displaystyle \left[ x^n \right] \left( - \ln (1-x) \right) = \frac{1}{n}$이다.
 
