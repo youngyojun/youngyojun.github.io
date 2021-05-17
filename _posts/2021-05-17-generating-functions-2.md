@@ -214,7 +214,7 @@ $F(x)$는 EGF이므로, 정리하면 $\displaystyle F(x) = \frac{1}{k!} C(x)^k$�
 
 즉, $\displaystyle \sum _{k = 1}^{n} \frac{1}{k!} C(x)^k$의 $x^n$의 계수를 계산하면 된다. 이 값은 $\displaystyle \sum _{k = 0}^{\infty} \frac{1}{k!} C(x)^k = e^{ C(x) }$의 $x^n$의 계수와 동일하다.
 
-​	따라서, 집합 $S$와 $n$가 주어졌을 때, 문제의 답을 $O \left( |S| + n \lg n \right)$에 효율적으로 알아낼 수 있다.
+​	따라서, 집합 $S$와 $n$가 주어졌을 때, 문제의 답을 $O \left( \left\lvert S \right\rvert + n \lg n \right)$에 효율적으로 알아낼 수 있다.
 
 ## 길이 $n$의 순열의 사이클의 개수의 기댓값
 
