@@ -81,7 +81,7 @@ $$ F(x, y) = \frac{1}{1-x-xy} = \frac{1}{1 - \left( x (y+1) \right)} = \sum _{n 
 
 $\displaystyle F(x, y) = \sum _{k = 0}^{\infty} (y+1)^k x^k$ 이므로, $x^n$의 계수는 $(y+1)^n$이다.
 
-또한, 정의에 따르면 $\displaystyle F(x, y) = \sum _{n = 0^{\infty}} \sum _{k = 0}^{\infty} f(n, k) x^n y^k = \sum _{n = 0}^{\infty} \left( \sum _{k = 0}^{\infty} f(n, k) y^k \right) x^n$ 이므로, $x^n$의 계수는 $\displaystyle \sum _{k = 0}^{\infty} f(n, k) y^k = \sum _{k = 0}^{\infty} \binom{n}{k} y^k$ 와도 같다.
+또한, 정의에 따르면 $\displaystyle F(x, y) = \sum _{n = 0}^{\infty} \sum _{k = 0}^{\infty} f(n, k) x^n y^k = \sum _{n = 0}^{\infty} \left( \sum _{k = 0}^{\infty} f(n, k) y^k \right) x^n$ 이므로, $x^n$의 계수는 $\displaystyle \sum _{k = 0}^{\infty} f(n, k) y^k = \sum _{k = 0}^{\infty} \binom{n}{k} y^k$ 와도 같다.
 
 따라서, 주어진 식은 항상 성립한다.
 
@@ -220,7 +220,7 @@ $F(x)$는 EGF이므로, 정리하면 $\displaystyle F(x) = \frac{1}{k!} C(x)^k$�
 
 ​	길이 $n$의 모든 순열이 생성하는 사이클의 개수의 합을 $g _n$라고 하자. 이 값을 $n!$으로 나누면 우리가 원하는 답이 된다.
 
-수열 $g$의 EGF를 $G(x)$라고 하자. 편의를 위하여, 다항 전개가 가능한 식 $f(x)$에 대하여, $f(x)$의 $x^n$의 계수를 $\left[ x^n \right] f(x)$라고 표기하자. 이전과 동일한 논리를 사용하면, 다음 등식을 얻는다:
+수열 $g$의 EGF를 $G(x)$라고 하자. 편의를 위하여, 다항 전개가 가능한 식 $f(x)$에 대하여, $f(x)$의 $x^n$의 계수를 $\displaystyle \left[ x^n \right] f(x)$라고 표기하자. 이전과 동일한 논리를 사용하면, 다음 등식을 얻는다:
 
 $$ \left[ x^n \right] G(x) = \left[ x^n \right] \sum _{k = 1}^{n} k \cdot \frac{ C(x)^k }{ k! } = \left[ x^n \right] = \sum _{k = 1}^{\infty} \frac{1}{(k-1)!} C(x)^k $$
 
