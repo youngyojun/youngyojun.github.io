@@ -224,7 +224,7 @@ $F(x)$는 EGF이므로, 정리하면 $\displaystyle F(x) = \frac{1}{k!} C(x)^k$�
 
 $$ \left[ x^n \right] G(x) = \left[ x^n \right] \sum _{k = 1}^{n} k \cdot \frac{ C(x)^k }{ k! } = \left[ x^n \right] \sum _{k = 1}^{\infty} \frac{1}{(k-1)!} C(x)^k $$
 
-$$ = \left[ x^n \right] C(x) \left( \sum _{k = 0}^{\infty} \frac{ C(x)^k }{ k! } \right) = [x^n] C(x) e^{ C(x) } $$
+$$ = \left[ x^n \right] C(x) \left( \sum _{k = 0}^{\infty} \frac{ C(x)^k }{ k! } \right) = \left[ x^n \right] C(x) e^{ C(x) } $$
 
 $c _n = (n-1)!$라는 사실로부터, 다음을 알 수 있다:
 
