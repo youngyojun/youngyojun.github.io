@@ -1,5 +1,5 @@
 ---
-title: "트리를 활용한 새로운 효율적 수열 쿼리 알고리즘"
+title: "트리를 활용한 새로운 효율적인 수열 쿼리 알고리즘"
 date: 2021-07-17 23:10:04
 categories:
  - Secmem
@@ -21,8 +21,8 @@ tags:
 
 ​	본문은 아래의 내용을 부가적인 설명 없이 서술한다. 각 항목에 대하여 자세하게 서술한 좋은 글을 링크해두었다.
 
-* [최소 공통 조상 (LCA, Lowest Common Ancestor)](http://www.secmem.org/blog/2019/03/27/fast-LCA-with-sparsetable/)
 * [세그먼트 트리 (Segment Tree)](https://en.wikipedia.org/wiki/Segment_tree)
+* [Heavy-Light Decomposition (HLD)](https://www.secmem.org/blog/2019/12/12/HLD/)
 * [좌표 압축 기법 (Coordinate Compression)](https://codingdog.tistory.com/entry/%EC%A2%8C%ED%91%9C-%EC%95%95%EC%B6%95-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%B2%94%EC%9C%84%EA%B0%80-%ED%81%B4-%EB%95%8C-%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B3%B5%EA%B0%84%EC%9D%84-%EC%A4%84%EC%9D%BC%EA%B9%8C%EC%9A%94)
 * [제곱근 분할법 (Sqrt Decomposition)](https://www.secmem.org/blog/2020/04/13/sqrt/)
 
@@ -65,7 +65,7 @@ $Q = 5$개의 쿼리가 순서대로 ["2번 쿼리", "1번 쿼리, $i = 5$, $x =
 
 네 번째 쿼리는 $A _2$의 값을 $3$으로 변경한다. $A = \left\\{ 2, 3, 1, 2, 2, 2 \right\\}$.
 
-마지막 쿼리의 답은, $(4, 5)$과 4(5, 6)$만 조건을 만족하므로, $2$이다.
+마지막 쿼리의 답은, $(4, 5)$과 $(5, 6)$만 조건을 만족하므로, $2$이다.
 
 ![](https://youngyojun.github.io/assets/images/posts/2021-07-17-tree-sequence-algorithm/in_out_example.png)
 
@@ -103,13 +103,13 @@ $i$를 고정한 후, $j$를 점차 증가하면서 구간 $[i+1, j-1]$의 최�
 
 > $i < j$이고 $A _i \ge A _j$라면, 모든 $i' < i$에 대하여 순서쌍 $(i', j)$는 부등식 조건을 만족할 수 없다.
 
-구간 $[i' + 1, j - 1]$의 최댓값이 이미 $A _i$ 이상이고, 이는 $A _j$보다 크므로, 이 관찰은 성립한다.
+구간 $[i' + 1, j - 1]$의 최댓값이 이미 $A _i$ 이상이고, 이는 $A _j$ 이상이므로, 이 관찰은 성립한다.
 
 ![](https://youngyojun.github.io/assets/images/posts/2021-07-17-tree-sequence-algorithm/no_before_high.png)
 
 <p style="text-align: center;"><b>그림 3: 두 번째 관찰의 모식도</b></p>
 
-<p style="text-align: center;">$A _i$가 이미 $A _j$보다 크므로, $\left( i', j \right)$는 조건을 만족하는 순서쌍이 될 수 없다.</p>
+<p style="text-align: center;">$A _i$가 이미 $A _j$ 이상이므로, $\left( i', j \right)$는 조건을 만족하는 순서쌍이 될 수 없다.</p>
 
 
 
@@ -138,15 +138,15 @@ for i in range(1, N+1):
 
 
 
-$1$부터 $N$까지 $N$개의 수는 스택에 오직 한 번 삽입되고, 한 번 삭제된다.
+​	$1$부터 $N$까지 $N$개의 수는 스택에 오직 한 번 삽입되고, 한 번 삭제된다.
 
 따라서, 2번 쿼리 당 시간 복잡도는 $O \left( N \right)$이며, 전체 시간 복잡도는 $O \left( NQ \right)$이다.
 
-또한, 부등식 조건을 만족하는 순서쌍은 많아봐야 $N-1$개임을 말해준다.
+또한, 부등식 조건을 만족하는 순서쌍은 많아봐야 $N-1$개임을 알 수 있다.
 
 
 
-이제, 2번 쿼리를 $O \left( N \right)$보다 빠르게 처리하는 방법을 알아보자.
+​	이제, 2번 쿼리를 $O \left( N \right)$보다 빠르게 처리하는 방법을 알아보자.
 
 
 
@@ -156,7 +156,7 @@ $1$부터 $N$까지 $N$개의 수는 스택에 오직 한 번 삽입되고, 한 
 
 아래와 같이 C++의 `std::map`, Python의 `dict`을 활용하면, 1번 쿼리를 $O \left( \lg (N+Q) \right)$, 2번 쿼리를 $O(1)$에 처리할 수 있다.
 
-```c++
+```cpp
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -240,7 +240,7 @@ $A _0 = A _{N+1} = \infty$로 한 후, $(0, N+1)$ 또한 조건을 만족한다�
 
 
 
-​	이러한 추측은 참이다. 조건을 만족하는 순서쌍은 항상 서로 포함 관계에 있거나, 아니면 교집합을 가지지 않는다. 즉, Laminar set family를 이룬다.
+​	이러한 추측은 참이다. 조건을 만족하는 순서쌍은 항상 서로 포함 관계에 있거나, 아니면 교집합을 가지지 않는다. 즉, [Laminar set family](https://en.wikipedia.org/wiki/Laminar_set_family)를 이룬다.
 
 Laminar set family에서 포함 관계를 가장 단순한 형태의 그래프로 표현하면, 여러 개의 트리로 이루어진 Forest가 된다.
 
@@ -281,7 +281,7 @@ $O \left( Q \right)$개의 가변 전봇대를 모두 무시한 채로, $O \left
 
 각 체인을 세그먼트 트리로 관리하며, 각 구간에서 가중치의 최솟값과 그러한 값을 가지는 정점의 개수를 관리하면 된다.
 
-```C++
+```cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -410,7 +410,7 @@ $$ O \left( N \lg N + \frac{Q}{D} \times \left( N + D \lg^2 N + D^2 \right) \rig
 
 ​	정리하면, 쿼리를 $\sqrt{N}$개씩 나누어 처리하면, 각 쿼리를 $O \left( \sqrt{N} \right)$의 복잡도로 해결할 수 있다!
 
-```C++
+```cpp
 #include <bits/stdc++.h>
 using namespace std;
 
