@@ -1,11 +1,13 @@
 ---
-title: "Stern-Brocot Tree를 활용한 수론적 함수의 합 계산"
-date: 2022-02-18 18:27:10
+title: "그래프의 간선을 제거할 때 절점의 개수를 세는 효율적인 알고리즘"
+date: 2021-12-19 12:43:29
 categories:
  - Secmem
 tags:
+ - Graph
+ - Cut vertex
+ - Cut edge
  - Algorithm
- - Mathematics
 
 ---
 
