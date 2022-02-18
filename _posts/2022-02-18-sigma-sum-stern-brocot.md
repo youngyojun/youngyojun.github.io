@@ -1,5 +1,5 @@
 ---
-title: "그래프의 간선을 제거할 때 절점의 개수를 세는 효율적인 알고리즘"
+title: "Stern Brocot Tree를 활용한 수론적 함수의 합 계산"
 date: 2021-12-19 12:43:29
 categories:
  - Secmem
@@ -10,7 +10,6 @@ tags:
  - Algorithm
 
 ---
-
 
 # 개요
 
@@ -183,3 +182,60 @@ Stern-Brocot Tree에 대하여 논하기 전에, 먼저 페리 수열의 정의�
 
 우리는 결국 $\displaystyle f \left( x _0, y _0, \frac{a}{b}, \frac{c}{d} \right)$가 0이 될 때까지 재귀적으로 탐색을 이어나가야 한다. 따라서, 이 함숫값을 계산할 수 있어야 한다. 이를 어떻게 계산할 수 있을까?
 
+**그림 4**의 두 접선을 각각 새로운 축으로 잡고, 점 $P$를 원점으로 생각한 새로운 좌표계 $u-v$를 생각하자. $u$ 축이 직선 $PR$, $v$ 축이 직선 $PQ$이다. 이 경우 회색 영역은 다음과 같이 변환된다.
+
+![](https://youngyojun.github.io/assets/images/posts/2022-02-18-sigma-sum-stern-brocot/4.png)
+
+<p style="text-align: center;"><b>그림 5: 변환된 새로운 영역</b></p>
+
+
+
+드디어 우리는 재귀적으로 정수 점의 개수를 셀 수 있게 되었다!
+
+
+
+# 시간 복잡도
+
+재귀적으로 변하는 접선의 기울기는 Stern-Brocot Tree에서 경로를 따라 아래로 내려가는 것과 같으므로, 시간 복잡도를 아래와 같이 쓸 수 있다.
+
+$$ O \left( \sum _{ ad - bc = 1 } I \left[ \sqrt{ \frac{N}{ c/d } } - \sqrt{ \frac{N}{ a/b } } \ge b + d \right] \right) $$
+
+$$ = O \left( \sum _{ ad - bc = 1 } I \left[ \frac{ \sqrt{bc + 1} - \sqrt{bc} }{ \sqrt{ac} } \ge \frac{ b + d }{ \sqrt{N} } \right] right) $$
+
+$$ = O \left( \sum _{ ad - bc = 1} I \left[ \frac{1}{ \sqrt{ab} c } \ge \frac{b+d}{\sqrt{N}} \right] \right) = O \left( \sum _{ad - bc = 1} I \left[ ab c^2 \left( b + d \right)^2 \ge N \right] \right) $$
+
+마지막 줄에서는 $ \displaystyle \sqrt{x+1} - \sqrt{x} = O \left( \frac{1}{ \sqrt{x} } \right) $가 사용되었다.
+
+이제, $t = bc$ 치환을 적용하면,
+
+$$ O \left( \sum _{t} \sum _{ b | t} \sum _{ a | (t+1) } I \left[ \frac{t^4}{ab} + t^3 + ab t^2 \ge N \right] \right) $$
+
+$$ = O \left( \sum _{t = 1}^{N^{1/3}} \sigma(t) \sigma(t+1) \right) = O \left( \sum _{t=1}^{N^{1/3}} \sigma^2 (t) \right) $$
+
+엄밀한 증명이나 식 전개는 생략하였다.
+
+
+
+이제, 다음의 잘 알려진 정리를 적용하자.
+
+> $$ \sum _{k=1}^{N} \sigma^2 (k) = \Theta \left( N \lg^3 N \right) $$
+
+
+
+즉, 서술한 알고리즘의 시간 복잡도는 $ \displaystyle O \left( N^{ \frac{1}{3} } \lg^3 N \right) = \tilde{O}\left( N^{ \frac{1}{3} } \right) $ 임을 알 수 있다.
+
+
+
+# 결론
+
+수론적 함수는 정수론 뿐만 아니라 컴퓨터과학, 알고리즘, PS 분야에도 사용될 정도로 중요하며 그 폭이 아주 넓다.
+
+우리는 대표적인 수론적 함수 $\sigma (n)$의 구간 합 $ \displaystyle \sum _{k=1}^{N} \sigma(k) $을 효율적으로 계산하는 알고리즘에 대하여 알아보았다.
+
+일반적인 식 전개로는 $ \displaystyle O \left( \sqrt{N} \right) $까지 시간 복잡도를 줄일 수 있었다. 그러나, $N$이 아주 큰 수라면 이 방법도 아직은 느리다.
+
+우리는 $ \displaystyle y = \frac{N}{x} $ 그래프와 구하고자 하는 값과의 관계를 알아내고, 그래프의 볼록성이라는 기하적 특성과 Stern-Brocot Tree 자료구조를 활용하여, 재귀적으로 값을 계산하는 새로운 알고리즘을 조사하였다.
+
+또한, 이 알고리즘의 시간 복잡도가 $ \displaystyle \tilde{O} \left( N^{1/3} \right) $로 아주 효율적임을 밝혔다.
+
+이러한 알고리즘의 아이디어는 다양한 볼록 함수에 대하여 접목시킬 수 있으며, 그 응용성이 높다. 다음 글에는 $\sigma (n)$ 외에 다른 수론적 함수의 구간 합을 효율적으로 계산하는 방법에 대하여 알아본다.
