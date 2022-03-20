@@ -52,7 +52,7 @@ LCS 문제는 다이나믹 프로그래밍 기법을 이용하여 쉽게 해결�
 
 > 임의의 문자열 $X$, $Y$, $S$에 대하여, 다음이 성립한다.
 >
-> $$ \text{LCS} \left( X + S, Y + S \right) = \text{LCS} \left( X, Y \right) + S := \left\\{ C + S : C \in \text{LCS} \left( X, Y \right) \right\\} $$
+> $$ \text{LCS} \left( X + S, Y + S \right) = \text{LCS} \left( X, Y \right) + S := \left\{ C + S : C \in \text{LCS} \left( X, Y \right) \right\} $$
 
 이는 $|S| = 1$일 때에만 증명해도 충분하다. $X + S$와 $Y + S$의 마지막 문자는 서로에게 대응시키는 것이 LCS를 구함에 있어 손해가 되지 않기 때문에 항상 최적임을 알 수 있다.
 
@@ -81,6 +81,24 @@ $\alpha \ne \beta$이므로, 두 알파벳은 서로에게 대응될 수 없다.
 
 
 
+이를 코드로 구현하면 다음과 같다.
+
+```c++
+int lcs(char *X, int N, char *Y, int M) {
+    int D[N+1][M+1] = {};
+    
+    for(int i = 1; i <= N; i++)
+        for(int j = 1; j <= M; j++)
+            D[i][j] = X[i] == Y[j]
+            		? D[i-1][j-1] + 1
+            		: max(D[i][j-1], D[i-1][j]);
+    
+    return D[N][M];
+}
+```
+
+
+
 # Hunt-Szymanski Algorithm
 
 ## 더 빠른 알고리즘의 필요성 제기
@@ -89,7 +107,7 @@ $\alpha \ne \beta$이므로, 두 알파벳은 서로에게 대응될 수 없다.
 
 그러나 현실에서, 그리고 많은 정보과학 관련 학문 분야에서 LCS 문제는 자주 사용되기에, 아주 긴 문자열의 LCS를 빠르게 계산하는 알고리즘의 필요성이 점차 대두되었다.
 
-Hunt-Szymanski 알고리즘은 간단한 아이디어로 두 문자열의 LCS를 $mathcal{O} \left( N \lg N \right)$의 실험적 시간 복잡도로 계산한다. 본 글은 이 알고리즘에 대하여 소개하고자 한다.
+Hunt-Szymanski 알고리즘은 간단한 아이디어로 두 문자열의 LCS를 $\displaystyle \mathcal{O} \left( N \lg N \right)$의 실험적 시간 복잡도로 계산한다. 본 글은 이 알고리즘에 대하여 소개하고자 한다.
 
 
 
@@ -97,7 +115,27 @@ Hunt-Szymanski 알고리즘은 간단한 아이디어로 두 문자열의 LCS를
 
 먼저, 고전적 DP 알고리즘의 작동 방식을 생각하자.
 
-두 문자열 "`aeaca`"와 "acea"의 
+두 문자열 `aeaca`와 `acea`에서 같은 알파벳을 가지는 모든 위치쌍을 'X'표로 나타내면 아래와 같다.
+
+![](https://youngyojun.github.io/assets/images/posts/2022-03-20-Hunt-Szymanski/1.png)
+
+<p style="text-align: center;"><b>그림 1: 두 문자열의 공통 알파벳에 대응되는 모든 위치를 표시한 표</b></p>
+
+<p style="text-align: center;">두 문자열 $X$, $Y$에 대하여, $x _i = y _j$인 모든 위치쌍 $(i, j)$을 'X'표로 나타내었다.</p>
+
+고전적 DP 알고리즘은 $D _{i, j}$의 값을 구할 때 일반적으로 $D _{i, j-1}$과 $D _{i-1, j}$의 최댓값을 채택하나, 'X'표에 해당하는 위치에서만 $D _{i-1, j-1} + 1$의 값을 택하는 알고리즘이다.
+
+그러나, 실생활에서, 알파벳의 총 개수가 충분히 크다면, 이러한 'X'표의 개수가 $\displaystyle \mathcal{O} \left( NM \right) $보다는 유의미하게 작으리라 기대할 수 있다. Hunt-Syzmanski 알고리즘은 이러한 아이디어에서 출발한다.
+
+#### Lemma 3. $D _{i, j}$의 행의 단조성
+
+> 고전적 DP 알고리즘에서 한 행 $D _{i, *}$의 값은 항상 다음과 같은 형식을 가진다.
+>
+> $$ 0\ 0\ 1\ 1\ 1\ 2\ 3\ 3\ 3\ 3\ 3\ 4\ 4\ 5\ 5\ 5\ \cdots $$
+>
+> 즉, 첫 번째 값은 항상 0이고, 이웃한 두 수의 차이는 최대 1이며, 값을 차례대로 읽으면 단조증가한다.
+>
+> 단, 편의상 $D _{0, * } = D _{ *, 0} = 0$라고 가정한다.
 
 
 
