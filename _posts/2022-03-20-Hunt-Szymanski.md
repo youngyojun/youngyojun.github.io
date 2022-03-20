@@ -1,5 +1,5 @@
 ---
-title: "asdf"
+title: "실무에서 빠르게 LCS를 계산하는 실용적인 Hunt-Szymanski 알고리즘에 관하여"
 date: 2022-03-20 14:55:28 +0900
 categories:
  - Secmem
@@ -54,7 +54,7 @@ LCS 문제는 다이나믹 프로그래밍 기법을 이용하여 쉽게 해결�
 >
 > $$ \text{LCS} \left( X + S, Y + S \right) = \text{LCS} \left( X, Y \right) + S := \left\{ C + S : C \in \text{LCS} \left( X, Y \right) \right\} $$
 
-이는 $|S| = 1$일 때에만 증명해도 충분하다. $X + S$와 $Y + S$의 마지막 문자는 서로에게 대응시키는 것이 LCS를 구함에 있어 손해가 되지 않기 때문에 항상 최적임을 알 수 있다.
+이는 $\left\lvert S \right\rvert = 1$일 때에만 증명해도 충분하다. $X + S$와 $Y + S$의 마지막 문자는 서로에게 대응시키는 것이 LCS를 구함에 있어 손해가 되지 않기 때문에 항상 최적임을 알 수 있다.
 
 #### Lemma 2. 양자택일.
 
@@ -85,13 +85,13 @@ $\alpha \ne \beta$이므로, 두 알파벳은 서로에게 대응될 수 없다.
 
 ```c++
 int lcs(char *X, int N, char *Y, int M) {
-    int D[N+1][M+1] = {};
+    int D[N+1][M+1] = {}; // D_{i, j}
     
     for(int i = 1; i <= N; i++)
         for(int j = 1; j <= M; j++)
             D[i][j] = X[i] == Y[j]
-            		? D[i-1][j-1] + 1
-            		: max(D[i][j-1], D[i-1][j]);
+                    ? D[i-1][j-1] + 1 // Lemma 1.
+                    : max(D[i][j-1], D[i-1][j]); // Lemma 2.
     
     return D[N][M];
 }
@@ -137,44 +137,106 @@ Hunt-Szymanski 알고리즘은 간단한 아이디어로 두 문자열의 LCS를
 >
 > 단, 편의상 $D _{0, * } = D _{ *, 0} = 0$라고 가정한다.
 
+행 번호 $i$에 대하여 귀납법을 적용하여 증명할 수 있다. $D _{0, *}$은 그 값이 모두 0이므로 자명하다. $D _{i, j}$의 값은 (1) 그 이전 값 $D _{i, j-1}$거나, (2) 그 위의 값 $D _{i-1, j}$거나, (3) 대각 위의 값 $D _{i-1, j-1}$에서 1을 더한 값이다. 인접한 수의 차이는 0 아니면 1이므로, $D _{i, *}$ 또한 단조증가하면서 차이가 최대 1인 수열임을 알 수 있다.
 
 
 
+이제, 각 행에 대하여 연속한 값을 가지는 구간의 특징을 관찰하자. 같은 값을 가지는 **Segment**에서 첫 수를 **Head**, 나머지 수들을 **Tail**이라고 부르자. 어떤 행의 $D _{i, *}$ 값이 $ 0\ 0\ 0\ 0\ 0\ 1\ 1\ 1\ 1\ 2\ 3\ 3\ 3\ 3\ 4\ 4\ 4\ 4 $일 때, 각 Segment의 Tail을 직사각형 블록으로 묶어서 표현하면 아래와 같다.
+
+![](https://youngyojun.github.io/assets/images/posts/2022-03-20-Hunt-Szymanski/2.png)
+
+<p style="text-align: center;"><b>그림 2: 한 행에서 모든 Tail을 직사각형으로 나타낸 그림</b></p>
+
+<p style="text-align: center;">총 네 개의 Tail을 직사각형으로 묶어 나타내었다. Head의 값이 차례대로 0, 1, 2, 3, 4 임에 유의하라.</p>
 
 
 
-## Stern-Brocot Tree
+**그림 2**와 같이 $D _{i, *}$ 값을 Segment 표기법으로 나타낸 후, 그 바로 아래의 행에서 'X'표 배치에 따른 $D _{i+1, *}$ 값 변화를 관찰하자. 만약, **그림 3**의 상단과 같이 'X'표가 배치되었다면, $D _{i+1, *}$의 값은 하단과 같이 결정된다.
 
-페리 수열 $F_n$을 확장하여, 각 유리수의 역수까지 등장하는 수열을 생각하자. 편의상, $ \displaystyle \frac{1}{0} = + \infty $로 생각하면, 이 수열은 $ \displaystyle \frac{0}{1} = 0 $ 이상 $ \displaystyle \frac{1}{0} = + \infty $ 이하인 기약분수를 잘 나열할 것이다.
+![](https://youngyojun.github.io/assets/images/posts/2022-03-20-Hunt-Szymanski/3.png)
 
-실제로, $0$ 이상의 모든 유리수는 충분히 큰 $n$에 대하여 확장된 페리 수열 $F' _n$에 정확하게 한 번 등장함을 증명할 수 있다. 이제, 깊이 $n$에 해당하는 층에 확장된 페리 수열 $F' _n$을 적어, 아래 그림과 같은 이진 트리를 생각하자.
+<p style="text-align: center;"><b>그림 3: 'X'표 배치와 그 아래 행의 값</b></p>
 
-![](https://youngyojun.github.io/assets/images/posts/2022-02-18-sigma-sum-stern-brocot/SternBrocotTree.png)
-
-<p style="text-align: center;"><b>그림 1: Stern–Brocot Tree</b></p>
-
-<p style="text-align: center;">확장된 페리 수열 $F' _1$부터 $F' _4$까지 활용하여 깊이 4의 Stern-Brocot Tree를 만들 수 있다.</p>
+<p style="text-align: center;"><b>그림 2</b>의 $D _{i, *}$과 'X'표 배치가 상단과 같이 주어지면, $D _{i+1, *}$의 값은 하단과 같이 결정된다.</p>
 
 
 
-이 트리는 (1) **완전 이진 검색 트리**이며, (2) **모든 양의 유리수가 정확하게 한 번씩 등장**한다는 강력한 성질을 가진다. 또한, 트리 그 자체로 유리수와 자연수 간의 일대일 대응을 잘 보여준다.
+여기서 우리는 다음의 사실을 관찰할 수 있다.
 
-이러한 완전 이진 검색 트리를 [Stern-Brocot Tree](https://en.wikipedia.org/wiki/Stern%E2%80%93Brocot_tree)라고 부른다.
+### Theorem.
+
+> 1. Head 아래에 있는 'X'표는 **무시해도** $D _{i+1, *}$ 값에 변화를 주지 않는다.
+> 2. 같은 Tail에 여러 개의 'X'표가 있다면, **가장 앞에 있는 'X'표만** 남겨도 그 결과는 동일하다.
+> 3. 각 Tail의 가장 앞에 있는 'X'표는 $D _{i+1, *}$의 값을 **1 증가**시킨다.
 
 
+
+## 알고리즘의 구현
+
+$D _{*, 0} = 0$이고 값이 증가한다면 증감량이 무조건 1이므로, 각 행에서 $D _{i, *}$ 값이 증가하는 시점만 기록해도 모든 정보를 나타내기에 충분하다.
+
+조금 더 자세하게는, $D _{i, j} - D _{i, j-1} = 1$인 $j$만 모아놓은 집합 $S _i$는 $D _{i, *}$의 모든 값을 잘 표현한다. 뿐만 아니라, $D _{i, *}$는 $\Theta \left( M \right)$의 공간 복잡도가 필요한 반면, $\left\lvert S _i \right\rvert$는 $M$보다 충분히 작을 것이라 기대할 수 있다. 실제로 이 집합의 크기가 어느 정도인 지는 추후에 분석한다.
+
+예를 들어, 그림 3에서 $D _{i, *}$과 $D _{i+1, *}$의 값으로부터 집합 $S _i$, $S _{i+1}$을 계산하면 아래와 같다.
+
+> * $$ S _i = \left\{ 5, 9, 10, 14 \right\} $$
+> * $$ S _{i+1} = \left\{ 2, 9, 10, 12, 16 \right\} $$
+
+
+
+그러면, $S _i$와 'X'표 배치로부터 집합 $S _{i+1}$는 어떻게 얻을 수 있을까. 먼저, 다음과 같이 함수 $\text{succ}(S, x)$를 정의하자.
+
+> $$ \text{succ} \left( S, x \right) := \min \left\{ y \in S : y \ge x \right\} $$
+
+이 함수는 C++의 `std::lower_bound`에 대응된다.
+
+
+
+$i+1$번째 행에 위치한 'X'표의 좌표를 모두 모아놓은 집합을 $R _i$라고 하자. 즉, $R _i := \left\\{ j : x _{i+1} = y _j \right\\}$이다. 이때, $S _{i+1}$는 다음과 같이 계산할 수 있다.
+
+> 1. $S _{i+1} \longleftarrow S _i$ : 집합 $S _i$를 $S _{i+1}$에 복사한다.
+> 2. 각 $j \in R _i$를 **감소하는 순서**대로 다음을 반복한다.
+>    1. $S _{i+1}$에서 $\text{succ} \left( S _{i+1}, j \right)$를 제거한다.
+>    2. $S _{i+1}$에 $j$를 추가한다.
+
+이러한 알고리즘의 정당성은 **Theorem.**에서 직관적으로 얻어진다.
+
+
+
+이를 코드로 구현하면 다음과 같다.
+
+```c++
+int lcs(char *X, int N, char *Y, int M) {
+    vector<int> idx[256]; // # of alphabets = 256
+    
+    // Counting sort + Reverse
+    // We use them to compute R_i fast
+    for(int i = M; i--;) idx[Y[i]].emplace_back(i);
+    
+    // Init S_0
+    int S[N+1] = {-1}, l = 1;
+    
+    // Compute S_1, ..., S_N
+    for(int i = 0; i < N; i++) {
+        for(int j : idx[A[i]]) {
+            if(S[l-1] < j) S[l++] = j; // No succ. exists
+            else S[int(lower_bound(S, S+l, j) - S)] = j;
+                // Find succ. and replace
+        }
+    }
+    
+    return l-1;
+}
+```
 
 
 
 # 결론
 
-수론적 함수는 정수론 뿐만 아니라 컴퓨터과학, 알고리즘, PS 분야에도 사용될 정도로 중요하며 그 폭이 아주 넓다.
+LCS 문제는 정보과학에서 기초적인 문제이지만, 생물정보학과 전산언어학, 검색 엔진, `diff` 프로그램 등, 학문적으로도 실용적으로도 다양한 분야에 접목되고 활용된다.
 
-우리는 대표적인 수론적 함수 $\sigma (n)$의 구간 합 $ \displaystyle \sum _{k=1}^{N} \sigma(k) $을 효율적으로 계산하는 알고리즘에 대하여 알아보았다.
+두 개의 문자열의 LCS를 구하는 문제는 해싱 등의 기법을 활용하지 않고서는 $\displaystyle \mathcal{O} \left( NM \right)$보다 빠르게 해결할 수 없음이 알려져 있다. 우리는 같은 알파벳을 나타내는 위치쌍의 총 개수 $\displaystyle R := \sum _i \left\lvert R _i \right\rvert$가 실험적으로는 $\displaystyle \mathcal{O} \left( NM \right)$보다는 유의미하게 작다는 사실을 활용한 Hunt-Szymanski 알고리즘에 대하여 알아보았다.
 
-일반적인 식 전개로는 $ \displaystyle O \left( \sqrt{N} \right) $까지 시간 복잡도를 줄일 수 있었다. 그러나, $N$이 아주 큰 수라면 이 방법도 아직은 느리다.
+이 알고리즘은 고전적 DP 알고리즘에서 인접한 두 행의 $D _{i, *}$, $D _{i+1, *}$ 값의 특징을 관찰하고, 이 DP 배열을 적은 개수의 수로 이루어진 집합으로 표현함으로써, 평균 시간 복잡도를 낮추었다. $N \gg M$을 가정하면, 시간 복잡도는 $\displaystyle \mathcal{O} \left( R \lg N + M \lg M \right)$가 되며, $R = \Theta \left( NM \right)$인 최악의 경우에도 고전적 DP 알고리즘보다 $\displaystyle \mathcal{O}\left( \lg N \right)$배밖에 느리지 않다. 또한, 실험적으로는 $\displaystyle R = \mathcal{O} \left( N \right)$을 기대할 수 있다.
 
-우리는 $ \displaystyle y = \frac{N}{x} $ 그래프와 구하고자 하는 값과의 관계를 알아내고, 그래프의 볼록성이라는 기하적 특성과 Stern-Brocot Tree 자료구조를 활용하여, 재귀적으로 값을 계산하는 새로운 알고리즘을 조사하였다.
-
-또한, 이 알고리즘의 시간 복잡도가 $ \displaystyle \tilde{O} \left( N^{1/3} \right) $로 아주 효율적임을 밝혔다.
-
-이러한 알고리즘의 아이디어는 다양한 볼록 함수에 대하여 접목시킬 수 있으며, 그 응용성이 높다. 다음 글에는 $\sigma (n)$ 외에 다른 수론적 함수의 구간 합을 효율적으로 계산하는 방법에 대하여 알아본다.
+Hunt-Szymanski 알고리즘의 핵심적인 관찰들은 추후 [Bit-String LCS 알고리즘](http://www.secmem.org/blog/2019/09/12/lcs-with-bitset/)에 응용되었다. 이 알고리즘은 $\displaystyle \mathcal{O} \left( \frac{ NM }{ \omega } \right)$의 시간 복잡도와 $\displaystyle \mathcal{O} \left( \frac{ \left\lvert \Sigma \right\rvert M }{ W } \right)$의 공간 복잡도로 LCS를 계산한다.
