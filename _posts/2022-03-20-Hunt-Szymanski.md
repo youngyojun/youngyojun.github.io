@@ -25,8 +25,9 @@ tags:
 
 어떤 문자열 $S$의 부분문자열 (Subsequence)의 정의는 다음과 같다.
 
-> 문자열 $S = s _1 s _2 \cdots s _N$의 부분문자열 $s _{i _1} s _{i _2} \cdots s _{i _K}$은 정수열 $\left\{ i _k \right\} _{k = 1}^{k = K}$로 생성되는 문자열이다. 여기서 수열 $\left\{ i _k \right\} _{k = 1}^{k = K}$는 다음 조건을 만족해야 한다.
+> 문자열 $S = s _1 s _2 \cdots s _N$의 부분문자열 $s _{i _1} s _{i _2} \cdots s _{i _K}$은 정수열 $\left\\{ i _k \right\\} _{k = 1}^{k = K}$로 생성되는 문자열이다. 여기서 수열 $\left\\{ i _k \right\\} _{k = 1}^{k = K}$는 다음 조건을 만족해야 한다.
 >
+> * $0 \le K \le N$
 > * $\displaystyle 1 \le i _1 < i _2 < \cdots < i _K \le N$
 
 즉, 부분문자열은 원 문자열에서 순서를 유지한 채 몇 개의 문자를 제거하여 얻어질 수 있는 문자열을 뜻한다.
@@ -45,38 +46,62 @@ LCS 문제는 다이나믹 프로그래밍 기법을 이용하여 쉽게 해결�
 
 
 
-먼저, 두 문자열 $X$, $Y$에 대하여, $\text{LCS} (X, Y)$를 정의하자.
+먼저, 두 문자열 $X$, $Y$에 대하여, $\text{LCS} (X, Y)$를 "$X$와 $Y$의 최장 공통 부분문자열의 집합"으로 정의하자.
 
+#### Lemma 1. 공통 접미사는 LCS에 포함된다.
 
-
-# Stern-Brocot Tree
-
-효율적인 알고리즘을 구상하기 전에, 페리 수열과 Stern-Brocot Tree 자료구조에 대하여 먼저 알아보자.
-
-## Farey Sequence
-
-Stern-Brocot Tree에 대하여 논하기 전에, 먼저 [페리 수열](https://en.wikipedia.org/wiki/Farey_sequence)의 정의를 소개한다. $n$번째 페리 수열 $F_n$는 다음을 만족하는 모든 기약분수 $ \displaystyle \frac{a}{b} $를 오름차순으로 나열한 수열이다.
-
-> 1. $0 \le b \le a \le n$
->2. $\gcd (a, b) = 1$
-
-
-
-예를 들어, 몇몇의 $n$에 대하여 페리 수열 $F_n$을 나열하면 아래와 같다.
-
-> $$ F _1 = \left\{ \frac{0}{1}, \frac{1}{1} \right\} $$
+> 임의의 문자열 $X$, $Y$, $S$에 대하여, 다음이 성립한다.
 >
-> $$ F _2 = \left\{ \frac{0}{1}, \frac{1}{2}, \frac{1}{1} \right\} $$
+> $$ \text{LCS} \left( X + S, Y + S \right) = \text{LCS} \left( X, Y \right) + S := \left\\{ C + S : C \in \text{LCS} \left( X, Y \right) \right\\} $$
+
+이는 $|S| = 1$일 때에만 증명해도 충분하다. $X + S$와 $Y + S$의 마지막 문자는 서로에게 대응시키는 것이 LCS를 구함에 있어 손해가 되지 않기 때문에 항상 최적임을 알 수 있다.
+
+#### Lemma 2. 양자택일.
+
+> 임의의 문자열 $X$, $Y$와 서로 다른 두 알파벳 $\alpha, \beta \in \Sigma$에 대하여, 다음이 성립한다.
 >
-> $$ F _5 = \left\{ \frac{0}{1}, \frac{1}{5}, \frac{1}{4}, \frac{1}{3}, \frac{2}{5}, \frac{1}{2}, \frac{3}{5}, \frac{2}{3}, \frac{3}{4}, \frac{4}{5}, \frac{1}{1} \right\} $$
+> $$ \text{LCS} \left( X + \alpha, Y + \beta \right) = \max \left[ \text{LCS} \left( X + \alpha, Y \right), \text{LCS} \left( X, Y + \beta \right) \right] $$
+>
+> 여기서, $ \max \left[ U, V \right] $는 $U \cup V$에서 길이가 가장 긴 문자열만 모아놓은 문자열 집합을 의미한다.
+
+$\alpha \ne \beta$이므로, 두 알파벳은 서로에게 대응될 수 없다. 즉, 둘 중 하나는 공통 부분문자열에 포함되지 못하므로, 각각의 경우에 대하여 LCS를 계산한 후 합쳐줄 수 있다. $\alpha = \beta$인 경우는 **Lemma 1.**에 해당함에 유의하라.
 
 
 
-여기서, 페리 수열 $F_n$에서 인접한 두 유리수를 "차수 $n$에서 페리 이웃하다"라고 한다. 페리 이웃에 관한 중요한 정리를 하나 소개한다.
+우리는 이 두 Lemma를 적용하여 LCS의 길이를 계산할 수 있다.
 
-> 차수에 상관없이, 페리 이웃한 두 유리수 $ \displaystyle \frac{a}{b} > \frac{c}{d} $는 $ad - bc = 1$을 만족한다.
+두 문자열 $X = x _1 x _2 \cdots x _N$, $Y = y _1 y _2 \cdots y _M$에 대하여, $D _{i, j}$를 $X[1 \cdots i]$와 $Y[1 \cdots j]$의 LCS 길이로 정의하자. 그러면 다음과 같은 재귀적 관계식을 세울 수 있다.
 
-이 정리는 아래에 서술할 Stern-Brocot Tree에 관한 정리의 기반이 된다.
+> * $x _i = y _j$라면, $ D _{i, j} = D _{i-1, j-1} + 1 $
+> * 그렇지 않다면, $ D _{i, j} = \max \left\\{ D _{i, j-1}, D _{i-1, j} \right\\} $
+
+전자는 **Lemma 1.**, 후자는 **Lemma 2.**에 대응됨에 유의하라.
+
+따라서, 두 문자열의 LCS의 길이는 $D _{N, M}$과 같고, 이 값은 $\displaystyle \mathcal{O} \left( NM \right)$의 시간 복잡도로 계산할 수 있다. $\text{LCS}(X, Y)$ 중 하나의 원소를 알아내는 작업은 $D _{N, M}$의 값이 어디로부터 왔는지를 역추적하여 계산할 수 있다.
+
+
+
+# Hunt-Szymanski Algorithm
+
+## 더 빠른 알고리즘의 필요성 제기
+
+해싱이나 문자의 값을 사용하지 않고, 두 문자열의 LCS를 알아내기 위해서는 $\mathcal{O} \left( NM \right)$번의 문자쌍 비교가 반드시 필요함이 [D S. Hirschberg와 J D. Ullman에 의하여 1974년에 증명](https://www.ics.uci.edu/~dan/pubs/p1-ullman.pdf)되었다. 즉, 상기한 고전적 DP 알고리즘은 LCS를 계산하는 최적의 알고리즘이다.
+
+그러나 현실에서, 그리고 많은 정보과학 관련 학문 분야에서 LCS 문제는 자주 사용되기에, 아주 긴 문자열의 LCS를 빠르게 계산하는 알고리즘의 필요성이 점차 대두되었다.
+
+Hunt-Szymanski 알고리즘은 간단한 아이디어로 두 문자열의 LCS를 $mathcal{O} \left( N \lg N \right)$의 실험적 시간 복잡도로 계산한다. 본 글은 이 알고리즘에 대하여 소개하고자 한다.
+
+
+
+## 핵심적 관찰
+
+먼저, 고전적 DP 알고리즘의 작동 방식을 생각하자.
+
+두 문자열 "`aeaca`"와 "acea"의 
+
+
+
+
 
 
 
@@ -99,115 +124,6 @@ Stern-Brocot Tree에 대하여 논하기 전에, 먼저 [페리 수열](https://
 이러한 완전 이진 검색 트리를 [Stern-Brocot Tree](https://en.wikipedia.org/wiki/Stern%E2%80%93Brocot_tree)라고 부른다.
 
 
-
-## 유리수 이분탐색
-
-알고리즘 분야에서 Stern-Brocot Tree는 유리수를 대상으로 이분탐색을 할 수 있게 되었다는 점에서 그 의미가 깊다.
-
-두 유리수 $ \displaystyle \frac{a}{b} < \frac{c}{d} $에 대하여, $\displaystyle \frac{a}{b}$ 초과 $\displaystyle \frac{c}{d}$ 미만의 모든 유리수를 담고 있는 Stern-Brocot Subtree의 루트 정점은 $\displaystyle \frac{a+c}{b+d}$이다.
-
-이를 그대로 활용하면, 다음과 같은 이분탐색 알고리즘을 생각할 수 있다.
-
-> 1. $ \displaystyle s := \frac{a}{b} = \frac{0}{1} $, $ \displaystyle e := \frac{c}{d} = \frac{1}{0} $으로 설정한다. 이제, 각 스텝마다 $s$ 초과 $e$ 미만인 유리수에 대하여 이분탐색을 수행한다.
-> 2. 중간값 $ \displaystyle m := \frac{ a+c }{ b+d } $을 잡자.
->    1. 만약, $m$이 찾고자 하는 유리수라면, 탐색을 멈춘다.
->    2. 아니라면, 찾고자 하는 유리수와 $m$에 대한 대소비교를 수행한다.
-> 3. $(s, e)$를 $(s, m)$ 혹은 $(m, e)$로 대입한 후, 위의 과정을 반복한다.
-
-
-
-이러한 이분탐색 과정을 통하여 최종적으로 기약분수 $ \displaystyle \frac{x}{y} $를 얻었다면, 탐색 횟수는 Stern-Brocot Tree에서 정점 $ \displaystyle \frac{x}{y} $의 깊이와 같으므로 $O(x+y)$이다.
-
-과정 2.는 Stern-Brocot Tree의 정점에서 한 쪽 방향으로 내려가는 것을 나타낸다. 여기서, 연속으로 몇 번까지 같은 방향으로 내려가는지를 알아낼 수 있다면 탐색 횟수를 줄일 수 있다. 예를 들어, 중간값 $m$보다 작은 쪽으로 탐색을 이어나가야 한다면, $e$ 값을 $ \displaystyle \frac{ ta + c }{ tb + d } $ 꼴로 제한할 수 있다. 이것이 가능한 최대 정수 $t$를 이분탐색으로 찾으면, 전체 탐색 횟수를 $O(x+y)$에서 $O \left( x + \lg y \right)$로 크게 개선할 수 있다.
-
-
-
-# 기하적 접근
-
-다시 원래의 문제로 돌아오자. 우리는 아래의 그림과 같이 $ \displaystyle y = \frac{N}{x} $ 곡선 아래의 회색 영역에 존재하는 양의 정수 쌍 $(x, y)$의 수를 세어야 한다.
-
-![](https://youngyojun.github.io/assets/images/posts/2022-02-18-sigma-sum-stern-brocot/1.png)
-
-<p style="text-align: center;"><b>그림 2: $xy = 20$ 그래프와 회색 영역</b></p>
-
-<p style="text-align: center;">$N = 20$이라면 위 회색 영역 내부의 정수 점의 개수를 세어야 한다.</p>
-
-
-
-이 그래프에서 기울기가 $-1$인 접선을 긋자. 아래의 그림에 접점 $G$, $x$ 축과 $y$ 축과의 교점 $P _x$, $P _y$을 나타내었다.
-
-![](https://youngyojun.github.io/assets/images/posts/2022-02-18-sigma-sum-stern-brocot/2.png)
-
-<p style="text-align: center;"><b>그림 3: $xy = 20$ 그래프와 기울기 $-1$의 접선</b></p>
-
-<p style="text-align: center;">접점 $G$와 중요한 교점 두 개 $P _x$, $P _y$를 나타내었다. 접선 아래 영역의 정수 점의 개수는 쉽게 셀 수 있다.</p>
-
-
-
-여기서 아이디어는 이러하다. 곡선 아래의 정수 점의 개수를 세는 것은 어렵지만, 직선 아래의 정수 점의 수는 사칙연산을 이용하여 아주 쉽게 셀 수 있다.
-
-우리는 남은 영역에 대하여 적당한 기울기의 접선을 그어 점의 개수를 세는 작업을 재귀적으로 반복하고자 한다. 정수 점의 개수는 유한하므로, 접선의 기울기를 잘 설정하였다면, 이러한 작업은 유한 시간 안에 종료할 것이다.
-
-편의를 위하여, **그림 4**와 같은 영역 내부의 정수 점의 개수를 $\displaystyle f \left( x _0, y _0, \frac{a}{b}, \frac{c}{d} \right)$로 나타내자. 이에 대한 엄밀한 정의는 다음과 같다.
-
-> 음이 아닌 정수 $x _0$, $y _0$과 페리 이웃한 두 기약분수 $\displaystyle \frac{a}{b}$, $\displaystyle \frac{c}{d}$에 대하여,
->
-> 1. 점 $P \left( x _0, y _0 \right)$을 잡고
-> 2. 점 $P$로부터 각각 기울기 $\displaystyle - \frac{a}{b}$, $\displaystyle - \frac{c}{d}$의 접선을 그어 교점 $Q$, $R$를 잡았을 때
-> 3. 직선과 곡선으로 닫힌 삼각 영역 $PQR$ 내부의 정수 점의 개수를 $\displaystyle f \left( x _0, y _0, \frac{a}{b}, \frac{c}{d} \right)$로 정의한다.
-> 4. 인자가 상기한 조건을 만족하지 않으면, 편의상 $\displaystyle f \left( x _0, y _0, \frac{a}{b}, \frac{c}{d} \right) = 0$으로 정의한다.
-
-![](https://youngyojun.github.io/assets/images/posts/2022-02-18-sigma-sum-stern-brocot/3.png)
-
-<p style="text-align: center;"><b>그림 4: 점 $P$, $Q$, $R$과 회색 삼각 영역</b></p>
-
-<p style="text-align: center;">$\displaystyle f \left( x _0, y _0, \frac{a}{b}, \frac{c}{d} \right)$의 정의에서 사용되는 세 점을 나타내었다.</p>
-
-
-
-우리는 결국 $\displaystyle f \left( x _0, y _0, \frac{a}{b}, \frac{c}{d} \right)$가 0이 될 때까지 재귀적으로 탐색을 이어나가야 한다. 따라서, 이 함숫값을 계산할 수 있어야 한다. 이를 어떻게 계산할 수 있을까?
-
-**그림 4**의 두 접선을 각각 새로운 축으로 잡고, 점 $P$를 원점으로 생각한 새로운 좌표계 $u-v$를 생각하자. $u$ 축이 직선 $PR$, $v$ 축이 직선 $PQ$이다. 이 경우 회색 영역은 다음과 같이 변환된다.
-
-![](https://youngyojun.github.io/assets/images/posts/2022-02-18-sigma-sum-stern-brocot/4.png)
-
-<p style="text-align: center;"><b>그림 5: 변환된 새로운 영역</b></p>
-
-
-
-드디어 우리는 재귀적으로 정수 점의 개수를 셀 수 있게 되었다!
-
-
-
-# 시간 복잡도
-
-재귀적으로 변하는 접선의 기울기는 Stern-Brocot Tree에서 경로를 따라 아래로 내려가는 것과 같으므로, 시간 복잡도를 아래와 같이 쓸 수 있다.
-
-$$ O \left( \sum _{ ad - bc = 1 } I \left[ \sqrt{ \frac{N}{ c/d } } - \sqrt{ \frac{N}{ a/b } } \ge b + d \right] \right) $$
-
-$$ = O \left( \sum _{ ad - bc = 1 } I \left[ \frac{ \sqrt{bc + 1} - \sqrt{bc} }{ \sqrt{ac} } \ge \frac{ b + d }{ \sqrt{N} } \right] \right) $$
-
-$$ = O \left( \sum _{ ad - bc = 1} I \left[ \frac{1}{ \sqrt{ab} c } \ge \frac{b+d}{\sqrt{N}} \right] \right) = O \left( \sum _{ad - bc = 1} I \left[ ab c^2 \left( b + d \right)^2 \ge N \right] \right) $$
-
-마지막 줄에서는 $ \displaystyle \sqrt{x+1} - \sqrt{x} = O \left( \frac{1}{ \sqrt{x} } \right) $가 사용되었다.
-
-이제, $t = bc$ 치환을 적용하면,
-
-$$ O \left( \sum _{t} \sum _{ b | t} \sum _{ a | (t+1) } I \left[ \frac{t^4}{ab} + t^3 + ab t^2 \ge N \right] \right) $$
-
-$$ = O \left( \sum _{t = 1}^{N^{1/3}} \sigma(t) \sigma(t+1) \right) = O \left( \sum _{t=1}^{N^{1/3}} \sigma^2 (t) \right) $$
-
-엄밀한 증명이나 식 전개는 생략하였다.
-
-
-
-이제, 다음의 잘 알려진 정리를 적용하자.
-
-> $$ \sum _{k=1}^{N} \sigma^2 (k) = \Theta \left( N \lg^3 N \right) $$
-
-
-
-즉, 서술한 알고리즘의 시간 복잡도는 $ \displaystyle O \left( N^{ \frac{1}{3} } \lg^3 N \right) = \tilde{O}\left( N^{ \frac{1}{3} } \right) $ 임을 알 수 있다.
 
 
 
