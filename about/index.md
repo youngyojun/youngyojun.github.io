@@ -22,11 +22,18 @@ type: about
 
 # About Me
 
+* **[2022년 국제정보올림피아드](https://ioi2022.id/) 한국 국가대표 코치**
+* 2022년 Google Code Jam Round 2 [87위](https://codingcompetitions.withgoogle.com/codejam/round/00000000008778ec)
+* **2021년 ACM ICPC Seoul Regional [1위](http://icpckorea.org/archives/2572) 및 World Final 2022 진출**
+  * 2년 연속 ICPC Regional 우승한 유일한 팀
+* **2021년 전국 대학생 프로그래밍 대회 [1위](https://www.acmicpc.net/contest/spotboard/670)**
+* 2021년 넥슨 청소년 프로그래밍 챌린지 출제 및 검수
 * **서울대학교 프로그래밍 및 알고리즘 동아리 SNUPS 2021 회장 ( snups@snucse.org )**
 * **삼성소프트웨어멤버십 소속 [youngyojun](https://www.secmem.org/authors/youngyojun/) (2020.12. ~ )**
 * 아직은 완성 못한 프로젝트의 **(Pre-) Back-end Developer**
 * [OI Korea Online Judge](https://oikorea.org/) (한국정보과학회 소속, 과학기술정보통신부 및 한국과학창의재단 지원) **Front-end Developer** ([robots.txt](https://oikorea.org/robots.txt) YGJ Initials)
 * **2020년 ACM ICPC Seoul Regional [1위](http://icpckorea.org/archives/2344) 및 World Final 2021 진출**
+  * World Final 2021은 2022년 하반기에 개최 예정
 * **2020년 삼성전자 대학생 프로그래밍 경진대회 4위 3등상**
 * 2020년 전국 대학생 프로그래밍 대회 [7위](https://www.acmicpc.net/contest/scoreboard/524)
 * 2020년 Google Code Jam Round 2 [118위](https://codingcompetitions.withgoogle.com/codejam/round/000000000019ffb9)
