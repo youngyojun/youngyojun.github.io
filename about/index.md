@@ -14,7 +14,7 @@ type: about
 
 **현역**으로 다녀올지 **산업기능요원**을 할지, **군문제**를 진지하게 고민중인 평범한 남학생.
 
-학점을 신경 쓰지는 않지만 GPA 4.23/4.3의 럭키가이.
+학점을 신경 쓰지는 않지만 GPA 4.26/4.3의 럭키가이.
 
 **사업가**가 되고 싶지만, **개발자**가 되지 않을까..?
 
@@ -22,6 +22,11 @@ type: about
 
 # About Me
 
+* **2022년 ACM ICPC Seoul Regioanl [1위](http://static.icpckorea.net/20221119/scoreboard/)**
+  * 전세계에서 **3년 연속 ICPC Regional 우승한 유일한 팀**
+* **ACM World Final 2021 Gold-medalist [4위](https://image.icpc.global/wfscoreboard/index.html)**
+* 2022년 넥슨 청소년 프로그래밍 챌린지 출제 및 검수
+* 2022년 전국 대학생 프로그래밍 대회 [2위](https://www.acmicpc.net/contest/spotboard/828)
 * **[2022년 국제정보올림피아드](https://ioi2022.id/) 한국 국가대표 코치**
 * 2022년 Google Code Jam Round 2 [87위](https://codingcompetitions.withgoogle.com/codejam/round/00000000008778ec)
 * **2021년 ACM ICPC Seoul Regional [1위](http://icpckorea.org/archives/2572) 및 World Final 2022 진출**
@@ -65,12 +70,16 @@ type: about
 
 **IOI Statistics** : [Gyojun Youn](https://stats.ioinformatics.org/people/6638)
 
+**Competitive Programming Hall Of Fame** : [Gyojun Youn](https://cphof.org/profile/icpc:Gyojun%20Youn)
+
 ------
 
 # Articles
 
 ~~과거 흑역사 보존용~~
 
+* **['대학생 프로그래밍 경시대회' 대통령상에 서울대 팀](http://www.dt.co.kr/contents.html?article_no=2022112002109931650001)**
+* [넥슨 청소년 코딩대회 'NYPC', '독창적' 출제 문제 참가자들 호평](https://biz.newdaily.co.kr/site/data/html/2022/08/18/2022081800151.html)
 * **[NYPC 2019 언박싱, 온라인 설명회 2부](https://www.youtube.com/watch?v=Rfk5BURA830)**
 * **[[NYPC스타] NYPC 2018 대상 수상자 윤교준 인터뷰](https://www.youtube.com/watch?v=xyKS_KuweWs)**
 * [넥슨 NYPC 우승한 경기과학고 윤교준 "NYPC 완벽한 대회, 프로그래밍으로 세상에 도움되고 싶다"](http://gamefocus.co.kr/detail.php?number=87445)
