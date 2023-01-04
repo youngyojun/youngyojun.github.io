@@ -657,7 +657,7 @@ Submatrix의 determinant가 pivots의 곱과 같다는 성질을 사용하자. $
 
 ### Problem 3.
 
-**(1)** For a real number $s$, let $\displaystyle A = \begin{bmatrix} 5 & s \\ s & 5 \end{bmatrix}$. Find a diagonal matrix $D$ and an orthogonal matrix $P$ such that $P^\mathsf{T} A P = D$.
+**(1)** For a real number $s$, let $\displaystyle A = \begin{bmatrix} 5 & s \\\\ s & 5 \end{bmatrix}$. Find a diagonal matrix $D$ and an orthogonal matrix $P$ such that $P^\mathsf{T} A P = D$.
 
 **(2)** For which $s$ is $A$ positive definite?
 
