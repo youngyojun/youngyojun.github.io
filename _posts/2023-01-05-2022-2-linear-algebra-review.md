@@ -29,6 +29,7 @@ tags:
 ### Problem 1.
 
 Solve as two triangular systems, without multiplying $LU$ to find $A$:
+
 $$
 LUx =
 \begin{bmatrix}
@@ -59,6 +60,7 @@ $$
 $L (Ux) = b$로 두어 $Ux$의 값을 구하고, $Ux = c$를 풀자.
 
 $L$이 lower triangular 하므로, $c$의 첫 번째 항부터 차례대로 알아낼 수 있다.
+
 $$
 Lc =
 \begin{bmatrix}
@@ -86,7 +88,9 @@ c =
 0
 \end{bmatrix}
 $$
+
 비슷하게, $U$가 upper triangular 하므로, $x$의 마지막 항부터 차례대로 알아낼 수 있다.
+
 $$
 Ux =
 \begin{bmatrix}
@@ -114,6 +118,7 @@ x =
 0
 \end{bmatrix}
 $$
+
 마지막으로, $LUx = b$가 되는지 검산을 하자. 나는 검산을 통해 산수 실수를 찾을 수 있었다. 아침 시험 첫 문제로 이런 문제는 틀리기 쉽다.
 
 여담으로, 답이 틀리면 부분점수가 없었다.
@@ -123,6 +128,7 @@ $$
 ### Problem 2.
 
 Find the inverse of
+
 $$
 A =
 \begin{bmatrix}
@@ -136,6 +142,7 @@ $$
 #### Sol)
 
 $A$가 lower triangular하기 때문에, $A = L_1 L_2 \cdots L_k$ 꼴로 나타내면, $A^{-1} = L_k^{-1} \cdots L_1^{-1}$로 쉽게 계산할 수 있을 것 같다.
+
 $$
 A =
 \begin{bmatrix}
@@ -200,6 +207,7 @@ $$
 ### Problem 3.
 
 Let
+
 $$
 A =
 \begin{bmatrix}
@@ -216,6 +224,7 @@ b =
 \end{bmatrix}
 \text{.}
 $$
+
 **(1)** Find the $LU$ decomposition of $A$, i.e., a lower triangular matrix $L$ that has only $1$'s on its main diagonal, and an echelon form $U$ such that $A = LU$.
 
 **(2)** Write the complete solutions $x = x_p + x_n$ to $Ax = b$.
@@ -229,6 +238,7 @@ $$
 **(1)**
 
 충분히 훈련되어 있어야 한다.
+
 $$
 A =
 \begin{bmatrix}
@@ -272,9 +282,11 @@ U =
 0 & 0 & 0 & 0
 \end{bmatrix}
 $$
+
 **(2)**
 
 $L$이 invertible하므로, $Ax = b$는 $Ux = L^{-1}b =: c$와 동치다.
+
 $$
 c := L^{-1} b =
 \begin{bmatrix}
@@ -294,9 +306,11 @@ c := L^{-1} b =
 0
 \end{bmatrix}
 $$
+
 $U$의 zero row에 대응하는 $c$의 항이 $0$이다. 따라서, $c \in C(U)$이고, $Ux = c$는 해를 가진다.
 
 먼저, 임의의 해 $x_p$를 구하자. pivot을 가지는 $U$의 columns으로 backward substitution을 하면 된다.
+
 $$
 \begin{bmatrix}
 1 & 2 \\
@@ -335,7 +349,9 @@ x_p :=
 0
 \end{bmatrix}
 $$
+
 $x_n \in N(U)$이다. $U$의 non-pivot column을 pivot columns의 선형 결합으로 표현하면 된다.
+
 $$
 U
 \begin{bmatrix}
@@ -369,9 +385,11 @@ x_n = c_1
 1
 \end{bmatrix}
 $$
+
 **(3) - 쉬운 풀이**
 
 $U$의 pivot이 있는 columns에 대응하는 $A$의 columns은 $C(A)$의 basis를 이룬다.
+
 $$
 C(A) =
 \text{Span}
@@ -389,9 +407,11 @@ C(A) =
 \end{bmatrix}
 \right\}
 $$
+
 **(3) - 좋아하는 풀이**
 
 **(2)**의 풀이를 다시 보자. $b \in C(A)$라는 것은 $c = L^{-1}b$의 마지막 항이 $0$임과 동치다.
+
 $$
 b \in C(A)
 \quad \Longleftrightarrow \quad
@@ -406,7 +426,9 @@ b \in N\left(
 \end{bmatrix}
 \right)
 $$
+
 이제, 행렬의 nullspace의 basis를 구하면 된다.
+
 $$
 C(A) =
 \text{Span}
@@ -424,6 +446,7 @@ C(A) =
 \end{bmatrix}
 \right\}
 $$
+
 **(4)**
 
 $A$의 왼쪽에 행렬을 곱한다는 것은, $A$의 rows로 선형 결합을 해서 새로운 rows를 만든다는 것이다. 따라서, $A$가 left-invertible 하려면, $\text{rank}(A) = 4$라야 한다.
@@ -447,23 +470,29 @@ Construct a matrix with the required property, or explain why you can't.
 $A$가 $m \times n$ 행렬이라면, $C(A)$와 $C\left( A^\mathsf{T} \right)$의 차원은 $r$로 같고, $\dim N(A) = n-r$, $\dim N\left( A^\mathsf{T} \right) = m-r$이다.
 
 즉, $n = m+1$인 모든 행렬이 찾고자 하는 답이 된다. 가장 쉬운 예시는 이러하다.
+
 $$
 \begin{bmatrix}
 0 & 0
 \end{bmatrix}
 $$
+
 **(2)**
 
 조금 당황했다. 시험 전까지 수업 때 배우지는 않았지만, 반드시 알아두어야 할 식이 하나 있다.
+
 $$
 C(A)^\bot = N\left( A^\mathsf{T} \right)
 $$
+
 증명은 $\subseteq$과 $\supseteq$로 나누어 하며, 그 서술은 기계가 한다. 나는 Gram-Schmidt로 $C(A)$의 Orthonormal basis를 잡고, $\mathbb{R}^m$의 orthonormal basis로 확장해서, 추가한 basis vectors가 $N\left( A^\mathsf{T} \right)$을 span한다는 아주 바보같은 서술을 했다. 여러분은 [이 증명](https://math.stackexchange.com/questions/3087270/proof-verification-the-orthogonal-complement-of-the-column-space-is-the-left-nu)에 익숙해지도록 하자.
 
 저 중요한 성질을 알면, 찾고자 하는 행렬은 존재하지 않음을 쉽게 알 수 있다.
+
 $$
 N(A) = C\left( A^\mathsf{T} \right)^\bot = C(A)^\bot = N\left( A^\mathsf{T} \right)
 $$
+
 이 문제에서 점수가 꽤 갈렸던 거 같다.
 
 
@@ -475,6 +504,7 @@ For a positive integer $n > 2$ and two nonzero vectors $u, v \in \mathbb{R}^n$, 
 #### Sol)
 
 Rank에 대한 철학을 갖고 아래의 식을 보자.
+
 $$
 A = u u^\mathsf{T} + v v^\mathsf{T} =
 \begin{bmatrix}
@@ -485,6 +515,7 @@ u^\mathsf{T} \\
 v^\mathsf{T}
 \end{bmatrix}
 $$
+
 행렬 $A$를 $n \times 2$ 행렬과 $2 \times n$ 행렬의 곱으로 나타낼 수 있으므로, $\text{rank}(A) \le 2$다.
 
 그리고, $A$의 rank는 $0$, $1$, $2$ 모두 가능하다. 각각, $u = v = \mathbb{0}$, $u = \mathbb{0}, v \ne \mathbb{0}$, nonzero $u$와 $v$가 평행하지 않는 경우이면 된다.
@@ -510,6 +541,7 @@ If $V$ is the subspace spanned by $(1, 1, 0, 1)$ and $(0, 0, 1, 0)$, find
 **(1)**
 
 $V$를 span하는 vectors가 orthogonal 하므로, 각 vector의 projection matrix $v v^\mathsf{T} / v^\mathsf{T} v$을 더하면 충분하다.
+
 $$
 P = \frac{1}{3}
 \begin{bmatrix}
@@ -539,6 +571,7 @@ P = \frac{1}{3}
 1/3 & 1/3 & 0 & 1/3
 \end{bmatrix}
 $$
+
 여담으로, 나는 상수 $1/3$을 놓쳐서 틀릴 뻔했다. Vector normalization을 먼저 하는 것도 좋은 습관일 것이다.
 
 **(2)**
@@ -548,6 +581,7 @@ $b \in V^\bot$ 이므로, 더 볼 것 없이 답은 $\mathbf{0}$이다. $Pb = \m
 **(3)**
 
 $(1, 1, 0, 1)$, $(0, 0, 1, 0)$, $(0, 1, 0, -1)$과 수직한 vector를 하나만 찾으면 된다.
+
 $$
 N\left(
 \begin{bmatrix}
@@ -564,7 +598,9 @@ N\left(
 1
 \end{bmatrix}
 $$
+
 사실, $\lVert b \rVert \ne 1$라서, $b$를 포함하는 orthonormal basis는 없다. 센스있게 답을 적자.
+
 $$
 \left\{
 \frac{1}{\sqrt{2}} b
@@ -582,7 +618,8 @@ $$
 
 ### Problem 2.
 
-Let $A = \left( a_{i j} \right) _{1 \le i, j \le n}$ be the matrix defined by
+Let $A = \left( a_ {i j} \right)_ {1 \le i, j \le n}$ be the matrix defined by
+
 $$
 a_{i j} =
 \begin{cases}
@@ -591,6 +628,7 @@ a_{i j} =
 0 & \text{otherwise.}
 \end{cases}
 $$
+
 Let $F_n$ be the determinant of $A$.
 
 **(1)** Compute $F_{10}$.
@@ -630,6 +668,7 @@ Submatrix의 determinant가 pivots의 곱과 같다는 성질을 사용하자. $
 **(1)**
 
 평범한 대각화다. 충분히 훈련되어야 한다.
+
 $$
 D =
 \begin{bmatrix}
@@ -645,6 +684,7 @@ P = \frac{1}{\sqrt{2}}
 \quad \Longrightarrow \quad
 AP = PD
 $$
+
 $P$에 상수 $1 / \sqrt{2}$를 붙여야 함에 유의할 것.
 
 **(2)**
@@ -654,6 +694,7 @@ $P$에 상수 $1 / \sqrt{2}$를 붙여야 함에 유의할 것.
 **(3)**
 
 행렬의 다양한 decomposition을 알아야 하고, 또한 각 decomposition이 어떻게 활용되는지 익혀두어야 한다.
+
 $$
 B := P \sqrt{D} P^\mathsf{T}
 \quad \Longrightarrow \quad
@@ -733,6 +774,7 @@ Suppose that $A^2 = A$.
 #### Sol)
 
 **(1)**
+
 $$
 Ax = \lambda x, \ x \ne \mathbf{0}
 \quad \Longrightarrow \quad
@@ -742,6 +784,7 @@ Ax = \lambda x, \ x \ne \mathbf{0}
 \quad \Longrightarrow \quad
 \lambda \in \{ 0, 1 \}
 $$
+
 **(2) - 모범 답안**
 
 $A^2 = A$ 이므로, $A$의 minimal polynomial은 $x$, $x-1$, $x(x-1)$ 중 하나다. 각 factor의 degree가 $1$ 이므로, Primary decomposition theorem에 의해 대각화 가능하다.
