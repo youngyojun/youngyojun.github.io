@@ -518,7 +518,7 @@ $$
 
 행렬 $A$를 $n \times 2$ 행렬과 $2 \times n$ 행렬의 곱으로 나타낼 수 있으므로, $\text{rank}(A) \le 2$다.
 
-그리고, $A$의 rank는 $0$, $1$, $2$ 모두 가능하다. 각각, $u = v = \mathbb{0}$, $u = \mathbb{0}$ & $v \ne \mathbb{0}$, nonzero $u$와 $v$가 평행하지 않는 경우이면 된다.
+그리고, $A$의 rank는 $0$, $1$, $2$ 모두 가능하다. 각각, $u = v = \mathbb{0}$, $u = \mathbb{0}$ & $v \ne \mathbb{0}$, $u^\mathsf{T} v \ne 0$이면 된다.
 
 
 
