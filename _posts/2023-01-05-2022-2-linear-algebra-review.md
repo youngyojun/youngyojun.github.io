@@ -731,7 +731,7 @@ $B$의 각 원소를 미지수로 두고 방정식을 푼 학생이 있다는데
 
 ### Problem 4.
 
-Let $\displaystyle A = \begin{bmatrix} .2 & .4 & .3 \\ .4 & .2 & .3 \\ .4 & .4 & .4 \end{bmatrix}$.
+Let $\displaystyle A = \begin{bmatrix} .2 & .4 & .3 \\\\ .4 & .2 & .3 \\\\ .4 & .4 & .4 \end{bmatrix}$.
 
 **(1)** Show that $0$ is an eigenvalue of $A$. Find all eigenvalues of $A$.
 
@@ -757,7 +757,7 @@ $A$는 Markov matrix 이므로, $1$을 고윳값으로 가진다.
 
 **(2) - 손이 바쁜 풀이**
 
-$A$를 대각화하면, $A^k = P D^k P^\mathsf{T}$ 꼴로 표현할 수 있다. $\displaystyle D^k \rightarrow \begin{bmatrix} 1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}$가 되므로, 수렴값을 계산하기 어렵지 않을 것이다.
+$A$를 대각화하면, $A^k = P D^k P^\mathsf{T}$ 꼴로 표현할 수 있다. $\displaystyle D^k \rightarrow \begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 0 & 0 \\\\ 0 & 0 & 0 \end{bmatrix}$가 되므로, 수렴값을 계산하기 어렵지 않을 것이다.
 
 고유벡터를 전부 찾아줘야 하는데 조금 귀찮다. $\lambda = 0$과 $\lambda = 1$의 고유벡터를 찾고, 둘을 외적하면 $\lambda = -0.2$의 고유벡터를 공짜로 얻을 수 있다.
 
