@@ -47,7 +47,7 @@ Sort the points $(x, y)$ by $10^7 \times (x - y) - y$, then take a longest stric
 
 Let $\alpha$ and $\beta$ be the roots of the equation $x^2 + px + kp = 0$.
 
-Since $(\alpha + k)(\beta + k) = k^2 > 0$ and $p = 2k - (\alpha + k) - (\beta + k)$, we have $N_p = 2 \times \left\lvert \{ n \in \mathbb{Z} \cap \left[ 1, \lvert k \rvert \right] :  n \mid k^2 \} \right\rvert$, and $\sum p = 2k \times N_p$.
+Since $(\alpha + k)(\beta + k) = k^2 > 0$ and $p = 2k - (\alpha + k) - (\beta + k)$, we have $N_p = 2 \times \left\lvert \left\\{ n \in \mathbb{Z} \cap \left[ 1, \lvert k \rvert \right] :  n \mid k^2 \right\\} \right\rvert$, and $\sum p = 2k \times N_p$.
 
 
 
