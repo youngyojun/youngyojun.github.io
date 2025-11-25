@@ -12,6 +12,8 @@ tags:
 **Disclaimer:** This is an **unofficial** analysis of some possible ways to solve the problems of the 2025 ICPC Asia Seoul Regional Finals. They are not intended to give complete solutions, but rather to outline some approaches that can be used to solve the problems. If you find an error, please [send me an email](https://youngyojun.github.io/about/) about it.
 
 
+**Live Solutions Presentation**: https://www.youtube.com/live/5L4TCvByfCQ?t=1534s
+
 
 ## M. Triple Fairness
 
@@ -71,7 +73,7 @@ For each vertex $v$, let $D_v$ be the minimum of "(cost of a clean arrangement o
 
 Sort the child subtrees of $v$ in decreasing order of size and place them alternately to the left and right around $v$; this minimizes $D_v$.
 
-For the root, a slightly different expression is used for the objective, but the same placement strategy is optimal. The overall time complexity is $\mathcal{O}(n)$.
+For the root, a slightly different expression is used for the objective, but the same placement strategy is optimal. The overall time complexity is $O(n)$.
 
 
 
@@ -140,7 +142,7 @@ The following observation suffices: suppose Dabi is either at a known cell $\alp
 Let $\lambda_n$ denote the number of Fair Problemset sequences of length $3n$. Writing $n = 3q + r$ and setting $\alpha := q + \delta_{r, 1}$ and $\beta := q + \delta_{r, 2}$, we have
 $$\lambda_n = (\alpha!)^3 (\beta!)^6 C_n$$
 where $C_n$ is the number of tuples $\left( \sigma_0, \sigma_1, \cdots, \sigma_{n - 1} \right) \in \Sigma_{3}^{n}$ satisfying
-$$\alpha \delta_{i, j} + \beta \left( 1 - \delta_{i, j} \right) = \left\lvert \left\\{ k : \sigma_k (i) = j \right\\} \right\rvert$$
+$$\alpha \delta_{i, j} + \beta \left( 1 - \delta_{i, j} \right) = \left\lvert \left\{ k : \sigma_k (i) = j \right\} \right\rvert$$
 Inspecting the six elements of $\Sigma_3$ yields
 $$C_n = \sum_{i = 0}^{q} {\binom{n}{\alpha - i ; i ; i ; i ; \beta - i ; \beta - i}}^{3}$$
 Define $B_q := \sum_{i = 0}^{q} {\binom{q}{i}}^{3}$. For $r = 0$, one obtains $C_n = n! (q!)^{6} B_q$. For $r = 1, 2$, $C_n$ can be expressed similarly in terms of $B_q$ and $B_{q + 1}$.
@@ -155,5 +157,5 @@ First, for $n \ge 3$ people with times $t_1 \le t_2 \le \cdots \le t_n$, the ans
 $$(n - k - 2) t_1 + (2k + 1) t_2 + \sum_{i = 3}^{n - 2k} t_i + \sum_{i = 0}^{k - 1} t_{n - 2i}$$
 where $m := \max\left\\{ j : t_j \le 2 t_2 - t_1 \right\\}$ and $k := \left\lfloor (n - m) / 2 \right\rfloor$. A greedy strategy is optimal—this can be strongly supported by local testing, and proved rigorously in several ways. For an elegant approach, see: M. Jianu, M. Jianu, and S. A. Popescu, "A Combinatorial Solution for Bridge and Torch Problem," *SN Operations Research Forum*, 1(3), Article 21, Aug. 2020, doi: 10.1007/s43069-020-00022-3.
 
-The final summation term is the trickiest to compute efficiently. After applying standard Mo's ordering to the query index intervals, maintain in a segment tree quantities such as "the sum of values that are the $1$st, $3$rd, $5$th, $\cdots$ largest." The overall time complexity is $\mathcal{O} \left( q \sqrt{n} \log n \right)$.
+The final summation term is the trickiest to compute efficiently. After applying standard Mo's ordering to the query index intervals, maintain in a segment tree quantities such as "the sum of values that are the $1$st, $3$rd, $5$th, $\cdots$ largest." The overall time complexity is $O \left( q \sqrt{n} \log n \right)$.
 
