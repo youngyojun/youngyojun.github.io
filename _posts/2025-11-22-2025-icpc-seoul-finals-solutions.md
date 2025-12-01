@@ -153,7 +153,7 @@ $$
 C_n = \sum_{i = 0}^{q} {\binom{n}{\alpha - i ; i ; i ; i ; \beta - i ; \beta - i}}^{3}
 $$
 
-Define $B_q := \sum_{i = 0}^{q} {\binom{q}{i}}^{3}$. For $r = 0$, one obtains $C_n = n! (q!)^{6} B_q$. For $r = 1, 2$, $C_n$ can be expressed similarly in terms of $B_q$ and $B_{q + 1}$.
+Define $B_q := \sum_{i = 0}^{q} {\binom{q}{i}}^{3}$. For $r = 0$, one obtains $\lambda_n = n! (q!)^{6} B_q$. For $r = 1, 2$, $\lambda_n$ can be expressed similarly in terms of $B_q$ and $B_{q + 1}$.
 
 
 
