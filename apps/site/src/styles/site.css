@@ -158,6 +158,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .post-header { margin-bottom: 3rem; }
 
+.home-posts article + article { margin-top: 5rem; }
+.post-title-link { text-decoration: none; }
+.post-title-link:hover { text-decoration: underline; }
+.post-more { margin-top: 2rem; text-align: center; }
+.post-more a { display: inline-block; padding: .1rem 1.25rem; border: 2px solid var(--color-heading); text-decoration: none; }
+.post-more a:hover { background: var(--color-heading); color: var(--color-background); }
+
 .post-meta {
   display: flex;
   justify-content: center;

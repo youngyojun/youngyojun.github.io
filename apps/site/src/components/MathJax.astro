@@ -1,0 +1,12 @@
+<script is:inline type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    // Incomplete local STIX fonts can render calligraphic letters as missing glyphs.
+    'HTML-CSS': { availableFonts: [] },
+    tex2jax: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    },
+  });
+</script>
+<script is:inline src="https://cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>

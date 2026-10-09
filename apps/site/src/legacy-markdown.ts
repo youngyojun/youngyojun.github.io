@@ -1,5 +1,10 @@
 import { satteri, type SatteriProcessorOptions } from '@astrojs/markdown-satteri';
 
+export function legacyExcerptSource(source: string) {
+  // Keep Jekyll's literal LF-LF excerpt boundary, including existing CRLF posts.
+  return source.trimStart().split('\n\n')[0];
+}
+
 export function legacyProcessor(site: string) {
   return satteri({
     features: { math: true },

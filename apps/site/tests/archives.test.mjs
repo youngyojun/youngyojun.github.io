@@ -31,7 +31,8 @@ test('preserves all 30 archive posts in chronological order with the original pa
     assert.deepEqual([...html.matchAll(/<h2\b[^>]*>(\d{4})<\/h2>/g)].map(match => match[1]), years);
   }
   const index = ['index.html', 'page2/index.html', 'page3/index.html'].map(path => readFileSync(new URL(`../dist/${path}`, import.meta.url), 'utf8')).join('\n');
-  assert.deepEqual(sections.flatMap(section => postLinks(section[2])), postLinks(index));
+  const homeLinks = [...index.matchAll(/<a\b[^>]*class="post-title-link"[^>]*href="([^"]+)"/g)].map(match => match[1]);
+  assert.deepEqual(sections.flatMap(section => postLinks(section[2])), homeLinks);
 });
 
 test('keeps the legacy archive page links and displays month/day without changing publication dates', () => {

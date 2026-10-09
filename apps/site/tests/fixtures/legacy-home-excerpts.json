@@ -1,0 +1,185 @@
+[
+  {
+    "path": "/",
+    "excerpts": [
+      {
+        "url": "/icpc/2025/11/22/2025-icpc-seoul-finals-solutions/",
+        "text": "Disclaimer: This is an unofficial analysis of some possible ways to solve the problems of the 2025 ICPC Asia Seoul Regional Finals. They are not intended to give complete solutions, but rather to outline some approaches that can be used to solve the problems. If you find an error, please send me an email about it.",
+        "links": [
+          "https://youngyojun.github.io/about/"
+        ]
+      },
+      {
+        "url": "/icpc/2025/10/11/2025-icpc-seoul-prelim-solutions/",
+        "text": "Disclaimer: This is an unofficial analysis of some possible ways to solve the problems of the 2025 ICPC Asia Seoul Regional Preliminary. They are not intended to give complete solutions, but rather to outline some approaches that can be used to solve the problems. If you find an error, please send me an email about it.",
+        "links": [
+          "https://youngyojun.github.io/about/"
+        ]
+      },
+      {
+        "url": "/linear%20algebra/2023/01/04/2022-2-linear-algebra-review/",
+        "text": "선형 대수학 1을 들었어야 했는데, 단선대를 수강해버렸다. 심지어, 같이 듣기로 한 친구는 수강신청에 실패해버려서 이 과목을 들을 이유가 하나도 없었다.",
+        "links": []
+      },
+      {
+        "url": "/contest/review/icpc/2022/12/25/2021-icpc-seoul-regional/",
+        "text": "F.S.M.",
+        "links": []
+      },
+      {
+        "url": "/secmem/2022/03/20/Hunt-Szymanski/",
+        "text": "개요",
+        "links": []
+      },
+      {
+        "url": "/secmem/2022/02/18/sigma-sum-stern-brocot/",
+        "text": "개요",
+        "links": []
+      },
+      {
+        "url": "/secmem/2021/09/19/young-tableaux/",
+        "text": null,
+        "links": []
+      },
+      {
+        "url": "/secmem/2021/07/17/tree-sequence-algorithm/",
+        "text": "개요",
+        "links": []
+      },
+      {
+        "url": "/secmem/2021/05/17/generating-functions-2/",
+        "text": "개요",
+        "links": []
+      },
+      {
+        "url": "/study/physicslab/physicslab1/2021/05/05/physicslab1-wave/",
+        "text": "Prelab",
+        "links": []
+      }
+    ]
+  },
+  {
+    "path": "/page2/",
+    "excerpts": [
+      {
+        "url": "/secmem/2021/04/18/generating-functions-1/",
+        "text": "개요",
+        "links": []
+      },
+      {
+        "url": "/study/physicslab/physicslab1/2021/04/18/physicslab1-energy/",
+        "text": "Prelab",
+        "links": []
+      },
+      {
+        "url": "/study/physicslab/physicslab1/2021/04/12/physicslab1-gyroscope/",
+        "text": "Prelab",
+        "links": []
+      },
+      {
+        "url": "/study/physicslab/physicslab1/2021/04/02/physicslab1-billiards/",
+        "text": "Prelab",
+        "links": []
+      },
+      {
+        "url": "/study/physicslab/physicslab1/2021/03/21/physicslab1-sisyphus/",
+        "text": "Prelab",
+        "links": []
+      },
+      {
+        "url": "/secmem/2021/03/19/count-cutvertices-when-cut-each-edge/",
+        "text": "개요",
+        "links": []
+      },
+      {
+        "url": "/study/physicslab/physicslab1/2021/03/16/physicslab1-torque/",
+        "text": "Prelab",
+        "links": []
+      },
+      {
+        "url": "/study/physicslab/physicslab1/2021/03/14/physicslab1-newton/",
+        "text": "Prelab",
+        "links": []
+      },
+      {
+        "url": "/study/physicslab/2021/03/14/physicslab12-main/",
+        "text": "(Working… 이번 주 안에 모든 16개의 보고서를 올릴 예정 / 시험에 치어서 살고 있다… 열심히 올리는중 ㅠㅜ)",
+        "links": []
+      },
+      {
+        "url": "/icpc/practice/2021/03/08/WF-practice/",
+        "text": "Flip Flow",
+        "links": [
+          "https://www.acmicpc.net/problem/20906"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/page3/",
+    "excerpts": [
+      {
+        "url": "/icpc/practice/2021/03/05/WF-practice/",
+        "text": "Circle",
+        "links": [
+          "https://www.acmicpc.net/problem/7115"
+        ]
+      },
+      {
+        "url": "/icpc/practice/2021/02/15/WF-practice/",
+        "text": "Multi-key Sorting",
+        "links": [
+          "https://www.acmicpc.net/problem/3340"
+        ]
+      },
+      {
+        "url": "/icpc/practice/2021/02/12/WF-practice/",
+        "text": "Hard Refactoring",
+        "links": [
+          "https://www.acmicpc.net/problem/13996"
+        ]
+      },
+      {
+        "url": "/icpc/practice/2021/02/09/WF-practice/",
+        "text": "Pizza",
+        "links": [
+          "https://www.acmicpc.net/problem/20660"
+        ]
+      },
+      {
+        "url": "/icpc/practice/2021/02/08/WF-practice/",
+        "text": "Chess Puzzle",
+        "links": [
+          "https://www.acmicpc.net/problem/5239"
+        ]
+      },
+      {
+        "url": "/icpc/practice/2021/02/04/WF-practice/",
+        "text": "장난감 경주",
+        "links": [
+          "https://www.acmicpc.net/problem/19592"
+        ]
+      },
+      {
+        "url": "/icpc/practice/2021/02/02/WF-practice/",
+        "text": "팀 연습 시작!",
+        "links": []
+      },
+      {
+        "url": "/contest/review/icpc/2020/11/14/2020-icpc-seoul-regional/",
+        "text": "ICPC Seoul 인터넷 예선",
+        "links": []
+      },
+      {
+        "url": "/contest/review/2020/02/15/iamcoder-2019-yearend-contest/",
+        "text": "머릿말",
+        "links": []
+      },
+      {
+        "url": "/daily/2020/02/15/first-article/",
+        "text": "우여곡절 끝에 개인 블로그를 만들었다!",
+        "links": []
+      }
+    ]
+  }
+]

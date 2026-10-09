@@ -26,13 +26,13 @@ Atom 피드는 기존 `/atom.xml` 주소에 최신 글 10개의 전체 본문과
 
 작성일은 기존 운영 화면과 같이 UTC 기준으로 표시하며, 목록은 파일명 대신 게시 시각의 내림차순으로 정렬합니다. 원문에 날짜가 없는 글은 파일명의 날짜를 사용합니다. 카테고리·태그는 원문의 이름과 순서를 유지하며, 현재는 글 상단에 표시합니다.
 
-홈은 기존 `/`, `/page2/`, `/page3/` 주소에서 최신순으로 10개씩 나눕니다. 페이지별 글과 주소는 `apps/site/src/legacy-home-pages.ts`, 공통 화면은 `apps/site/src/components/HomePage.astro`에서 관리합니다. 페이지 이동은 정적 HTML 링크이므로 JavaScript 없이도 직접 접속·새로고침·이전/다음 이동이 가능합니다. 현재 홈에는 제목·날짜 목록을 표시하며, 기존 본문 발췌 표시는 아직 옮기지 않았습니다.
+홈은 기존 `/`, `/page2/`, `/page3/` 주소에서 최신순으로 10개씩 나눕니다. 페이지별 글과 주소는 `apps/site/src/legacy-home-pages.ts`, 공통 화면은 `apps/site/src/components/HomePage.astro`에서 관리합니다. 각 글의 제목·날짜·본문 발췌와 원래 글로 연결되는 ‘더 읽어보기’ 링크를 표시합니다. 발췌는 Atom과 같은 `legacyExcerptSource` 및 Markdown 설정을 사용합니다. 기존 Jekyll의 빈 줄 경계를 그대로 읽으므로, CRLF로 작성된 「영 타블로」는 기존 홈처럼 본문 전체와 그림 7개가 표시됩니다. 홈과 글 페이지의 수식 설정은 `apps/site/src/components/MathJax.astro`에서 공유합니다. 페이지 이동과 글 링크는 JavaScript 없이도 사용할 수 있습니다.
 
 소개 페이지는 기존 `/about/` 주소에서 루트의 `about/index.md`를 직접 읽습니다. 소개 내용을 수정할 때는 이 원문을 편집하며, Astro용 사본을 만들지 않습니다. 기존 제목·링크·제목의 책갈피 주소를 유지하고 공통 소개 메뉴로 이동할 수 있습니다.
 
 태그 목록은 `/tags/`, 카테고리 목록은 `/categories/`에서 볼 수 있습니다. 상세 목록은 기존 `/tag/#/<인코딩된 이름>`과 `/category/#/<인코딩된 이름>` 주소를 사용하며, 글 상단의 분류에서도 이동합니다. 최신순으로 10개씩 표시하고 `/tag/#/ICPC/page2`, `/category/#/ICPC/page2` 주소도 유지합니다. `/tag/`와 `/category/`는 각각의 목록으로 이동하며, 없는 분류·페이지는 안내를 표시합니다. JavaScript를 끄면 미리 생성된 전체 분류별 목록을 볼 수 있습니다.
 
-태그·카테고리 데이터는 `apps/site/src/legacy-collections.ts`, 공통 상세 화면·페이지 이동은 `apps/site/src/components/CollectionPage.astro`에서 관리합니다. 홈·분류·아카이브 화면의 글 목록은 `apps/site/src/components/PostList.astro`를 함께 사용합니다. 원문의 카테고리 배열은 기존처럼 각각 독립된 분류로 취급합니다.
+태그·카테고리 데이터는 `apps/site/src/legacy-collections.ts`, 공통 상세 화면·페이지 이동은 `apps/site/src/components/CollectionPage.astro`에서 관리합니다. 분류·아카이브 화면의 간결한 글 목록은 `apps/site/src/components/PostList.astro`를 함께 사용합니다. 원문의 카테고리 배열은 기존처럼 각각 독립된 분류로 취급합니다.
 
 아카이브는 `/archives/`에서 최신순으로 10개씩 나누고 각 페이지에서 연도별로 묶습니다. 기존 `/archives/#/page2`, `/archives/#/page3` 주소와 월·일 표시를 유지하며, JavaScript를 끄면 전체 목록을 볼 수 있습니다. ‘본문으로 건너뛰기’는 선택한 분류·아카이브 페이지의 주소를 유지하면서 본문에 초점을 옮깁니다.
 

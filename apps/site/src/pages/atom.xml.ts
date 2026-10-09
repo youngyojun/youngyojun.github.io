@@ -1,5 +1,5 @@
 import type { APIContext } from 'astro';
-import { legacyProcessor } from '../legacy-markdown';
+import { legacyExcerptSource, legacyProcessor } from '../legacy-markdown';
 import { posts } from '../legacy-posts';
 import { escapeXml } from '../xml';
 
@@ -11,9 +11,7 @@ export async function GET({ site }: APIContext) {
   const entries = await Promise.all(posts.slice(0, 10).map(async post => {
     const url = new URL(post.url, site).href;
     const content = (await post.compiledContent()).trim();
-    // Keep Jekyll's literal LF-LF excerpt boundary, including existing CRLF posts.
-    const excerptSource = post.rawContent().trimStart().split('\n\n')[0];
-    const { code } = await renderer.render(excerptSource);
+    const { code } = await renderer.render(legacyExcerptSource(post.rawContent()));
     const summary = code.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
     return `<entry>
       <title type="html">${escapeXml(post.frontmatter.title)}</title>

@@ -19,7 +19,7 @@ test('publishes the original home pagination URLs with 10 chronological posts pe
   const links = [];
   for (const [path, first, last] of pages) {
     const html = output(path);
-    const current = [...html.matchAll(/<li\b[^>]*>[\s\S]*?<a\b[^>]*href="([^"]+)"/g)].map(match => match[1]);
+    const current = [...html.matchAll(/<a\b[^>]*class="post-title-link"[^>]*href="([^"]+)"/g)].map(match => match[1]);
     assert.equal(current.length, 10, path);
     assert.equal(current[0], first);
     assert.equal(current.at(-1), last);
