@@ -24,7 +24,19 @@ const { Content, frontmatter } = post;
     <main>
       <nav aria-label="사이트"><a href="/">홈</a></nav>
       <article>
-        <header><h1>{frontmatter.title}</h1></header>
+        <header>
+          <h1>{frontmatter.title}</h1>
+          <dl>
+            <dt>작성일</dt>
+            <dd><time datetime={post.publishedAt}>{post.displayDate}</time></dd>
+            <dt>카테고리</dt>
+            <dd>{post.categories.join(' / ')}</dd>
+            {post.tags.length > 0 && <>
+              <dt>태그</dt>
+              <dd>{post.tags.map(tag => `# ${tag}`).join(', ')}</dd>
+            </>}
+          </dl>
+        </header>
         <Content />
       </article>
     </main>
