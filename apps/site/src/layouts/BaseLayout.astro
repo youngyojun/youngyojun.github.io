@@ -1,0 +1,31 @@
+---
+import '../styles/site.css';
+
+interface Props {
+  title?: string;
+}
+
+const siteTitle = "Gyojun Youn's PS Blog";
+const { title = siteTitle } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+    <header class="site-header">
+      <a class="brand" href="/">{siteTitle}</a>
+      <p class="site-subtitle">@youngyojun, @GyojunYoun, and @yclock's PS Blog</p>
+      <nav class="site-nav" aria-label="사이트"><a href="/">홈</a></nav>
+    </header>
+    <main id="main" tabindex="-1"><slot /></main>
+    <footer class="site-footer">Gyojun Youn</footer>
+    <slot name="scripts" />
+  </body>
+</html>

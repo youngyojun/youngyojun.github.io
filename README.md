@@ -18,7 +18,11 @@ corepack pnpm dev
 
 작성일은 기존 운영 화면과 같이 UTC 기준으로 표시하며, 목록은 파일명 대신 게시 시각의 내림차순으로 정렬합니다. 원문에 날짜가 없는 글은 파일명의 날짜를 사용합니다. 카테고리·태그는 원문의 이름과 순서를 유지하며, 현재는 글 상단에 표시합니다.
 
-앱은 `apps/*`, 실제 공유 패키지는 `packages/*`에 추가합니다. 새 개발 경로는 Jekyll의 `exclude`로 제외합니다. 아래는 기존 NexT 테마 안내입니다.
+앱은 `apps/*`, 실제 공유 패키지는 `packages/*`에 추가합니다. 새 개발 경로는 Jekyll의 `exclude`로 제외합니다.
+
+Astro의 공통 HTML 틀·사이트 헤더는 `apps/site/src/layouts/BaseLayout.astro`, 색상 변수와 본문·모바일 스타일은 `apps/site/src/styles/site.css`에서 관리합니다. 페이지는 `apps/site/src/pages/`에서 레이아웃을 사용하며, 글 원문은 기존 위치에 둡니다. 현재 NexT Muse의 밝은 배경과 검정 헤더를 기준으로 구성했습니다. 공유 스타일 패키지는 다른 앱에서도 실제로 필요해질 때 분리합니다.
+
+아래는 기존 NexT 테마 안내입니다.
 
 # NexT
 

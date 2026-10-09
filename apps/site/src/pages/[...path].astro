@@ -1,5 +1,6 @@
 ---
 import { posts } from '../legacy-posts';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 export function getStaticPaths() {
   return posts.map(post => ({
@@ -12,34 +13,28 @@ const { post } = Astro.props;
 const { Content, frontmatter } = post;
 ---
 
-<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{frontmatter.title}</title>
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
-  </head>
-  <body>
-    <main>
-      <nav aria-label="사이트"><a href="/">홈</a></nav>
-      <article>
-        <header>
-          <h1>{frontmatter.title}</h1>
-          <dl>
-            <dt>작성일</dt>
-            <dd><time datetime={post.publishedAt}>{post.displayDate}</time></dd>
-            <dt>카테고리</dt>
-            <dd>{post.categories.join(' / ')}</dd>
-            {post.tags.length > 0 && <>
-              <dt>태그</dt>
-              <dd>{post.tags.map(tag => `# ${tag}`).join(', ')}</dd>
-            </>}
-          </dl>
-        </header>
-        <Content />
-      </article>
-    </main>
+<BaseLayout title={frontmatter.title}>
+  <article>
+    <header class="post-header">
+      <h1 class="post-title">{frontmatter.title}</h1>
+      <dl class="post-meta">
+        <div>
+          <dt>작성일</dt>
+          <dd><time datetime={post.publishedAt}>{post.displayDate}</time></dd>
+        </div>
+        <div>
+          <dt>카테고리</dt>
+          <dd>{post.categories.join(' / ')}</dd>
+        </div>
+        {post.tags.length > 0 && <div>
+          <dt>태그</dt>
+          <dd>{post.tags.map(tag => `# ${tag}`).join(', ')}</dd>
+        </div>}
+      </dl>
+    </header>
+    <div class="post-body"><Content /></div>
+  </article>
+  <Fragment slot="scripts">
     <script is:inline type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
@@ -50,12 +45,5 @@ const { Content, frontmatter } = post;
       });
     </script>
     <script is:inline src="https://cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  </body>
-</html>
-
-<style>
-  main { max-width: 75ch; margin: 2rem auto; padding: 0 1rem; font-family: system-ui, sans-serif; line-height: 1.8; }
-  article :global(img) { max-width: 100%; height: auto; }
-  article :global(pre) { overflow-x: auto; padding: 1rem; }
-  article :global(blockquote) { margin-inline: 0; padding-inline-start: 1rem; border-inline-start: 3px solid #bbb; }
-</style>
+  </Fragment>
+</BaseLayout>

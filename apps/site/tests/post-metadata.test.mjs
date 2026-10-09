@@ -42,7 +42,8 @@ function output(url) {
 
 test('preserves the published date, category and tag metadata of all legacy posts', () => {
   for (const [url, publishedAt, categories, tags] of posts) {
-    const header = output(url).match(/<header\b[^>]*>([\s\S]*?)<\/header>/)?.[1] ?? '';
+    const article = output(url).match(/<article\b[^>]*>([\s\S]*?)<\/article>/)?.[1] ?? '';
+    const header = article.match(/<header\b[^>]*>([\s\S]*?)<\/header>/)?.[1] ?? '';
     const time = header.match(/<time\b[^>]*datetime="([^"]+)"[^>]*>(.*?)<\/time>/s);
     assert.ok(time, `Missing publication date: ${url}`);
     assert.equal(new Date(time[1]).toISOString(), new Date(publishedAt).toISOString(), url);
