@@ -1,4 +1,4 @@
-import { posts } from './legacy-posts';
+import { posts } from './posts';
 
 const pageSize = 10;
 

@@ -1,6 +1,6 @@
 import type { APIContext } from 'astro';
 import { legacyExcerptSource, legacyProcessor } from '../legacy-markdown';
-import { posts } from '../legacy-posts';
+import { posts } from '../posts';
 import { escapeXml } from '../xml';
 
 export async function GET({ site }: APIContext) {
@@ -11,12 +11,12 @@ export async function GET({ site }: APIContext) {
   const entries = await Promise.all(posts.slice(0, 10).map(async post => {
     const url = new URL(post.url, site).href;
     const idUrl = new URL(post.legacyUrl ?? post.url, site).href;
-    const content = (await post.compiledContent()).trim();
-    const { code } = await renderer.render(legacyExcerptSource(post.rawContent()));
+    const content = post.html.trim();
+    const { code } = await renderer.render(legacyExcerptSource(post.body));
     const summary = code.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
     return `<entry>
-      <title type="html">${escapeXml(post.frontmatter.title)}</title>
-      <link href="${escapeXml(url)}" rel="alternate" type="text/html" title="${escapeXml(post.frontmatter.title)}" />
+      <title type="html">${escapeXml(post.data.title)}</title>
+      <link href="${escapeXml(url)}" rel="alternate" type="text/html" title="${escapeXml(post.data.title)}" />
       <published>${post.publishedAt}</published>
       <updated>${post.publishedAt}</updated>
       <id>${escapeXml(idUrl.slice(0, -1))}</id>

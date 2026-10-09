@@ -1,6 +1,7 @@
 ---
 title: "블로그 개설!"
 slug: first-article
+date: 2020-02-15T00:00:00Z
 categories:
  - Daily
 tags:

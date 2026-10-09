@@ -4,7 +4,7 @@ import { readdirSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { homePages } from '../legacy-home-pages';
-import { posts } from '../legacy-posts';
+import { posts } from '../posts';
 import { escapeXml } from '../xml';
 
 export function GET({ site }: APIContext) {

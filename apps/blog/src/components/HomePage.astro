@@ -1,5 +1,5 @@
 ---
-import { posts } from '../legacy-posts';
+import { posts } from '../posts';
 import { homePages } from '../legacy-home-pages';
 import { legacyExcerptSource, legacyProcessor } from '../legacy-markdown';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -14,7 +14,7 @@ if (!Astro.site) throw new Error('Home excerpts require a configured site URL');
 const renderer = await legacyProcessor(Astro.site.href).createRenderer({});
 const previews = await Promise.all(page.posts.map(async post => ({
   post,
-  excerpt: (await renderer.render(legacyExcerptSource(post.rawContent()))).code,
+  excerpt: (await renderer.render(legacyExcerptSource(post.body))).code,
 })));
 ---
 
@@ -24,11 +24,11 @@ const previews = await Promise.all(page.posts.map(async post => ({
   <section class="home-posts" aria-label="글 미리보기">
     {previews.map(({ post, excerpt }) => <article>
       <header class="post-header">
-        <h2 class="post-title"><a class="post-title-link" href={post.url}>{post.frontmatter.title}</a></h2>
+        <h2 class="post-title"><a class="post-title-link" href={post.url}>{post.data.title}</a></h2>
         <p class="post-meta">작성일 <time datetime={post.publishedAt}>{post.displayDate}</time></p>
       </header>
       <div class="post-body" set:html={excerpt} />
-      <p class="post-more"><a href={`${post.url}#`} rel="contents" aria-label={`${post.frontmatter.title} 더 읽어보기`}>더 읽어보기 »</a></p>
+      <p class="post-more"><a href={`${post.url}#`} rel="contents" aria-label={`${post.data.title} 더 읽어보기`}>더 읽어보기 »</a></p>
     </article>)}
   </section>
   {homePages.length > 1 && <nav class="pagination" aria-label="글 목록 페이지">

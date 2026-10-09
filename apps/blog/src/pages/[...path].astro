@@ -1,7 +1,8 @@
 ---
-import { posts } from '../legacy-posts';
+import { posts } from '../posts';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MathJax from '../components/MathJax.astro';
+import { render } from 'astro:content';
 
 export function getStaticPaths() {
   return posts.flatMap(post => {
@@ -15,13 +16,13 @@ export function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content, frontmatter } = post;
+const { Content } = await render(post);
 ---
 
-<BaseLayout title={frontmatter.title} canonicalPath={post.url}>
+<BaseLayout title={post.data.title} canonicalPath={post.url}>
   <article>
     <header class="post-header">
-      <h1 class="post-title">{frontmatter.title}</h1>
+      <h1 class="post-title">{post.data.title}</h1>
       <dl class="post-meta">
         <div>
           <dt>작성일</dt>

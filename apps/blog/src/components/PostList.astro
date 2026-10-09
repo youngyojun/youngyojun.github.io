@@ -1,5 +1,5 @@
 ---
-import type { posts as blogPosts } from '../legacy-posts';
+import type { posts as blogPosts } from '../posts';
 
 interface Props {
   posts: typeof blogPosts;
@@ -12,6 +12,6 @@ const { posts, shortDate = false } = Astro.props;
 <ul class="post-list">
   {posts.map(post => <li>
     <time datetime={post.publishedAt}>{shortDate ? post.displayDate.slice(5) : post.displayDate}</time>{' '}
-    <a href={post.url}>{post.frontmatter.title}</a>
+    <a href={post.url}>{post.data.title}</a>
   </li>)}
 </ul>

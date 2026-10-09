@@ -1,4 +1,4 @@
-import { posts } from './legacy-posts';
+import { posts } from './posts';
 
 function groupPosts(field: 'tags' | 'categories') {
   const route = field === 'tags' ? 'tag' : 'category';
