@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { tags } from '../../legacy-tags';
+
+const pageSize = 10;
+---
+
+<BaseLayout title="태그 | Gyojun Youn's PS Blog">
+  <h1 id="tag-title" class="page-heading">태그</h1>
+  <p id="tag-error" class="post-count" role="status" hidden>
+    해당 태그 또는 페이지를 찾을 수 없습니다. <a href="/tags/">태그 목록으로</a>
+  </p>
+  {tags.map(tag => {
+    const pages = Array.from({ length: Math.ceil(tag.posts.length / pageSize) }, (_, index) => index + 1);
+    return pages.map(page => <section class="tag-page" data-tag={tag.name} data-page={page}>
+      <h2 class="page-heading tag-group-heading">{tag.name}</h2>
+      <p class="post-count">{tag.posts.length}개의 글 · {page}/{pages.length} 페이지</p>
+      <PostList posts={tag.posts.slice((page - 1) * pageSize, page * pageSize)} />
+      {pages.length > 1 && <nav class="pagination" aria-label={`${tag.name} 글 페이지`}>
+        {pages.map(number => <a
+          href={tag.url + (number > 1 ? `/page${number}` : '')}
+          aria-label={`${number} 페이지`}
+          aria-current={number === page ? 'page' : undefined}
+        >{number}</a>)}
+      </nav>}
+    </section>);
+  })}
+  <p class="tag-back"><a href="/tags/">전체 태그</a></p>
+  <script>
+    const pages = [...document.querySelectorAll<HTMLElement>('.tag-page')];
+    const title = document.getElementById('tag-title')!;
+    const error = document.getElementById('tag-error')!;
+    const baseTitle = document.title;
+    document.querySelectorAll<HTMLElement>('.tag-group-heading').forEach(heading => heading.hidden = true);
+
+    function showTag() {
+      if (!location.hash || location.hash === '#/') {
+        location.replace('/tags/');
+        return;
+      }
+      let selected: HTMLElement | undefined;
+      const route = location.hash.match(/^#\/([^/]+)(?:\/page([1-9]\d*))?\/?$/);
+      if (route) {
+        try {
+          const name = decodeURIComponent(route[1]);
+          const page = route[2] ?? '1';
+          selected = pages.find(section => section.dataset.tag === name && section.dataset.page === page);
+        } catch {
+          // A malformed percent escape is an unknown route, not a script error.
+        }
+      }
+      pages.forEach(section => section.hidden = section !== selected);
+      error.hidden = !!selected;
+      title.textContent = selected?.dataset.tag ?? '태그';
+      document.title = selected ? `${title.textContent} | ${baseTitle}` : baseTitle;
+    }
+
+    showTag();
+    window.addEventListener('hashchange', () => {
+      showTag();
+      document.querySelector('main')?.focus();
+      window.scrollTo(0, 0);
+    });
+  </script>
+</BaseLayout>

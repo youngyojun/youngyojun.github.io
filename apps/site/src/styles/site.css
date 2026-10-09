@@ -71,7 +71,7 @@ a:hover { color: var(--color-heading); }
   font-size: 12px;
 }
 
-.site-nav { font-size: 13px; }
+.site-nav { display: flex; justify-content: center; gap: 1.5rem; font-size: 13px; }
 
 main {
   width: min(var(--content-width), calc(100% - 2rem));
@@ -111,6 +111,21 @@ h1, h2, h3, h4, h5, h6 {
 .post-list time { color: var(--color-muted); font-size: 13px; }
 .post-list a { overflow-wrap: anywhere; text-decoration: none; }
 .post-list a:hover { text-decoration: underline; }
+
+.tag-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.tag-count { color: var(--color-muted); font-size: 12px; }
+.tag-back, .pagination { text-align: center; }
+.pagination { display: flex; justify-content: center; gap: 1.5rem; margin-block: 2rem; }
+.pagination [aria-current="page"] { color: var(--color-heading); font-weight: 600; text-decoration: none; }
+
 .post-header { margin-bottom: 3rem; }
 
 .post-meta {
