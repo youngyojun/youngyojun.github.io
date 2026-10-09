@@ -121,8 +121,10 @@ h1, h2, h3, h4, h5, h6 {
   list-style: none;
 }
 
-.tag-count { color: var(--color-muted); font-size: 12px; }
-.tag-back, .pagination { text-align: center; }
+.category-list { padding: 0; list-style: none; }
+.category-list li { margin: .5rem 1rem; }
+.collection-count { color: var(--color-muted); font-size: 12px; }
+.collection-back, .pagination { text-align: center; }
 .pagination { display: flex; justify-content: center; gap: 1.5rem; margin-block: 2rem; }
 .pagination [aria-current="page"] { color: var(--color-heading); font-weight: 600; text-decoration: none; }
 

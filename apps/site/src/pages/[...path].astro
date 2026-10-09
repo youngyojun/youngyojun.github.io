@@ -24,7 +24,9 @@ const { Content, frontmatter } = post;
         </div>
         <div>
           <dt>카테고리</dt>
-          <dd>{post.categories.join(' / ')}</dd>
+          <dd>{post.categories.map((category, index) => <>
+            {index > 0 && ' / '}<a href={`/category/#/${encodeURIComponent(category)}`} rel="index">{category}</a>
+          </>)}</dd>
         </div>
         {post.tags.length > 0 && <div>
           <dt>태그</dt>

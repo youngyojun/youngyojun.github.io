@@ -48,7 +48,7 @@ test('preserves the published date, category and tag metadata of all legacy post
     assert.ok(time, `Missing publication date: ${url}`);
     assert.equal(new Date(time[1]).toISOString(), new Date(publishedAt).toISOString(), url);
     assert.equal(time[2].trim(), publishedAt.slice(0, 10), url);
-    assert.equal(header.match(/<dt\b[^>]*>카테고리<\/dt>\s*<dd\b[^>]*>(.*?)<\/dd>/s)?.[1].trim(), categories.join(' / '), url);
+    assert.equal(header.match(/<dt\b[^>]*>카테고리<\/dt>\s*<dd\b[^>]*>(.*?)<\/dd>/s)?.[1].replace(/<[^>]*>/g, '').trim(), categories.join(' / '), url);
     assert.equal(header.match(/<dt\b[^>]*>태그<\/dt>\s*<dd\b[^>]*>(.*?)<\/dd>/s)?.[1].replace(/<[^>]*>/g, '').trim(), tags.length ? tags.map(tag => `# ${tag}`).join(', ') : undefined, url);
   }
 });
