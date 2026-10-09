@@ -1,0 +1,108 @@
+<button id="search-open" type="button" aria-haspopup="dialog" aria-controls="site-search" hidden>검색</button>
+<dialog id="site-search" aria-labelledby="search-title">
+  <header class="search-header">
+    <h2 id="search-title">검색</h2>
+    <button id="search-close" type="button">닫기</button>
+  </header>
+  <label for="search-input">글 제목·본문 검색</label>
+  <input id="search-input" type="search" placeholder="검색어를 입력하세요" autocomplete="off" autocapitalize="none" spellcheck="false" autofocus />
+  <p id="search-status" role="status">검색어를 입력하세요.</p>
+  <ul id="search-results"></ul>
+</dialog>
+
+<script>
+  import { searchPosts, type SearchEntry, type SearchHit } from '../search';
+
+  const open = document.getElementById('search-open')!;
+  const dialog = document.getElementById('site-search') as HTMLDialogElement;
+  const input = document.getElementById('search-input') as HTMLInputElement;
+  const status = document.getElementById('search-status')!;
+  const results = document.getElementById('search-results')!;
+  let entries: SearchEntry[] | undefined;
+  let loading = false;
+
+  function highlight(text: string, hits: SearchHit[]) {
+    const fragment = document.createDocumentFragment();
+    let end = 0;
+    for (const hit of hits) {
+      fragment.append(text.slice(end, hit.start));
+      const mark = document.createElement('mark');
+      mark.textContent = text.slice(hit.start, hit.end);
+      fragment.append(mark);
+      end = hit.end;
+    }
+    fragment.append(text.slice(end));
+    return fragment;
+  }
+
+  function showResults() {
+    if (!entries) return;
+    results.replaceChildren();
+    const matches = searchPosts(entries, input.value);
+    status.textContent = !input.value.trim() ? '검색어를 입력하세요.' : matches.length ? `${matches.length}개의 글` : '검색 결과가 없습니다.';
+    for (const match of matches) {
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = match.url;
+      link.append(highlight(match.title, match.titleHits));
+      item.append(link);
+      if (match.excerpt) {
+        const passage = document.createElement('p');
+        passage.append(highlight(match.excerpt, match.excerptHits), '…');
+        item.append(passage);
+      }
+      results.append(item);
+    }
+  }
+
+  function closeSearch() {
+    dialog.close();
+    input.value = '';
+    results.replaceChildren();
+    status.textContent = '검색어를 입력하세요.';
+  }
+
+  open.hidden = false;
+  open.addEventListener('click', async () => {
+    dialog.showModal();
+    input.focus();
+    if (entries || loading) return;
+    loading = true;
+    status.textContent = '검색 데이터를 불러오는 중입니다.';
+    try {
+      const response = await fetch('/search.xml');
+      if (!response.ok) throw new Error('Search index request failed');
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(await response.text(), 'application/xml');
+      if (xml.querySelector('parsererror') || !xml.querySelector('entry')) throw new Error('Invalid search XML');
+      entries = [...xml.querySelectorAll('entry')].map(entry => {
+        const url = entry.querySelector('url')!.textContent!;
+        if (new URL(url, location.origin).origin !== location.origin || !url.startsWith('/')) throw new Error('Invalid search URL');
+        return {
+          title: entry.querySelector('title')!.textContent!,
+          content: parser.parseFromString(entry.querySelector('content')!.textContent!, 'text/html').body.textContent ?? '',
+          url,
+        };
+      });
+      showResults();
+    } catch {
+      status.textContent = '검색 데이터를 불러오지 못했습니다. 닫았다가 다시 열어주세요.';
+    } finally {
+      loading = false;
+    }
+  });
+  input.addEventListener('input', showResults);
+  document.getElementById('search-close')!.addEventListener('click', closeSearch);
+  dialog.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeSearch();
+    }
+  });
+  dialog.addEventListener('click', event => {
+    if (event.target === dialog) {
+      const { left, right, top, bottom } = dialog.getBoundingClientRect();
+      if (event.clientX < left || event.clientX > right || event.clientY < top || event.clientY > bottom) closeSearch();
+    }
+  });
+</script>

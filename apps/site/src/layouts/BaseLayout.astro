@@ -1,5 +1,6 @@
 ---
 import '../styles/site.css';
+import Search from '../components/Search.astro';
 
 interface Props {
   title?: string;
@@ -27,6 +28,7 @@ const { title = siteTitle } = Astro.props;
         <a href="/categories/">카테고리</a>
         <a href="/archives/">아카이브</a>
         <a href="/tags/">태그</a>
+        <Search />
       </nav>
     </header>
     <main id="main" tabindex="-1"><slot /></main>
