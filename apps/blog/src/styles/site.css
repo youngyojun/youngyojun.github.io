@@ -1,15 +1,4 @@
-:root {
-  color-scheme: light;
-  --color-background: #fff;
-  --color-surface: #f7f7f7;
-  --color-text: #555;
-  --color-muted: #707070;
-  --color-heading: #222;
-  --color-border: #ddd;
-  --font-body: Lato, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-  --font-code: Menlo, Consolas, monospace;
-  --content-width: 700px;
-}
+@import "@youngyojun/design-tokens/tokens.css";
 
 * { box-sizing: border-box; }
 

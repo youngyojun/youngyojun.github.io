@@ -42,7 +42,9 @@ Atom 피드는 기존 `/atom.xml` 주소에 최신 글 10개의 전체 본문과
 
 앱은 `apps/*`, 실제 공유 패키지는 `packages/*`에 추가합니다. 새 개발 경로는 Jekyll의 `exclude`로 제외합니다.
 
-Astro의 공통 HTML 틀·사이트 헤더는 `apps/blog/src/layouts/BaseLayout.astro`, 색상 변수와 본문·모바일 스타일은 `apps/blog/src/styles/site.css`에서 관리합니다. 페이지는 `apps/blog/src/pages/`에서 레이아웃을 사용하며, 글 원문은 기존 위치에 둡니다. 현재 NexT Muse의 밝은 배경과 검정 헤더를 기준으로 구성했습니다. 공유 스타일 패키지는 다른 앱에서도 실제로 필요해질 때 분리합니다.
+Astro의 공통 HTML 틀·사이트 헤더는 `apps/blog/src/layouts/BaseLayout.astro`, 본문·모바일 스타일은 `apps/blog/src/styles/site.css`에서 관리합니다. 페이지는 `apps/blog/src/pages/`에서 레이아웃을 사용하며, 글 원문은 기존 위치에 둡니다. 현재 NexT Muse의 밝은 배경과 검정 헤더를 기준으로 구성했습니다.
+
+공통 색상·본문/코드 글꼴·읽기 폭은 `packages/design-tokens/src/tokens.css`에서 관리합니다. CSS만 제공하는 `@youngyojun/design-tokens` 패키지이며 React나 별도 빌드가 필요하지 않습니다. 소비하는 앱은 `package.json`에 `"@youngyojun/design-tokens": "workspace:*"` 의존성을 선언하고, 스타일 파일에서 `@import "@youngyojun/design-tokens/tokens.css";`로 가져옵니다. 패키지 내부 파일 경로를 직접 참조하지 않습니다. 전체 디자인의 기본값은 이 파일에서 변경하고, 각 앱의 레이아웃과 전용 컴포넌트 스타일은 해당 앱에서 관리합니다. 현재 토큰은 기존 밝은 테마의 값을 그대로 사용합니다.
 
 아래는 기존 NexT 테마 안내입니다.
 
