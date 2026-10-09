@@ -1,4 +1,11 @@
-import type { SatteriProcessorOptions } from '@astrojs/markdown-satteri';
+import { satteri, type SatteriProcessorOptions } from '@astrojs/markdown-satteri';
+
+export function legacyProcessor(site: string) {
+  return satteri({
+    features: { math: true },
+    hastPlugins: [legacyMarkdown(site), legacyHeadingIds()],
+  });
+}
 
 export function legacyHeadingIds(): NonNullable<SatteriProcessorOptions['hastPlugins']>[number] {
   return () => {
