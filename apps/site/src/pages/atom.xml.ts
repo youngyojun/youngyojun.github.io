@@ -1,11 +1,7 @@
 import type { APIContext } from 'astro';
 import { legacyProcessor } from '../legacy-markdown';
 import { posts } from '../legacy-posts';
-
-function escapeXml(text: string) {
-  return text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;').replaceAll("'", '&apos;');
-}
+import { escapeXml } from '../xml';
 
 export async function GET({ site }: APIContext) {
   if (!site) throw new Error('The Atom feed requires a configured site URL');
