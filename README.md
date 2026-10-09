@@ -46,6 +46,12 @@ Astro의 공통 HTML 틀·사이트 헤더는 `apps/blog/src/layouts/BaseLayout.
 
 공통 색상·본문/코드 글꼴·읽기 폭은 `packages/design-tokens/src/tokens.css`에서 관리합니다. CSS만 제공하는 `@youngyojun/design-tokens` 패키지이며 React나 별도 빌드가 필요하지 않습니다. 소비하는 앱은 `package.json`에 `"@youngyojun/design-tokens": "workspace:*"` 의존성을 선언하고, 스타일 파일에서 `@import "@youngyojun/design-tokens/tokens.css";`로 가져옵니다. 패키지 내부 파일 경로를 직접 참조하지 않습니다. 전체 디자인의 기본값은 이 파일에서 변경하고, 각 앱의 레이아웃과 전용 컴포넌트 스타일은 해당 앱에서 관리합니다. 현재 토큰은 기존 밝은 테마의 값을 그대로 사용합니다.
 
+공용 React 컴포넌트는 `packages/ui`의 `@youngyojun/ui` 패키지에서 관리합니다. 앱은 `"@youngyojun/ui": "workspace:*"` 의존성을 선언하고 `import { Button } from '@youngyojun/ui'`로 사용합니다. 토큰은 공용 UI에서 가져오며, 컴포넌트 스타일은 CSS Modules로 분리합니다. 현재 `Button`은 기본 `type="button"`으로 폼 제출을 방지하고, 일반 버튼 속성·`ref`·`className`을 받습니다. 제출 버튼에는 `type="submit"`을 명시하세요. 키보드 초점과 비활성 상태의 스타일도 포함합니다.
+
+UI 패키지는 React 19를 peer dependency로 선언하고, 앱과 개발·테스트 환경의 React/React DOM 버전을 맞춥니다. 이 저장소에서는 공개 export의 TypeScript/TSX 소스를 Astro와 향후 Vite 앱이 직접 처리하므로 UI 패키지의 별도 빌드가 필요하지 않습니다. `corepack pnpm check`는 UI와 블로그의 타입을 검사하고, `corepack pnpm test`는 UI의 Vitest 단위 테스트와 블로그의 정적 빌드 검증을 실행합니다.
+
+블로그는 공식 `@astrojs/react` integration을 사용합니다. 검색창의 닫기 버튼은 공용 `Button`을 정적 HTML로 렌더링하며 기존 Astro 스크립트가 클릭을 처리합니다. 이 버튼에는 `client:*`를 사용하지 않습니다. React 앱에서는 부모의 상태와 `onClick`을 그대로 연결할 수 있습니다. Astro에서 React 상태·이벤트 처리가 필요한 화면은 해당 React 컴포넌트에 hydration을 적용해야 합니다.
+
 아래는 기존 NexT 테마 안내입니다.
 
 # NexT

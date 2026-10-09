@@ -1,8 +1,12 @@
+---
+import { Button } from '@youngyojun/ui';
+---
+
 <button id="search-open" type="button" aria-haspopup="dialog" aria-controls="site-search" hidden>검색</button>
 <dialog id="site-search" aria-labelledby="search-title">
   <header class="search-header">
     <h2 id="search-title">검색</h2>
-    <button id="search-close" type="button">닫기</button>
+    <Button id="search-close">닫기</Button>
   </header>
   <label for="search-input">글 제목·본문 검색</label>
   <input id="search-input" type="search" placeholder="검색어를 입력하세요" autocomplete="off" autocapitalize="none" spellcheck="false" autofocus />
