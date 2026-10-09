@@ -1,0 +1,23 @@
+---
+import { posts } from '../legacy-posts';
+import { homePages } from '../legacy-home-pages';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostList from './PostList.astro';
+
+interface Props {
+  page: typeof homePages[number];
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout>
+  <h1 class="page-heading">글 목록</h1>
+  <p class="post-count">{posts.length}개의 글 · {page.number}/{homePages.length} 페이지</p>
+  <PostList posts={page.posts} />
+  {homePages.length > 1 && <nav class="pagination" aria-label="글 목록 페이지">
+    {page.number > 1 && <a href={homePages[page.number - 2].url} rel="prev">이전</a>}
+    {homePages.map(({ number, url }) => <a href={url} aria-label={`${number} 페이지`} aria-current={number === page.number ? 'page' : undefined}>{number}</a>)}
+    {page.number < homePages.length && <a href={homePages[page.number].url} rel="next">다음</a>}
+  </nav>}
+</BaseLayout>

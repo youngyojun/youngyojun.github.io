@@ -1,11 +1,6 @@
 ---
-import { posts } from '../legacy-posts';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import PostList from '../components/PostList.astro';
+import { homePages } from '../legacy-home-pages';
+import HomePage from '../components/HomePage.astro';
 ---
 
-<BaseLayout>
-  <h1 class="page-heading">글 목록</h1>
-  <p class="post-count">{posts.length}개의 글</p>
-  <PostList posts={posts} />
-</BaseLayout>
+<HomePage page={homePages[0]} />

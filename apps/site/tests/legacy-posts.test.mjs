@@ -38,8 +38,8 @@ const posts = [
   ["/icpc/2025/11/22/2025-icpc-seoul-finals-solutions/", "2025 ICPC Asia Seoul Regional Finals Solution Sketches"]
 ];
 
-test('publishes all 30 legacy URLs and links them from the preview index', () => {
-  const index = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
+test('publishes all 30 legacy URLs and links them from the home pages', () => {
+  const index = ['index.html', 'page2/index.html', 'page3/index.html'].map(path => readFileSync(new URL(`../dist/${path}`, import.meta.url), 'utf8')).join('\n');
   assert.equal(readdirSync(new URL('../../../_posts/', import.meta.url)).filter(name => name.endsWith('.md')).length, posts.length);
   for (const [url, title] of posts) {
     const output = new URL(`../dist/${decodeURIComponent(url.slice(1))}index.html`, import.meta.url);

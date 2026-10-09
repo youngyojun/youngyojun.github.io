@@ -30,7 +30,7 @@ test('preserves all 30 archive posts in chronological order with the original pa
     assert.equal(links.at(-1), last);
     assert.deepEqual([...html.matchAll(/<h2\b[^>]*>(\d{4})<\/h2>/g)].map(match => match[1]), years);
   }
-  const index = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
+  const index = ['index.html', 'page2/index.html', 'page3/index.html'].map(path => readFileSync(new URL(`../dist/${path}`, import.meta.url), 'utf8')).join('\n');
   assert.deepEqual(sections.flatMap(section => postLinks(section[2])), postLinks(index));
 });
 

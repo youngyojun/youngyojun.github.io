@@ -53,8 +53,8 @@ test('preserves the published date, category and tag metadata of all legacy post
   }
 });
 
-test('orders the index by publication time, including posts whose filenames have older dates', () => {
-  const index = output('/');
+test('orders all home pages by publication time, including posts whose filenames have older dates', () => {
+  const index = ['/', '/page2/', '/page3/'].map(output).join('\n');
   const links = [...index.matchAll(/<li\b[^>]*>[\s\S]*?<a\b[^>]*href="([^"]+)"/g)].map(match => match[1]);
   const expected = posts.toSorted((a, b) => Date.parse(b[1]) - Date.parse(a[1])).map(post => post[0]);
   assert.deepEqual(links, expected);
