@@ -14,13 +14,13 @@ corepack pnpm dev
 
 개발 페이지는 `http://localhost:4321/`에서 확인합니다. `corepack pnpm check`는 Astro/TypeScript 검사, `corepack pnpm build`는 앱 빌드, `corepack pnpm preview`는 빌드 결과 미리보기입니다. 산출물은 `apps/blog/dist/`에 생성합니다.
 
-현재 Astro에서는 기존 글 30개를 원래 URL로 검증합니다. 홈의 글 목록에서 한글·영어 본문, 수식, 그림, 코드와 다운로드 링크를 비교하세요. 원문은 루트 `_posts/`에서 직접 읽고, `apps/blog/public/`의 심볼릭 링크는 기존 `assets/`와 `downloadable_files/`를 가리키므로 자산을 복사해 관리하지 않습니다. 수식은 기존 블로그와 같은 MathJax CDN의 TeX 웹폰트를 사용합니다. 불완전한 로컬 STIX 폰트 때문에 특수 글자가 깨지는 문제를 피하도록 로컬 폰트 자동 선택을 끕니다. `corepack pnpm test`는 빌드 후 Markdown 호환 처리, 기존 글 URL과 첨부파일을 검사합니다.
+현재 Astro에서는 기존 글 30개를 `/blog/posts/<slug>/`에서 제공합니다. 과거 주소에서도 같은 글을 열 수 있으며 canonical은 새 주소를 가리킵니다. 홈의 글 목록에서 한글·영어 본문, 수식, 그림, 코드와 다운로드 링크를 비교하세요. 원문은 루트 `_posts/`에서 직접 읽고, `apps/blog/public/`의 심볼릭 링크는 기존 `assets/`와 `downloadable_files/`를 가리키므로 자산을 복사해 관리하지 않습니다. 수식은 기존 블로그와 같은 MathJax CDN의 TeX 웹폰트를 사용합니다. 불완전한 로컬 STIX 폰트 때문에 특수 글자가 깨지는 문제를 피하도록 로컬 폰트 자동 선택을 끕니다. `corepack pnpm test`는 빌드 후 Markdown 호환 처리, 기존 글 URL과 첨부파일을 검사합니다.
 
 글의 frontmatter에는 고유한 `slug`를 직접 지정합니다. 소문자 영문·숫자와 단어 사이의 하이픈만 허용하며, 누락·잘못된 형식·중복은 `apps/blog/src/post-slugs.ts`에서 빌드 오류로 검출합니다. 제목·게시일·분류·파일명을 바꿔도 공개한 slug는 유지합니다. 날짜는 자동으로 붙이지 않으며, 대회 연도·연습일·연재 회차처럼 구분에 필요한 경우에만 포함합니다. 기존 WF 연습 글은 제목에 적힌 연습일을 사용합니다. 이 규칙은 초안을 포함해 읽어들인 모든 글에 적용됩니다.
 
-전체 글의 목표 주소는 `/blog/posts/<slug>/`입니다. 현재 단계에서는 기존 글 30개에 slug를 명시하고 검증하며, 공개 주소와 링크는 그대로 유지합니다. `apps/blog/src/legacy-post-urls.json`은 운영 sitemap과 각 글 제목으로 확인한 과거 주소를 보관하고, 누락·중복·남은 매핑은 빌드 오류로 검출합니다. 새 주소로 전환한 뒤에는 새 글을 과거 URL 매핑에 추가하지 않는 구조로 바꿀 예정입니다. 과거 주소의 이동 방식과 운영 배포 전환은 아직 준비 중입니다. 기존 Jekyll 빌드와 비교할 때는 `TZ=UTC`를 사용해야 운영 주소와 일치합니다.
+모든 글의 대표 주소는 `/blog/posts/<slug>/`이며, 글 목록·검색·사이트맵·피드와 본문 안의 글 링크도 이 주소를 사용합니다. `apps/blog/src/legacy-post-urls.json`은 기존 30개 글의 과거 주소만 보관합니다. 새 글은 slug를 명시해 추가하고 이 매핑을 수정하지 않습니다. 중복되거나 원본이 없는 과거 매핑은 빌드 오류로 검출합니다. 과거 주소는 현재 같은 글을 보여주는 호환 페이지로 생성하고, canonical은 새 주소로 지정합니다. 자동 리다이렉션 방식은 아직 미확정이며 운영 배포 전환 전에 결정할 예정입니다. 기존 Jekyll 빌드와 비교할 때는 `TZ=UTC`를 사용해야 운영 주소와 일치합니다.
 
-Atom 피드는 기존 `/atom.xml` 주소에 최신 글 10개의 전체 본문과 발췌를 생성합니다. 구독기에 같은 글이 중복 등록되지 않도록 기존 피드·글 ID를 유지하며, 글 링크·UTC 게시 시각·태그도 보존합니다. 본문과 발췌는 `apps/blog/src/legacy-markdown.ts`의 공통 Markdown 설정을 사용하고, 피드 본문의 상대 주소는 각 글의 `xml:base`를 기준으로 해석합니다. 원래 비활성화된 RSS 메뉴는 추가하지 않습니다.
+Atom 피드는 기존 `/atom.xml` 주소에 최신 글 10개의 전체 본문과 발췌를 생성합니다. 구독기에 같은 글이 중복 등록되지 않도록 기존 피드·글 ID를 유지합니다. 글 링크와 본문의 `xml:base`는 새 대표 주소를 사용하고, UTC 게시 시각과 태그는 보존합니다. 본문과 발췌는 `apps/blog/src/legacy-markdown.ts`의 공통 Markdown 설정을 사용하고, 피드 본문의 상대 주소는 각 글의 `xml:base`를 기준으로 해석합니다. 원래 비활성화된 RSS 메뉴는 추가하지 않습니다.
 
 사이트맵은 기존 `/sitemap.xml` 주소에 글 30개·탐색 페이지 9개·PDF 11개의 공개 주소를 생성합니다. 홈 페이지 수는 글 목록에서 계산하고, PDF 목록은 기존 다운로드 폴더에서 읽습니다. 기존처럼 글의 `lastmod`는 UTC 게시 시각, PDF는 파일 수정 시각을 사용하며 탐색 페이지에는 날짜를 넣지 않습니다. PDF 날짜는 체크아웃 시 파일 수정 시각의 영향을 받습니다. 사용자의 결정에 따라 NexT 영문 설명서(`/README.en/`)와 라이브러리 설명서(`/assets/lib/fastclick/`, `/assets/lib/jquery_lazyload/`)의 공개 HTML 페이지는 이전 대상에서 제외합니다. 이 문서들의 원본 파일과 라이브러리 코드는 보관합니다.
 
@@ -30,7 +30,7 @@ Atom 피드는 기존 `/atom.xml` 주소에 최신 글 10개의 전체 본문과
 
 작성일은 기존 운영 화면과 같이 UTC 기준으로 표시하며, 목록은 파일명 대신 게시 시각의 내림차순으로 정렬합니다. 원문에 날짜가 없는 글은 파일명의 날짜를 사용합니다. 카테고리·태그는 원문의 이름과 순서를 유지하며, 현재는 글 상단에 표시합니다.
 
-홈은 기존 `/`, `/page2/`, `/page3/` 주소에서 최신순으로 10개씩 나눕니다. 페이지별 글과 주소는 `apps/blog/src/legacy-home-pages.ts`, 공통 화면은 `apps/blog/src/components/HomePage.astro`에서 관리합니다. 각 글의 제목·날짜·본문 발췌와 원래 글로 연결되는 ‘더 읽어보기’ 링크를 표시합니다. 발췌는 Atom과 같은 `legacyExcerptSource` 및 Markdown 설정을 사용합니다. 기존 Jekyll의 빈 줄 경계를 그대로 읽으므로, CRLF로 작성된 「영 타블로」는 기존 홈처럼 본문 전체와 그림 7개가 표시됩니다. 홈과 글 페이지의 수식 설정은 `apps/blog/src/components/MathJax.astro`에서 공유합니다. 페이지 이동과 글 링크는 JavaScript 없이도 사용할 수 있습니다.
+홈은 기존 `/`, `/page2/`, `/page3/` 주소에서 최신순으로 10개씩 나눕니다. 페이지별 글과 주소는 `apps/blog/src/legacy-home-pages.ts`, 공통 화면은 `apps/blog/src/components/HomePage.astro`에서 관리합니다. 각 글의 제목·날짜·본문 발췌와 새 대표 주소로 연결되는 ‘더 읽어보기’ 링크를 표시합니다. 발췌는 Atom과 같은 `legacyExcerptSource` 및 Markdown 설정을 사용합니다. 기존 Jekyll의 빈 줄 경계를 그대로 읽으므로, CRLF로 작성된 「영 타블로」는 기존 홈처럼 본문 전체와 그림 7개가 표시됩니다. 홈과 글 페이지의 수식 설정은 `apps/blog/src/components/MathJax.astro`에서 공유합니다. 페이지 이동과 글 링크는 JavaScript 없이도 사용할 수 있습니다.
 
 소개 페이지는 기존 `/about/` 주소에서 루트의 `about/index.md`를 직접 읽습니다. 소개 내용을 수정할 때는 이 원문을 편집하며, Astro용 사본을 만들지 않습니다. 기존 제목·링크·제목의 책갈피 주소를 유지하고 공통 소개 메뉴로 이동할 수 있습니다.
 

@@ -10,6 +10,7 @@ export async function GET({ site }: APIContext) {
   const feedUrl = new URL('/atom.xml', site).href;
   const entries = await Promise.all(posts.slice(0, 10).map(async post => {
     const url = new URL(post.url, site).href;
+    const idUrl = new URL(post.legacyUrl ?? post.url, site).href;
     const content = (await post.compiledContent()).trim();
     const { code } = await renderer.render(legacyExcerptSource(post.rawContent()));
     const summary = code.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
@@ -18,7 +19,7 @@ export async function GET({ site }: APIContext) {
       <link href="${escapeXml(url)}" rel="alternate" type="text/html" title="${escapeXml(post.frontmatter.title)}" />
       <published>${post.publishedAt}</published>
       <updated>${post.publishedAt}</updated>
-      <id>${escapeXml(url.slice(0, -1))}</id>
+      <id>${escapeXml(idUrl.slice(0, -1))}</id>
       <content type="html" xml:base="${escapeXml(url)}">${escapeXml(content)}</content>
       ${author}
       ${post.tags.map(tag => `<category term="${escapeXml(tag)}" />`).join('')}

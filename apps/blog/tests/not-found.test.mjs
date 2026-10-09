@@ -16,8 +16,8 @@ test('builds a 404.html with a visible error message and a home link, without au
   assert.ok(!/<loc>[^<]*\/404(?:\.html|\/)?<\/loc>/.test(sitemap), 'Do not advertise the error page in the sitemap');
 });
 
-test('keeps normal pages indexable with their existing canonical URLs', () => {
-  for (const path of ['/', '/about/', '/secmem/2022/03/20/Hunt-Szymanski/']) {
+test('keeps normal pages indexable with their public canonical URLs', () => {
+  for (const path of ['/', '/about/', '/blog/posts/hunt-szymanski/']) {
     const html = readFileSync(new URL(`../dist/${path.slice(1)}index.html`, import.meta.url), 'utf8');
     assert.ok(html.includes(`href="https://youngyojun.github.io${path}"`), path);
     assert.ok(!/<meta\b[^>]*name="robots"[^>]*content="noindex"/.test(html), path);

@@ -51,8 +51,8 @@ for (const [indexPath, detailPath, groups] of [['tags', 'tag', tags], ['categori
     assert.ok(html.includes(`href="/${detailPath}/#/ICPC/page2"`));
     const oldICPCPosts = sections.find(section => section[1] === 'ICPC' && section[2] === '2')?.[3] ?? '';
     assert.deepEqual([...oldICPCPosts.matchAll(/<li\b[^>]*>[\s\S]*?<a\b[^>]*href="([^"]+)"/g)].map(match => match[1]), [
-      '/icpc/practice/2021/02/02/WF-practice/',
-      '/contest/review/icpc/2020/11/14/2020-icpc-seoul-regional/',
+      '/blog/posts/icpc-wf-practice-2021-02-01/',
+      '/blog/posts/2020-icpc-seoul-regional/',
     ]);
   });
 }

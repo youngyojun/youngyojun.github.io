@@ -17,7 +17,7 @@ tags:
 
 ### F.S.M.
 
-ICPC Seoul Regional 2020에서 [예상하지 못한 좋은 성과](https://youngyojun.github.io/contest/review/icpc/2020/11/14/2020-icpc-seoul-regional/)를 거두고선, 이번 2021년도 대회에는 같은 팀으로 욕심을 내며 출전하였다.
+ICPC Seoul Regional 2020에서 [예상하지 못한 좋은 성과](/blog/posts/2020-icpc-seoul-regional/)를 거두고선, 이번 2021년도 대회에는 같은 팀으로 욕심을 내며 출전하였다.
 
 팀원은 나와 [민제](https://codeforces.com/profile/dlalswp25), [세빈이](https://codeforces.com/profile/blackbori). 팀명은 **FSM**. 민제랑 세빈이가 [JetPunk](https://www.jetpunk.com/)라는 *십덕 세계지리 오타쿠 퀴즈 사이트*에 빠져있었는데, 오세아니아의 국가, "미크로네시아 연방"(**F**ederated **S**tates of **M**icronesia)이 좋았나보다. 사실, 작년 팀명인 "Let Us Win ICPC WF"의 최악의 작명자가 나라서, 나는 발언권이 없었다. 팀명을 "유한 상태 기계"(**F**inite **S**tate **M**achine)로도 해석할 수 있기에 재밌다고 생각했다.
 
@@ -29,7 +29,7 @@ ICPC Seoul Regional 2020에서 [예상하지 못한 좋은 성과](https://young
 
 ### ICPC Seoul 인터넷 예선
 
-[자기 반성](https://youngyojun.github.io/contest/review/icpc/2020/11/14/2020-icpc-seoul-regional/#icpc-seoul-%EC%9D%B8%ED%84%B0%EB%84%B7-%EC%98%88%EC%84%A0)과 [연습](https://youngyojun.github.io/tag/#/%EC%97%B0%EC%8A%B5)을 많이 했기에, 예선은 부담없이 즐겼다. 그냥 셋 다 잘했고 F, G 빼고 전부 풀어서 [1등](http://static.icpckorea.net/2021/scoreboard_preliminary/)을 했다.
+[자기 반성](/blog/posts/2020-icpc-seoul-regional/#icpc-seoul-%EC%9D%B8%ED%84%B0%EB%84%B7-%EC%98%88%EC%84%A0)과 [연습](https://youngyojun.github.io/tag/#/%EC%97%B0%EC%8A%B5)을 많이 했기에, 예선은 부담없이 즐겼다. 그냥 셋 다 잘했고 F, G 빼고 전부 풀어서 [1등](http://static.icpckorea.net/2021/scoreboard_preliminary/)을 했다.
 
 F의 티어는 다이아 4라는데 못 풀어서 아쉽지는 않다. G는 내가 보자마자 풀었어야 했는데 그러지 못해 아쉬웠다.
 
@@ -43,7 +43,7 @@ F의 티어는 다이아 4라는데 못 풀어서 아쉽지는 않다. G는 내�
 
 #### 대회 초반
 
-본선 대회가 시작했다. 주최측이 올려준 합본 pdf를 프린터가 읽어들이지 못했다. 우왕좌왕하다가 결국 각 문제별로 pdf를 다운로드 받아서 하나씩 인쇄했다. [작년의 그 악몽](https://youngyojun.github.io/contest/review/icpc/2020/11/14/2020-icpc-seoul-regional/#4--10-min)이 떠올라서 살짝 싸했다.
+본선 대회가 시작했다. 주최측이 올려준 합본 pdf를 프린터가 읽어들이지 못했다. 우왕좌왕하다가 결국 각 문제별로 pdf를 다운로드 받아서 하나씩 인쇄했다. [작년의 그 악몽](/blog/posts/2020-icpc-seoul-regional/#4--10-min)이 떠올라서 살짝 싸했다.
 
 초반 한 시간 내내 서울대 *The Elders* 팀과 KAIST의 *BabyPenguin* 팀에게 질질 끌려다녔다. 솔브 수 차이까지 생겨서 다들 멘탈 빈약 상태였다.
 
@@ -69,7 +69,7 @@ F를 한 번 더 틀린 나는 "주최측 데이터가 틀렸다"를 시전하�
 
 #### 191 min.
 
-J를 잘 생각해보니, 내가 [나는코더다 송년대회](https://youngyojun.github.io/contest/review/2020/02/15/iamcoder-2019-yearend-contest/)에 출제하려다가 제한의 상한을 증명하지 못해 안 냈던 문제랑 **완전하게 똑같았다**. 출제진은 상한을 증명했겠거니 생각하고 내 풀이를 그대로 짜서 맞았다.
+J를 잘 생각해보니, 내가 [나는코더다 송년대회](/blog/posts/iamcoder-2019-yearend-contest/)에 출제하려다가 제한의 상한을 증명하지 못해 안 냈던 문제랑 **완전하게 똑같았다**. 출제진은 상한을 증명했겠거니 생각하고 내 풀이를 그대로 짜서 맞았다.
 
 여기서 우리와 상위권 팀들의 솔브 수가 같아졌다. 대회 중 처음으로 웃을 수 있었다.
 

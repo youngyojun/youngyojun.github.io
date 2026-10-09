@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { test } from 'node:test';
 
+const postUrls = JSON.parse(readFileSync(new URL('./fixtures/post-urls.json', import.meta.url), 'utf8'));
+
 // IDs and UTC publication times from the original Jekyll Atom feed.
 const entries = [
   ['/icpc/2025/11/22/2025-icpc-seoul-finals-solutions/', '2025-11-22T09:00:00Z', ['ICPC']],
@@ -40,7 +42,7 @@ test('keeps the original Atom subscription identity and latest 10 entry IDs, dat
   for (const [index, [path, date, tags]] of entries.entries()) {
     const entry = actual[index];
     assert.equal(entry.match(/<id>([^<]+)<\/id>/)?.[1], `https://youngyojun.github.io${path.slice(0, -1)}`);
-    assert.ok(entry.includes(`href="https://youngyojun.github.io${path}" rel="alternate"`));
+    assert.ok(entry.includes(`href="https://youngyojun.github.io${postUrls[path]}" rel="alternate"`));
     for (const field of ['published', 'updated']) {
       assert.equal(Date.parse(entry.match(new RegExp(`<${field}>([^<]+)</${field}>`))?.[1]), Date.parse(date));
     }
@@ -53,9 +55,9 @@ test('includes full rendered article HTML with a URL base and the original excer
   for (const [index, [path]] of entries.entries()) {
     const entry = actual[index];
     const content = entry.match(/<content type="html" xml:base="([^"]+)">([\s\S]*?)<\/content>/);
-    assert.equal(content?.[1], `https://youngyojun.github.io${path}`);
+    assert.equal(content?.[1], `https://youngyojun.github.io${postUrls[path]}`);
     assert.ok(content[2].includes('&lt;'), 'HTML must be escaped inside XML');
-    const article = readFileSync(new URL(`../dist/${decodeURI(path.slice(1))}index.html`, import.meta.url), 'utf8');
+    const article = readFileSync(new URL(`../dist/${postUrls[path].slice(1)}index.html`, import.meta.url), 'utf8');
     const body = article.match(/<div class="post-body">([\s\S]*?)<\/div>\s*<\/article>/)?.[1];
     assert.ok(body, path);
     assert.equal(unescape(content[2]).trim(), body.trim(), `Full article: ${path}`);

@@ -48,13 +48,13 @@ tags:
 
 ### 물리학실험 1
 
-* [뉴턴의 사과](https://youngyojun.github.io/study/physicslab/physicslab1/2021/03/14/physicslab1-newton/)
-* [관성 모멘트 측정](https://youngyojun.github.io/study/physicslab/physicslab1/2021/03/16/physicslab1-torque/)
-* [시지프스의 고민](https://youngyojun.github.io/study/physicslab/physicslab1/2021/03/21/physicslab1-sisyphus/)
-* [당구의 역학](https://youngyojun.github.io/study/physicslab/physicslab1/2021/04/02/physicslab1-billiards/)
-* [자이로스코프](https://youngyojun.github.io/study/physicslab/physicslab1/2021/04/12/physicslab1-gyroscope/)
-* [에너지 모습](https://youngyojun.github.io/study/physicslab/physicslab1/2021/04/18/physicslab1-energy/)
-* [파동](https://youngyojun.github.io/study/physicslab/physicslab1/2021/05/05/physicslab1-wave/)
+* [뉴턴의 사과](/blog/posts/physicslab1-newton/)
+* [관성 모멘트 측정](/blog/posts/physicslab1-torque/)
+* [시지프스의 고민](/blog/posts/physicslab1-sisyphus/)
+* [당구의 역학](/blog/posts/physicslab1-billiards/)
+* [자이로스코프](/blog/posts/physicslab1-gyroscope/)
+* [에너지 모습](/blog/posts/physicslab1-energy/)
+* [파동](/blog/posts/physicslab1-wave/)
 
 
 

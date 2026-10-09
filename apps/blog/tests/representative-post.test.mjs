@@ -2,12 +2,12 @@ import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import { test } from 'node:test';
 
-test('builds the original article URL with its title, code, math and local figures', () => {
-  const output = new URL('../dist/secmem/2021/03/19/count-cutvertices-when-cut-each-edge/index.html', import.meta.url);
-  assert.ok(existsSync(output), 'The original article URL must be generated');
+test('builds the canonical article URL with its title, code, math and local figures', () => {
+  const output = new URL('../dist/blog/posts/count-cutvertices-when-cut-each-edge/index.html', import.meta.url);
+  assert.ok(existsSync(output), 'The canonical article URL must be generated');
   const html = readFileSync(output, 'utf8');
   assert.ok(html.includes('그래프의 간선을 제거할 때 절점의 개수를 세는 효율적인 알고리즘'));
-  assert.ok(html.includes('https://youngyojun.github.io/secmem/2021/03/19/count-cutvertices-when-cut-each-edge/'));
+  assert.ok(html.includes('https://youngyojun.github.io/blog/posts/count-cutvertices-when-cut-each-edge/'));
   assert.equal((html.match(/<pre\b/g) ?? []).length, 3);
   assert.ok(html.includes(String.raw`\(G(V, E \setminus \{ e \})\)`));
   assert.ok(html.includes('MathJax.Hub.Config'));

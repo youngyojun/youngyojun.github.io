@@ -3,7 +3,11 @@ import { existsSync, readFileSync, statSync } from 'node:fs';
 import { test } from 'node:test';
 
 // Original Jekyll sitemap; attachment dates depend on the checkout's file mtimes.
-const baseline = JSON.parse(readFileSync(new URL('./fixtures/legacy-sitemap.json', import.meta.url), 'utf8'));
+const postUrls = JSON.parse(readFileSync(new URL('./fixtures/post-urls.json', import.meta.url), 'utf8'));
+const baseline = JSON.parse(readFileSync(new URL('./fixtures/legacy-sitemap.json', import.meta.url), 'utf8')).map(([url, lastmod]) => {
+  const path = new URL(url).pathname;
+  return [new URL(postUrls[path] ?? path, url).href, lastmod];
+});
 const excludedDocuments = ['/README.en/', '/assets/lib/fastclick/', '/assets/lib/jquery_lazyload/'];
 
 function entries() {

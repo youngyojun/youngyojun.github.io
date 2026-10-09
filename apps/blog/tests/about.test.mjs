@@ -19,7 +19,7 @@ test('publishes the original about page with its title, links, formatting and he
   assert.ok(body.includes('<strong>2001년 6월 10일생, 윤교준. Gyojun Youn.</strong>'));
   for (const text of ['2월', 'INFJ', '과거 흑역사 보존용']) assert.ok(body.includes(`<del>${text}</del>`));
   assert.ok(body.includes('youngyojun <em>at</em> gmail <em>dot</em> com'));
-  for (const path of ['index.html', 'secmem/2022/03/20/Hunt-Szymanski/index.html', 'about/index.html']) {
+  for (const path of ['index.html', 'blog/posts/hunt-szymanski/index.html', 'about/index.html']) {
     const page = readFileSync(new URL(`../dist/${path}`, import.meta.url), 'utf8');
     assert.ok(/<a\b[^>]*href="\/about\/"[^>]*>소개<\/a>/.test(page), path);
   }

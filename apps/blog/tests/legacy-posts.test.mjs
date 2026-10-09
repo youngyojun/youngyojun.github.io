@@ -4,6 +4,8 @@ import { test } from 'node:test';
 import { relative, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+const postUrls = JSON.parse(readFileSync(new URL('./fixtures/post-urls.json', import.meta.url), 'utf8'));
+
 // Captured from the live sitemap and page titles on 2026-10-09, independently of local timezone.
 const posts = [
   ["/daily/2020/02/15/first-article/", "블로그 개설!"],
@@ -38,17 +40,41 @@ const posts = [
   ["/icpc/2025/11/22/2025-icpc-seoul-finals-solutions/", "2025 ICPC Asia Seoul Regional Finals Solution Sketches"]
 ];
 
-test('publishes all 30 legacy URLs and links them from the home pages', () => {
+test('publishes all 30 canonical post URLs and links them from the home pages', () => {
   const index = ['index.html', 'page2/index.html', 'page3/index.html'].map(path => readFileSync(new URL(`../dist/${path}`, import.meta.url), 'utf8')).join('\n');
   assert.equal(readdirSync(new URL('../../../_posts/', import.meta.url)).filter(name => name.endsWith('.md')).length, posts.length);
-  for (const [url, title] of posts) {
+  for (const [legacyUrl, title] of posts) {
+    const url = postUrls[legacyUrl];
     const output = new URL(`../dist/${decodeURIComponent(url.slice(1))}index.html`, import.meta.url);
-    assert.ok(existsSync(output), `Missing legacy URL: ${url}`);
+    assert.ok(existsSync(output), `Missing canonical URL: ${url}`);
     const html = readFileSync(output, 'utf8');
     assert.equal(html.match(/<title>(.*?)<\/title>/s)?.[1], title, `Wrong post at ${url}`);
     assert.ok(html.includes(`href="https://youngyojun.github.io${url}"`), `Canonical: ${url}`);
     assert.ok(/<article\b/.test(html) && /<h1\b/.test(html), `Article: ${url}`);
     assert.ok(index.includes(`href="${url}"`), `Index link: ${url}`);
+  }
+});
+
+test('keeps legacy article addresses readable with the new canonical URL while redirects are undecided', () => {
+  for (const [legacyUrl, title] of posts) {
+    const url = postUrls[legacyUrl];
+    const legacy = readFileSync(new URL(`../dist/${decodeURIComponent(legacyUrl.slice(1))}index.html`, import.meta.url), 'utf8');
+    const canonical = readFileSync(new URL(`../dist/${url.slice(1)}index.html`, import.meta.url), 'utf8');
+    assert.equal(legacy.match(/<title>(.*?)<\/title>/s)?.[1], title, legacyUrl);
+    assert.ok(legacy.includes(`href="https://youngyojun.github.io${url}"`), legacyUrl);
+    assert.ok(!/http-equiv="refresh"/i.test(legacy), legacyUrl);
+    assert.equal(legacy.match(/<article\b[^>]*>[\s\S]*?<\/article>/)?.[0], canonical.match(/<article\b[^>]*>[\s\S]*?<\/article>/)?.[0], legacyUrl);
+  }
+});
+
+test('uses new post links inside articles while preserving heading fragments', () => {
+  const overview = readFileSync(new URL('../dist/blog/posts/physicslab12-main/index.html', import.meta.url), 'utf8');
+  assert.ok(overview.includes('href="/blog/posts/physicslab1-newton/"'));
+  const review = readFileSync(new URL('../dist/blog/posts/2021-icpc-seoul-regional/index.html', import.meta.url), 'utf8');
+  assert.ok(review.includes('href="/blog/posts/2020-icpc-seoul-regional/#icpc-seoul-%EC%9D%B8%ED%84%B0%EB%84%B7-%EC%98%88%EC%84%A0"'));
+  for (const url of Object.keys(postUrls)) {
+    assert.ok(!review.includes(`href="https://youngyojun.github.io${url}`), url);
+    assert.ok(!overview.includes(`href="https://youngyojun.github.io${url}`), url);
   }
 });
 

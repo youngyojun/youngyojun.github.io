@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 
-// Excerpt text and authored links captured from the original Jekyll home pages.
+// Original excerpt text and authored links; post URLs use the approved canonical paths.
 const pages = JSON.parse(readFileSync(new URL('./fixtures/legacy-home-excerpts.json', import.meta.url), 'utf8'));
 const output = path => readFileSync(new URL(`../dist/${decodeURIComponent(path.slice(1))}index.html`, import.meta.url), 'utf8');
 const text = html => html.replace(/<[^>]*>/g, '').replace(/&#(x[\da-f]+|\d+);|&(amp|lt|gt|quot|apos|nbsp);/gi, (_, number, name) => number
@@ -34,7 +34,7 @@ test('restores all legacy home excerpts and read-more links without shortening t
 
 test('loads the same MathJax settings on home pages and articles', () => {
   const scripts = html => [...html.matchAll(/<script\b[^>]*(?:mathjax-config|cdn\.bootcss\.com\/mathjax)[^>]*>[\s\S]*?<\/script>/g)].map(match => match[0]);
-  const expected = scripts(output('/secmem/2021/09/19/young-tableaux/'));
+  const expected = scripts(output('/blog/posts/young-tableaux/'));
   assert.equal(expected.length, 2);
   for (const { path } of pages) assert.deepEqual(scripts(output(path)), expected, path);
 });

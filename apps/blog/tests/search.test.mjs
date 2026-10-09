@@ -42,12 +42,12 @@ test('returns one highlighted body excerpt around the best matching passage', as
   assert.equal(titleMatch.title.slice(titleMatch.titleHits[0].start, titleMatch.titleHits[0].end), 'Newton');
 });
 
-test('publishes all 30 original search URLs with rendered body text and classification metadata', () => {
+test('publishes all 30 canonical search URLs with rendered body text and classification metadata', () => {
   const output = new URL('../dist/search.xml', import.meta.url);
   assert.ok(existsSync(output), 'Missing original /search.xml endpoint');
   const xml = readFileSync(output, 'utf8');
   assert.equal((xml.match(/<entry>/g) ?? []).length, 30);
-  const urls = Object.values(JSON.parse(readFileSync(new URL('../src/legacy-post-urls.json', import.meta.url), 'utf8')));
+  const urls = Object.values(JSON.parse(readFileSync(new URL('./fixtures/post-urls.json', import.meta.url), 'utf8')));
   assert.deepEqual([...xml.matchAll(/<url>(.*?)<\/url>/g)].map(match => match[1]).sort(), urls.sort());
   assert.ok(xml.includes('공기저항'));
   assert.ok(xml.includes('Longest Common Subsequence'));

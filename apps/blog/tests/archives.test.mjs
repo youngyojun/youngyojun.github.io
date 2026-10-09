@@ -4,9 +4,9 @@ import { test } from 'node:test';
 
 // Page boundaries and year headings observed in the UTC Jekyll archive.
 const pages = [
-  [1, ['2025', '2023', '2022', '2021'], '/icpc/2025/11/22/2025-icpc-seoul-finals-solutions/', '/study/physicslab/physicslab1/2021/05/05/physicslab1-wave/'],
-  [2, ['2021'], '/secmem/2021/04/18/generating-functions-1/', '/icpc/practice/2021/03/08/WF-practice/'],
-  [3, ['2021', '2020'], '/icpc/practice/2021/03/05/WF-practice/', '/daily/2020/02/15/first-article/'],
+  [1, ['2025', '2023', '2022', '2021'], '/blog/posts/2025-icpc-seoul-finals-solutions/', '/blog/posts/physicslab1-wave/'],
+  [2, ['2021'], '/blog/posts/generating-functions-1/', '/blog/posts/icpc-wf-practice-2021-03-07/'],
+  [3, ['2021', '2020'], '/blog/posts/icpc-wf-practice-2021-03-04/', '/blog/posts/first-article/'],
 ];
 
 function archive() {
