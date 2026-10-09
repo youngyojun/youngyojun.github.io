@@ -4,10 +4,11 @@ import Search from '../components/Search.astro';
 
 interface Props {
   title?: string;
+  noindex?: boolean;
 }
 
 const siteTitle = "Gyojun Youn's PS Blog";
-const { title = siteTitle } = Astro.props;
+const { title = siteTitle, noindex = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -16,7 +17,9 @@ const { title = siteTitle } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    {noindex
+      ? <meta name="robots" content="noindex" />
+      : <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />}
   </head>
   <body>
     <a class="skip-link" href="#main">본문으로 건너뛰기</a>
