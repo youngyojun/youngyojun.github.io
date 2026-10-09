@@ -24,10 +24,25 @@ export default function legacyMarkdown(site: string): NonNullable<SatteriProcess
   const origin = new URL(site).host;
   return {
     name: 'legacy-markdown',
+    options: { position: true },
+    before(_root, ctx) {
+      const frontmatter = ctx.data.astro?.frontmatter;
+      // Jekyll's layout name is not an Astro component import.
+      if (ctx.fileURL?.pathname.endsWith('/about/index.md') && frontmatter?.layout === 'page') {
+        delete frontmatter.layout;
+      }
+    },
     element: {
-      filter: ['code', 'img'],
+      filter: ['code', 'img', 'a'],
       visit(node, ctx) {
-        if (node.tagName === 'img') {
+        if (node.tagName === 'a') {
+          const position = node.position;
+          // This page originally left bare addresses as text; keep explicitly authored links.
+          if (ctx.fileURL?.pathname.endsWith('/about/index.md') && position &&
+            ctx.source.slice(position.start.offset, position.end.offset) === ctx.textContent(node)) {
+            ctx.replaceNode(node, node.children);
+          }
+        } else if (node.tagName === 'img') {
           if (typeof node.properties.src !== 'string') return;
           const url = new URL(node.properties.src, site);
           if (url.host === origin && url.pathname.startsWith('/assets/')) {

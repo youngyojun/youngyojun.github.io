@@ -5,6 +5,33 @@ import config from '../astro.config.mjs';
 
 const renderer = await (config.markdown?.processor ?? satteri()).createRenderer({});
 
+test('keeps bare about-page email addresses as text while preserving explicit email links', async () => {
+  const source = 'contact@example.com and [Email](mailto:contact@example.com)';
+  const { code } = await renderer.render(source, { fileURL: new URL('../../../about/index.md', import.meta.url) });
+  assert.equal((code.match(/href="mailto:contact@example.com"/g) ?? []).length, 1);
+  assert.ok(code.includes('contact@example.com and <a'));
+  const post = await renderer.render(source);
+  assert.equal((post.code.match(/href="mailto:contact@example.com"/g) ?? []).length, 2);
+});
+
+test('ignores the original about page Jekyll layout while preserving its other metadata and Astro layouts', async () => {
+  const { metadata } = await renderer.render('# Who Am I?', {
+    fileURL: new URL('../../../about/index.md', import.meta.url),
+    frontmatter: { title: '저를 소개합니다! :D', layout: 'page', type: 'about' },
+  });
+  assert.deepEqual(metadata.frontmatter, { title: '저를 소개합니다! :D', type: 'about' });
+  const astro = await renderer.render('# Page', {
+    fileURL: new URL('../src/pages/example.md', import.meta.url),
+    frontmatter: { layout: '../layouts/BaseLayout.astro' },
+  });
+  assert.equal(astro.metadata.frontmatter.layout, '../layouts/BaseLayout.astro');
+  const other = await renderer.render('# Page', {
+    fileURL: new URL('../src/pages/example.md', import.meta.url),
+    frontmatter: { layout: 'page' },
+  });
+  assert.equal(other.metadata.frontmatter.layout, 'page');
+});
+
 test('preserves subscripts and Jekyll-escaped braces for MathJax', async () => {
   const { code } = await renderer.render(String.raw`$G_i \\{ e \\}$`);
   assert.ok(code.includes(String.raw`\(G_i \{ e \}\)`), code);
