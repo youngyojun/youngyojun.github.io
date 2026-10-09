@@ -1,10 +1,15 @@
 ---
-import { Content, frontmatter } from '../../../../_posts/2021-03-19-count-cutvertices-when-cut-each-edge.md';
+import { posts } from '../legacy-posts';
 
 export function getStaticPaths() {
-  // shortcut: one representative URL, replace with verified post mappings before migrating all posts.
-  return [{ params: { path: 'secmem/2021/03/19/count-cutvertices-when-cut-each-edge' } }];
+  return posts.map(post => ({
+    params: { path: decodeURIComponent(post.url.slice(1, -1)) },
+    props: { post },
+  }));
 }
+
+const { post } = Astro.props;
+const { Content, frontmatter } = post;
 ---
 
 <!doctype html>

@@ -33,3 +33,12 @@ test('serves same-site HTTP and HTTPS images from the preserved asset path', asy
   const { code } = await renderer.render('![external](https://example.com/graph.png)');
   assert.ok(code.includes('https://example.com/graph.png'), code);
 });
+
+test('keeps Jekyll heading fragments, including numbered title collisions, per document', async () => {
+  for (let i = 0; i < 2; i++) {
+    const { code } = await renderer.render('# 풀이\n\n# 풀이\n\n# 풀이 1\n\n# 풀이 1\n\n# 실험 ① 결과');
+    assert.deepEqual([...code.matchAll(/<h1 id="([^"]+)"/g)].map(match => match[1]), [
+      '풀이', '풀이-1', '풀이-1', '풀이-1-1', '실험--결과',
+    ]);
+  }
+});
