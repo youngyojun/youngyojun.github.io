@@ -1,3 +1,21 @@
+# 개발
+
+기존 블로그는 현재 루트의 Jekyll 소스를 사용합니다. `apps/site`는 별도로 실행하는 Astro 이전 검증용 앱이며 운영 배포에는 연결하지 않았습니다.
+
+Node 버전은 `.nvmrc`, pnpm 버전은 루트 `package.json`에 고정합니다. Corepack을 사용할 수 있는 환경에서 실행하세요.
+
+```sh
+nvm use
+corepack pnpm install --frozen-lockfile
+corepack pnpm dev
+```
+
+개발 페이지는 `http://localhost:4321/`에서 확인합니다. `corepack pnpm check`는 Astro/TypeScript 검사, `corepack pnpm build`는 앱 빌드, `corepack pnpm preview`는 빌드 결과 미리보기입니다. 산출물은 `apps/site/dist/`에 생성합니다.
+
+현재 Astro에서는 그래프 절점 글 한 편만 기존 URL로 검증합니다. 홈의 대표 글 링크로 들어가 수식, 그림 4개, Python 코드와 HTML 캡션을 비교하세요. 원문은 루트 `_posts/`에서 직접 읽고, `apps/site/public/assets`는 기존 `assets/`를 가리키므로 자산을 복사해 관리하지 않습니다. 수식은 기존 블로그와 같은 MathJax CDN을 사용합니다. `corepack pnpm test`는 빌드 후 Markdown 호환 처리와 실제 글 산출물을 검사합니다.
+
+앱은 `apps/*`, 실제 공유 패키지는 `packages/*`에 추가합니다. 새 개발 경로는 Jekyll의 `exclude`로 제외합니다. 아래는 기존 NexT 테마 안내입니다.
+
 # NexT
 
 > 精于心，简于形

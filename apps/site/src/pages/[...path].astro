@@ -1,0 +1,44 @@
+---
+import { Content, frontmatter } from '../../../../_posts/2021-03-19-count-cutvertices-when-cut-each-edge.md';
+
+export function getStaticPaths() {
+  // shortcut: one representative URL, replace with verified post mappings before migrating all posts.
+  return [{ params: { path: 'secmem/2021/03/19/count-cutvertices-when-cut-each-edge' } }];
+}
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{frontmatter.title}</title>
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+  </head>
+  <body>
+    <main>
+      <nav aria-label="사이트"><a href="/">홈</a></nav>
+      <article>
+        <header><h1>{frontmatter.title}</h1></header>
+        <Content />
+      </article>
+    </main>
+    <script is:inline type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        },
+      });
+    </script>
+    <script is:inline src="https://cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </body>
+</html>
+
+<style>
+  main { max-width: 75ch; margin: 2rem auto; padding: 0 1rem; font-family: system-ui, sans-serif; line-height: 1.8; }
+  article :global(img) { max-width: 100%; height: auto; }
+  article :global(pre) { overflow-x: auto; padding: 1rem; }
+  article :global(blockquote) { margin-inline: 0; padding-inline-start: 1rem; border-inline-start: 3px solid #bbb; }
+</style>
