@@ -128,6 +128,9 @@ h1, h2, h3, h4, h5, h6 {
 .pagination { display: flex; justify-content: center; gap: 1.5rem; margin-block: 2rem; }
 .pagination [aria-current="page"] { color: var(--color-heading); font-weight: 600; text-decoration: none; }
 
+.archive-year { margin: 2rem 0 .5rem; font-size: 22px; font-weight: 400; }
+.archive-page .post-list li { grid-template-columns: 3.5rem minmax(0, 1fr); }
+
 .post-header { margin-bottom: 3rem; }
 
 .post-meta {
