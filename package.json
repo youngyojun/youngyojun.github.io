@@ -6,10 +6,10 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "corepack pnpm --filter @youngyojun/site dev",
+    "dev": "corepack pnpm --filter @youngyojun/blog dev",
     "check": "corepack pnpm -r check",
     "test": "corepack pnpm -r test",
     "build": "corepack pnpm -r build",
-    "preview": "corepack pnpm --filter @youngyojun/site preview"
+    "preview": "corepack pnpm --filter @youngyojun/blog preview"
   }
 }
