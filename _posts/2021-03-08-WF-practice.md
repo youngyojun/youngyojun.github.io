@@ -1,5 +1,6 @@
 ---
 title: "ICPC WF 연습 (3/7)"
+slug: icpc-wf-practice-2021-03-07
 date: 2021-03-08 14:54:35
 categories:
  - ICPC

@@ -1,5 +1,6 @@
 ---
 title: "물리학실험1 당구의 역학"
+slug: physicslab1-billiards
 date: 2021-04-02 15:42:43
 categories:
  - Study

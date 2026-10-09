@@ -1,14 +1,18 @@
 import type { MarkdownInstance } from 'astro';
 import urls from './legacy-post-urls.json';
+import { validatePostSlugs } from './post-slugs';
 
 const modules = import.meta.glob<MarkdownInstance<{
   title: string;
+  slug: string;
   date?: string;
   categories: string[];
   tags?: string[] | null;
 }>>('../../../_posts/*.md', { eager: true });
 
-// Keep published Jekyll URLs fixed; add a verified mapping when adding a post.
+validatePostSlugs(Object.entries(modules).map(([source, post]) => [source, post.frontmatter.slug] as const));
+
+// Published routes remain unchanged during the slug metadata migration.
 export const posts = Object.entries(modules).map(([source, post]) => {
   const filename = source.split('/').at(-1)!;
   const url = urls[filename as keyof typeof urls];

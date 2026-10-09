@@ -1,5 +1,6 @@
 ---
 title: "영 타블로의 조합론적 의미와 알고리즘적 응용 (1)"
+slug: young-tableaux
 date: 2021-09-19 22:43:07 +0900
 categories:
  - Secmem

@@ -1,5 +1,6 @@
 ---
 title: "나는코더다 2019 송년대회 이야기"
+slug: iamcoder-2019-yearend-contest
 date: 2020-02-15 17:03:27
 categories:
  - Contest

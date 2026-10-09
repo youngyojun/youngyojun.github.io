@@ -1,5 +1,6 @@
 ---
 title: "ICPC WF 연습 (2/6)"
+slug: icpc-wf-practice-2021-02-06
 date: 2021-02-08 20:27:12
 categories:
  - ICPC

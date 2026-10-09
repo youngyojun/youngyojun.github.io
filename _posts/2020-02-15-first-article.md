@@ -1,5 +1,6 @@
 ---
 title: "블로그 개설!"
+slug: first-article
 categories:
  - Daily
 tags:

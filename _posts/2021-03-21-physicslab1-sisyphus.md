@@ -1,5 +1,6 @@
 ---
 title: "물리학실험1 시지프스의 고민"
+slug: physicslab1-sisyphus
 date: 2021-03-21 04:01:19
 categories:
  - Study

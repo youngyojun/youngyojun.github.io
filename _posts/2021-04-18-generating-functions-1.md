@@ -1,5 +1,6 @@
 ---
 title: "다양한 생성함수와 그 응용 (1)"
+slug: generating-functions-1
 date: 2021-04-18 19:05:30
 categories:
  - Secmem

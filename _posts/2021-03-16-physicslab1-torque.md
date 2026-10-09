@@ -1,5 +1,6 @@
 ---
 title: "물리학실험1 관성 모멘트 측정"
+slug: physicslab1-torque
 date: 2021-03-16 18:09:43
 categories:
  - Study

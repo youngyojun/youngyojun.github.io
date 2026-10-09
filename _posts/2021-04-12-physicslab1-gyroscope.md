@@ -1,5 +1,6 @@
 ---
 title: "물리학실험1 자이로스코프"
+slug: physicslab1-gyroscope
 date: 2021-04-12 01:02:23
 categories:
  - Study

@@ -1,5 +1,6 @@
 ---
 title: "그래프의 간선을 제거할 때 절점의 개수를 세는 효율적인 알고리즘"
+slug: count-cutvertices-when-cut-each-edge
 date: 2021-03-19 12:43:29
 categories:
  - Secmem

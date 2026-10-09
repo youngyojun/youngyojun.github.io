@@ -1,5 +1,6 @@
 ---
 title: "2025 ICPC Asia Seoul Regional Finals Solution Sketches"
+slug: 2025-icpc-seoul-finals-solutions
 date: 2025-11-22 18:00:00 +0900
 categories:
  - ICPC

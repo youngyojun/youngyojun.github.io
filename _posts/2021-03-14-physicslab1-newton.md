@@ -1,5 +1,6 @@
 ---
 title: "물리학실험1 뉴턴의 사과"
+slug: physicslab1-newton
 date: 2021-03-14 17:53:51
 categories:
  - Study

@@ -1,5 +1,6 @@
 ---
 title: "물리학실험1·2 보고서"
+slug: physicslab12-main
 date: 2021-03-14 17:21:57
 categories:
  - Study

@@ -1,5 +1,6 @@
 ---
 title: "이승진 교수님의 선형 대수학 후기"
+slug: 2022-2-linear-algebra-review
 date: 2023-01-05 02:44:08 +0900
 categories:
  - Linear Algebra

@@ -1,5 +1,6 @@
 ---
 title: "2021 ICPC Seoul Regional 후기"
+slug: 2021-icpc-seoul-regional
 date: 2022-12-26 03:15:56 +0900
 categories:
  - Contest

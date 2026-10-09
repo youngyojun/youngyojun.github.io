@@ -1,5 +1,6 @@
 ---
 title: "2025 ICPC Asia Seoul Regional Preliminary Solution Sketches"
+slug: 2025-icpc-seoul-prelim-solutions
 date: 2025-10-11 17:00:00 +0900
 categories:
  - ICPC

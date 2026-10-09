@@ -1,5 +1,6 @@
 ---
 title: "물리학실험1 파동"
+slug: physicslab1-wave
 date: 2021-05-05 02:41:01
 categories:
  - Study

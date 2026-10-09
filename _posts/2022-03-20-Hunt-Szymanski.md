@@ -1,5 +1,6 @@
 ---
 title: "실무에서 빠르게 LCS를 계산하는 실용적인 Hunt-Szymanski 알고리즘에 관하여"
+slug: hunt-szymanski
 date: 2022-03-20 14:55:28 +0900
 categories:
  - Secmem

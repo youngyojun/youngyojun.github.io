@@ -1,5 +1,6 @@
 ---
 title: "트리를 활용한 새로운 효율적인 수열 쿼리 알고리즘"
+slug: tree-sequence-algorithm
 date: 2021-07-17 23:10:04
 categories:
  - Secmem

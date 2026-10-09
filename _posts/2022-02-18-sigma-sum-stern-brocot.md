@@ -1,5 +1,6 @@
 ---
 title: "Stern-Brocot Tree를 활용한 수론적 함수의 합 계산"
+slug: sigma-sum-stern-brocot
 date: 2022-02-18 18:27:10 +0900
 categories:
  - Secmem

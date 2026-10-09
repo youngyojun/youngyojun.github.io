@@ -1,5 +1,6 @@
 ---
 title: "2020 ICPC Seoul Regional 후기"
+slug: 2020-icpc-seoul-regional
 date: 2020-11-14 11:52:30
 categories:
  - Contest

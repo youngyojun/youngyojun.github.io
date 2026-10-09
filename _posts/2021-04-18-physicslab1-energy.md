@@ -1,5 +1,6 @@
 ---
 title: "물리학실험1 에너지의 모습"
+slug: physicslab1-energy
 date: 2021-04-18 02:08:37
 categories:
  - Study
