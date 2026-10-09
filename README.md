@@ -12,7 +12,7 @@ corepack pnpm dev
 
 개발 페이지는 `http://localhost:4321/`에서 확인합니다. `corepack pnpm check`는 Astro/TypeScript 검사, `corepack pnpm build`는 앱 빌드, `corepack pnpm preview`는 빌드 결과 미리보기입니다. 산출물은 `apps/site/dist/`에 생성합니다.
 
-현재 Astro에서는 기존 글 30개를 원래 URL로 검증합니다. 홈의 글 목록에서 한글·영어 본문, 수식, 그림, 코드와 다운로드 링크를 비교하세요. 원문은 루트 `_posts/`에서 직접 읽고, `apps/site/public/`의 심볼릭 링크는 기존 `assets/`와 `downloadable_files/`를 가리키므로 자산을 복사해 관리하지 않습니다. 수식은 기존 블로그와 같은 MathJax CDN을 사용합니다. `corepack pnpm test`는 빌드 후 Markdown 호환 처리, 기존 글 URL과 첨부파일을 검사합니다.
+현재 Astro에서는 기존 글 30개를 원래 URL로 검증합니다. 홈의 글 목록에서 한글·영어 본문, 수식, 그림, 코드와 다운로드 링크를 비교하세요. 원문은 루트 `_posts/`에서 직접 읽고, `apps/site/public/`의 심볼릭 링크는 기존 `assets/`와 `downloadable_files/`를 가리키므로 자산을 복사해 관리하지 않습니다. 수식은 기존 블로그와 같은 MathJax CDN의 TeX 웹폰트를 사용합니다. 불완전한 로컬 STIX 폰트 때문에 특수 글자가 깨지는 문제를 피하도록 로컬 폰트 자동 선택을 끕니다. `corepack pnpm test`는 빌드 후 Markdown 호환 처리, 기존 글 URL과 첨부파일을 검사합니다.
 
 `apps/site/src/legacy-post-urls.json`은 운영 sitemap과 각 글 제목으로 확인한 공개 주소를 고정합니다. 글을 추가할 때 원문 파일명과 URL 매핑도 함께 추가해야 하며, 누락·중복·남은 매핑은 빌드 오류로 검출합니다. 파일명의 날짜나 로컬 시간대로 주소를 다시 계산하지 마세요. 기존 Jekyll 빌드와 비교할 때는 `TZ=UTC`를 사용해야 운영 주소와 일치합니다. 검색·태그·소개 페이지와 배포 전환은 아직 준비 중입니다.
 
