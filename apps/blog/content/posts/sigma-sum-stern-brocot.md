@@ -1,10 +1,10 @@
 ---
 title: "Stern-Brocot Tree를 활용한 수론적 함수의 합 계산"
-slug: sigma-sum-stern-brocot
-date: "2022-02-18T09:27:10.000Z"
+date: "2022-02-18 18:27:10"
 categories: ["Secmem"]
 tags: ["Algorithm","Mathematics"]
 ---
+
 # 개요
 
 정수론에서 주로 다루는 중요한 [수론적 함수](https://en.wikipedia.org/wiki/Arithmetic_function)로는 약수 함수 $\sigma_k (n)$, 오일러 피 함수 $\phi (n)$, 뫼비우스 함수 $\mu (n)$ 등이 있다. 이러한 함수의 학문적 중요도는 이루 말할 수 없으며, 컴퓨터과학와 PS 분야에도 종종 등장할 정도로 다양하게 활용된다.

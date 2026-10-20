@@ -1,10 +1,10 @@
 ---
 title: "ICPC WF 연습 (2/8)"
-slug: icpc-wf-practice-2021-02-08
-date: "2021-02-09T21:11:24.000Z"
+date: "2021-02-10 06:11:24"
 categories: ["ICPC","Practice"]
 tags: ["ICPC","연습"]
 ---
+
 ### [Pizza](https://www.acmicpc.net/problem/20660)
 
 Boolean array 가지고 노는 문제. 나는 bitset의 & operator로 풀어보았다.

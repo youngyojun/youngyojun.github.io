@@ -1,10 +1,10 @@
 ---
 title: "ICPC WF 연습 (2/14)"
-slug: icpc-wf-practice-2021-02-14
-date: "2021-02-15T00:00:00.000Z"
+date: "2021-02-15 09:00:00"
 categories: ["ICPC","Practice"]
 tags: ["ICPC","연습"]
 ---
+
 ### [Multi-key Sorting](https://www.acmicpc.net/problem/3340)
 
 문제 요약은 생략한다.

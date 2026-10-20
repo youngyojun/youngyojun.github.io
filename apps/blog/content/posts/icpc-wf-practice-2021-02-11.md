@@ -1,10 +1,10 @@
 ---
 title: "ICPC WF 연습 (2/11)"
-slug: icpc-wf-practice-2021-02-11
-date: "2021-02-12T00:00:00.000Z"
+date: "2021-02-12 09:00:00"
 categories: ["ICPC","Practice"]
 tags: ["ICPC","연습"]
 ---
+
 ### [Hard Refactoring](https://www.acmicpc.net/problem/13996)
 
 부등식 여러 개가 주어지면, 이를 동치이면서 최대한 짧은 하나의 부등식으로 표현하는 문제이다.

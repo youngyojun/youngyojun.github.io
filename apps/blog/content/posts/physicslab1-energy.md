@@ -1,10 +1,10 @@
 ---
 title: "물리학실험1 에너지의 모습"
-slug: physicslab1-energy
-date: "2021-04-18T02:08:37.000Z"
+date: "2021-04-18 11:08:37"
 categories: ["Study","PhysicsLab","PhysicsLab1"]
 tags: ["물리학실험","물리학실험1","보고서"]
 ---
+
 # Prelab
 
 ## 열역학과 에너지 보존 법칙

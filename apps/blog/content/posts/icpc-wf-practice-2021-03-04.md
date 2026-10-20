@@ -1,10 +1,10 @@
 ---
 title: "ICPC WF 연습 (3/4)"
-slug: icpc-wf-practice-2021-03-04
-date: "2021-03-05T15:19:21.000Z"
+date: "2021-03-06 00:19:21"
 categories: ["ICPC","Practice"]
 tags: ["ICPC","연습"]
 ---
+
 ### [Circle](https://www.acmicpc.net/problem/7115)
 
 격자판에 원을 그렸을 때, 원이 지나는 격자의 개수를 세는 문제이다.

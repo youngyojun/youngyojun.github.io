@@ -1,10 +1,10 @@
 ---
 title: "2021 ICPC Seoul Regional 후기"
-slug: 2021-icpc-seoul-regional
-date: "2022-12-25T18:15:56.000Z"
+date: "2022-12-26 03:15:56"
 categories: ["Contest","Review","ICPC"]
 tags: ["대회","풀이","ICPC","후기"]
 ---
+
 ### F.S.M.
 
 ICPC Seoul Regional 2020에서 [예상하지 못한 좋은 성과](/blog/posts/2020-icpc-seoul-regional/)를 거두고선, 이번 2021년도 대회에는 같은 팀으로 욕심을 내며 출전하였다.

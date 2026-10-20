@@ -1,10 +1,10 @@
 ---
 title: "실무에서 빠르게 LCS를 계산하는 실용적인 Hunt-Szymanski 알고리즘에 관하여"
-slug: hunt-szymanski
-date: "2022-03-20T05:55:28.000Z"
+date: "2022-03-20 14:55:28"
 categories: ["Secmem"]
 tags: ["Algorithm"]
 ---
+
 # 개요
 
 두 문자열의 가장 긴 공통 부분문자열을 찾는 [Longest Common Subsequence (LCS) 문제](https://en.wikipedia.org/wiki/Longest_common_subsequence_problem)는 정보과학에서 기초가 되는 잘 알려진 문제이다. 이렇게 기초적임에도 불구하고, LCS 문제는 생물정보학이나 전산언어학, 그리고 실생활에서 자주 사용하는 검색 엔진 등 다양한 학문과 분야에서 활용되는 아주 중요한 문제이다.

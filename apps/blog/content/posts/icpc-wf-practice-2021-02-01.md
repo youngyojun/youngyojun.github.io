@@ -1,10 +1,10 @@
 ---
 title: "ICPC WF 연습 (2/1)"
-slug: icpc-wf-practice-2021-02-01
-date: "2021-02-02T01:17:40.000Z"
+date: "2021-02-02 10:17:40"
 categories: ["ICPC","Practice"]
 tags: ["ICPC","연습"]
 ---
+
 ### 팀 연습 시작!
 
 2021년 6월 이후에 열릴 ICPC World Final 2021에서 좋은 성과를 얻기 위해, 오늘부터 PS 연습을 하기로 팀원과 약속하였다.

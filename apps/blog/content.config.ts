@@ -4,7 +4,8 @@ import { pageSchema, postSchema } from './lib/schema';
 
 export const collections = {
   posts: defineCollection({
-    loader: glob({ base: './content/posts', pattern: '*.md', generateId: ({ entry }) => entry }),
+    // Preserve the filename verbatim so invalid URL identifiers fail validation instead of being rewritten.
+    loader: glob({ base: './content/posts', pattern: '*.md', generateId: ({ entry }) => entry.slice(0, -3) }),
     schema: postSchema,
   }),
   pages: defineCollection({

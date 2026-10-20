@@ -1,10 +1,10 @@
 ---
 title: "그래프의 간선을 제거할 때 절점의 개수를 세는 효율적인 알고리즘"
-slug: count-cutvertices-when-cut-each-edge
-date: "2021-03-19T12:43:29.000Z"
+date: "2021-03-19 21:43:29"
 categories: ["Secmem"]
 tags: ["Graph","Cut vertex","Cut edge","Algorithm"]
 ---
+
 # 개요
 
 그래프는 일상생활 뿐만 아니라 대부분의 과학 분야에서 '추상화'를 위해 사용하는 아주 강력한 자료 구조이다. 그래프의 중요한 성질로 여러 가지가 있으며, 이 글은 그 중에서 특히 절점과 절선에 대하여 다룬다.

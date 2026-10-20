@@ -1,10 +1,10 @@
 ---
 title: "2025 ICPC Asia Seoul Regional Preliminary Solution Sketches"
-slug: 2025-icpc-seoul-prelim-solutions
-date: "2025-10-11T08:00:00.000Z"
+date: "2025-10-11 17:00:00"
 categories: ["ICPC"]
 tags: ["ICPC"]
 ---
+
 **Disclaimer:** This is an **unofficial** analysis of some possible ways to solve the problems of the 2025 ICPC Asia Seoul Regional Preliminary. They are not intended to give complete solutions, but rather to outline some approaches that can be used to solve the problems. If you find an error, please [send me an email](https://youngyojun.github.io/about/) about it.
 
 

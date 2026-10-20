@@ -1,10 +1,10 @@
 ---
 title: "물리학실험1 관성 모멘트 측정"
-slug: physicslab1-torque
-date: "2021-03-16T18:09:43.000Z"
+date: "2021-03-17 03:09:43"
 categories: ["Study","PhysicsLab","PhysicsLab1"]
 tags: ["물리학실험","물리학실험1","보고서"]
 ---
+
 # Prelab
 
 ## 관성 모멘트와 회전 운동, 그리고 토크

@@ -1,10 +1,10 @@
 ---
 title: "다양한 생성함수와 그 응용 (1)"
-slug: generating-functions-1
-date: "2021-04-18T19:05:30.000Z"
+date: "2021-04-19 04:05:30"
 categories: ["Secmem"]
 tags: ["Mathematics","Algorithm"]
 ---
+
 # 개요
 
 ​	어떤 주어진 성질을 만족하는 것의 가짓수를 세는 문제를 연구하는 학문을 조합론이라 하며, PS 분야 뿐만 아니라 통계학, 수리물리학 등 다양한 분야에서 중요하게 다루어진다.

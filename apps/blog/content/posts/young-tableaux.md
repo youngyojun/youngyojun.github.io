@@ -1,10 +1,10 @@
 ---
 title: "영 타블로의 조합론적 의미와 알고리즘적 응용 (1)"
-slug: young-tableaux
-date: "2021-09-19T13:43:07.000Z"
+date: "2021-09-19 22:43:07"
 categories: ["Secmem"]
 tags: ["Algorithm","Mathematics"]
 ---
+
 # 개요
 
 영 타블로(Young tableaux)는 20세기 초반, 알프레드 영(Alfred Young)이 제안한 객체로, 조합론에서 군(Group)을 표현할 때 유용하게 사용할 수 있는 특수한 형태의 행렬이다.

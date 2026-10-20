@@ -1,10 +1,10 @@
 ---
 title: "ICPC WF 연습 (2/3)"
-slug: icpc-wf-practice-2021-02-03
-date: "2021-02-04T01:20:27.000Z"
+date: "2021-02-04 10:20:27"
 categories: ["ICPC","Practice"]
 tags: ["ICPC","연습"]
 ---
+
 ### [장난감 경주](https://www.acmicpc.net/problem/19592)
 
 부등식을 가지고 노는 문제이다.

@@ -1,10 +1,10 @@
 ---
 title: "물리학실험1 뉴턴의 사과"
-slug: physicslab1-newton
-date: "2021-03-14T17:53:51.000Z"
+date: "2021-03-15 02:53:51"
 categories: ["Study","PhysicsLab","PhysicsLab1"]
 tags: ["물리학실험","물리학실험1","보고서"]
 ---
+
 # Prelab
 
 ## 뉴턴역학과 중력

@@ -1,10 +1,10 @@
 ---
 title: "물리학실험1 파동"
-slug: physicslab1-wave
-date: "2021-05-05T02:41:01.000Z"
+date: "2021-05-05 11:41:01"
 categories: ["Study","PhysicsLab","PhysicsLab1"]
 tags: ["물리학실험","물리학실험1","보고서"]
 ---
+
 # Prelab
 
 ## 파동의 발생 및 전달

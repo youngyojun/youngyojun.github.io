@@ -1,10 +1,10 @@
 ---
 title: "2020 ICPC Seoul Regional 후기"
-slug: 2020-icpc-seoul-regional
-date: "2020-11-14T11:52:30.000Z"
+date: "2020-11-14 20:52:30"
 categories: ["Contest","Review","ICPC"]
 tags: ["대회","풀이","ICPC","후기"]
 ---
+
 ### ICPC Seoul 인터넷 예선
 
 나는 dlalswp25, sebinkim와 함께 "Let Us Win ICPC WF"라는 팀명으로 처음으로 ICPC에 참가하였다.

@@ -1,10 +1,10 @@
 ---
 title: "ICPC WF 연습 (2/6)"
-slug: icpc-wf-practice-2021-02-06
-date: "2021-02-08T20:27:12.000Z"
+date: "2021-02-09 05:27:12"
 categories: ["ICPC","Practice"]
 tags: ["ICPC","연습"]
 ---
+
 ### [Chess Puzzle](https://www.acmicpc.net/problem/5239)
 
 2분 30초 AC.

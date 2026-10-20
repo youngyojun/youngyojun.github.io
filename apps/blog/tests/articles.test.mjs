@@ -8,13 +8,17 @@ const originals = JSON.parse(readFileSync(new URL('./fixtures/posts.json', impor
 const aliases = JSON.parse(readFileSync(new URL('./fixtures/post-urls.json', import.meta.url), 'utf8'));
 const page = path => readFileSync(new URL(`../dist/${decodeURIComponent(path.slice(1))}index.html`, import.meta.url), 'utf8');
 
-test('publishes every original article with its title, UTC date and classifications', () => {
+test('publishes every original article at its filename URL with the same instant and a KST display date', () => {
   for (const original of originals) {
     const html = page(`/blog/posts/${original.slug}/`);
     const header = html.match(/<header class="article-header">([\s\S]*?)<\/header>/)?.[1];
     assert.ok(header, original.slug);
     assert.equal(plainText(header.match(/<h1>([\s\S]*?)<\/h1>/)[1]), original.title);
-    assert.ok(header.includes(`datetime="${original.date}"`), original.slug);
+    const time = header.match(/<time datetime="([^"]+)">([^<]+)<\/time>/);
+    assert.ok(time, original.slug);
+    assert.equal(new Date(time[1]).toISOString(), original.date, original.slug);
+    const kstDay = new Date(Date.parse(original.date) + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
+    assert.equal(time[2], kstDay, original.slug);
     for (const category of original.categories) assert.ok(header.includes(`/blog/categories/${encodeURIComponent(category)}/`), category);
     for (const tag of original.tags) assert.ok(header.includes(`/blog/tags/${encodeURIComponent(tag)}/`), tag);
     assert.ok(html.includes(`href="https://youngyojun.github.io/blog/posts/${original.slug}/"`));

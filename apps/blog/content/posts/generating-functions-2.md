@@ -1,10 +1,10 @@
 ---
 title: "다양한 생성함수와 그 응용 (2)"
-slug: generating-functions-2
-date: "2021-05-17T15:21:11.000Z"
+date: "2021-05-18 00:21:11"
 categories: ["Secmem"]
 tags: ["Mathematics","Algorithm"]
 ---
+
 # 개요
 
 ​	본문은 아래의 포스트와 내용이 이어지며, 다음 포스트의 내용을 부가적인 설명 없이 서술한다.

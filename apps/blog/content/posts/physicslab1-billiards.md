@@ -1,10 +1,10 @@
 ---
 title: "물리학실험1 당구의 역학"
-slug: physicslab1-billiards
-date: "2021-04-02T15:42:43.000Z"
+date: "2021-04-03 00:42:43"
 categories: ["Study","PhysicsLab","PhysicsLab1"]
 tags: ["물리학실험","물리학실험1","보고서"]
 ---
+
 # Prelab
 
 ## 탄성 충돌과 운동량 보존 법칙

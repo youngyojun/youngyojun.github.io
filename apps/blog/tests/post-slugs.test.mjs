@@ -2,14 +2,9 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { validatePostSlugs } from '../lib/slugs.ts';
 
-test('accepts explicit lowercase slugs with meaningful years and sequence numbers', () => {
-  assert.doesNotThrow(() => validatePostSlugs([
-    ['renamed-source.md', 'hunt-szymanski'],
-    ['practice.md', 'icpc-wf-practice-2021-02-01'],
-    ['series.md', 'generating-functions-1'],
-    ['contest.md', '2025-icpc-seoul-finals-solutions'],
-    ['short.md', 'a'],
-  ]));
+test('accepts filename identifiers with meaningful years and sequence numbers', () => {
+  const filenames = ['hunt-szymanski.md', 'icpc-wf-practice-2021-02-01.md', 'generating-functions-1.md', '2025-icpc-seoul-finals-solutions.md', 'a.md'];
+  assert.doesNotThrow(() => validatePostSlugs(filenames.map(name => [name, name.slice(0, -3)])));
 });
 
 test('rejects missing and non-string slugs and identifies the source', () => {

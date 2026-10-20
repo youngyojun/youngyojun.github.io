@@ -1,10 +1,10 @@
 ---
 title: "물리학실험1 시지프스의 고민"
-slug: physicslab1-sisyphus
-date: "2021-03-21T04:01:19.000Z"
+date: "2021-03-21 13:01:19"
 categories: ["Study","PhysicsLab","PhysicsLab1"]
 tags: ["물리학실험","물리학실험1","보고서"]
 ---
+
 # Prelab
 
 ## 에너지 보존 법칙

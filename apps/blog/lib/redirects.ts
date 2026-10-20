@@ -2,7 +2,7 @@ import aliases from './post-aliases.json';
 import { posts } from './posts';
 import { paginate } from './pagination';
 
-const slugs = new Set(posts.map(post => post.data.slug));
+const slugs = new Set(posts.map(post => post.slug));
 export const redirects = [
   ...Object.entries(aliases).map(([slug, from]) => {
     if (!slugs.has(slug)) throw new Error(`Redirect has no article: ${slug}`);

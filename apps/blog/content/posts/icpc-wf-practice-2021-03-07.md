@@ -1,10 +1,10 @@
 ---
 title: "ICPC WF 연습 (3/7)"
-slug: icpc-wf-practice-2021-03-07
-date: "2021-03-08T14:54:35.000Z"
+date: "2021-03-08 23:54:35"
 categories: ["ICPC","Practice"]
 tags: ["ICPC","연습"]
 ---
+
 ### [Flip Flow](https://www.acmicpc.net/problem/20906)
 
 모래시계를 시뮬레이션 하는 문제이다.

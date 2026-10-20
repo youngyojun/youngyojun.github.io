@@ -10,7 +10,7 @@ export function GET({ site }: APIContext) {
   const latest = posts.slice(0, 10);
   const entries = latest.map(post => {
     const url = new URL(post.url, site).href;
-    const old = (aliases as Partial<Record<string, string>>)[post.data.slug];
+    const old = (aliases as Partial<Record<string, string>>)[post.slug];
     const id = new URL(old ?? post.url, site).href.slice(0, -1);
     const html = post.html.replace(/\b(href|src)=(['"])(\/[^'"]*)\2/g, (_, attr, quote, path) => `${attr}=${quote}${new URL(path, site).href}${quote}`);
     return `<entry><title>${escapeXml(post.data.title)}</title><id>${escapeXml(id)}</id><link href="${url}"/><published>${post.data.date}</published><updated>${post.data.date}</updated>${author}<summary>${escapeXml(post.description)}</summary><content type="html" xml:base="${url}">${escapeXml(html)}</content>${post.data.tags.map(tag => `<category term="${escapeXml(tag)}"/>`).join('')}</entry>`;
