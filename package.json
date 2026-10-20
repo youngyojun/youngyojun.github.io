@@ -3,13 +3,14 @@
   "private": true,
   "packageManager": "pnpm@10.33.4",
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=24.0.0"
   },
   "scripts": {
     "dev": "corepack pnpm --filter @youngyojun/blog dev",
     "check": "corepack pnpm -r check",
-    "test": "corepack pnpm -r test",
-    "build": "corepack pnpm -r build",
-    "preview": "corepack pnpm --filter @youngyojun/blog preview"
+    "test": "corepack pnpm -r test && node --test scripts/*.test.mjs",
+    "build": "corepack pnpm -r build && node scripts/assemble-site.mjs",
+    "preview": "node apps/blog/preview.mjs",
+    "test:e2e": "corepack pnpm --filter @youngyojun/blog test:e2e"
   }
 }

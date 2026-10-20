@@ -1,0 +1,24 @@
+---
+import { render } from 'astro:content';
+import { posts } from '../../../lib/posts';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+export function getStaticPaths() {
+  return posts.map(post => ({ params: { slug: post.data.slug }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<BaseLayout title={post.data.title} description={post.description} publishedAt={post.data.date}>
+  <article>
+    <header class="article-header">
+      <time datetime={post.data.date}>{post.displayDate}</time>
+      <h1>{post.data.title}</h1>
+      <dl class="post-meta">
+        {post.data.categories.length > 0 && <div><dt>분류</dt><dd>{post.data.categories.map(category => <a href={`/blog/categories/${encodeURIComponent(category)}/`}>{category}</a>)}</dd></div>}
+        {post.data.tags.length > 0 && <div><dt>태그</dt><dd>{post.data.tags.map(tag => <a href={`/blog/tags/${encodeURIComponent(tag)}/`}># {tag}</a>)}</dd></div>}
+      </dl>
+    </header>
+    <div class="prose"><Content /></div>
+    <footer class="article-footer"><a href="/blog/">← 글 목록으로</a></footer>
+  </article>
+</BaseLayout>

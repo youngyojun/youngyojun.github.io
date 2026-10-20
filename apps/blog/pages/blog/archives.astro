@@ -1,0 +1,10 @@
+---
+import { posts } from '../../lib/posts';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+const years = [...new Set(posts.map(post => post.data.date.slice(0, 4)))];
+---
+<BaseLayout title="아카이브">
+  <header class="page-header"><h1>아카이브</h1><p>{posts.length}개의 글</p></header>
+  {years.map(year => <section class="archive-year" aria-labelledby={`year-${year}`}><h2 id={`year-${year}`}>{year}</h2><PostList posts={posts.filter(post => post.data.date.startsWith(year))} /></section>)}
+</BaseLayout>

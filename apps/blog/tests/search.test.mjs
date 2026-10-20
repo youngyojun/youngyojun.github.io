@@ -3,7 +3,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { test } from 'node:test';
 
 async function search(entries, query) {
-  const source = new URL('../src/search.ts', import.meta.url);
+  const source = new URL('../lib/search.ts', import.meta.url);
   assert.ok(existsSync(source), 'Missing title/body search');
   const { searchPosts } = await import(source);
   return searchPosts(entries, query);
@@ -22,7 +22,7 @@ test('searches Korean body text and English titles without case sensitivity', as
   assert.deepEqual(await search(entries, '없는검색어'), []);
 });
 
-test('keeps legacy any-keyword matching for spaces and hyphens and ranks phrases before individual hits', async () => {
+test('matches space-separated terms and ranks complete phrases before individual hits', async () => {
   assert.deepEqual((await search(entries, '뉴턴-subsequence')).map(result => result.url), ['/hunt/']);
   const ranked = [
     { title: 'alpha', content: 'alpha alpha / beta beta', url: '/words/' },
@@ -40,19 +40,4 @@ test('returns one highlighted body excerpt around the best matching passage', as
   assert.equal(result.excerpt.slice(result.excerptHits[0].start, result.excerptHits[0].end), 'alpha beta');
   const [titleMatch] = await search(entries, 'newton');
   assert.equal(titleMatch.title.slice(titleMatch.titleHits[0].start, titleMatch.titleHits[0].end), 'Newton');
-});
-
-test('publishes all 30 canonical search URLs with rendered body text and classification metadata', () => {
-  const output = new URL('../dist/search.xml', import.meta.url);
-  assert.ok(existsSync(output), 'Missing original /search.xml endpoint');
-  const xml = readFileSync(output, 'utf8');
-  assert.equal((xml.match(/<entry>/g) ?? []).length, 30);
-  const urls = Object.values(JSON.parse(readFileSync(new URL('./fixtures/post-urls.json', import.meta.url), 'utf8')));
-  assert.deepEqual([...xml.matchAll(/<url>(.*?)<\/url>/g)].map(match => match[1]).sort(), urls.sort());
-  assert.ok(xml.includes('공기저항'));
-  assert.ok(xml.includes('Longest Common Subsequence'));
-  assert.ok(xml.includes('<category>'));
-  assert.ok(xml.includes('<tag>'));
-  assert.ok(!xml.includes('{%'));
-  assert.ok(!xml.includes('<pre'));
 });

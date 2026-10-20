@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { validatePostSlugs } from '../src/post-slugs.ts';
+import { validatePostSlugs } from '../lib/slugs.ts';
 
 test('accepts explicit lowercase slugs with meaningful years and sequence numbers', () => {
   assert.doesNotThrow(() => validatePostSlugs([

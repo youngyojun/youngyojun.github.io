@@ -1,8 +1,0 @@
-import type { APIContext } from 'astro';
-
-export function GET({ site }: APIContext) {
-  if (!site) throw new Error('robots.txt requires a configured site URL');
-  return new Response(`Sitemap: ${new URL('/sitemap.xml', site).href}\n`, {
-    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
-  });
-}

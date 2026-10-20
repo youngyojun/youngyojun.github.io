@@ -1,0 +1,55 @@
+---
+import '@youngyojun/design-tokens/tokens.css';
+import 'katex/dist/katex.min.css';
+import '../styles/site.css';
+import Search from '../components/Search.astro';
+import { site } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+  publishedAt?: string;
+}
+
+const { title, description = site.description, noindex = false, publishedAt } = Astro.props;
+const pageTitle = title ? `${title} | ${site.title}` : site.title;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const navigation = [
+  [site.blog, '글'],
+  ['/blog/archives/', '아카이브'],
+  ['/blog/tags/', '태그'],
+  ['/blog/categories/', '분류'],
+  ['/blog/about/', '소개'],
+];
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <meta property="og:title" content={title ?? site.title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={publishedAt ? 'article' : 'website'} />
+    <meta property="og:url" content={canonical} />
+    {publishedAt && <meta property="article:published_time" content={publishedAt} />}
+    <link rel="alternate" type="application/atom+xml" title={site.title} href="/atom.xml" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+    <header class="site-header">
+      <a class="brand" href={site.blog}>{site.title}</a>
+      <p class="site-subtitle">{site.description}</p>
+      <nav class="site-nav" aria-label="블로그">
+        {navigation.map(([url, label]) => <a href={url} aria-current={Astro.url.pathname === url ? 'page' : undefined}>{label}</a>)}
+        <Search />
+      </nav>
+    </header>
+    <main id="main" tabindex="-1"><slot /></main>
+    <footer class="site-footer"><span>{site.author}</span><a href="/atom.xml">Atom</a></footer>
+  </body>
+</html>

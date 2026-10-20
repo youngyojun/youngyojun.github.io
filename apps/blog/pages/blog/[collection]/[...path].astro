@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostIndex from '../../../components/PostIndex.astro';
+import { groupPosts } from '../../../lib/posts';
+import { paginate } from '../../../lib/pagination';
+
+export function getStaticPaths() {
+  return (['tags', 'categories'] as const).flatMap(collection => {
+    const groups = groupPosts(collection);
+    const index = { params: { collection, path: undefined }, props: { collection, groups, group: undefined, page: undefined, pages: undefined } };
+    const details = groups.flatMap(group => {
+      const pages = paginate(group.posts, group.url);
+      return pages.map(page => ({
+        params: { collection, path: `${group.name}${page.number > 1 ? `/page/${page.number}` : ''}` },
+        props: { collection, groups, group, page, pages },
+      }));
+    });
+    return [index, ...details];
+  });
+}
+const { collection, groups, group, page, pages } = Astro.props;
+const label = collection === 'tags' ? '태그' : '분류';
+---
+{group && page && pages ? <PostIndex title={group.name} page={page} pages={pages} total={group.posts.length} /> : <BaseLayout title={label}>
+  <header class="page-header"><h1>{label}</h1><p>관심 있는 주제로 글을 찾아보세요.</p></header>
+  <ul class="taxonomy-list">{groups.map(item => <li><a href={item.url}>{item.name}<span>{item.posts.length}</span></a></li>)}</ul>
+</BaseLayout>}
