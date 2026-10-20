@@ -3,9 +3,10 @@ import { mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
-import { assembleSite } from './assemble-site.mjs';
+import { assembleSite } from './assemble-site.ts';
 
 function fixture() {
+  // Keep test file operations separate from real app builds and deployment output.
   const root = mkdtempSync(join(tmpdir(), 'assemble-site-'));
   const source = join(root, 'blog');
   const output = join(root, 'dist');

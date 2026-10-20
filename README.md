@@ -19,7 +19,7 @@ corepack pnpm dev --host 127.0.0.1 --port 4323
 | 명령 | 동작 |
 | --- | --- |
 | `corepack pnpm dev` | 블로그 개발 서버 |
-| `corepack pnpm check` | 블로그·공용 UI 타입 검사 |
+| `corepack pnpm check` | 블로그·공용 UI·저장소 스크립트 타입 검사 |
 | `corepack pnpm test` | 단위 테스트, 블로그 빌드·내부 링크·콘텐츠·자산 검사, 산출물 조립 테스트 |
 | `corepack pnpm build` | 독립 앱 빌드 후 루트 `dist/`로 조립 |
 | `corepack pnpm preview` | 조립된 `dist/`를 `http://localhost:4325/`에서 제공 |
@@ -130,7 +130,7 @@ Astro 공식 Unified processor와 remark-math·rehype-katex로 빌드 시 수식
 
 ## CI·배포 준비
 
-`corepack pnpm build`는 현재 `apps/blog/dist`를 루트 `dist`에 조립하고 `.nojekyll`을 추가합니다. `scripts/assemble-site.mjs`는 원본과 출력의 경로 중첩·심볼릭 링크·파일 충돌을 검출하며, 충돌이 있으면 기존 결과를 건드리기 전에 실패합니다. 배포 대상은 루트 `dist/`입니다. 산출물과 브라우저 테스트 결과는 Git에 넣지 않습니다.
+`corepack pnpm build`는 현재 `apps/blog/dist`를 루트 `dist`에 조립하고 `.nojekyll`을 추가합니다. `scripts/assemble-site.ts`는 원본과 출력의 경로 중첩·심볼릭 링크·파일 충돌을 검출하며, 충돌이 있으면 기존 결과를 건드리기 전에 실패합니다. 배포 대상은 루트 `dist/`입니다. 산출물과 브라우저 테스트 결과는 Git에 넣지 않습니다.
 
 `.github/workflows/ci.yml`은 고정된 Node/pnpm으로 설치·타입·테스트·조립·브라우저 검증을 실행하고 `static-site` artifact를 업로드합니다. push·pull request·배포 옵션 없는 수동 실행에서는 검증만 합니다. 수동 실행의 `deploy`를 선택하고 브랜치가 `master`인 경우, 같은 실행에서 검증한 `dist/`를 Pages artifact로 포장하고 별도 배포 job이 게시합니다. 검증 실패 시 배포하지 않습니다. Pages 쓰기·OIDC 권한은 배포 job에만 부여합니다.
 

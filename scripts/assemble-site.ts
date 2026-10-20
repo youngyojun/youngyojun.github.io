@@ -2,11 +2,18 @@ import { copyFileSync, existsSync, lstatSync, mkdirSync, readdirSync, rmSync, wr
 import { basename, dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export function assembleSite(sources, destination) {
+/**
+ * Merge prebuilt app directories into a clean deployment directory, preserving URL paths.
+ * This only assembles files; it does not compile apps or publish the site.
+ * Inputs and path collisions are checked before the previous output is removed.
+ * Returns the number of input files copied into the output.
+ */
+export function assembleSite(sources: readonly string[], destination: string): number {
   const output = resolve(destination);
   if (basename(output) !== 'dist') throw new Error('The output directory must be named dist');
   if (existsSync(output) && lstatSync(output).isSymbolicLink()) throw new Error('Output must not be a symlink');
-  const files = new Map();
+  // Build the complete file list before making any changes to the output.
+  const files = new Map<string, string>();
   for (const source of sources) {
     const root = resolve(source);
     if (root === output || root.startsWith(output + sep) || output.startsWith(root + sep)) throw new Error('Source and output directories must not overlap');
@@ -27,6 +34,7 @@ export function assembleSite(sources, destination) {
       parent = dirname(parent);
     }
   }
+  // Recreate the output so removed app files cannot survive in a later deployment.
   rmSync(output, { recursive: true, force: true });
   mkdirSync(output, { recursive: true });
   for (const [name, source] of files) {
@@ -39,6 +47,7 @@ export function assembleSite(sources, destination) {
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  // Register app builds here; each must emit paths relative to the site root.
   const count = assembleSite([fileURLToPath(new URL('../apps/blog/dist/', import.meta.url))], fileURLToPath(new URL('../dist/', import.meta.url)));
   console.log(`Assembled ${count} files into dist/`);
 }
