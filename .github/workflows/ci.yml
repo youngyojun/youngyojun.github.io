@@ -4,13 +4,18 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+    inputs:
+      deploy:
+        description: Publish the verified site to GitHub Pages (master only)
+        type: boolean
+        default: false
 
 permissions:
   contents: read
 
 concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  group: ci-${{ github.ref }}-${{ inputs.deploy && 'deploy' || 'verify' }}
+  cancel-in-progress: ${{ !inputs.deploy }}
 
 jobs:
   verify:
@@ -36,3 +41,29 @@ jobs:
           path: dist/
           include-hidden-files: true
           retention-days: 7
+          overwrite: true
+      - name: Package verified site for Pages
+        if: github.event_name == 'workflow_dispatch' && inputs.deploy && github.ref == 'refs/heads/master'
+        uses: actions/upload-pages-artifact@v5.0.0
+        with:
+          name: github-pages-${{ github.run_attempt }}
+          path: dist/
+          include-hidden-files: true
+
+  deploy:
+    if: github.event_name == 'workflow_dispatch' && inputs.deploy && github.ref == 'refs/heads/master'
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy verified site
+        id: deployment
+        uses: actions/deploy-pages@v5.0.1
+        with:
+          artifact_name: github-pages-${{ github.run_attempt }}

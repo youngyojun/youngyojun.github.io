@@ -2,7 +2,7 @@
 
 Astro 블로그와 독립 앱을 관리하는 pnpm monorepo입니다. 현재 구현된 앱은 `apps/blog`이며, 메인 사이트와 다른 앱은 실제 구현 시 `apps/`에 추가합니다.
 
-Jekyll 빌드와 이전 테마의 렌더링 코드는 제거했습니다. 운영 GitHub Pages 설정은 아직 전환하지 않았습니다. 기존 Jekyll 방식으로 이 변경을 배포하지 마세요. CI는 검증과 정적 산출물 업로드만 수행하며 사이트를 게시하지 않습니다.
+Jekyll 빌드와 이전 테마의 렌더링 코드는 제거했습니다. 운영 GitHub Pages 설정은 아직 전환하지 않았습니다. 기존 Jekyll 방식으로 이 변경을 배포하지 마세요. 일반 CI는 검증과 정적 산출물 업로드만 수행합니다. 실제 게시는 `master`에서 수동으로 배포 옵션을 선택한 경우에만 실행됩니다.
 
 ## 개발
 
@@ -133,6 +133,24 @@ Astro 공식 Unified processor와 remark-math·rehype-katex로 빌드 시 수식
 
 `corepack pnpm build`는 현재 `apps/blog/dist`를 루트 `dist`에 조립하고 `.nojekyll`을 추가합니다. `scripts/assemble-site.mjs`는 원본과 출력의 경로 중첩·심볼릭 링크·파일 충돌을 검출하며, 충돌이 있으면 기존 결과를 건드리기 전에 실패합니다. 배포 대상은 루트 `dist/`입니다. 산출물과 브라우저 테스트 결과는 Git에 넣지 않습니다.
 
-`.github/workflows/ci.yml`은 고정된 Node/pnpm으로 설치·타입·테스트·조립·브라우저 검증을 실행하고 `static-site` artifact를 업로드합니다. 배포 권한과 게시 단계는 포함하지 않습니다. Actions 자체는 로컬 검증 후에도 원격 첫 실행을 확인해야 합니다.
+`.github/workflows/ci.yml`은 고정된 Node/pnpm으로 설치·타입·테스트·조립·브라우저 검증을 실행하고 `static-site` artifact를 업로드합니다. push·pull request·배포 옵션 없는 수동 실행에서는 검증만 합니다. 수동 실행의 `deploy`를 선택하고 브랜치가 `master`인 경우, 같은 실행에서 검증한 `dist/`를 Pages artifact로 포장하고 별도 배포 job이 게시합니다. 검증 실패 시 배포하지 않습니다. Pages 쓰기·OIDC 권한은 배포 job에만 부여합니다.
 
-운영 전환 시에는 실제 GitHub Pages 설정을 확인하고, Jekyll 소스 빌드 대신 검증한 정적 artifact를 게시하도록 전환해야 합니다. 이전 정상 산출물을 확보한 뒤 새 버전에 문제가 있으면 이전 산출물을 다시 게시하는 절차를 준비합니다. 현재 운영 설정 변경·push·배포는 수행하지 않았습니다.
+### 첫 운영 전환
+
+2026-10-20 읽기 전용 조회 기준으로 운영 주소는 `https://youngyojun.github.io/`, Pages source는 `master`의 `/`, build type은 `legacy`였습니다. custom domain은 없고 HTTPS는 활성화되어 있습니다. 마지막 성공한 Pages 빌드의 commit은 `e580ae2dd9d3ab617177313e7380f2ab3b7fa953`입니다. 아직 새 CI를 원격에서 실행하거나 운영 설정을 변경하지 않았습니다.
+
+1. 저장소의 **Settings → Pages → Build and deployment → Source**를 **GitHub Actions**로 전환합니다. 이 전환은 기존 Jekyll 자동 게시를 중단시키므로 새 소스를 push하기 전에 합니다.
+2. **Settings → Environments → github-pages**에서 배포 가능한 브랜치를 `master`로 제한합니다. 필요하면 승인자도 지정합니다.
+3. 변경을 commit·push한 뒤 일반 **CI**가 성공했는지 확인하고, `static-site` artifact를 내려받아 검사합니다.
+4. **Actions → CI → Run workflow**에서 브랜치 `master`와 `deploy` 옵션을 선택합니다. 다시 수행한 검증을 모두 통과하면 배포 job이 실행됩니다. 다른 브랜치에서는 배포를 건너뜁니다.
+5. 운영 `/blog/`, 과거 글 주소, 검색, 그림·다운로드, `/atom.xml`, `/sitemap.xml`, 없는 주소의 404를 확인합니다. 새로고침과 모바일 화면도 확인합니다.
+
+GitHub Pages에는 빌드 소스가 아니라 조립한 정적 `dist/`를 게시합니다. 수동 배포 방식과 권한·artifact 구성은 [GitHub 공식 문서](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)를 따릅니다. 첫 원격 실행과 실제 게시 동작은 운영 전환 때 확인해야 합니다.
+
+### 복구
+
+새 방식의 정상 배포 이후에는 해당 실행의 commit SHA와 `static-site` artifact를 보관합니다. 문제가 생기면 **마지막으로 정상 배포된 실행**을 열고 **Re-run all jobs**로 같은 commit을 다시 검증·빌드·배포할 수 있습니다. [GitHub의 재실행](https://github.com/github/docs/blob/main/content/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs.md)은 최초 실행 후 30일 이내에 가능합니다. 기간이 지난 경우 정상 버전의 소스를 `master`의 새 복구 commit으로 적용한 뒤 수동 배포합니다.
+
+배포 옵션 없이 실행했던 CI를 재실행해도 게시되지는 않습니다. 재실행 시 `static-site`는 교체하며, Pages artifact는 실행 시도별 이름을 사용해 이전 업로드와 충돌하지 않습니다. `static-site` 보존 기간은 7일이므로 장기 보관이 필요하면 별도로 내려받습니다. 복구할 때에는 배포 job만 재실행하지 말고 **전체 job을 재실행**하여 새 시도에 필요한 artifact를 다시 생성합니다.
+
+첫 Astro 전환 자체를 되돌려야 하면, 위의 기존 정상 commit에서 복구 브랜치를 만들고 Pages source를 그 브랜치의 `/`를 사용하는 **Deploy from a branch**로 되돌립니다. 새 코드가 있는 `master`를 Jekyll source로 선택하지 않습니다. 이 경로는 기존 Pages/Jekyll 빌드에 다시 의존하므로 전환 전에 GitHub의 지원 여부와 해당 commit의 빌드 가능성을 확인해야 합니다. 복구도 실제 운영 게시 작업이므로 명시적으로 결정한 뒤 실행합니다.
