@@ -53,7 +53,6 @@ packages/
   design-tokens/        # 앱 공통 CSS 변수
   ui/                   # 앱 공통 React 컴포넌트
 scripts/                # 빌드 결과 조립
-third-party/next/       # 보관한 원본 테마 설명서
 ```
 
 `astro.config.mjs`의 `srcDir: '.'` 설정으로 앱 루트의 디렉터리를 사용합니다. 작성 원문과 URL 코드는 분리되어 있습니다. `pages/`는 콘텐츠를 조회해 화면에 연결하며 Markdown 원문을 보관하지 않습니다.
