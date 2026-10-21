@@ -1,3 +1,10 @@
 packages:
   - apps/*
   - packages/*
+
+catalog:
+  katex: 0.19.0
+
+overrides:
+  # shortcut: rehype-katex still targets KaTeX 0.16; remove this override once it supports the catalog release.
+  katex: 'catalog:'
