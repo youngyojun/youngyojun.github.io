@@ -5,11 +5,13 @@ export default defineConfig({
   fullyParallel: true,
   workers: process.env.CI ? 2 : 3,
   retries: process.env.CI ? 1 : 0,
-  reporter: 'list',
+  reporter: [['list'], ['html', { open: 'never' }]],
   use: { baseURL: 'http://127.0.0.1:4325', trace: 'retain-on-failure', screenshot: 'only-on-failure' },
   projects: [
-    { name: 'desktop', use: { viewport: { width: 1280, height: 900 } } },
-    { name: 'mobile', use: { viewport: { width: 375, height: 812 } } },
+    { name: 'chromium-desktop', use: { browserName: 'chromium', viewport: { width: 1280, height: 900 } } },
+    { name: 'chromium-mobile', use: { browserName: 'chromium', viewport: { width: 375, height: 812 }, isMobile: true, hasTouch: true } },
+    { name: 'webkit-desktop', use: { browserName: 'webkit', viewport: { width: 1280, height: 900 } } },
+    { name: 'webkit-mobile', use: { browserName: 'webkit', viewport: { width: 375, height: 812 }, isMobile: true, hasTouch: true } },
   ],
   webServer: {
     command: 'node preview.mjs',

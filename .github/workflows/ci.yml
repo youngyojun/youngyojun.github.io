@@ -33,8 +33,20 @@ jobs:
       - run: corepack pnpm check
       - run: corepack pnpm test
       - run: corepack pnpm build
-      - run: corepack pnpm --filter @youngyojun/blog exec playwright install --with-deps chromium
-      - run: corepack pnpm test:e2e
+      - run: corepack pnpm --filter @youngyojun/blog exec playwright install --with-deps chromium webkit
+      - name: Test built site in browsers
+        id: browser-tests
+        run: corepack pnpm test:e2e
+      - name: Upload browser failure report
+        if: failure() && steps.browser-tests.outcome == 'failure'
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: browser-failures
+          path: |
+            apps/blog/playwright-report/
+            apps/blog/test-results/
+          retention-days: 7
+          overwrite: true
       - uses: actions/upload-artifact@v7.0.2
         with:
           name: static-site

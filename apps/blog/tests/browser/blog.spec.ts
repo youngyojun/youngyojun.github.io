@@ -29,7 +29,7 @@ test('renders local figures, mathcal, code and Korean content without client mat
   expect(errors).toEqual([]);
 });
 
-test('searches Korean and English, highlights text and restores keyboard focus', async ({ page }) => {
+test('searches Korean and English, highlights text and restores focus after closing', async ({ page }) => {
   await page.goto('/blog/');
   const toggle = page.getByRole('button', { name: '검색', exact: true });
   await toggle.focus();
@@ -48,6 +48,10 @@ test('searches Korean and English, highlights text and restores keyboard focus',
   await toggle.click();
   await expect(input).toHaveValue('');
   await page.getByRole('button', { name: '검색 닫기' }).click();
+  await expect(toggle).toBeFocused();
+  await toggle.click();
+  await page.mouse.click(5, 5);
+  await expect(page.getByRole('dialog')).not.toBeVisible();
   await expect(toggle).toBeFocused();
 });
 

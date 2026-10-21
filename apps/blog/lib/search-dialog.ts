@@ -77,6 +77,8 @@ dialog.addEventListener('close', () => {
   input.value = '';
   results.replaceChildren();
   status.textContent = '검색어를 입력하세요.';
+  // WebKit does not focus buttons on pointer activation, so native dialog restoration misses the opener.
+  toggle.focus();
 });
 dialog.addEventListener('click', event => {
   if (event.target !== dialog) return;

@@ -2,8 +2,6 @@ node_modules
 _site
 .DS_Store
 dist/
-# Original vendor distributions are source assets, not workspace build output.
-!apps/blog/public/assets/lib/**/dist/
 .astro/
 .sass-cache/
 .pnpm-store/

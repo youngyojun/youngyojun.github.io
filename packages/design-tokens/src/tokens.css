@@ -1,12 +1,12 @@
 :root {
   color-scheme: light;
   --color-background: #fff;
-  --color-surface: #f7f7f7;
-  --color-text: #555;
+  --color-surface: #f6f6f6;
+  --color-text: #414141;
   --color-muted: #707070;
   --color-heading: #222;
-  --color-border: #ddd;
-  --font-body: Lato, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-  --font-code: Menlo, Consolas, monospace;
-  --content-width: 700px;
+  --color-border: #e5e5e5;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-code: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --content-width: 736px;
 }

@@ -23,17 +23,19 @@ corepack pnpm dev --host 127.0.0.1 --port 4323
 | `corepack pnpm test` | 단위 테스트, 블로그 빌드·내부 링크·콘텐츠·자산 검사, 산출물 조립 테스트 |
 | `corepack pnpm build` | 독립 앱 빌드 후 루트 `dist/`로 조립 |
 | `corepack pnpm preview` | 조립된 `dist/`를 `http://localhost:4325/`에서 제공 |
-| `corepack pnpm test:e2e` | 조립된 결과의 데스크톱·모바일 브라우저 검증 |
+| `corepack pnpm test:e2e` | 조립된 결과의 Chromium·WebKit 데스크톱·모바일 검증 |
 
 브라우저 검증 전에 한 번 설치합니다.
 
 ```sh
-corepack pnpm --filter @youngyojun/blog exec playwright install chromium
+corepack pnpm --filter @youngyojun/blog exec playwright install chromium webkit
 corepack pnpm build
 corepack pnpm test:e2e
 ```
 
-Playwright가 설치한 전용 Chromium만 사용합니다. 개인 Chrome 실행 파일·프로필·기존 CDP 연결은 테스트에 사용하지 않습니다. 각 테스트는 독립 브라우저 컨텍스트를 사용하고 종료 시 정리합니다.
+Playwright가 설치한 전용 Chromium과 WebKit만 사용합니다. 개인 Chrome·Safari 실행 파일·프로필·기존 CDP 연결은 테스트에 사용하지 않습니다. 각 테스트는 독립 브라우저 컨텍스트를 사용하고 종료 시 정리합니다. 모바일 프로젝트는 터치와 모바일 viewport를 사용합니다. WebKit은 Safari 계열 엔진의 호환성을 확인하지만 실제 Safari 앱이나 iPhone 기기 검증을 대신하지 않습니다. Firefox는 현재 검사 대상이 아닙니다. [브라우저별 프로젝트](https://playwright.dev/docs/test-projects)는 같은 동작 검사를 각 환경에서 실행합니다.
+
+실패하면 `apps/blog/playwright-report/`에 HTML 보고서, `apps/blog/test-results/`에 실패 화면과 trace가 남습니다. `corepack pnpm --filter @youngyojun/blog exec playwright show-report`로 보고서를 열 수 있습니다. 이 명령은 개인 브라우저를 열 수 있으므로 에이전트는 자동 실행하지 않습니다.
 
 ## 저장소 구조
 
@@ -101,7 +103,7 @@ Astro 공식 Unified processor와 remark-math·rehype-katex로 빌드 시 수식
 
 기존 원본은 `public/assets/`, `public/downloadable_files/`로 이동했고 공개 주소 `/assets/…`, `/downloadable_files/…`는 유지합니다. 원본 그림·PDF·DOCX·C++ 파일을 변환하거나 DOCX 내부 이미지를 추출하지 않습니다. 기존 만료된 외부 Googleusercontent 이미지 링크는 사용자의 결정대로 유지합니다.
 
-원래 라이브러리 소스와 라이선스도 `public/assets/lib/`에 보존합니다. 새 화면에서는 이 테마 라이브러리를 실행하지 않습니다. 제외하기로 한 NexT/FastClick/jQuery Lazy Load 설명서의 공개 HTML 페이지는 생성하지 않습니다.
+사용하지 않는 과거 NexT 테마의 CSS·JavaScript·라이브러리·장식 이미지는 제거했습니다. `public/assets/`에는 본문 원본 그림만 남기고, `public/downloadable_files/`의 첨부파일은 참조 여부와 관계없이 모두 보존합니다. 과거 테마 소스는 Git history에서 확인할 수 있습니다.
 
 ## URL·검색·피드
 
@@ -134,6 +136,10 @@ Astro 공식 Unified processor와 remark-math·rehype-katex로 빌드 시 수식
 `corepack pnpm build`는 현재 `apps/blog/dist`를 루트 `dist`에 조립하고 `.nojekyll`을 추가합니다. `scripts/assemble-site.ts`는 원본과 출력의 경로 중첩·심볼릭 링크·파일 충돌을 검출하며, 충돌이 있으면 기존 결과를 건드리기 전에 실패합니다. 배포 대상은 루트 `dist/`입니다. 산출물과 브라우저 테스트 결과는 Git에 넣지 않습니다.
 
 `.github/workflows/ci.yml`은 고정된 Node/pnpm으로 설치·타입·테스트·조립·브라우저 검증을 실행하고 `static-site` artifact를 업로드합니다. push·pull request·배포 옵션 없는 수동 실행에서는 검증만 합니다. 수동 실행의 `deploy`를 선택하고 브랜치가 `master`인 경우, 같은 실행에서 검증한 `dist/`를 Pages artifact로 포장하고 별도 배포 job이 게시합니다. 검증 실패 시 배포하지 않습니다. Pages 쓰기·OIDC 권한은 배포 job에만 부여합니다.
+
+브라우저 검사 실패 시 `browser-failures` artifact에 HTML 보고서·실패 화면·trace를 7일간 보관합니다. 성공한 실행의 `static-site`도 7일간 보관합니다.
+
+`.github/dependabot.yml`은 매주 월요일 오전 9시 KST 일정으로 pnpm workspace 패키지와 GitHub Actions의 업데이트를 확인합니다. minor·patch 업데이트는 ecosystem별로 묶고 major 업데이트는 별도 PR로 제안합니다. [Dependabot 설정](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference)에 따라 업데이트 PR을 만들며 자동 병합·배포하지 않습니다. PR의 변경 내용과 CI 결과를 확인한 뒤 반영합니다. Node와 pnpm 자체의 버전은 별도로 관리합니다.
 
 ### 첫 운영 전환
 
