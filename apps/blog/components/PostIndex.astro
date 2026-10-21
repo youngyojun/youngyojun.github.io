@@ -15,9 +15,9 @@ const { title = '글 목록', page, pages, total } = Astro.props;
   <section class="post-previews" aria-label="글 목록">
     {page.items.map(post => <article>
       <time datetime={post.data.date}>{post.displayDate}</time>
-      <h2><a href={post.url}>{post.data.title}</a></h2>
+      <h2><a href={post.url} set:html={post.titleHtml} /></h2>
       <p>{post.description}</p>
-      <a class="read-more" href={post.url} aria-label={`${post.data.title} 읽기`}>글 읽기 <span aria-hidden="true">→</span></a>
+      <a class="read-more" href={post.url} aria-label={`${post.title} 읽기`}>글 읽기 <span aria-hidden="true">→</span></a>
     </article>)}
     {!page.items.length && <p>아직 작성한 글이 없습니다.</p>}
   </section>

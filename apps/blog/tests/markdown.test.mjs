@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
 import { markdownOptions } from '../lib/markdown.ts';
+import { plainText } from '../lib/text.ts';
 
 const renderer = await createMarkdownProcessor(markdownOptions);
 
@@ -41,4 +42,30 @@ const char* latex = "\\mathcal{O}";
   assert.ok(code.includes('<figcaption>그림 설명</figcaption>'));
   assert.ok(code.includes('data-language="cpp"'));
   assert.ok(!code.includes('katex-error'));
+});
+
+test('renders math inside HTML captions and headings while preserving attributes and literal code', async () => {
+  const { code } = await renderer.render(String.raw`#### Lemma 3. $D _{*, *}$의 행의 단조성
+
+<figure><figcaption style="text-align: center;"><b>그림 $X$</b>: $D _{i, *}$ &amp; 설명 <code>$literal$</code></figcaption></figure>
+
+<p style="text-align: center;">두 문자열 $X$, $Y$에 대하여, $x _i = y _j$인 모든 위치쌍 $(i, j)$</p>`);
+  const caption = code.match(/<figcaption\b[^>]*>([\s\S]*?)<\/figcaption>/)?.[1];
+  assert.ok(caption?.includes('class="katex"'), caption);
+  assert.ok(!caption.includes('$X$'));
+  assert.ok(!caption.includes('$D'));
+  assert.ok(plainText(caption).includes('& 설명'));
+  assert.ok(caption.includes('<code>$literal$</code>'));
+  assert.match(code, /<h4\b[^>]*>Lemma 3\. <span class="katex"/);
+  assert.match(code, /<p style="text-align: center;">두 문자열 <span class="katex"/);
+  await assert.rejects(renderer.render(String.raw`<figcaption>$\DefinitelyUnsupportedMathCommand$</figcaption>`), /Could not render math|Undefined control sequence/);
+});
+
+test('leaves escaped Markdown dollars and code literal when expanding HTML math', async () => {
+  const { code } = await renderer.render(String.raw`Escaped \$x\$ and \`$code$\`.
+
+<p title="$attribute$">Escaped \$y\$ and <code>$code$</code>, but $z$ is math.</p>`.replaceAll('\\`', '`'));
+  assert.equal((code.match(/class="katex"/g) ?? []).length, 1);
+  assert.ok(plainText(code).includes('Escaped $x$ and $code$.'));
+  assert.ok(code.includes('title="$attribute$"'));
 });

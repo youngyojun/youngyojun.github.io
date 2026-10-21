@@ -9,11 +9,11 @@ export function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 ---
-<BaseLayout title={post.data.title} description={post.description} publishedAt={post.data.date}>
+<BaseLayout title={post.title} description={post.description} publishedAt={post.data.date}>
   <article>
     <header class="article-header">
       <time datetime={post.data.date}>{post.displayDate}</time>
-      <h1>{post.data.title}</h1>
+      <h1 set:html={post.titleHtml} />
       <dl class="post-meta">
         {post.data.categories.length > 0 && <div><dt>분류</dt><dd>{post.data.categories.map(category => <a href={blogPath(`categories/${encodeURIComponent(category)}/`)}>{category}</a>)}</dd></div>}
         {post.data.tags.length > 0 && <div><dt>태그</dt><dd>{post.data.tags.map(tag => <a href={blogPath(`tags/${encodeURIComponent(tag)}/`)}># {tag}</a>)}</dd></div>}

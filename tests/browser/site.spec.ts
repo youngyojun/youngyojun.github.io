@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { existsSync } from 'node:fs';
+import { renderMathText } from '../../apps/blog/lib/math.ts';
 
 test('opens the blog, paginates and follows static classification links', async ({ page }) => {
   await page.goto('/');
@@ -31,6 +32,36 @@ test('renders local figures, mathcal, code and Korean content without client mat
   expect(await page.locator('script[src*="mathjax"]').count()).toBe(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   expect(errors).toEqual([]);
+});
+
+test('renders Hunt-Szymanski captions and matches math text size to each surrounding style', async ({ page }) => {
+  await page.goto('/blog/posts/hunt-szymanski/');
+  const caption = page.locator('.prose p[style]').filter({ hasText: /^두 문자열/ });
+  await expect(caption.locator('.katex')).toHaveCount(4);
+  await expect(caption).not.toContainText('$');
+  await expect(page.locator('.prose h4').filter({ hasText: 'Lemma 3.' }).locator('.katex')).toHaveCount(1);
+
+  const text = renderMathText(String.raw`Plain $\text{Plain}$`);
+  await page.locator('main').evaluate((main, html) => {
+    main.innerHTML = `<header class="article-header"><h1>${html}</h1></header>
+      <section class="post-previews"><h2><a href="#">${html}</a></h2></section>
+      <div class="prose">${[1, 2, 3, 4, 5, 6].map(level => `<h${level}>${html}</h${level}>`).join('')}
+      <p>${html}</p><figure><figcaption>${html}</figcaption></figure>
+      <p style="text-align: center;"><b>${html}</b></p>
+      <table><tr><th>${html}</th><td>${html}</td></tr></table></div>`;
+  }, text);
+  await page.evaluate(() => document.fonts.ready);
+  const sizes = await page.locator('main .katex').evaluateAll(formulas => formulas.map(formula => ({
+    plain: getComputedStyle(formula.parentElement!).fontSize,
+    math: getComputedStyle(formula).fontSize,
+    text: getComputedStyle(formula.querySelector('.katex-html .text')!).fontSize,
+  })));
+  expect(sizes).toHaveLength(13);
+  for (const size of sizes) {
+    expect(size.math).toBe(size.plain);
+    expect(size.text).toBe(size.plain);
+  }
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 
 test('searches Korean and English, highlights text and restores focus after closing', async ({ page }) => {
