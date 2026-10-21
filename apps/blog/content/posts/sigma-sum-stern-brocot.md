@@ -109,7 +109,7 @@ Stern-Brocot Tree에 대하여 논하기 전에, 먼저 [페리 수열](https://
 
 실제로, $0$ 이상의 모든 유리수는 충분히 큰 $n$에 대하여 확장된 페리 수열 $F' _n$에 정확하게 한 번 등장함을 증명할 수 있다. 이제, 깊이 $n$에 해당하는 층에 확장된 페리 수열 $F' _n$을 적어, 아래 그림과 같은 이진 트리를 생각하자.
 
-![](/assets/images/posts/2022-02-18-sigma-sum-stern-brocot/SternBrocotTree.png)
+![](/blog/images/sigma-sum-stern-brocot/SternBrocotTree.png)
 
 <p style="text-align: center;"><b>그림 1: Stern–Brocot Tree</b></p>
 
@@ -149,7 +149,7 @@ Stern-Brocot Tree에 대하여 논하기 전에, 먼저 [페리 수열](https://
 
 다시 원래의 문제로 돌아오자. 우리는 아래의 그림과 같이 $ \displaystyle y = \frac{N}{x} $ 곡선 아래의 회색 영역에 존재하는 양의 정수 쌍 $(x, y)$의 수를 세어야 한다.
 
-![](/assets/images/posts/2022-02-18-sigma-sum-stern-brocot/1.png)
+![](/blog/images/sigma-sum-stern-brocot/1.png)
 
 <p style="text-align: center;"><b>그림 2: $xy = 20$ 그래프와 회색 영역</b></p>
 
@@ -159,7 +159,7 @@ Stern-Brocot Tree에 대하여 논하기 전에, 먼저 [페리 수열](https://
 
 이 그래프에서 기울기가 $-1$인 접선을 긋자. 아래의 그림에 접점 $G$, $x$ 축과 $y$ 축과의 교점 $P _x$, $P _y$을 나타내었다.
 
-![](/assets/images/posts/2022-02-18-sigma-sum-stern-brocot/2.png)
+![](/blog/images/sigma-sum-stern-brocot/2.png)
 
 <p style="text-align: center;"><b>그림 3: $xy = 20$ 그래프와 기울기 $-1$의 접선</b></p>
 
@@ -180,7 +180,7 @@ Stern-Brocot Tree에 대하여 논하기 전에, 먼저 [페리 수열](https://
 > 3. 직선과 곡선으로 닫힌 삼각 영역 $PQR$ 내부의 정수 점의 개수를 $\displaystyle f \left( x _0, y _0, \frac{a}{b}, \frac{c}{d} \right)$로 정의한다.
 > 4. 인자가 상기한 조건을 만족하지 않으면, 편의상 $\displaystyle f \left( x _0, y _0, \frac{a}{b}, \frac{c}{d} \right) = 0$으로 정의한다.
 
-![](/assets/images/posts/2022-02-18-sigma-sum-stern-brocot/3.png)
+![](/blog/images/sigma-sum-stern-brocot/3.png)
 
 <p style="text-align: center;"><b>그림 4: 점 $P$, $Q$, $R$과 회색 삼각 영역</b></p>
 
@@ -192,7 +192,7 @@ Stern-Brocot Tree에 대하여 논하기 전에, 먼저 [페리 수열](https://
 
 **그림 4**의 두 접선을 각각 새로운 축으로 잡고, 점 $P$를 원점으로 생각한 새로운 좌표계 $u-v$를 생각하자. $u$ 축이 직선 $PR$, $v$ 축이 직선 $PQ$이다. 이 경우 회색 영역은 다음과 같이 변환된다.
 
-![](/assets/images/posts/2022-02-18-sigma-sum-stern-brocot/4.png)
+![](/blog/images/sigma-sum-stern-brocot/4.png)
 
 <p style="text-align: center;"><b>그림 5: 변환된 새로운 영역</b></p>
 

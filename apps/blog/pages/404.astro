@@ -1,6 +1,7 @@
 ---
+import { site } from '../lib/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="페이지를 찾을 수 없습니다" noindex>
-  <section class="not-found"><p class="eyebrow">404</p><h1>페이지를 찾을 수 없습니다.</h1><p>주소를 확인하거나 글 목록에서 찾아보세요.</p><a href="/blog/">블로그로 돌아가기 →</a></section>
+  <section class="not-found"><p class="eyebrow">404</p><h1>페이지를 찾을 수 없습니다.</h1><p>주소를 확인하거나 글 목록에서 찾아보세요.</p><a href={site.blog}>블로그로 돌아가기 →</a></section>
 </BaseLayout>

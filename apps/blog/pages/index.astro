@@ -1,4 +1,8 @@
 ---
-import Redirect from '../components/Redirect.astro';
+import { posts } from '../lib/posts';
+import { site } from '../lib/site';
+import { paginate } from '../lib/pagination';
+import PostIndex from '../components/PostIndex.astro';
+const pages = paginate(posts, site.blog);
 ---
-<Redirect to="/blog/" />
+<PostIndex page={pages[0]} pages={pages} total={posts.length} />

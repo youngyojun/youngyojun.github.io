@@ -1,7 +1,7 @@
 ---
-import { posts } from '../../lib/posts';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import PostList from '../../components/PostList.astro';
+import { posts } from '../lib/posts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostList from '../components/PostList.astro';
 const years = [...new Set(posts.map(post => post.data.date.slice(0, 4)))];
 ---
 <BaseLayout title="아카이브">

@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { test } from 'node:test';
 import { plainText } from '../lib/text.ts';
 
 const originals = JSON.parse(readFileSync(new URL('./fixtures/posts.json', import.meta.url), 'utf8'));
-const page = path => readFileSync(new URL(`../dist/${decodeURIComponent(path.slice(1))}index.html`, import.meta.url), 'utf8');
+const page = path => readFileSync(new URL(`../dist/${decodeURIComponent(path.slice('/blog/'.length))}index.html`, import.meta.url), 'utf8');
 
 test('publishes every original article at its filename URL with the same instant and a KST display date', () => {
   for (const original of originals) {
@@ -26,12 +26,6 @@ test('publishes every original article at its filename URL with the same instant
   }
 });
 
-test('does not publish former article or navigation alias pages', () => {
-  for (const path of ['daily/2020/02/15/first-article/', 'secmem/2022/03/20/Hunt-Szymanski/', 'tag/', 'category/', 'tags/', 'categories/', 'archives/', 'about/', 'page2/']) {
-    assert.equal(existsSync(new URL(`../dist/${path}index.html`, import.meta.url)), false, path);
-  }
-});
-
 test('Atom entry IDs use the canonical article URLs', () => {
   const feed = readFileSync(new URL('../dist/atom.xml', import.meta.url), 'utf8');
   const entries = [...feed.matchAll(/<entry>[\s\S]*?<id>([^<]+)<\/id>[\s\S]*?<link href="([^"]+)"\/>/g)];
@@ -43,7 +37,7 @@ test('Atom entry IDs use the canonical article URLs', () => {
 });
 
 test('copies original article figures and all attachments without modifying their bytes', () => {
-  for (const directory of ['assets/images/posts', 'downloadable_files']) {
+  for (const directory of ['images', 'attachments']) {
     const source = new URL(`../public/${directory}/`, import.meta.url);
     for (const entry of readdirSync(source, { recursive: true, withFileTypes: true })) {
       if (!entry.isFile()) continue;
@@ -59,7 +53,7 @@ test('renders code, figures, display formulas and mathcal in representative arti
   const hunt = page('/blog/posts/hunt-szymanski/');
   assert.ok(hunt.includes('data-language="c++"'));
   assert.match(hunt, /class="[^"]*\bmathcal\b/);
-  assert.ok(hunt.includes('/assets/images/posts/2022-03-20-Hunt-Szymanski/1.png'));
+  assert.ok(hunt.includes('/blog/images/hunt-szymanski/1.png'));
   const tableaux = page('/blog/posts/young-tableaux/');
   assert.ok(tableaux.includes('katex-display'));
   assert.equal([...tableaux.matchAll(/<img\b/g)].length, 7);

@@ -1,8 +1,8 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import PostIndex from '../../../components/PostIndex.astro';
-import { groupPosts } from '../../../lib/posts';
-import { paginate } from '../../../lib/pagination';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostIndex from '../../components/PostIndex.astro';
+import { groupPosts } from '../../lib/posts';
+import { paginate } from '../../lib/pagination';
 
 export function getStaticPaths() {
   return (['tags', 'categories'] as const).flatMap(collection => {

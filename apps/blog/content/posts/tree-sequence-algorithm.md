@@ -63,7 +63,7 @@ $Q = 5$개의 쿼리가 순서대로 ["2번 쿼리", "1번 쿼리, $i = 5$, $x =
 
 마지막 쿼리의 답은, $(4, 5)$과 $(5, 6)$만 조건을 만족하므로, $2$이다.
 
-![](/assets/images/posts/2021-07-17-tree-sequence-algorithm/in_out_example.png)
+![](/blog/images/tree-sequence-algorithm/in_out_example.png)
 
 <p style="text-align: center;"><b>그림 1: 예제의 시각화</b></p>
 
@@ -89,7 +89,7 @@ $i$를 고정한 후, $j$를 점차 증가하면서 구간 $[i+1, j-1]$의 최�
 
 그러한 $i$가 두 개 이상 존재하면, 제일 작은 $i$에 대하여 순서쌍 $(i, j)$는 부등식 조건을 만족할 수 없다.
 
-![](/assets/images/posts/2021-07-17-tree-sequence-algorithm/no_same_height.png)
+![](/blog/images/tree-sequence-algorithm/no_same_height.png)
 
 <p style="text-align: center;"><b>그림 2: 첫 번째 관찰의 모식도</b></p>
 
@@ -101,7 +101,7 @@ $i$를 고정한 후, $j$를 점차 증가하면서 구간 $[i+1, j-1]$의 최�
 
 구간 $[i' + 1, j - 1]$의 최댓값이 이미 $A _i$ 이상이고, 이는 $A _j$ 이상이므로, 이 관찰은 성립한다.
 
-![](/assets/images/posts/2021-07-17-tree-sequence-algorithm/no_before_high.png)
+![](/blog/images/tree-sequence-algorithm/no_before_high.png)
 
 <p style="text-align: center;"><b>그림 3: 두 번째 관찰의 모식도</b></p>
 
@@ -202,7 +202,7 @@ $N = 2K + 1$, $A = \left\{ K, K-1, \cdots, 2, 1, 0, 1, 2, \cdots, K-1, K \right\
 
 이는 곧, 조건을 만족하는 순서쌍을 효율적으로 관리하기 어려울 것임을 암시한다.
 
-![](/assets/images/posts/2021-07-17-tree-sequence-algorithm/too_many_change.png)
+![](/blog/images/tree-sequence-algorithm/too_many_change.png)
 
 <p style="text-align: center;"><b>그림 4: 답이 급격하게 변하는 경우</b></p>
 
@@ -228,7 +228,7 @@ $N = 2K + 1$, $A = \left\{ K, K-1, \cdots, 2, 1, 0, 1, 2, \cdots, K-1, K \right\
 
 $A _0 = A _{N+1} = \infty$로 한 후, $(0, N+1)$ 또한 조건을 만족한다고 하자. 각 선분을 정점으로 생각하면, 이들이 하나의 트리를 형성하는 것처럼 보인다.
 
-![](/assets/images/posts/2021-07-17-tree-sequence-algorithm/tree_model.png)
+![](/blog/images/tree-sequence-algorithm/tree_model.png)
 
 <p style="text-align: center;"><b>그림 5: 전선의 트리화</b></p>
 

@@ -40,7 +40,7 @@ tags: ["Algorithm","Mathematics"]
 
 영 다이어그램은 페러스 다이어그램(Ferrers diagram)이라고 부르기도 한다. 예를 들어, $(4, 2, 2, 1)$의 형태를 가지는 영 다이어그램은 아래의 그림과 같다.
 
-![](/assets/images/posts/2021-09-19-young-tableaux/1.png)
+![](/blog/images/young-tableaux/1.png)
 
 <p style="text-align: center;"><b>그림 1: $(4, 2, 2, 1)$ 형태의 영 다이어그램</b></p>
 
@@ -63,7 +63,7 @@ tags: ["Algorithm","Mathematics"]
 
 그림 1에서 그림 2와 같이 수를 채웠다면, 이는 $(4, 2, 2, 1)$ 형태의 표준 영 타블로가 된다. 영 타블로에서 각 수가 등장하는 횟수를 기록한 벡터를 "영 타블로의 가중치"라고 부른다. 모든 표준 영 타블로의 가중치는 $(1, 1, \cdots, 1)$임이 자명하다. 표준 영 타블로에서 1번 조건은 필요에 따라 무시할 수 있다.
 
-![](/assets/images/posts/2021-09-19-young-tableaux/2.png)
+![](/blog/images/young-tableaux/2.png)
 
 <p style="text-align: center;"><b>그림 2: $(4, 2, 2, 1)$ 형태의 표준 영 타블로</b></p>
 
@@ -84,7 +84,7 @@ tags: ["Algorithm","Mathematics"]
 
 예를 들어, $(9, 7, 5, 1) / (5, 3, 2)$ 형태의 치우친 표준 영 타블로는 아래와 같다.
 
-![](/assets/images/posts/2021-09-19-young-tableaux/3.png)
+![](/blog/images/young-tableaux/3.png)
 
 <p style="text-align: center;"><b>그림 3: $(9, 7, 5, 1) / (5, 3, 2)$ 형태의 치우친 표준 영 타블로</b></p>
 
@@ -119,7 +119,7 @@ tags: ["Algorithm","Mathematics"]
 
 그림 4는 표준 영 타블로 $(2, 5, 9)(6, 7)(8)$에 수 $3$을 행 삽입하는 과정을 보여준다.
 
-![](/assets/images/posts/2021-09-19-young-tableaux/4.png)
+![](/blog/images/young-tableaux/4.png)
 
 <p style="text-align: center;"><b>그림 4: $(2, 5, 9)(6, 7)(8) \leftarrow 3$ 연산 과정</b></p>
 
@@ -140,7 +140,7 @@ tags: ["Algorithm","Mathematics"]
 
 그림 5는 표준 영 타블로 $(2, 5, 9)(6, 7)(8)$에 수 $3$을 열 삽입하는 과정을 보여준다.
 
-![](/assets/images/posts/2021-09-19-young-tableaux/5.png)
+![](/blog/images/young-tableaux/5.png)
 
 <p style="text-align: center;"><b>그림 5: $3 \rightarrow (2, 5, 9)(6, 7)(8)$ 연산 과정</b></p>
 
@@ -179,7 +179,7 @@ tags: ["Algorithm","Mathematics"]
 
 위 연산 작업의 과정 2.에서 $y$가 유일하게 존재함이 보장된다. 이는 표준 영 타블로의 정의를 이용하여 귀납법으로 증명할 수 있다. 아래의 그림은 표준 영 타블로 $(2, 3, 9)(5, 7)(6)(8)$에서 칸 $(4, 1)$을 삭제하는 연산 과정을 보여준다.
 
-![](/assets/images/posts/2021-09-19-young-tableaux/6.png)
+![](/blog/images/young-tableaux/6.png)
 
 <p style="text-align: center;"><b>그림 6: $(2, 3, 9)(5, 7)(6)(8)$에서 칸 $(4, 1)$ 삭제 연산 과정</b></p>
 
@@ -239,7 +239,7 @@ $S \leftarrow x$ 연산을 하여, 칸 $(s, t)$가 생성되었다고 가정하�
 
 ​	상당히 복잡하다. 예를 들어, 순열 $X = (1, 5, 3, 2, 6, 7, 4)$에 대하여 RSK 대응을 수행한 결과는 아래와 같다.
 
-![](/assets/images/posts/2021-09-19-young-tableaux/7.png)
+![](/blog/images/young-tableaux/7.png)
 
 <p style="text-align: center;"><b>그림 7: 순열 $X = (1, 5, 3, 2, 6, 7, 4)$의 RSK 대응, $P _X$와 $Q _X$</b></p>
 

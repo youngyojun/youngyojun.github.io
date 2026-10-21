@@ -1,6 +1,7 @@
 import { getCollection } from 'astro:content';
 import { validatePostSlugs } from './slugs.ts';
 import { description, plainText } from './text.ts';
+import { blogPath } from './site.ts';
 
 const entries = await getCollection('posts');
 validatePostSlugs(entries.map(post => [post.filePath ?? post.id, post.id] as const));
@@ -13,7 +14,7 @@ export const posts = entries.map(entry => {
     html: entry.rendered.html,
     text: plainText(entry.rendered.html),
     description: entry.data.description ?? description(entry.rendered.html),
-    url: `/blog/posts/${entry.id}/`,
+    url: blogPath(`posts/${entry.id}/`),
     displayDate: entry.data.date.slice(0, 10),
   };
 }).sort((a, b) => b.data.date.localeCompare(a.data.date) || a.slug.localeCompare(b.slug));
@@ -25,7 +26,7 @@ export function groupPosts(field: 'tags' | 'categories') {
     .sort((a, b) => a.localeCompare(b, 'ko'))
     .map(name => ({
       name,
-      url: `/blog/${field}/${encodeURIComponent(name)}/`,
+      url: blogPath(`${field}/${encodeURIComponent(name)}/`),
       posts: posts.filter(post => post.data[field].includes(name)),
     }));
 }

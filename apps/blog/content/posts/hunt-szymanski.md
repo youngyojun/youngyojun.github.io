@@ -124,7 +124,7 @@ int lcs(char *X, int N, char *Y, int M) {
 
 두 문자열 `aeaca`와 `acea`에서 같은 알파벳을 가지는 모든 위치쌍을 'X'표로 나타내면 아래와 같다.
 
-![](/assets/images/posts/2022-03-20-Hunt-Szymanski/1.png)
+![](/blog/images/hunt-szymanski/1.png)
 
 <p style="text-align: center;"><b>그림 1: 두 문자열의 공통 알파벳에 대응되는 모든 위치를 표시한 표</b></p>
 
@@ -152,7 +152,7 @@ int lcs(char *X, int N, char *Y, int M) {
 
 이제, 각 행에 대하여 연속한 값을 가지는 구간의 특징을 관찰하자. 같은 값을 가지는 **Segment**에서 첫 수를 **Head**, 나머지 수들을 **Tail**이라고 부르자. 어떤 행의 $D _{i, *}$ 값이 $ 0\ 0\ 0\ 0\ 0\ 1\ 1\ 1\ 1\ 2\ 3\ 3\ 3\ 3\ 4\ 4\ 4\ 4 $일 때, 각 Segment의 Tail을 직사각형 블록으로 묶어서 표현하면 아래와 같다.
 
-![](/assets/images/posts/2022-03-20-Hunt-Szymanski/2.png)
+![](/blog/images/hunt-szymanski/2.png)
 
 <p style="text-align: center;"><b>그림 2: 한 행에서 모든 Tail을 직사각형으로 나타낸 그림</b></p>
 
@@ -162,7 +162,7 @@ int lcs(char *X, int N, char *Y, int M) {
 
 **그림 2**와 같이 $D _{i, *}$ 값을 Segment 표기법으로 나타낸 후, 그 바로 아래의 행에서 'X'표 배치에 따른 $D _{i+1, *}$ 값 변화를 관찰하자. 만약, **그림 3**의 상단과 같이 'X'표가 배치되었다면, $D _{i+1, *}$의 값은 하단과 같이 결정된다.
 
-![](/assets/images/posts/2022-03-20-Hunt-Szymanski/3.png)
+![](/blog/images/hunt-szymanski/3.png)
 
 <p style="text-align: center;"><b>그림 3: 'X'표 배치와 그 아래 행의 값</b></p>
 

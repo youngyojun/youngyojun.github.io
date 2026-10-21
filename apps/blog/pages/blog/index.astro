@@ -1,7 +1,0 @@
----
-import { posts } from '../../lib/posts';
-import { paginate } from '../../lib/pagination';
-import PostIndex from '../../components/PostIndex.astro';
-const pages = paginate(posts, '/blog/');
----
-<PostIndex page={pages[0]} pages={pages} total={posts.length} />

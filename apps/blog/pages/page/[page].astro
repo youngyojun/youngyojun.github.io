@@ -1,9 +1,10 @@
 ---
-import { posts } from '../../../lib/posts';
-import { paginate } from '../../../lib/pagination';
-import PostIndex from '../../../components/PostIndex.astro';
+import { posts } from '../../lib/posts';
+import { site } from '../../lib/site';
+import { paginate } from '../../lib/pagination';
+import PostIndex from '../../components/PostIndex.astro';
 export function getStaticPaths() {
-  const pages = paginate(posts, '/blog/');
+  const pages = paginate(posts, site.blog);
   return pages.slice(1).map(page => ({ params: { page: String(page.number) }, props: { page, pages } }));
 }
 const { page, pages } = Astro.props;

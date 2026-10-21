@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2023",
-    "lib": ["ES2023"],
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
     "module": "NodeNext",
     "strict": true,
     "noEmit": true,
@@ -11,5 +11,5 @@
     "types": ["node"],
     "skipLibCheck": true
   },
-  "include": ["*.ts"]
+  "include": ["*.ts", "../site.config.ts", "../playwright.config.ts", "../tests/browser/**/*.ts"]
 }

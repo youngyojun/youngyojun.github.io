@@ -98,7 +98,7 @@ $v \in R(e)$이므로, 정점 $v$와 간선 $e$를 제거한 그래프는 연결
 
 하지만, **그림 1**과 같이, 간선 $e$를 지나는 경로는 항상, 간선 $e$를 지나지 않도록 변형할 수 있다. 간선 $e$를 포함하는 단순 사이클 $C$가 존재하기 때문에, 간선 $e$를 지나지 않도록 '반대 방향으로 단순 사이클 $C$를 따라 돌아가면' 된다.
 
-![cycle_theorem_not_use_e](/assets/images/posts/2021-03-19-count-cutvertices-when-cut-each-edge/cycle_theorem_not_use_e.png)
+![cycle_theorem_not_use_e](/blog/images/count-cutvertices-when-cut-each-edge/cycle_theorem_not_use_e.png)
 
 <p style="text-align: center;"><b>그림 1: 간선 $e$를 지나지 않는 단순 경로</b></p>
 
@@ -190,7 +190,7 @@ BCC 그래프 $G(V, E)$에서 루트 정점 $r \in V$부터 DFS를 시행하여,
 * 정점 $v$는 두 정점 $\alpha$와 $\beta$ 사이에 위치하여야 하며
 * 정점 $v$의 자식 정점을 $c(v)$라고 할 때, 부트리 $T_{c(v)}$에서 위로 올라가는 **유일한** 간선이 $e = (\alpha, \beta)$라야 한다.
 
-![back_edge_e_answer_v](/assets/images/posts/2021-03-19-count-cutvertices-when-cut-each-edge/back_edge_e_answer_v.png)
+![back_edge_e_answer_v](/blog/images/count-cutvertices-when-cut-each-edge/back_edge_e_answer_v.png)
 
 <p style="text-align: center;"><b>그림 2: Back edge $e$를 끊었을 때, 정점 $v$가 새로운 절점이 되는 일반적인 경우</b></p>
 
@@ -227,7 +227,7 @@ for (alpha, beta) in back_edges:
 
 Tree edge $e = (v, p(v))$를 끊었을 때, 정점 $p(v)$보다 위에 있는 정점 $u$가 새로운 절점이 되었다고 하자. 이것이 가능하려면, **그림 3**과 같이, 간선 $e$를 끊은 이후에, 두 부트리 $T _v$와 $T _{c(u)} \setminus T _v$는 연결성을 잃어버려야 한다.
 
-![tree_edge_e_answer_upper_vertex_u](/assets/images/posts/2021-03-19-count-cutvertices-when-cut-each-edge/tree_edge_e_answer_upper_vertex_u.png)
+![tree_edge_e_answer_upper_vertex_u](/blog/images/count-cutvertices-when-cut-each-edge/tree_edge_e_answer_upper_vertex_u.png)
 
 <p style="text-align: center;"><b>그림 3: Tree edge $e$를 끊었을 때, 위에 존재하는 정점 $u$가 새로운 절점이 되는 경우</b></p>
 
@@ -255,7 +255,7 @@ for v in V:
 
 Tree edge $e = (v, p(v))$를 끊었을 때, 정점 $v$보다 아래에 존재하는 정점 $t$가 새로운 정점이 된다는 것은, 일반적인 경우, 두 부트리 $T_v \setminus T_t$와 $T_\gamma \setminus T_v$가 끊어진다는 것과 동치이다. 여기서, $\gamma$는 DFS Tree $T$의 루트 정점이다.
 
-![](/assets/images/posts/2021-03-19-count-cutvertices-when-cut-each-edge/tree_edge_e_answer_lower_vertex_t.png)
+![](/blog/images/count-cutvertices-when-cut-each-edge/tree_edge_e_answer_lower_vertex_t.png)
 
 <p style="text-align: center;"><b>그림 4: Tree edge $e$를 끊었을 때, 아래에 존재하는 정점 $t$가 새로운 절점이 되는 일반적인 경우</b></p>
 

@@ -1,6 +1,6 @@
 # youngyojun.github.io
 
-Astro 블로그와 독립 앱을 관리하는 pnpm monorepo입니다. 현재 구현된 앱은 `apps/blog`이며, 메인 사이트와 다른 앱은 실제 구현 시 `apps/`에 추가합니다.
+Astro 블로그와 독립 앱을 관리하는 pnpm monorepo입니다. 현재 `apps/blog`는 블로그를, `apps/site`는 루트 진입점·전역 404·robots·사이트맵 인덱스를 담당합니다. 메인 소개 화면과 다른 앱은 아직 구현하지 않았습니다.
 
 Jekyll 빌드와 이전 테마의 렌더링 코드는 제거했습니다. 운영 GitHub Pages 설정은 아직 전환하지 않았습니다. 기존 Jekyll 방식으로 이 변경을 배포하지 마세요. 일반 CI는 검증과 정적 산출물 업로드만 수행합니다. 실제 게시는 `master`에서 수동으로 배포 옵션을 선택한 경우에만 실행됩니다.
 
@@ -14,7 +14,7 @@ corepack pnpm install --frozen-lockfile
 corepack pnpm dev --host 127.0.0.1 --port 4323
 ```
 
-블로그는 `http://localhost:4323/blog/`에서 확인합니다. 현재 `/`는 `/blog/`로 이동합니다. 향후 메인 사이트가 `/`를 소유할 때 이 진입점만 교체합니다.
+블로그 개발 서버는 `http://localhost:4323/blog/`에서 앱 경로만 제공합니다. 전체 사이트는 `corepack pnpm build` 후 `corepack pnpm preview`로 확인합니다. 조립된 사이트의 `/`는 현재 `/blog/`로 이동하며, 향후 메인 화면을 구현할 때 `apps/site`의 이 진입점을 교체합니다.
 
 | 명령 | 동작 |
 | --- | --- |
@@ -28,22 +28,24 @@ corepack pnpm dev --host 127.0.0.1 --port 4323
 브라우저 검증 전에 한 번 설치합니다.
 
 ```sh
-corepack pnpm --filter @youngyojun/blog exec playwright install chromium webkit
+corepack pnpm exec playwright install chromium webkit
 corepack pnpm build
 corepack pnpm test:e2e
 ```
 
 Playwright가 설치한 전용 Chromium과 WebKit만 사용합니다. 개인 Chrome·Safari 실행 파일·프로필·기존 CDP 연결은 테스트에 사용하지 않습니다. 각 테스트는 독립 브라우저 컨텍스트를 사용하고 종료 시 정리합니다. 모바일 프로젝트는 터치와 모바일 viewport를 사용합니다. WebKit은 Safari 계열 엔진의 호환성을 확인하지만 실제 Safari 앱이나 iPhone 기기 검증을 대신하지 않습니다. Firefox는 현재 검사 대상이 아닙니다. [브라우저별 프로젝트](https://playwright.dev/docs/test-projects)는 같은 동작 검사를 각 환경에서 실행합니다.
 
-실패하면 `apps/blog/playwright-report/`에 HTML 보고서, `apps/blog/test-results/`에 실패 화면과 trace가 남습니다. `corepack pnpm --filter @youngyojun/blog exec playwright show-report`로 보고서를 열 수 있습니다. 이 명령은 개인 브라우저를 열 수 있으므로 에이전트는 자동 실행하지 않습니다.
+실패하면 `playwright-report/`에 HTML 보고서, `test-results/`에 실패 화면과 trace가 남습니다. `corepack pnpm exec playwright show-report`로 보고서를 열 수 있습니다. 이 명령은 개인 브라우저를 열 수 있으므로 에이전트는 자동 실행하지 않습니다.
 
 ## 저장소 구조
 
 ```text
+site.config.ts          # 도메인과 앱별 공개 경로 등록
+apps/site/              # 루트 진입점·전역 404·robots·사이트맵 인덱스
 apps/blog/
   content/posts/        # 글 Markdown
   content/pages/        # 소개 등 작성 콘텐츠
-  pages/                # URL 진입점
+  pages/                # 앱 기준 경로에 상대적인 URL 진입점
   layouts/              # 문서 틀·공통 탐색·메타데이터
   components/           # 블로그 전용 UI
   styles/               # 블로그 스타일
@@ -55,9 +57,11 @@ packages/
   design-tokens/        # 앱 공통 CSS 변수
   ui/                   # 앱 공통 React 컴포넌트
 scripts/                # 빌드 결과 조립
+tests/browser/          # 전체 배포 결과의 브라우저 검증
+playwright.config.ts    # Chromium·WebKit 검사와 정적 preview 설정
 ```
 
-`astro.config.mjs`의 `srcDir: '.'` 설정으로 앱 루트의 디렉터리를 사용합니다. 작성 원문과 URL 코드는 분리되어 있습니다. `pages/`는 콘텐츠를 조회해 화면에 연결하며 Markdown 원문을 보관하지 않습니다.
+`astro.config.mjs`의 `srcDir: '.'` 설정으로 앱 루트의 디렉터리를 사용합니다. 블로그의 `base`는 `/blog/`이며 `pages/index.astro`가 `/blog/`, `pages/posts/[slug].astro`가 `/blog/posts/<slug>/`를 생성합니다. 작성 원문과 URL 코드는 분리되어 있습니다. `pages/`는 콘텐츠를 조회해 화면에 연결하며 Markdown 원문을 보관하지 않습니다.
 
 앱은 다른 앱의 내부 소스를 import하지 않습니다. 실제 공통 기능만 `packages/`에서 public export로 제공합니다. 콘텐츠·검색·분류 로직은 블로그 앱이 소유합니다.
 
@@ -101,11 +105,11 @@ KaTeX 버전은 `pnpm-workspace.yaml`의 `catalog.katex` 한 곳에서 관리합
 
 ## 이미지·첨부파일
 
-새 그림은 `apps/blog/public/images/<slug>/`, 새 첨부는 `apps/blog/public/downloads/`에 추가하고 본문에서는 `/images/...`, `/downloads/...`로 연결할 수 있습니다. `public` 파일은 이름과 바이트를 유지해 배포합니다.
+그림은 `apps/blog/public/images/<글 파일명>/`, 첨부는 `apps/blog/public/attachments/<글 파일명 또는 주제>/`에 둡니다. 본문에서는 `/blog/images/...`, `/blog/attachments/...`로 연결합니다. `public` 아래에 `blog` 폴더를 만들지 않습니다.
 
-기존 원본은 `public/assets/`, `public/downloadable_files/`로 이동했고 공개 주소 `/assets/…`, `/downloadable_files/…`는 유지합니다. 원본 그림·PDF·DOCX·C++ 파일을 변환하거나 DOCX 내부 이미지를 추출하지 않습니다. 기존 만료된 외부 Googleusercontent 이미지 링크는 사용자의 결정대로 유지합니다.
+블로그는 `/blog/`를 기준으로 개발·빌드하고, 조립 단계에서 앱 산출물을 `dist/blog/`에 배치합니다. 예를 들어 `public/images/hunt-szymanski/1.png`는 개발과 배포 모두 `/blog/images/hunt-szymanski/1.png`로 제공됩니다. 47개 원본 그림·PDF·DOCX·C++ 파일은 바이트를 보존해 이동했으며 기존 `/assets/…`, `/downloadable_files/…` 주소는 제공하지 않습니다. 첨부파일은 본문 참조 여부와 관계없이 보존합니다.
 
-사용하지 않는 과거 NexT 테마의 CSS·JavaScript·라이브러리·장식 이미지는 제거했습니다. `public/assets/`에는 본문 원본 그림만 남기고, `public/downloadable_files/`의 첨부파일은 참조 여부와 관계없이 모두 보존합니다. 과거 테마 소스는 Git history에서 확인할 수 있습니다.
+사용하지 않는 과거 NexT 테마 파일은 제거했습니다. DOCX 내부 이미지를 추출하거나 원본을 변환하지 않습니다. 만료된 외부 Googleusercontent 이미지 링크는 사용자의 결정대로 유지합니다.
 
 ## URL·검색·피드
 
@@ -121,9 +125,9 @@ KaTeX 버전은 `pnpm-workspace.yaml`의 `catalog.katex` 한 곳에서 관리합
 
 과거 글·탐색 주소의 alias와 자동 이동은 제공하지 않습니다. 이전 주소는 404로 처리하며, 글과 탐색에는 위의 정식 URL을 사용합니다. 메인 홈이 없는 현재 `/`에서 `/blog/`로 이동하는 진입점만 유지합니다.
 
-`/atom.xml`은 최신 10개 글의 전체 본문을 제공합니다. 각 entry의 ID와 링크는 정식 글 URL을 사용합니다. `/sitemap.xml`에는 대표 글·탐색 페이지와 공개 PDF만 넣습니다. 글 날짜는 명시한 게시 시각을 사용하고 파일 체크아웃 시각을 수정일로 사용하지 않습니다. `/robots.txt`는 사이트맵을 안내합니다. `/search.xml`도 기존 소비자를 위해 같은 글 데이터에서 생성합니다.
+`/blog/atom.xml`은 최신 10개 글의 전체 본문을 제공합니다. 이전 `/atom.xml` 주소는 사용자의 결정대로 제거했으므로 기존 구독자는 새 주소로 구독해야 합니다. 각 entry의 ID와 링크는 정식 글 URL을 사용합니다. `/blog/sitemap.xml`에는 대표 글·탐색 페이지와 공개 PDF를 넣습니다. 루트 `/sitemap.xml`은 블로그 사이트맵을 안내하는 인덱스이며 `apps/site`가 소유합니다. 글 날짜는 명시한 게시 시각을 사용하고 파일 체크아웃 시각을 수정일로 사용하지 않습니다. `/robots.txt`는 사이트맵을 안내합니다. `/blog/search.xml`도 같은 글 데이터에서 생성합니다.
 
-없는 주소에는 안내와 블로그 링크가 있는 `404.html`을 제공합니다. 실제 GitHub Pages의 오류 페이지 연결은 운영 전환 후 확인해야 합니다.
+전체 사이트의 없는 주소는 `apps/site`가 만드는 루트 `404.html`에서 안내하며 홈·블로그 링크를 제공합니다. 블로그의 앱 전용 404도 `/blog/404.html`에 생성됩니다. SPA로 대체 응답하거나 임의의 잘못된 주소를 정상 페이지로 처리하지 않습니다.
 
 ## 공통 UI와 새 앱
 
@@ -131,11 +135,15 @@ KaTeX 버전은 `pnpm-workspace.yaml`의 `catalog.katex` 한 곳에서 관리합
 
 공용 React UI는 `@youngyojun/ui`에서 가져옵니다. 현재 `Button`은 일반 버튼 props·ref·className을 지원하며 기본 `type="button"`을 사용합니다. Astro에서는 `client:*` 없이 정적 HTML로 사용할 수 있고, React 상태·이벤트가 필요할 때만 해당 컴포넌트를 hydrate합니다. 블로그 전체를 React로 실행하지 않습니다.
 
-새 앱은 `apps/<name>`에 별도 package.json과 dev/check/test/build 명령을 둡니다. 실제로 필요한 공유 패키지에 workspace 의존성을 선언하고, 출력의 URL·자산 경로가 다른 앱과 겹치지 않도록 합니다. 빌드 결과를 조립 스크립트에 등록할 때 `/`와 `404.html`·사이트맵 등 사이트 전체 경로의 소유자도 정해야 합니다.
+새 앱은 `apps/<name>`에 별도 package.json과 dev/check/test/build 명령을 둡니다. `site.config.ts`의 `appPaths`에 공개 경로를 등록하고 앱 설정의 `base`가 같은 값을 사용하도록 합니다. 앱의 `dist/`는 앱 내부 경로만 포함하며 조립 단계가 등록한 공개 경로에 배치합니다. 다른 앱의 소스는 import하지 않고 실제 공유 코드만 workspace 패키지에서 가져옵니다.
+
+`/`와 전역 404·robots·사이트맵 인덱스는 `apps/site`, `/blog/` 전체는 `apps/blog`가 소유합니다. 루트 앱이 다른 앱의 경로 아래에 파일을 만들거나 두 앱의 경로가 중첩되면 조립이 실패합니다. 앱마다 CSS·스크립트·public 파일도 자기 경로 안에 배치합니다.
+
+공개 화면 주소마다 정적 진입 HTML을 생성하고 React로 필요한 상호작용을 구현하는 것을 기본으로 합니다. 새 앱은 직접 접속·새로고침·뒤로/앞으로 가기를 조립된 정적 결과에서 검증해야 합니다. 런타임 동적 라우트나 서버 기능이 필요해지면 해당 앱의 호스팅 요구를 별도로 검토합니다.
 
 ## CI·배포 준비
 
-`corepack pnpm build`는 현재 `apps/blog/dist`를 루트 `dist`에 조립하고 `.nojekyll`을 추가합니다. `scripts/assemble-site.ts`는 원본과 출력의 경로 중첩·심볼릭 링크·파일 충돌을 검출하며, 충돌이 있으면 기존 결과를 건드리기 전에 실패합니다. 배포 대상은 루트 `dist/`입니다. 산출물과 브라우저 테스트 결과는 Git에 넣지 않습니다.
+`corepack pnpm build`는 `apps/site/dist`를 루트에, `apps/blog/dist`를 `dist/blog/`에 조립하고 `.nojekyll`을 추가합니다. `scripts/assemble-site.ts`는 앱 경로의 중복·중첩·소유권 침범, 원본과 출력의 경로 중첩·심볼릭 링크·파일 충돌을 검출하며, 충돌이 있으면 기존 결과를 건드리기 전에 실패합니다. 배포 대상은 루트 `dist/`입니다. 산출물과 브라우저 테스트 결과는 Git에 넣지 않습니다.
 
 `.github/workflows/ci.yml`은 고정된 Node/pnpm으로 설치·타입·테스트·조립·브라우저 검증을 실행하고 `static-site` artifact를 업로드합니다. push·pull request·배포 옵션 없는 수동 실행에서는 검증만 합니다. 수동 실행의 `deploy`를 선택하고 브랜치가 `master`인 경우, 같은 실행에서 검증한 `dist/`를 Pages artifact로 포장하고 별도 배포 job이 게시합니다. 검증 실패 시 배포하지 않습니다. Pages 쓰기·OIDC 권한은 배포 job에만 부여합니다.
 
@@ -151,7 +159,7 @@ KaTeX 버전은 `pnpm-workspace.yaml`의 `catalog.katex` 한 곳에서 관리합
 2. **Settings → Environments → github-pages**에서 배포 가능한 브랜치를 `master`로 제한합니다. 필요하면 승인자도 지정합니다.
 3. 변경을 commit·push한 뒤 일반 **CI**가 성공했는지 확인하고, `static-site` artifact를 내려받아 검사합니다.
 4. **Actions → CI → Run workflow**에서 브랜치 `master`와 `deploy` 옵션을 선택합니다. 다시 수행한 검증을 모두 통과하면 배포 job이 실행됩니다. 다른 브랜치에서는 배포를 건너뜁니다.
-5. 운영 `/blog/`, 삭제한 과거 주소의 404, 검색, 그림·다운로드, `/atom.xml`, `/sitemap.xml`, 없는 주소의 404를 확인합니다. 새로고침과 모바일 화면도 확인합니다.
+5. 운영 `/blog/`, 삭제한 과거 주소의 404, 검색, 그림·다운로드, `/blog/atom.xml`, `/sitemap.xml`, `/blog/sitemap.xml`, 없는 주소의 404를 확인합니다. 새로고침과 모바일 화면도 확인합니다.
 
 GitHub Pages에는 빌드 소스가 아니라 조립한 정적 `dist/`를 게시합니다. 수동 배포 방식과 권한·artifact 구성은 [GitHub 공식 문서](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)를 따릅니다. 첫 원격 실행과 실제 게시 동작은 운영 전환 때 확인해야 합니다.
 

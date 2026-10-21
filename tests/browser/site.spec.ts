@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { existsSync } from 'node:fs';
 
 test('opens the blog, paginates and follows static classification links', async ({ page }) => {
   await page.goto('/');
@@ -92,7 +93,7 @@ test('treats indexed HTML-looking strings as text', async ({ page }) => {
 });
 
 test('returns 404 at former article and classification URLs', async ({ page }) => {
-  for (const path of ['/secmem/2022/03/20/Hunt-Szymanski/', '/tag/#/ICPC/page2', '/category/#/Linear%20Algebra']) {
+  for (const path of ['/secmem/2022/03/20/Hunt-Szymanski/', '/tag/#/ICPC/page2', '/category/#/Linear%20Algebra', '/tags/', '/categories/', '/archives/', '/about/', '/atom.xml', '/assets/images/posts/2022-03-20-Hunt-Szymanski/1.png', '/downloadable_files/physicslab1/newton_apple_report.pdf']) {
     const response = await page.goto(path);
     expect(response?.status()).toBe(404);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('페이지를 찾을 수 없습니다.');
@@ -122,8 +123,8 @@ test('keeps navigation, article math and the root entry usable without JavaScrip
   } finally { await context.close(); }
 });
 
-test('publishes valid Atom and sitemap XML from the built artifact', async ({ page, request }) => {
-  for (const path of ['/atom.xml', '/sitemap.xml']) {
+test('publishes valid blog XML and a site-wide sitemap index', async ({ page, request }) => {
+  for (const path of ['/blog/atom.xml', '/blog/sitemap.xml', '/sitemap.xml']) {
     const response = await request.get(path);
     expect(response.status()).toBe(200);
     const xml = await response.text();
@@ -132,12 +133,40 @@ test('publishes valid Atom and sitemap XML from the built artifact', async ({ pa
       return { errors: document.querySelectorAll('parsererror').length, entries: document.querySelectorAll('entry').length, urls: [...document.querySelectorAll('loc')].map(element => element.textContent) };
     }, xml);
     expect(parsed.errors).toBe(0);
-    if (path === '/atom.xml') expect(parsed.entries).toBe(10);
+    if (path === '/blog/atom.xml') expect(parsed.entries).toBe(10);
+    else if (path === '/sitemap.xml') expect(parsed.urls).toEqual(['https://youngyojun.github.io/blog/sitemap.xml']);
     else {
       expect(parsed.urls.length).toBeGreaterThan(60);
       expect(new Set(parsed.urls).size).toBe(parsed.urls.length);
       expect(parsed.urls).toContain('https://youngyojun.github.io/blog/posts/hunt-szymanski/');
       expect(parsed.urls.some(url => url?.includes('/secmem/'))).toBe(false);
+      expect(parsed.urls.every(url => url?.startsWith('https://youngyojun.github.io/blog/'))).toBe(true);
     }
   }
+});
+
+test('serves real HTML for direct app navigation, reloads and browser history', async ({ page }) => {
+  const routes = ['/blog/', '/blog/page/2/', '/blog/posts/hunt-szymanski/', '/blog/tags/학교/', '/blog/about/'];
+  for (const path of routes) {
+    expect(existsSync(new URL(`../../dist/${decodeURIComponent(path.slice(1))}index.html`, import.meta.url))).toBe(true);
+    expect((await page.goto(path))?.status()).toBe(200);
+    expect((await page.reload())?.status()).toBe(200);
+    expect(new URL(page.url()).pathname).toBe(encodeURI(path));
+  }
+  await page.goto('/blog/');
+  await page.getByRole('link', { name: '2 페이지', exact: true }).click();
+  await page.goBack();
+  await expect(page).toHaveURL(/\/blog\/$/);
+  await page.goForward();
+  await expect(page).toHaveURL(/\/blog\/page\/2\/$/);
+});
+
+test('serves original figures and attachments inside the blog mount', async ({ request }) => {
+  const figure = await request.get('/blog/images/hunt-szymanski/1.png');
+  expect(figure.status()).toBe(200);
+  expect(figure.headers()['content-type']).toContain('image/png');
+  const attachment = await request.get('/blog/attachments/physicslab1/newton_apple_report.pdf');
+  expect(attachment.status()).toBe(200);
+  expect(attachment.headers()['content-type']).toContain('application/pdf');
+  expect((await attachment.body()).subarray(0, 5).toString()).toBe('%PDF-');
 });

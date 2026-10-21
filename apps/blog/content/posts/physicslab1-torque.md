@@ -81,8 +81,8 @@ $$
 
 # Prelab 원본
 
-* <a href="/downloadable_files/physicslab1/torque_prelab.docx" download="download">Word (.docx)</a>
-* <a href="/downloadable_files/physicslab1/torque_prelab.pdf" download="download">PDF (.pdf)</a>
+* <a href="/blog/attachments/physicslab1/torque_prelab.docx" download="download">Word (.docx)</a>
+* <a href="/blog/attachments/physicslab1/torque_prelab.pdf" download="download">PDF (.pdf)</a>
 
 
 
@@ -320,6 +320,6 @@ $$
 
 # 보고서 원본
 
-* <a href="/downloadable_files/physicslab1/torque_report.docx" download="download">Word (.docx)</a>
-* <a href="/downloadable_files/physicslab1/torque_report.pdf" download="download">PDF (.pdf)</a>
+* <a href="/blog/attachments/physicslab1/torque_report.docx" download="download">Word (.docx)</a>
+* <a href="/blog/attachments/physicslab1/torque_report.pdf" download="download">PDF (.pdf)</a>
 

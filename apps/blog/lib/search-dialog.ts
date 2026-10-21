@@ -1,3 +1,4 @@
+import { blogPath } from './site.ts';
 import { searchPosts, type SearchEntry, type SearchHit } from './search.ts';
 
 const toggle = document.querySelector<HTMLButtonElement>('#search-toggle')!;
@@ -43,12 +44,12 @@ function showResults() {
 }
 
 async function loadEntries(): Promise<SearchEntry[]> {
-  const response = await fetch('/blog/search.json');
+  const response = await fetch(blogPath('search.json'));
   if (!response.ok) throw new Error('Search index request failed');
   const data: unknown = await response.json();
   if (!Array.isArray(data) || !data.every(entry =>
     entry && typeof entry.title === 'string' && typeof entry.content === 'string' &&
-    typeof entry.url === 'string' && /^\/blog\/posts\/[a-z0-9]+(?:-[a-z0-9]+)*\/$/.test(entry.url)
+    typeof entry.url === 'string' && entry.url.startsWith(blogPath('posts/')) && /^[a-z0-9]+(?:-[a-z0-9]+)*\/$/.test(entry.url.slice(blogPath('posts/').length))
   )) throw new Error('Invalid search index');
   return data;
 }

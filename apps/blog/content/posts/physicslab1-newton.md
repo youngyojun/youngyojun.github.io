@@ -95,8 +95,8 @@ tags: ["물리학실험","물리학실험1","보고서"]
 
 # Prelab 원본
 
-* <a href="/downloadable_files/physicslab1/newton_apple_prelab.docx" download="download">Word (.docx)</a>
-* <a href="/downloadable_files/physicslab1/newton_apple_prelab.pdf" download="download">PDF (.pdf)</a>
+* <a href="/blog/attachments/physicslab1/newton_apple_prelab.docx" download="download">Word (.docx)</a>
+* <a href="/blog/attachments/physicslab1/newton_apple_prelab.pdf" download="download">PDF (.pdf)</a>
 
 
 
@@ -272,6 +272,6 @@ tags: ["물리학실험","물리학실험1","보고서"]
 
 # 보고서 원본
 
-* <a href="/downloadable_files/physicslab1/newton_apple_report.docx" download="download">Word (.docx)</a>
-* <a href="/downloadable_files/physicslab1/newton_apple_report.pdf" download="download">PDF (.pdf)</a>
+* <a href="/blog/attachments/physicslab1/newton_apple_report.docx" download="download">Word (.docx)</a>
+* <a href="/blog/attachments/physicslab1/newton_apple_report.pdf" download="download">PDF (.pdf)</a>
 

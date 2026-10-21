@@ -14,7 +14,7 @@ export default defineConfig({
     { name: 'webkit-mobile', use: { browserName: 'webkit', viewport: { width: 375, height: 812 }, isMobile: true, hasTouch: true } },
   ],
   webServer: {
-    command: 'node preview.mjs',
+    command: 'node apps/site/preview.mjs',
     url: 'http://127.0.0.1:4325/blog/',
     reuseExistingServer: false,
     timeout: 30000,
