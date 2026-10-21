@@ -1,8 +1,0 @@
----
-import { redirects } from '../lib/redirects';
-import Redirect from '../components/Redirect.astro';
-export function getStaticPaths() {
-  return redirects.map(redirect => ({ params: { path: decodeURIComponent(redirect.from.slice(1, -1)) }, props: redirect }));
-}
----
-<Redirect to={Astro.props.to} hashRoute={Astro.props.hashRoute} />

@@ -1,10 +1,10 @@
 ---
-interface Props { to: string; hashRoute?: 'tags' | 'categories' | 'archives' }
-const { to, hashRoute } = Astro.props;
+interface Props { to: string }
+const { to } = Astro.props;
 if (!to.startsWith('/') || to.startsWith('//')) throw new Error('Redirect targets must be same-site paths');
 ---
 <!doctype html>
-<html lang="ko" data-redirect={to} data-hash-route={hashRoute}>
+<html lang="ko" data-redirect={to}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -15,9 +15,8 @@ if (!to.startsWith('/') || to.startsWith('//')) throw new Error('Redirect target
   <body>
     <main><h1>페이지가 이동했습니다.</h1><p><a href={to}>새 주소로 이동하기</a></p></main>
     <script>
-      import { redirectTarget } from '../lib/redirect-target';
-      const { redirect, hashRoute } = document.documentElement.dataset;
-      if (redirect) location.replace(redirectTarget(redirect, hashRoute, location.hash));
+      const { redirect } = document.documentElement.dataset;
+      if (redirect) location.replace(redirect + location.hash);
     </script>
     <style>body { max-width: 42rem; margin: 4rem auto; padding: 1.5rem; font: 1rem/1.8 system-ui, sans-serif; color: #333; }</style>
   </body>

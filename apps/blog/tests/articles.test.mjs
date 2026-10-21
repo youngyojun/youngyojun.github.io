@@ -1,11 +1,10 @@
 import assert from 'node:assert/strict';
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { test } from 'node:test';
 import { plainText } from '../lib/text.ts';
 
 const originals = JSON.parse(readFileSync(new URL('./fixtures/posts.json', import.meta.url), 'utf8'));
-const aliases = JSON.parse(readFileSync(new URL('./fixtures/post-urls.json', import.meta.url), 'utf8'));
 const page = path => readFileSync(new URL(`../dist/${decodeURIComponent(path.slice(1))}index.html`, import.meta.url), 'utf8');
 
 test('publishes every original article at its filename URL with the same instant and a KST display date', () => {
@@ -27,13 +26,19 @@ test('publishes every original article at its filename URL with the same instant
   }
 });
 
-test('old article URLs contain a canonical and a visible link to the new address', () => {
-  for (const [old, destination] of Object.entries(aliases)) {
-    const html = page(old);
-    assert.ok(html.includes(`href="https://youngyojun.github.io${destination}"`), old);
-    assert.ok(html.includes(`href="${destination}"`), old);
-    assert.ok(html.includes(`0;url=${destination}`), old);
-    assert.ok(!html.includes('class="prose"'), old);
+test('does not publish former article or navigation alias pages', () => {
+  for (const path of ['daily/2020/02/15/first-article/', 'secmem/2022/03/20/Hunt-Szymanski/', 'tag/', 'category/', 'tags/', 'categories/', 'archives/', 'about/', 'page2/']) {
+    assert.equal(existsSync(new URL(`../dist/${path}index.html`, import.meta.url)), false, path);
+  }
+});
+
+test('Atom entry IDs use the canonical article URLs', () => {
+  const feed = readFileSync(new URL('../dist/atom.xml', import.meta.url), 'utf8');
+  const entries = [...feed.matchAll(/<entry>[\s\S]*?<id>([^<]+)<\/id>[\s\S]*?<link href="([^"]+)"\/>/g)];
+  assert.equal(entries.length, 10);
+  for (const [, id, link] of entries) {
+    assert.equal(id, link);
+    assert.match(id, /^https:\/\/youngyojun\.github\.io\/blog\/posts\/[a-z0-9-]+\/$/);
   }
 });
 

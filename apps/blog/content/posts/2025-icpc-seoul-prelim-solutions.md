@@ -5,7 +5,7 @@ categories: ["ICPC"]
 tags: ["ICPC"]
 ---
 
-**Disclaimer:** This is an **unofficial** analysis of some possible ways to solve the problems of the 2025 ICPC Asia Seoul Regional Preliminary. They are not intended to give complete solutions, but rather to outline some approaches that can be used to solve the problems. If you find an error, please [send me an email](https://youngyojun.github.io/about/) about it.
+**Disclaimer:** This is an **unofficial** analysis of some possible ways to solve the problems of the 2025 ICPC Asia Seoul Regional Preliminary. They are not intended to give complete solutions, but rather to outline some approaches that can be used to solve the problems. If you find an error, please [send me an email](https://youngyojun.github.io/blog/about/) about it.
 
 
 

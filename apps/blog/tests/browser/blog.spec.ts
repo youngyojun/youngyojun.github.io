@@ -84,14 +84,12 @@ test('treats indexed HTML-looking strings as text', async ({ page }) => {
   expect(await page.evaluate(() => 'searchXss' in window)).toBe(false);
 });
 
-test('moves old post and hash-based classification addresses to the new URLs', async ({ page }) => {
-  await page.goto('/secmem/2022/03/20/Hunt-Szymanski/#결론');
-  await expect(page).toHaveURL(/\/blog\/posts\/hunt-szymanski\/#/);
-  await page.goto('/tag/#/ICPC/page2');
-  await expect(page).toHaveURL(/\/blog\/tags\/ICPC\/page\/2\/$/);
-  await expect(page.locator('.post-previews article')).not.toHaveCount(0);
-  await page.goto('/category/#/Linear%20Algebra');
-  await expect(page).toHaveURL(/\/blog\/categories\/Linear%20Algebra\/$/);
+test('returns 404 at former article and classification URLs', async ({ page }) => {
+  for (const path of ['/secmem/2022/03/20/Hunt-Szymanski/', '/tag/#/ICPC/page2', '/category/#/Linear%20Algebra']) {
+    const response = await page.goto(path);
+    expect(response?.status()).toBe(404);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('페이지를 찾을 수 없습니다.');
+  }
 });
 
 test('provides a real 404 response and a visible return link', async ({ page }) => {
@@ -101,7 +99,7 @@ test('provides a real 404 response and a visible return link', async ({ page }) 
   await expect(page.getByRole('link', { name: '블로그로 돌아가기 →' })).toHaveAttribute('href', '/blog/');
 });
 
-test('keeps navigation, article math and old-address fallback usable without JavaScript', async ({ browser, baseURL }) => {
+test('keeps navigation, article math and the root entry usable without JavaScript', async ({ browser, baseURL }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, baseURL });
   try {
     const page = await context.newPage();
@@ -112,8 +110,8 @@ test('keeps navigation, article math and old-address fallback usable without Jav
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('학교');
     await page.goto('/blog/posts/hunt-szymanski/');
     await expect(page.locator('.mathcal').first()).toBeVisible();
-    await page.goto('/daily/2020/02/15/first-article/');
-    await expect(page).toHaveURL(/\/blog\/posts\/first-article\/$/);
+    await page.goto('/');
+    await expect(page).toHaveURL(/\/blog\/$/);
   } finally { await context.close(); }
 });
 
