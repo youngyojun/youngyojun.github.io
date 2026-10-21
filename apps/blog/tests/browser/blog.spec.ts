@@ -23,6 +23,9 @@ test('renders local figures, mathcal, code and Korean content without client mat
   await expect(page.locator('.katex-error')).toHaveCount(0);
   await page.evaluate(() => document.fonts.ready);
   await expect(page.locator('.prose .mathcal').first()).toBeVisible();
+  await expect(page.locator('.prose .mathcal').first()).toHaveCSS('font-family', /KaTeX_Caligraphic/);
+  // A renderer/CSS version mismatch can leave the text visible while breaking formula layout.
+  await expect(page.locator('.prose .katex-html > span').first()).toHaveCSS('display', 'inline-block');
   expect(await page.locator('.prose img').evaluateAll(images => images.every(image => (image as HTMLImageElement).naturalWidth > 0))).toBe(true);
   expect(await page.locator('script[src*="mathjax"]').count()).toBe(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);

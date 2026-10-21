@@ -97,6 +97,8 @@ $$
 
 Astro 공식 Unified processor와 remark-math·rehype-katex로 빌드 시 수식을 렌더링합니다. 렌더러와 CSS/폰트의 KaTeX 버전을 맞추고 로컬 산출물로 제공합니다. 외부 MathJax 스크립트와 런타임 수식 변환은 없습니다. TeX 중괄호는 `\{`·`\}`로 작성하고 Jekyll용 이중 이스케이프를 추가하지 않습니다. Markdown 표 안의 절댓값은 `\lvert`·`\rvert`를 사용하면 구분자와 충돌하지 않습니다.
 
+KaTeX 버전은 `pnpm-workspace.yaml`의 `catalog.katex` 한 곳에서 관리합니다. 현재 `rehype-katex`가 이전 버전을 의존하므로 `overrides`로 수식 생성기와 CSS를 같은 버전에 맞춥니다. 빌드와 테스트에는 Astro의 `--force`를 사용하여 렌더러 업데이트 후 이전 콘텐츠 캐시가 재사용되지 않도록 합니다. 브라우저 검사에서는 수식의 가시성뿐 아니라 실제 폰트와 배치 스타일의 적용도 확인합니다.
+
 ## 이미지·첨부파일
 
 새 그림은 `apps/blog/public/images/<slug>/`, 새 첨부는 `apps/blog/public/downloads/`에 추가하고 본문에서는 `/images/...`, `/downloads/...`로 연결할 수 있습니다. `public` 파일은 이름과 바이트를 유지해 배포합니다.
