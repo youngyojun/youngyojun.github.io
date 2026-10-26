@@ -8,6 +8,10 @@ updates:
       time: "09:00"
       timezone: Asia/Seoul
     open-pull-requests-limit: 3
+    ignore:
+      # Match the Node runtime major pinned in .nvmrc; upgrade both together.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
     groups:
       compatible-packages:
         patterns: ["*"]
