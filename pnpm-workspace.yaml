@@ -3,8 +3,8 @@ packages:
   - packages/*
 
 catalog:
-  astro: 7.4.2
-  katex: 0.19.0
+  astro: 7.4.4
+  katex: 0.19.1
 
 overrides:
   # shortcut: rehype-katex still targets KaTeX 0.16; remove this override once it supports the catalog release.
