@@ -87,7 +87,7 @@ Apply standard Mo's ordering over frames, and answer the queries with square-roo
 
 
 
-## D. [Fox Buki](https://www.youtube.com/channel/UCYxLMfeX1CbMBll9MsGlzmw)
+## D. [Fox Buki](https://www.youtube.com/@tenkoshibuki/)
 
 <small>My solution: 1,602 bytes.</small>
 
