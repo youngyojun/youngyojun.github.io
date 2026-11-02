@@ -2,7 +2,7 @@
 
 Astro 블로그와 독립 앱을 관리하는 pnpm monorepo입니다. 현재 `apps/blog`는 블로그를, `apps/site`는 루트 진입점·전역 404·robots·사이트맵 인덱스를 담당합니다. 메인 소개 화면과 다른 앱은 아직 구현하지 않았습니다.
 
-Jekyll 빌드와 이전 테마의 렌더링 코드는 제거했습니다. 운영 GitHub Pages 설정은 아직 전환하지 않았습니다. 기존 Jekyll 방식으로 이 변경을 배포하지 마세요. 일반 CI는 검증과 정적 산출물 업로드만 수행합니다. 실제 게시는 `master`에서 수동으로 배포 옵션을 선택한 경우에만 실행됩니다.
+Jekyll 빌드와 이전 테마의 렌더링 코드는 제거했습니다. 운영 GitHub Pages 설정은 아직 전환하지 않았습니다. 기존 Jekyll 방식으로 이 변경을 배포하지 마세요. `master`에 push하면 검증을 통과한 정적 산출물을 자동 게시합니다. PR과 배포 옵션 없는 수동 실행에서는 검증만 수행합니다.
 
 ## 개발
 
@@ -145,11 +145,11 @@ KaTeX 버전은 `pnpm-workspace.yaml`의 `catalog.katex` 한 곳에서 관리합
 
 `corepack pnpm build`는 `apps/site/dist`를 루트에, `apps/blog/dist`를 `dist/blog/`에 조립하고 `.nojekyll`을 추가합니다. `scripts/assemble-site.ts`는 앱 경로의 중복·중첩·소유권 침범, 원본과 출력의 경로 중첩·심볼릭 링크·파일 충돌을 검출하며, 충돌이 있으면 기존 결과를 건드리기 전에 실패합니다. 배포 대상은 루트 `dist/`입니다. 산출물과 브라우저 테스트 결과는 Git에 넣지 않습니다.
 
-`.github/workflows/ci.yml`은 고정된 Node/pnpm으로 설치·타입·테스트·조립·브라우저 검증을 실행하고 `static-site` artifact를 업로드합니다. push·pull request·배포 옵션 없는 수동 실행에서는 검증만 합니다. 수동 실행의 `deploy`를 선택하고 브랜치가 `master`인 경우, 같은 실행에서 검증한 `dist/`를 Pages artifact로 포장하고 별도 배포 job이 게시합니다. 검증 실패 시 배포하지 않습니다. Pages 쓰기·OIDC 권한은 배포 job에만 부여합니다.
+`.github/workflows/ci.yml`은 고정된 Node/pnpm으로 설치·타입·테스트·조립·브라우저 검증을 실행하고 `static-site` artifact를 업로드합니다. `master` push와 PR merge는 검증 성공 후 자동 배포합니다. PR과 배포 옵션 없는 수동 실행에서는 검증만 합니다. `master`에서 수동 실행의 `deploy`를 선택해 배포할 수도 있습니다. 같은 실행에서 검증한 `dist/`를 Pages artifact로 포장하고 별도 배포 job이 게시하며, 검증 실패 시 배포하지 않습니다. 자동·수동 배포는 같은 대기열을 사용하고 진행 중인 배포를 취소하지 않습니다. Pages 쓰기·OIDC 권한은 배포 job에만 부여합니다.
 
 브라우저 검사 실패 시 `browser-failures` artifact에 HTML 보고서·실패 화면·trace를 7일간 보관합니다. 성공한 실행의 `static-site`도 7일간 보관합니다.
 
-`.github/dependabot.yml`은 매주 월요일 오전 9시 KST 일정으로 pnpm workspace 패키지와 GitHub Actions의 업데이트를 확인합니다. minor·patch 업데이트는 ecosystem별로 묶고 major 업데이트는 별도 PR로 제안합니다. [Dependabot 설정](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference)에 따라 업데이트 PR을 만들며 자동 병합·배포하지 않습니다. PR의 변경 내용과 CI 결과를 확인한 뒤 반영합니다. Node와 pnpm 자체의 버전은 별도로 관리합니다.
+`.github/dependabot.yml`은 매주 월요일 오전 9시 KST 일정으로 pnpm workspace 패키지와 GitHub Actions의 업데이트를 확인합니다. minor·patch 업데이트는 ecosystem별로 묶고 major 업데이트는 별도 PR로 제안합니다. [Dependabot 설정](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference)에 따라 업데이트 PR을 만들며 자동 병합하지 않습니다. PR의 변경 내용과 CI 결과를 확인한 뒤 merge하면 `master` CI의 검증을 거쳐 자동 배포합니다. Node와 pnpm 자체의 버전은 별도로 관리합니다.
 
 ### 첫 운영 전환
 
@@ -161,12 +161,12 @@ KaTeX 버전은 `pnpm-workspace.yaml`의 `catalog.katex` 한 곳에서 관리합
 4. **Actions → CI → Run workflow**에서 브랜치 `master`와 `deploy` 옵션을 선택합니다. 다시 수행한 검증을 모두 통과하면 배포 job이 실행됩니다. 다른 브랜치에서는 배포를 건너뜁니다.
 5. 운영 `/blog/`, 삭제한 과거 주소의 404, 검색, 그림·다운로드, `/blog/atom.xml`, `/sitemap.xml`, `/blog/sitemap.xml`, 없는 주소의 404를 확인합니다. 새로고침과 모바일 화면도 확인합니다.
 
-GitHub Pages에는 빌드 소스가 아니라 조립한 정적 `dist/`를 게시합니다. 수동 배포 방식과 권한·artifact 구성은 [GitHub 공식 문서](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)를 따릅니다. 첫 원격 실행과 실제 게시 동작은 운영 전환 때 확인해야 합니다.
+GitHub Pages에는 빌드 소스가 아니라 조립한 정적 `dist/`를 게시합니다. 배포 권한·artifact 구성은 [GitHub 공식 문서](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)를 따릅니다. 첫 원격 실행과 실제 게시 동작은 운영 전환 때 확인해야 합니다.
 
 ### 복구
 
-새 방식의 정상 배포 이후에는 해당 실행의 commit SHA와 `static-site` artifact를 보관합니다. 문제가 생기면 **마지막으로 정상 배포된 실행**을 열고 **Re-run all jobs**로 같은 commit을 다시 검증·빌드·배포할 수 있습니다. [GitHub의 재실행](https://github.com/github/docs/blob/main/content/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs.md)은 최초 실행 후 30일 이내에 가능합니다. 기간이 지난 경우 정상 버전의 소스를 `master`의 새 복구 commit으로 적용한 뒤 수동 배포합니다.
+새 방식의 정상 배포 이후에는 해당 실행의 commit SHA와 `static-site` artifact를 보관합니다. 문제가 생기면 **마지막으로 정상 배포된 실행**을 열고 **Re-run all jobs**로 같은 commit을 다시 검증·빌드·배포할 수 있습니다. [GitHub의 재실행](https://github.com/github/docs/blob/main/content/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs.md)은 최초 실행 후 30일 이내에 가능합니다. 기간이 지난 경우 정상 버전의 소스를 `master`의 새 복구 commit으로 적용하면 검증 후 자동 배포합니다.
 
-배포 옵션 없이 실행했던 CI를 재실행해도 게시되지는 않습니다. 재실행 시 `static-site`는 교체하며, Pages artifact는 실행 시도별 이름을 사용해 이전 업로드와 충돌하지 않습니다. `static-site` 보존 기간은 7일이므로 장기 보관이 필요하면 별도로 내려받습니다. 복구할 때에는 배포 job만 재실행하지 말고 **전체 job을 재실행**하여 새 시도에 필요한 artifact를 다시 생성합니다.
+PR 검사나 배포 옵션 없는 수동 실행을 재실행해도 게시되지는 않습니다. 재실행 시 `static-site`는 교체하며, Pages artifact는 실행 시도별 이름을 사용해 이전 업로드와 충돌하지 않습니다. `static-site` 보존 기간은 7일이므로 장기 보관이 필요하면 별도로 내려받습니다. 복구할 때에는 배포 job만 재실행하지 말고 **전체 job을 재실행**하여 새 시도에 필요한 artifact를 다시 생성합니다.
 
 첫 Astro 전환 자체를 되돌려야 하면, 위의 기존 정상 commit에서 복구 브랜치를 만들고 Pages source를 그 브랜치의 `/`를 사용하는 **Deploy from a branch**로 되돌립니다. 새 코드가 있는 `master`를 Jekyll source로 선택하지 않습니다. 이 경로는 기존 Pages/Jekyll 빌드에 다시 의존하므로 전환 전에 GitHub의 지원 여부와 해당 commit의 빌드 가능성을 확인해야 합니다. 복구도 실제 운영 게시 작업이므로 명시적으로 결정한 뒤 실행합니다.

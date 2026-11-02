@@ -15,8 +15,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: ci-${{ github.ref }}-${{ inputs.deploy && 'deploy' || 'verify' }}
-  cancel-in-progress: ${{ !inputs.deploy }}
+  group: ci-${{ github.ref }}-${{ (github.event_name == 'push' || inputs.deploy) && 'deploy' || 'verify' }}
+  cancel-in-progress: ${{ github.event_name != 'push' && !inputs.deploy }}
 
 jobs:
   verify:
@@ -56,7 +56,7 @@ jobs:
           retention-days: 7
           overwrite: true
       - name: Package verified site for Pages
-        if: github.event_name == 'workflow_dispatch' && inputs.deploy && github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.deploy))
         uses: actions/upload-pages-artifact@v5.0.0
         with:
           name: github-pages-${{ github.run_attempt }}
@@ -64,7 +64,7 @@ jobs:
           include-hidden-files: true
 
   deploy:
-    if: github.event_name == 'workflow_dispatch' && inputs.deploy && github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/master' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.deploy))
     needs: verify
     runs-on: ubuntu-latest
     timeout-minutes: 10
