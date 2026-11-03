@@ -65,7 +65,7 @@ playwright.config.ts    # Chromium·WebKit 검사와 정적 preview 설정
 
 앱은 다른 앱의 내부 소스를 import하지 않습니다. 실제 공통 기능만 `packages/`에서 public export로 제공합니다. 콘텐츠·검색·분류 로직은 블로그 앱이 소유합니다.
 
-메인 홈은 Georgia 제목과 Helvetica Neue 본문을 사용합니다. 해당 글꼴이 없는 기기는 CSS에 지정된 대체 글꼴을 사용합니다. 블로그의 영문은 [Geist Sans](https://vercel.com/font), 한글은 [Noto Sans KR](https://fontsource.org/fonts/noto-sans-kr)를 공유 디자인 패키지에서 제공합니다. 고정된 Fontsource npm 패키지에서 필요한 글자 부분만 자체 제공하고 자주 쓰는 글자는 미리 불러옵니다. 외부 폰트 CDN은 사용하지 않으며 수식의 KaTeX와 코드의 고정폭 글꼴은 유지합니다.
+메인 홈은 Georgia 제목과 Helvetica Neue 본문을 사용합니다. 해당 글꼴이 없는 기기는 CSS에 지정된 대체 글꼴을 사용합니다. 블로그의 한글·영문은 공유 디자인 패키지의 [Wanted Sans Variable](https://github.com/wanteddev/wanted-sans)을 사용합니다. 고정된 공식 npm 패키지에서 필요한 글자 부분만 자체 제공하고 자주 쓰는 글자는 미리 불러옵니다. 블로그 본문은 17px, 글 제목은 30px(모바일 26px), 본문 소제목은 24·22·20px, 메뉴는 14px, 날짜·분류·태그는 13px를 기준으로 하며 브라우저의 기본 글자 크기 설정을 따르는 rem 단위를 사용합니다. 외부 폰트 CDN은 사용하지 않으며 수식의 KaTeX와 코드의 고정폭 글꼴은 유지합니다.
 
 ## 새 글 작성
 

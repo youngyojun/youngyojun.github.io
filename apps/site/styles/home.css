@@ -5,7 +5,7 @@
   --home-muted: #69716a;
   --home-accent: #315c46;
   --home-line: #dfe3d9;
-  --font-body: "Helvetica Neue", Helvetica, Arial, "Apple SD Gothic Neo", "Noto Sans KR Variable", sans-serif;
+  --font-body: "Helvetica Neue", Helvetica, Arial, "Apple SD Gothic Neo", "Wanted Sans Variable", sans-serif;
   --font-heading: Georgia, "Times New Roman", serif;
 }
 html { scroll-behavior: smooth; scrollbar-gutter: stable; text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }

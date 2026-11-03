@@ -121,12 +121,9 @@ importers:
 
   packages/design-tokens:
     dependencies:
-      '@fontsource-variable/geist':
-        specifier: 5.3.0
-        version: 5.3.0
-      '@fontsource-variable/noto-sans-kr':
-        specifier: 5.3.1
-        version: 5.3.1
+      wanted-sans:
+        specifier: 1.0.3
+        version: 1.0.3
 
   packages/ui:
     dependencies:
@@ -400,12 +397,6 @@ packages:
 
   '@emnapi/wasi-threads@1.2.3':
     resolution: {integrity: sha512-ELEBe8PsLvvJ6QMr0zLt8ffvOHW/dc1m3CEzNMg7aJUv3bMaoDtw2TXyDAwkYBuroxxuHEwhRTLJSe5sya547g==}
-
-  '@fontsource-variable/geist@5.3.0':
-    resolution: {integrity: sha512-j0m+vLQuG5XAYoHtGCVu0spvlGreR3EzpECUVzkFmI1mTVnAO38l/NEPDCFgZ177JxzYJCLSmTQibIiYPilGrA==}
-
-  '@fontsource-variable/noto-sans-kr@5.3.1':
-    resolution: {integrity: sha512-f5aty6Qgk2LVU5TjCtXHxiYHqUWYW8f75ll0Chn8ucCqoOlIomcACUwf1V47yUt6wTdWZiGr3dcbQk+zlOspMA==}
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -2230,6 +2221,9 @@ packages:
   vscode-uri@3.2.0:
     resolution: {integrity: sha512-m2gXo3bn0G1kT9InzMf07fTbqMbGtyckj3bH5ktLO+1Ssv+yiATZ4dhwaQv9UZWxJh6E9IFGnQyjgWVDWVBDrg==}
 
+  wanted-sans@1.0.3:
+    resolution: {integrity: sha512-YU+mQRJMc97zMGFmxFjOvjdrF5Hi2zagc69bNP9n//i77Dlf9AWGfziZWYKdhQzPK5tw+e0iHcjLrZXDatxRTQ==}
+
   web-namespaces@2.0.1:
     resolution: {integrity: sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==}
 
@@ -2576,10 +2570,6 @@ snapshots:
   '@emnapi/wasi-threads@1.2.3':
     dependencies:
       tslib: 2.8.1
-
-  '@fontsource-variable/geist@5.3.0': {}
-
-  '@fontsource-variable/noto-sans-kr@5.3.1': {}
 
   '@img/colour@1.1.0':
     optional: true
@@ -4759,6 +4749,8 @@ snapshots:
   vscode-nls@5.2.0: {}
 
   vscode-uri@3.2.0: {}
+
+  wanted-sans@1.0.3: {}
 
   web-namespaces@2.0.1: {}
 

@@ -10,7 +10,6 @@
     "**/*.css"
   ],
   "dependencies": {
-    "@fontsource-variable/geist": "5.3.0",
-    "@fontsource-variable/noto-sans-kr": "5.3.1"
+    "wanted-sans": "1.0.3"
   }
 }

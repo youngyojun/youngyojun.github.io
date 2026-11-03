@@ -85,16 +85,22 @@ test('uses editorial homepage typography and self-hosted blog fonts', async ({ p
   await expect(page.locator('.work-card h3').first()).toHaveCSS('font-family', /^Georgia/);
   const fonts: string[] = [];
   page.on('response', response => {
-    if (/\/(geist|noto-sans-kr)-.*\.woff2$/.test(new URL(response.url()).pathname)) fonts.push(response.url());
+    if (/\/WantedSansVariable.*\.woff2$/.test(new URL(response.url()).pathname)) fonts.push(response.url());
   });
   await page.goto('/blog/');
   await page.evaluate(() => document.fonts.ready);
-  await expect(page.locator('body')).toHaveCSS('font-family', /^"?Geist Variable/);
-  await expect(page.locator('h1').first()).toHaveCSS('font-family', /^"?Geist Variable/);
-  expect(await page.evaluate(() => [...document.fonts].some(font => font.family.includes('Geist') && font.status === 'loaded'))).toBe(true);
-  expect(await page.evaluate(() => [...document.fonts].some(font => font.family.includes('Noto Sans KR') && font.status === 'loaded'))).toBe(true);
+  await expect(page.locator('body')).toHaveCSS('font-family', /^"?Wanted Sans Variable/);
+  await expect(page.locator('h1').first()).toHaveCSS('font-family', /^"?Wanted Sans Variable/);
+  await expect(page.locator('body')).toHaveCSS('font-size', '17px');
+  await expect(page.locator('.site-nav')).toHaveCSS('font-size', '14px');
+  await expect(page.locator('time').first()).toHaveCSS('font-size', '13px');
+  expect(await page.evaluate(() => [...document.fonts].some(font => font.family.includes('Wanted Sans') && font.status === 'loaded'))).toBe(true);
   expect(fonts.length).toBeGreaterThan(0);
   expect(fonts.every(url => new URL(url).origin === new URL(baseURL!).origin)).toBe(true);
+  await page.goto('/blog/posts/hunt-szymanski/');
+  await expect(page.locator('.article-header h1')).toHaveCSS('font-size', page.viewportSize()!.width <= 600 ? '26px' : '30px');
+  await expect(page.locator('.prose h1').first()).toHaveCSS('font-size', '24px');
+  await expect(page.locator('.prose h2').first()).toHaveCSS('font-size', '22px');
 });
 
 test('renders local figures, mathcal, code and Korean content without client math scripts', async ({ page }) => {
