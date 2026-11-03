@@ -16,7 +16,7 @@ test('publishes a personal homepage with real writing links and its own canonica
   assert.ok(html.includes('id="latest-posts"'));
   assert.ok(html.includes('id="copyright-year"'));
   assert.ok(!html.includes('함께 나눌 이야기가 있다면.'));
-  assert.ok(html.includes('href="mailto:youngyojun@gmail.com"'));
+  assert.ok(!html.includes('youngyojun@gmail.com'));
   assert.ok(!html.includes('http-equiv="refresh"'));
   assert.ok(!html.includes('location.replace'));
 });
