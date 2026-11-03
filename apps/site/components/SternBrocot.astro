@@ -1,0 +1,41 @@
+---
+import { appPaths } from '../../../site.config.ts';
+const nodes = [
+  { x: 220, y: 70, top: 1, bottom: 1, radius: 31 },
+  { x: 120, y: 168, top: 1, bottom: 2, radius: 28 },
+  { x: 320, y: 168, top: 2, bottom: 1, radius: 28 },
+  { x: 65, y: 270, top: 1, bottom: 3, radius: 25 },
+  { x: 175, y: 270, top: 2, bottom: 3, radius: 25 },
+  { x: 265, y: 270, top: 3, bottom: 2, radius: 25 },
+  { x: 375, y: 270, top: 3, bottom: 1, radius: 25 },
+];
+---
+<figure class="tree-figure">
+  <a class="tree-link" href={`${appPaths.blog}posts/sigma-sum-stern-brocot/`} aria-label="Read about the Stern–Brocot tree">
+    <svg viewBox="0 0 440 340" fill="none" aria-hidden="true">
+      <defs><pattern id="tree-grid" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="11" cy="11" r=".7" fill="currentColor" /></pattern></defs>
+      <rect width="440" height="340" fill="url(#tree-grid)" opacity=".14" />
+      <g class="tree-lines"><path d="M220 70 120 168 65 270M120 168 175 270M220 70 320 168 265 270M320 168 375 270M65 270 38 323M65 270 92 323M175 270 148 323M175 270 202 323M265 270 238 323M265 270 292 323M375 270 348 323M375 270 402 323" /></g>
+      {nodes.map(node => <g class="tree-node" transform={`translate(${node.x} ${node.y})`}>
+        <circle r={node.radius} />
+        <text y="-5">{node.top}</text><path d="M-9 0H9" /><text y="18">{node.bottom}</text>
+      </g>)}
+    </svg>
+    <figcaption><span>THE STERN–BROCOT TREE</span><span aria-hidden="true">↗</span></figcaption>
+  </a>
+</figure>
+
+<style>
+  .tree-figure { margin: 0; color: var(--home-accent); }
+  .tree-link { display: block; text-decoration: none; }
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .tree-lines { stroke: #a7b9aa; stroke-width: 1.2; }
+  .tree-node { cursor: pointer; }
+  .tree-node circle { fill: var(--home-paper); stroke: #8da692; stroke-width: 1.2; transition: fill .2s; }
+  .tree-node text { fill: currentColor; text-anchor: middle; font-family: var(--font-body); font-size: 18px; }
+  .tree-node path { stroke: currentColor; stroke-width: .8; }
+  .tree-node:hover circle, .tree-link:focus-visible .tree-node circle { fill: #e1e9df; }
+  figcaption { display: flex; justify-content: space-between; align-items: center; margin: 1rem 1.5rem 0; font-family: var(--font-body); font-size: .63rem; letter-spacing: .12em; }
+  figcaption span:last-child { font-size: 1.1rem; }
+  @media (prefers-reduced-motion: reduce) { .tree-node circle { transition: none; } }
+</style>

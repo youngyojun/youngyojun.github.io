@@ -1,5 +1,101 @@
 ---
-import Redirect from '../components/Redirect.astro';
-import { appPaths } from '../../../site.config.ts';
+import '@youngyojun/design-tokens/tokens.css';
+import '../styles/home.css';
+import SternBrocot from '../components/SternBrocot.astro';
+import { appPaths, siteUrl } from '../../../site.config.ts';
+
+const post = (slug: string) => `${appPaths.blog}posts/${slug}/`;
+const description = 'Gyojun Youn’s personal workspace. Notes and explorations on algorithms, mathematics, and software.';
 ---
-<Redirect to={appPaths.blog} />
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Gyojun Youn</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={`${siteUrl}/`} />
+    <meta property="og:title" content="Gyojun Youn" />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={`${siteUrl}/`} />
+    <link rel="alternate" type="application/atom+xml" title="Writing by Gyojun Youn" href={`${appPaths.blog}atom.xml`} />
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="home-header shell">
+      <a class="wordmark" href="/" aria-label="Gyojun Youn — Home">gy<span>.</span></a>
+      <nav aria-label="Main">
+        <a href="#about">About</a><a href="#work">Work</a><a href="#writing">Writing</a>
+        <a class="blog-link" href={appPaths.blog}>Blog <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main id="main" class="shell" tabindex="-1">
+      <section class="hero" aria-labelledby="home-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="small-dot" aria-hidden="true"></span> ALGORITHMS · SOFTWARE · NOTES</p>
+          <h1 id="home-title">Gyojun Youn<span>.</span></h1>
+          <p class="hero-intro">Exploring algorithms.<br />Writing what I learn.</p>
+          <p class="hero-description">I enjoy turning mathematical observations into code.<br class="desktop-break" /> This is where I collect what I learn along the way.</p>
+          <div class="hero-links"><a href={appPaths.blog}>Read the blog <span aria-hidden="true">↗</span></a><a href="https://github.com/youngyojun">GitHub <span aria-hidden="true">↗</span></a></div>
+        </div>
+        <div class="hero-art"><SternBrocot /></div>
+      </section>
+
+      <section class="work-section" id="work" aria-labelledby="work-title">
+        <div class="section-heading">
+          <div><p class="eyebrow">01 / EXPLORATIONS</p><h2 id="work-title">From insight to code.</h2></div>
+          <p>Algorithms and mathematics,<br />worth a closer look.</p>
+        </div>
+        <div class="work-grid">
+          <a class="work-card" href={post('hunt-szymanski')}>
+            <div class="work-art matrix-art" aria-hidden="true">
+              <svg viewBox="0 0 480 210" fill="none">
+                <path class="matrix-grid" d="M144 35V175M192 35V175M240 35V175M288 35V175M336 35V175M120 58H360M120 105H360M120 152H360" />
+                <path class="matrix-route" d="m144 152 48-47h48l48-47h48" />
+                <g class="matrix-points"><circle cx="144" cy="152" r="5"/><circle cx="192" cy="105" r="5"/><circle cx="240" cy="105" r="5"/><circle cx="288" cy="58" r="5"/><circle cx="336" cy="58" r="5"/></g>
+                <text x="38" y="45">X</text><text x="424" y="183">Y</text>
+              </svg>
+              <span class="art-caption">A DIFFERENT WAY TO SEE LCS</span>
+            </div>
+            <div class="work-card-heading"><h3>Hunt–Szymanski</h3><span aria-hidden="true">↗</span></div>
+            <p>Finding common subsequences faster, from observation to implementation.</p>
+            <span class="work-category">ALGORITHMS <span aria-hidden="true">/</span> 2022</span>
+          </a>
+          <a class="work-card" href={post('young-tableaux')}>
+            <div class="work-art tableaux-art" aria-hidden="true">
+              <svg viewBox="0 0 480 210" fill="none">
+                <g class="tableaux-cells"><path d="M163 28h48v48h-48ZM211 28h48v48h-48ZM259 28h48v48h-48ZM163 76h48v48h-48ZM211 76h48v48h-48ZM163 124h48v48h-48Z"/></g>
+                <g class="tableaux-numbers"><text x="187" y="59">1</text><text x="235" y="59">2</text><text x="283" y="59">5</text><text x="187" y="107">3</text><text x="235" y="107">4</text><text x="187" y="155">6</text></g>
+              </svg>
+              <span class="art-caption">A LITTLE ORDER, MANY POSSIBILITIES</span>
+            </div>
+            <div class="work-card-heading"><h3>Young tableaux</h3><span aria-hidden="true">↗</span></div>
+            <p>Combinatorics and algorithms, starting with a few simple rules for filling boxes.</p>
+            <span class="work-category">COMBINATORICS <span aria-hidden="true">/</span> 2021</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="writing-section" id="writing" aria-labelledby="writing-title">
+        <div class="section-heading"><div><p class="eyebrow">02 / LATEST WRITING</p><h2 id="writing-title">Recent writing.</h2></div><a class="text-link" href={appPaths.blog}>All posts <span aria-hidden="true">↗</span></a></div>
+        <p id="writing-status" class="writing-status" role="status"></p>
+        <ul class="writing-list" id="latest-posts">
+          <li class="writing-fallback"><a href={appPaths.blog}>Read the latest posts on the blog <span aria-hidden="true">↗</span></a></li>
+        </ul>
+      </section>
+
+      <section class="about-section" id="about" aria-labelledby="about-title">
+        <div><p class="eyebrow">03 / A LITTLE ABOUT ME</p><h2 id="about-title">Hello,<br />I’m Gyojun.</h2></div>
+        <div class="about-copy"><p>I like algorithms and mathematics: the small observations that help solve a problem, and the process of turning them into clear code and explanations.</p><p>This is my personal workspace, a home for past explorations and things yet to be built.</p><a class="text-link" href={`${appPaths.blog}about/`}>More about me <span aria-hidden="true">↗</span></a></div>
+      </section>
+    </main>
+
+    <footer class="home-footer shell"><div><a class="email-link" href="mailto:youngyojun@gmail.com">youngyojun@gmail.com <span aria-hidden="true">↗</span></a></div><div class="footer-bottom"><span>© <span id="copyright-year">{new Date().getFullYear()}</span> Gyojun Youn</span><div><a href="https://github.com/youngyojun">GitHub</a><a href="https://codeforces.com/profile/GyojunYoun">Codeforces</a><a href="#top">Back to top ↑</a></div></div></footer>
+    <script>
+      import '../lib/home';
+    </script>
+  </body>
+</html>

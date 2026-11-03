@@ -1,6 +1,6 @@
 # youngyojun.github.io
 
-Astro 블로그와 독립 앱을 관리하는 pnpm monorepo입니다. 현재 `apps/blog`는 블로그를, `apps/site`는 루트 진입점·전역 404·robots·사이트맵 인덱스를 담당합니다. 메인 소개 화면과 다른 앱은 아직 구현하지 않았습니다.
+Astro 블로그와 독립 앱을 관리하는 pnpm monorepo입니다. 현재 `apps/blog`는 블로그를, `apps/site`는 개인 메인 홈·전역 404·robots·사이트맵 인덱스를 담당합니다. 다른 앱은 아직 구현하지 않았습니다.
 
 Jekyll 빌드와 이전 테마의 렌더링 코드는 제거했습니다. 운영 GitHub Pages 설정은 아직 전환하지 않았습니다. 기존 Jekyll 방식으로 이 변경을 배포하지 마세요. `master`에 push하면 검증을 통과한 정적 산출물을 자동 게시합니다. PR과 배포 옵션 없는 수동 실행에서는 검증만 수행합니다.
 
@@ -14,7 +14,7 @@ corepack pnpm install --frozen-lockfile
 corepack pnpm dev --host 127.0.0.1 --port 4323
 ```
 
-블로그 개발 서버는 `http://localhost:4323/blog/`에서 앱 경로만 제공합니다. 전체 사이트는 `corepack pnpm build` 후 `corepack pnpm preview`로 확인합니다. 조립된 사이트의 `/`는 현재 `/blog/`로 이동하며, 향후 메인 화면을 구현할 때 `apps/site`의 이 진입점을 교체합니다.
+블로그 개발 서버는 `http://localhost:4323/blog/`에서 앱 경로만 제공합니다. 전체 사이트는 `corepack pnpm build` 후 `corepack pnpm preview`로 확인합니다. 조립된 사이트의 `/`는 개인 메인 홈, `/blog/`는 블로그입니다. 메인 홈만 개발하려면 `corepack pnpm --filter @youngyojun/site dev --host 127.0.0.1 --port 4324`를 사용합니다. 앱 전용 개발 서버는 다른 앱의 경로를 제공하지 않으므로 홈·블로그 간 이동은 조립된 전체 사이트에서 확인합니다.
 
 | 명령 | 동작 |
 | --- | --- |
@@ -41,7 +41,7 @@ Playwright가 설치한 전용 Chromium과 WebKit만 사용합니다. 개인 Chr
 
 ```text
 site.config.ts          # 도메인과 앱별 공개 경로 등록
-apps/site/              # 루트 진입점·전역 404·robots·사이트맵 인덱스
+apps/site/              # 개인 메인 홈·전역 404·robots·사이트맵 인덱스
 apps/blog/
   content/posts/        # 글 Markdown
   content/pages/        # 소개 등 작성 콘텐츠
@@ -64,6 +64,8 @@ playwright.config.ts    # Chromium·WebKit 검사와 정적 preview 설정
 `astro.config.mjs`의 `srcDir: '.'` 설정으로 앱 루트의 디렉터리를 사용합니다. 블로그의 `base`는 `/blog/`이며 `pages/index.astro`가 `/blog/`, `pages/posts/[slug].astro`가 `/blog/posts/<slug>/`를 생성합니다. 작성 원문과 URL 코드는 분리되어 있습니다. `pages/`는 콘텐츠를 조회해 화면에 연결하며 Markdown 원문을 보관하지 않습니다.
 
 앱은 다른 앱의 내부 소스를 import하지 않습니다. 실제 공통 기능만 `packages/`에서 public export로 제공합니다. 콘텐츠·검색·분류 로직은 블로그 앱이 소유합니다.
+
+메인 홈은 Georgia 제목과 Helvetica Neue 본문을 사용합니다. 해당 글꼴이 없는 기기는 CSS에 지정된 대체 글꼴을 사용합니다. 블로그의 영문은 [Geist Sans](https://vercel.com/font), 한글은 [Noto Sans KR](https://fontsource.org/fonts/noto-sans-kr)를 공유 디자인 패키지에서 제공합니다. 고정된 Fontsource npm 패키지에서 필요한 글자 부분만 자체 제공하고 자주 쓰는 글자는 미리 불러옵니다. 외부 폰트 CDN은 사용하지 않으며 수식의 KaTeX와 코드의 고정폭 글꼴은 유지합니다.
 
 ## 새 글 작성
 
@@ -123,9 +125,9 @@ KaTeX 버전은 `pnpm-workspace.yaml`의 `catalog.katex` 한 곳에서 관리합
 
 글·분류·목록·수식은 JavaScript 없이 읽고 이동할 수 있습니다. 검색은 native dialog와 처음 열 때 불러오는 `/blog/search.json`을 사용합니다. 한글·영어 제목/본문을 검색하며 전체 문구의 일치를 우선합니다. Escape·닫기·배경 클릭으로 닫고, 포커스를 복원합니다. 로딩 실패는 닫았다 다시 열어 재시도할 수 있습니다. 검색 결과는 HTML로 삽입하지 않고 텍스트 노드로 구성합니다.
 
-과거 글·탐색 주소의 alias와 자동 이동은 제공하지 않습니다. 이전 주소는 404로 처리하며, 글과 탐색에는 위의 정식 URL을 사용합니다. 메인 홈이 없는 현재 `/`에서 `/blog/`로 이동하는 진입점만 유지합니다.
+과거 글·탐색 주소의 alias와 자동 이동은 제공하지 않습니다. 이전 주소는 404로 처리하며, 글과 탐색에는 위의 정식 URL을 사용합니다. `/`는 개인 메인 홈이며 `/blog/`로 자동 이동하지 않습니다. 홈의 탐구 링크는 `apps/site/pages/index.astro`에서 직접 선별합니다. 글 영역은 블로그의 공개 `/blog/recent-posts.json`에서 블로그 목록과 같은 순서의 최신 3개 글을 불러옵니다. 새 글은 배포 후 홈에도 반영되며, JavaScript가 없거나 요청에 실패하면 블로그 링크를 제공합니다. 글 날짜는 KST로 표시하고 저작권 연도는 페이지를 열 때 현재 연도로 갱신합니다. 소개 문구와 도해는 홈 앱이 소유하며 다른 앱의 콘텐츠 구현을 import하지 않습니다.
 
-`/blog/atom.xml`은 최신 10개 글의 전체 본문을 제공합니다. 이전 `/atom.xml` 주소는 사용자의 결정대로 제거했으므로 기존 구독자는 새 주소로 구독해야 합니다. 각 entry의 ID와 링크는 정식 글 URL을 사용합니다. `/blog/sitemap.xml`에는 대표 글·탐색 페이지와 공개 PDF를 넣습니다. 루트 `/sitemap.xml`은 블로그 사이트맵을 안내하는 인덱스이며 `apps/site`가 소유합니다. 글 날짜는 명시한 게시 시각을 사용하고 파일 체크아웃 시각을 수정일로 사용하지 않습니다. `/robots.txt`는 사이트맵을 안내합니다. `/blog/search.xml`도 같은 글 데이터에서 생성합니다.
+`/blog/atom.xml`은 최신 10개 글의 전체 본문을 제공합니다. 이전 `/atom.xml` 주소는 사용자의 결정대로 제거했으므로 기존 구독자는 새 주소로 구독해야 합니다. 각 entry의 ID와 링크는 정식 글 URL을 사용합니다. `/blog/sitemap.xml`에는 대표 글·탐색 페이지와 공개 PDF를 넣습니다. 루트 `/sitemap.xml`은 홈의 `/site-sitemap.xml`과 블로그의 `/blog/sitemap.xml`을 안내하는 인덱스이며 `apps/site`가 소유합니다. 글 날짜는 명시한 게시 시각을 사용하고 파일 체크아웃 시각을 수정일로 사용하지 않습니다. `/robots.txt`는 사이트맵을 안내합니다. `/blog/search.xml`도 같은 글 데이터에서 생성합니다.
 
 전체 사이트의 없는 주소는 `apps/site`가 만드는 루트 `404.html`에서 안내하며 홈·블로그 링크를 제공합니다. 블로그의 앱 전용 404도 `/blog/404.html`에 생성됩니다. SPA로 대체 응답하거나 임의의 잘못된 주소를 정상 페이지로 처리하지 않습니다.
 
@@ -137,7 +139,7 @@ KaTeX 버전은 `pnpm-workspace.yaml`의 `catalog.katex` 한 곳에서 관리합
 
 새 앱은 `apps/<name>`에 별도 package.json과 dev/check/test/build 명령을 둡니다. `site.config.ts`의 `appPaths`에 공개 경로를 등록하고 앱 설정의 `base`가 같은 값을 사용하도록 합니다. 앱의 `dist/`는 앱 내부 경로만 포함하며 조립 단계가 등록한 공개 경로에 배치합니다. 다른 앱의 소스는 import하지 않고 실제 공유 코드만 workspace 패키지에서 가져옵니다.
 
-`/`와 전역 404·robots·사이트맵 인덱스는 `apps/site`, `/blog/` 전체는 `apps/blog`가 소유합니다. 루트 앱이 다른 앱의 경로 아래에 파일을 만들거나 두 앱의 경로가 중첩되면 조립이 실패합니다. 앱마다 CSS·스크립트·public 파일도 자기 경로 안에 배치합니다.
+`/`의 메인 홈과 전역 404·robots·사이트맵 인덱스는 `apps/site`, `/blog/` 전체는 `apps/blog`가 소유합니다. 루트 앱이 다른 앱의 경로 아래에 파일을 만들거나 두 앱의 경로가 중첩되면 조립이 실패합니다. 앱마다 CSS·스크립트·public 파일도 자기 경로 안에 배치합니다.
 
 공개 화면 주소마다 정적 진입 HTML을 생성하고 React로 필요한 상호작용을 구현하는 것을 기본으로 합니다. 새 앱은 직접 접속·새로고침·뒤로/앞으로 가기를 조립된 정적 결과에서 검증해야 합니다. 런타임 동적 라우트나 서버 기능이 필요해지면 해당 앱의 호스팅 요구를 별도로 검토합니다.
 

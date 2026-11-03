@@ -4,6 +4,8 @@ import { renderMathText } from '../../apps/blog/lib/math.ts';
 
 test('opens the blog, paginates and follows static classification links', async ({ page }) => {
   await page.goto('/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Gyojun Youn.');
+  await page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Blog' }).click();
   await expect(page).toHaveURL(/\/blog\/$/);
   await expect(page.locator('.post-previews article')).toHaveCount(10);
   await page.getByRole('link', { name: '2 페이지', exact: true }).click();
@@ -14,6 +16,85 @@ test('opens the blog, paginates and follows static classification links', async 
   await expect(page.locator('.post-previews article')).toHaveCount(1);
   await page.goto('/blog/categories/Linear%20Algebra/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Linear Algebra');
+});
+
+test('keeps the personal homepage navigable, responsive and linked to real articles', async ({ page, request }) => {
+  await page.goto('/');
+  await expect(page).toHaveTitle('Gyojun Youn');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://youngyojun.github.io/');
+  await page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Work', exact: true }).click();
+  await expect(page).toHaveURL(/\/#work$/);
+  for (const link of await page.locator('main a[href^="/blog/"]').evaluateAll(links => [...new Set(links.map(link => link.getAttribute('href')!))])) {
+    expect((await request.get(link)).status(), link).toBe(200);
+  }
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.locator('.work-card').first().click();
+  await expect(page).toHaveURL(/\/blog\/posts\/hunt-szymanski\/$/);
+  await page.getByRole('link', { name: '메인 홈', exact: true }).click();
+  await expect(page).toHaveURL(/^https?:\/\/[^/]+\/$/);
+  await page.getByRole('link', { name: 'Skip to content' }).focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('main')).toBeFocused();
+});
+
+test('shows the same latest articles as the blog and uses the current year', async ({ page }) => {
+  await page.goto('/blog/');
+  const latest = await page.locator('.post-previews h2 a').evaluateAll(links => links.slice(0, 3).map(link => link.getAttribute('href')));
+  await page.clock.setFixedTime(new Date('2031-06-10T12:00:00+09:00'));
+  await page.goto('/');
+  await expect(page.locator('.writing-list time')).toHaveCount(3);
+  expect(await page.locator('.writing-list a').evaluateAll(links => links.map(link => link.getAttribute('href')))).toEqual(latest);
+  await expect(page.locator('.home-footer')).toContainText('© 2031 Gyojun Youn');
+  await expect(page.locator('.home-footer')).not.toContainText('함께 나눌 이야기가 있다면.');
+});
+
+test('keeps a blog link when recent articles cannot load and treats titles as text', async ({ page }) => {
+  await page.route('**/blog/recent-posts.json', route => route.fulfill({ status: 503, body: 'unavailable' }));
+  await page.goto('/');
+  await expect(page.locator('#writing-status')).toContainText('Could not load recent posts');
+  await expect(page.locator('.writing-list a')).toHaveAttribute('href', '/blog/');
+  await page.unroute('**/blog/recent-posts.json');
+  await page.route('**/blog/recent-posts.json', route => route.fulfill({ json: [{
+    title: '<img src=x onerror=alert(1)>', description: '<script>literal</script>',
+    date: '2030-12-31T15:00:00Z', url: '/blog/posts/new-article/',
+  }] }));
+  await page.reload();
+  await expect(page.locator('.writing-list h3')).toHaveText('<img src=x onerror=alert(1)>');
+  await expect(page.locator('.writing-list img, .writing-list script')).toHaveCount(0);
+  await expect(page.locator('.writing-list time')).toHaveText('2031.01.01');
+  await page.unroute('**/blog/recent-posts.json');
+  await page.route('**/blog/recent-posts.json', route => route.fulfill({ json: [{
+    title: 'Unsafe URL', description: '', date: '2031-01-01T00:00:00+09:00', url: '//example.com/',
+  }] }));
+  await page.reload();
+  await expect(page.locator('#writing-status')).toContainText('Could not load recent posts');
+  await expect(page.locator('.writing-list a')).toHaveAttribute('href', '/blog/');
+  await page.unroute('**/blog/recent-posts.json');
+  await page.route('**/blog/recent-posts.json', route => route.fulfill({ json: [] }));
+  await page.reload();
+  await expect(page.locator('#writing-status')).toHaveText('No posts yet.');
+  await expect(page.locator('.writing-list time')).toHaveCount(0);
+});
+
+test('uses editorial homepage typography and self-hosted blog fonts', async ({ page, baseURL }) => {
+  await page.goto('/');
+  await expect(page.locator('body')).toHaveCSS('font-family', /^"?Helvetica Neue/);
+  await expect(page.locator('h1')).toHaveCSS('font-family', /^Georgia/);
+  await expect(page.locator('h2').first()).toHaveCSS('font-family', /^Georgia/);
+  await expect(page.locator('.work-card h3').first()).toHaveCSS('font-family', /^Georgia/);
+  const fonts: string[] = [];
+  page.on('response', response => {
+    if (/\/(geist|noto-sans-kr)-.*\.woff2$/.test(new URL(response.url()).pathname)) fonts.push(response.url());
+  });
+  await page.goto('/blog/');
+  await page.evaluate(() => document.fonts.ready);
+  await expect(page.locator('body')).toHaveCSS('font-family', /^"?Geist Variable/);
+  await expect(page.locator('h1').first()).toHaveCSS('font-family', /^"?Geist Variable/);
+  expect(await page.evaluate(() => [...document.fonts].some(font => font.family.includes('Geist') && font.status === 'loaded'))).toBe(true);
+  expect(await page.evaluate(() => [...document.fonts].some(font => font.family.includes('Noto Sans KR') && font.status === 'loaded'))).toBe(true);
+  expect(fonts.length).toBeGreaterThan(0);
+  expect(fonts.every(url => new URL(url).origin === new URL(baseURL!).origin)).toBe(true);
 });
 
 test('renders local figures, mathcal, code and Korean content without client math scripts', async ({ page }) => {
@@ -150,12 +231,14 @@ test('keeps navigation, article math and the root entry usable without JavaScrip
     await page.goto('/blog/posts/hunt-szymanski/');
     await expect(page.locator('.mathcal').first()).toBeVisible();
     await page.goto('/');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Gyojun Youn.');
+    await page.getByRole('link', { name: 'Read the blog', exact: true }).click();
     await expect(page).toHaveURL(/\/blog\/$/);
   } finally { await context.close(); }
 });
 
 test('publishes valid blog XML and a site-wide sitemap index', async ({ page, request }) => {
-  for (const path of ['/blog/atom.xml', '/blog/sitemap.xml', '/sitemap.xml']) {
+  for (const path of ['/blog/atom.xml', '/blog/sitemap.xml', '/sitemap.xml', '/site-sitemap.xml']) {
     const response = await request.get(path);
     expect(response.status()).toBe(200);
     const xml = await response.text();
@@ -165,7 +248,8 @@ test('publishes valid blog XML and a site-wide sitemap index', async ({ page, re
     }, xml);
     expect(parsed.errors).toBe(0);
     if (path === '/blog/atom.xml') expect(parsed.entries).toBe(10);
-    else if (path === '/sitemap.xml') expect(parsed.urls).toEqual(['https://youngyojun.github.io/blog/sitemap.xml']);
+    else if (path === '/sitemap.xml') expect(parsed.urls).toEqual(['https://youngyojun.github.io/site-sitemap.xml', 'https://youngyojun.github.io/blog/sitemap.xml']);
+    else if (path === '/site-sitemap.xml') expect(parsed.urls).toEqual(['https://youngyojun.github.io/']);
     else {
       expect(parsed.urls.length).toBeGreaterThan(60);
       expect(new Set(parsed.urls).size).toBe(parsed.urls.length);

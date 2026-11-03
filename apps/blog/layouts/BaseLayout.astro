@@ -5,6 +5,8 @@ import '../styles/site.css';
 import Search from '../components/Search.astro';
 import NavigationIcon from '../components/NavigationIcon.astro';
 import { site, blogPath } from '../lib/site';
+import { appPaths } from '../../../site.config.ts';
+import { fontPreloads } from '@youngyojun/design-tokens/fonts';
 
 interface Props {
   title?: string;
@@ -30,6 +32,7 @@ const navigation = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    {fontPreloads.map(href => <link rel="preload" as="font" type="font/woff2" href={href} crossorigin="anonymous" />)}
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
@@ -51,6 +54,6 @@ const navigation = [
       </nav>
     </header>
     <main id="main" tabindex="-1"><slot /></main>
-    <footer class="site-footer"><span>{site.author}</span><a href={blogPath('atom.xml')}>Atom</a></footer>
+    <footer class="site-footer"><span>{site.author}</span><a href={appPaths.site}>메인 홈</a><a href={blogPath('atom.xml')}>Atom</a></footer>
   </body>
 </html>
