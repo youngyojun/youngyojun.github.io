@@ -6,6 +6,21 @@ import { plainText } from '../lib/text.ts';
 
 const renderer = await createMarkdownProcessor(markdownOptions);
 
+test('renders prose dashes while preserving quotes, code, URLs and TeX source', async () => {
+  const source = [
+    'Floyd--Warshall and prose --- with "straight quotes", \'single quotes\', and ...',
+    'Inline code: `i--` and [link](https://example.com/--flag).',
+    String.raw`Math: $\texttt{--}$.`,
+    '```cpp\ni--;\n```',
+  ].join('\n\n');
+  const { code } = await renderer.render(source);
+  assert.ok(plainText(code).includes('Floyd–Warshall and prose — with "straight quotes", \'single quotes\', and ...'));
+  assert.ok(code.includes('<code>i--</code>'));
+  assert.ok(plainText(code).includes('i--;'));
+  assert.ok(code.includes('href="https://example.com/--flag"'));
+  assert.ok(code.includes(String.raw`\texttt{--}`));
+});
+
 test('renders mathcal, subscripts and literal set braces at build time', async () => {
   const { code } = await renderer.render(String.raw`$\mathcal{O}(n^2)$, $a_i$, $\{a_i\}$`);
   assert.ok(code.includes('class="katex"'));

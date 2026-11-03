@@ -4,7 +4,7 @@ import rehypeKatex from 'rehype-katex';
 import { mathOptions, rehypeHtmlMath } from './math.ts';
 
 export const markdownOptions: AstroMarkdownOptions = {
-  smartypants: false,
+  smartypants: { dashes: 'oldschool', quotes: false, backticks: false, ellipses: false },
   remarkPlugins: [remarkMath],
   rehypePlugins: [
     rehypeHtmlMath,
