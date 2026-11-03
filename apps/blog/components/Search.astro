@@ -1,8 +1,9 @@
 ---
 import { Button } from '@youngyojun/ui';
+import NavigationIcon from './NavigationIcon.astro';
 ---
 
-<button id="search-toggle" class="search-toggle" type="button" aria-haspopup="dialog" aria-controls="search-dialog" hidden>검색</button>
+<button id="search-toggle" class="search-toggle" type="button" aria-haspopup="dialog" aria-controls="search-dialog" hidden><NavigationIcon name="search" />검색</button>
 <dialog id="search-dialog" aria-labelledby="search-heading">
   <header class="search-header">
     <h2 id="search-heading">블로그 검색</h2>

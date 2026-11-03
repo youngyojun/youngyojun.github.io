@@ -1,0 +1,19 @@
+---
+const paths = {
+  posts: 'M14 3H5v18h14V8Zm0 0v5h5M8 12h8M8 16h8',
+  archives: 'M3 3h18v5H3ZM5 8v13h14V8M10 12h4',
+  tags: 'M3 3h8l10 10-8 8L3 11ZM7 7h.01',
+  categories: 'M3 3h7v7H3ZM14 3h7v7h-7ZM3 14h7v7H3ZM14 14h7v7h-7Z',
+  about: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 11v6M12 7h.01',
+  search: 'M17 10a7 7 0 1 0-14 0 7 7 0 0 0 14 0ZM15 15l6 6',
+} as const;
+interface Props { name: keyof typeof paths }
+const { name } = Astro.props;
+---
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <path d={paths[name]} />
+</svg>
+
+<style>
+  svg { width: 1.1em; height: 1.1em; flex-shrink: 0; }
+</style>

@@ -3,6 +3,7 @@ import '@youngyojun/design-tokens/tokens.css';
 import 'katex/dist/katex.min.css';
 import '../styles/site.css';
 import Search from '../components/Search.astro';
+import NavigationIcon from '../components/NavigationIcon.astro';
 import { site, blogPath } from '../lib/site';
 
 interface Props {
@@ -16,12 +17,12 @@ const { title, description = site.description, noindex = false, publishedAt } = 
 const pageTitle = title ? `${title} | ${site.title}` : site.title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const navigation = [
-  [site.blog, '글'],
-  [blogPath('archives/'), '아카이브'],
-  [blogPath('tags/'), '태그'],
-  [blogPath('categories/'), '분류'],
-  [blogPath('about/'), '소개'],
-];
+  [site.blog, '글', 'posts'],
+  [blogPath('archives/'), '아카이브', 'archives'],
+  [blogPath('tags/'), '태그', 'tags'],
+  [blogPath('categories/'), '분류', 'categories'],
+  [blogPath('about/'), '소개', 'about'],
+] as const;
 ---
 
 <!doctype html>
@@ -45,7 +46,7 @@ const navigation = [
       <a class="brand" href={site.blog}>{site.title}</a>
       <p class="site-subtitle">{site.description}</p>
       <nav class="site-nav" aria-label="블로그">
-        {navigation.map(([url, label]) => <a href={url} aria-current={Astro.url.pathname === url ? 'page' : undefined}>{label}</a>)}
+        {navigation.map(([url, label, icon]) => <a href={url} aria-current={Astro.url.pathname === url ? 'page' : undefined}><NavigationIcon name={icon} />{label}</a>)}
         <Search />
       </nav>
     </header>
