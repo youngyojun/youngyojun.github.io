@@ -30,5 +30,15 @@ export function planSeats(current: readonly Wind[]): SeatPlan {
     });
     return { current: [...current], target, moves };
   });
-  return candidates.reduce((best, next) => next.moves.length < best.moves.length ? next : best);
+  return candidates.reduce((best, next) => {
+    if (next.moves.length !== best.moves.length) return next.moves.length < best.moves.length ? next : best;
+    // Break ties by keeping East, then South, West and North in their current seats.
+    for (const wind of winds) {
+      const seat = current.indexOf(wind);
+      const bestKeeps = best.target[seat] === wind;
+      const nextKeeps = next.target[seat] === wind;
+      if (bestKeeps !== nextKeeps) return nextKeeps ? next : best;
+    }
+    return best;
+  });
 }

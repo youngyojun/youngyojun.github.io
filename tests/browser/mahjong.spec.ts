@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('draws four winds and shows the two players who should swap', async ({ page }) => {
+test('draws four winds and keeps East seated when two minimal swaps are possible', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('link', { name: 'Mahjong tools' }).click();
   await expect(page).toHaveURL(/\/mahjong\/$/);
@@ -16,8 +16,9 @@ test('draws four winds and shows the two players who should swap', async ({ page
   const current = page.getByRole('group', { name: '추첨 결과' });
   const target = page.getByRole('group', { name: '이렇게 앉으세요' });
   await expect(current.locator('[data-position="0"]')).toHaveAttribute('data-wind', 'south');
-  await expect(target.locator('[data-position="1"]')).toHaveAttribute('data-wind', 'east');
-  await expect(target.locator('[data-position="3"]')).toHaveAttribute('data-wind', 'west');
+  await expect(current.locator('[data-position="3"]')).toHaveAttribute('data-wind', 'east');
+  await expect(target.locator('[data-position="3"]')).toHaveAttribute('data-wind', 'east');
+  await expect(target.locator('[data-position="1"]')).toHaveAttribute('data-wind', 'west');
   await expect(page.getByRole('status').locator('li')).toHaveCount(2);
   await expect.poll(() => page.locator('.mahjong-tile').evaluateAll(images => images.every(image => (image as HTMLImageElement).naturalWidth > 0))).toBe(true);
   await expect(current.locator('.mahjong-tile').first()).toHaveCSS('background-image', /Front.*\.svg/);

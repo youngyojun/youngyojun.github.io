@@ -6,7 +6,7 @@ function permutations(items: readonly Wind[]): Wind[][] {
   return items.length ? items.flatMap((item, index) => permutations(items.filter((_, other) => index !== other)).map(rest => [item, ...rest])) : [[]];
 }
 
-test('minimizes moving players for all 24 draws, with East free to rotate', () => {
+test('minimizes movement, then keeps East, South, West and North seated in priority order for all 24 draws', () => {
   const layouts = permutations(winds);
   // Seats are top, right, bottom, left. South is East’s right-hand neighbour.
   const valid = layouts.filter(layout => {
@@ -20,6 +20,13 @@ test('minimizes moving players for all 24 draws, with East free to rotate', () =
     const plan = planSeats(current);
     const minimum = Math.min(...valid.map(target => current.filter((wind, seat) => wind !== target[seat]).length));
     assert.equal(plan.moves.length, minimum, current.join(','));
+    let preferred = valid.filter(target => current.filter((wind, seat) => wind !== target[seat]).length === minimum);
+    for (const wind of winds) {
+      const keepingWind = preferred.filter(target => target[current.indexOf(wind)] === wind);
+      if (keepingWind.length) preferred = keepingWind;
+    }
+    assert.equal(preferred.length, 1);
+    assert.deepEqual(plan.target, preferred[0], current.join(','));
     assert.ok(valid.some(layout => layout.every((wind, seat) => plan.target[seat] === wind)));
     assert.deepEqual(current, before);
     const after = [...current];
