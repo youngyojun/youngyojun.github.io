@@ -1,0 +1,26 @@
+{
+  "name": "@youngyojun/mahjong",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "check": "astro check",
+    "test": "astro build --force && node --test tests/*.test.ts",
+    "build": "astro build --force"
+  },
+  "dependencies": {
+    "@astrojs/react": "7.1.2",
+    "@youngyojun/design-tokens": "workspace:*",
+    "@youngyojun/ui": "workspace:*",
+    "astro": "catalog:",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@types/node": "24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "5.9.3"
+  }
+}

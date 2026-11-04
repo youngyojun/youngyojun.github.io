@@ -24,6 +24,7 @@ test('publishes a personal homepage with real writing links and its own canonica
 test('publishes home and blog sitemaps through one index and robots entry', () => {
   assert.match(output('sitemap.xml'), /<sitemapindex\b/);
   assert.ok(output('sitemap.xml').includes('<loc>https://youngyojun.github.io/blog/sitemap.xml</loc>'));
+  assert.ok(output('sitemap.xml').includes('<loc>https://youngyojun.github.io/mahjong/sitemap.xml</loc>'));
   assert.ok(output('sitemap.xml').includes('<loc>https://youngyojun.github.io/site-sitemap.xml</loc>'));
   assert.ok(output('site-sitemap.xml').includes('<loc>https://youngyojun.github.io/</loc>'));
   assert.equal(output('robots.txt'), 'Sitemap: https://youngyojun.github.io/sitemap.xml\n');

@@ -42,6 +42,7 @@ section[id] { scroll-margin-top: 35px; }
 h2 { margin: 0; font-family: var(--font-heading); font-size: 30px; font-weight: 400; line-height: 1.5; letter-spacing: -.025em; word-break: keep-all; }
 .section-heading > p { margin: 0 0 3px; color: var(--home-muted); font-size: 13px; line-height: 1.8; }
 .work-section { padding-bottom: 86px; }
+.tool-link { margin: 28px 0 0; }
 .work-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; }
 .work-card { display: block; min-width: 0; text-decoration: none; }
 .work-art { position: relative; overflow: hidden; border: 1px solid transparent; border-radius: 3px; transition: border-color .2s, transform .2s; }

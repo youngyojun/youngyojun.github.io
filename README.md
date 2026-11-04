@@ -1,6 +1,6 @@
 # youngyojun.github.io
 
-Astro 블로그와 독립 앱을 관리하는 pnpm monorepo입니다. 현재 `apps/blog`는 블로그를, `apps/site`는 개인 메인 홈·전역 404·robots·사이트맵 인덱스를 담당합니다. 다른 앱은 아직 구현하지 않았습니다.
+Astro 블로그와 독립 앱을 관리하는 pnpm monorepo입니다. 현재 `apps/blog`는 블로그를, `apps/site`는 개인 메인 홈·전역 404·robots·사이트맵 인덱스를, `apps/mahjong`은 마작 도구를 담당합니다.
 
 Jekyll 빌드와 이전 테마의 렌더링 코드는 제거했습니다. 운영 GitHub Pages 설정은 아직 전환하지 않았습니다. 기존 Jekyll 방식으로 이 변경을 배포하지 마세요. `master`에 push하면 검증을 통과한 정적 산출물을 자동 게시합니다. PR과 배포 옵션 없는 수동 실행에서는 검증만 수행합니다.
 
@@ -42,6 +42,7 @@ Playwright가 설치한 전용 Chromium과 WebKit만 사용합니다. 개인 Chr
 ```text
 site.config.ts          # 도메인과 앱별 공개 경로 등록
 apps/site/              # 개인 메인 홈·전역 404·robots·사이트맵 인덱스
+apps/mahjong/           # 마작 도구 목록·자리 뽑기·공통 마작패 SVG
 apps/blog/
   content/posts/        # 글 Markdown
   content/pages/        # 소개 등 작성 콘텐츠
@@ -66,6 +67,14 @@ playwright.config.ts    # Chromium·WebKit 검사와 정적 preview 설정
 앱은 다른 앱의 내부 소스를 import하지 않습니다. 실제 공통 기능만 `packages/`에서 public export로 제공합니다. 콘텐츠·검색·분류 로직은 블로그 앱이 소유합니다.
 
 메인 홈은 Georgia 제목과 Helvetica Neue 본문을 사용합니다. 해당 글꼴이 없는 기기는 CSS에 지정된 대체 글꼴을 사용합니다. 블로그의 한글·영문은 공유 디자인 패키지의 [Wanted Sans Variable](https://github.com/wanteddev/wanted-sans)을 사용합니다. 고정된 공식 npm 패키지에서 필요한 글자 부분만 자체 제공하고 자주 쓰는 글자는 미리 불러옵니다. 블로그 본문은 17px, 글 제목은 30px(모바일 26px), 본문 소제목은 24·22·20px, 메뉴는 14px, 날짜·분류·태그는 13px를 기준으로 하며 브라우저의 기본 글자 크기 설정을 따르는 rem 단위를 사용합니다. 외부 폰트 CDN은 사용하지 않으며 수식의 KaTeX와 코드의 고정폭 글꼴은 유지합니다.
+
+## 마작 도구
+
+`/mahjong/`은 도구 목록, `/mahjong/seating/`은 4인 자리 뽑기입니다. 한 번의 추첨으로 현재 네 자리에 동·남·서·북을 배정합니다. 동의 위치를 고정하지 않고 네 회전 배치를 비교해 이동 인원을 최소화합니다. 가능한 24개 추첨 결과를 모두 검사하며, 이미 올바른 순서면 이동하지 않고 나머지는 두 사람만 서로 바꾸면 됩니다.
+
+`apps/mahjong/assets/tiles/`에는 [FluffyStuff의 Regular 마작패](https://github.com/FluffyStuff/riichi-mahjong-tiles) SVG 40개와 원본 CC0/퍼블릭 도메인 라이선스를 보관합니다. 가져온 리비전은 같은 폴더의 README에 기록합니다. 각 도구는 `MahjongTile` 컴포넌트로 같은 에셋을 사용하며 브라우저에서 외부 이미지 서버에 요청하지 않습니다.
+
+앱만 개발할 때는 `corepack pnpm --filter @youngyojun/mahjong dev --host 127.0.0.1 --port 4327`을 사용합니다. 전체 사이트는 기존처럼 빌드 후 조립한 preview에서 확인합니다.
 
 ## 새 글 작성
 

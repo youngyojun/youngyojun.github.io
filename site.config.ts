@@ -4,4 +4,5 @@ export const siteUrl = 'https://youngyojun.github.io';
 export const appPaths = {
   site: '/',
   blog: '/blog/',
+  mahjong: '/mahjong/',
 } as const;

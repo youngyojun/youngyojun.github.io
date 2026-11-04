@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { MahjongTile } from '../components/MahjongTile';
+import { appPaths } from '../../../site.config.ts';
+---
+<Layout title="마작 도구 모음" description="테이블에서 가볍게 꺼내 쓰는 마작 도구들. 네 사람의 자리를 뽑고, 최소한의 이동으로 앉아보세요.">
+  <header class="page-intro"><p class="eyebrow">AT THE TABLE</p><h1>마작을 위한 작은 도구들.</h1><p>테이블에서 필요한 순간, 가볍게 꺼내 쓰세요.</p></header>
+  <a class="tool-card" href={`${appPaths.mahjong}seating/`}>
+    <div class="tool-art" aria-hidden="true"><MahjongTile tile="Ton" alt="" /><MahjongTile tile="Nan" alt="" /><MahjongTile tile="Shaa" alt="" /><MahjongTile tile="Pei" alt="" /></div>
+    <div class="tool-copy"><p class="eyebrow">01 / SEATING</p><h2>자리 뽑기 <span aria-hidden="true">↗</span></h2><p>동·남·서·북을 뽑고, 가장 적게 움직여 앉으세요.</p></div>
+  </a>
+</Layout>

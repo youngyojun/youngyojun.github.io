@@ -244,7 +244,7 @@ test('keeps navigation, article math and the root entry usable without JavaScrip
 });
 
 test('publishes valid blog XML and a site-wide sitemap index', async ({ page, request }) => {
-  for (const path of ['/blog/atom.xml', '/blog/sitemap.xml', '/sitemap.xml', '/site-sitemap.xml']) {
+  for (const path of ['/blog/atom.xml', '/blog/sitemap.xml', '/mahjong/sitemap.xml', '/sitemap.xml', '/site-sitemap.xml']) {
     const response = await request.get(path);
     expect(response.status()).toBe(200);
     const xml = await response.text();
@@ -254,8 +254,9 @@ test('publishes valid blog XML and a site-wide sitemap index', async ({ page, re
     }, xml);
     expect(parsed.errors).toBe(0);
     if (path === '/blog/atom.xml') expect(parsed.entries).toBe(10);
-    else if (path === '/sitemap.xml') expect(parsed.urls).toEqual(['https://youngyojun.github.io/site-sitemap.xml', 'https://youngyojun.github.io/blog/sitemap.xml']);
+    else if (path === '/sitemap.xml') expect(parsed.urls).toEqual(['https://youngyojun.github.io/site-sitemap.xml', 'https://youngyojun.github.io/blog/sitemap.xml', 'https://youngyojun.github.io/mahjong/sitemap.xml']);
     else if (path === '/site-sitemap.xml') expect(parsed.urls).toEqual(['https://youngyojun.github.io/']);
+    else if (path === '/mahjong/sitemap.xml') expect(parsed.urls).toEqual(['https://youngyojun.github.io/mahjong/', 'https://youngyojun.github.io/mahjong/seating/']);
     else {
       expect(parsed.urls.length).toBeGreaterThan(60);
       expect(new Set(parsed.urls).size).toBe(parsed.urls.length);

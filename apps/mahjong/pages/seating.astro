@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SeatPlanner from '../components/SeatPlanner';
+---
+<Layout title="자리 뽑기" description="네 사람에게 동·남·서·북을 무작위로 배정하고, 동의 위치에 제한 없이 최소 인원만 자리를 바꾸는 방법을 알려드립니다.">
+  <header class="page-intro"><p class="eyebrow">FOUR PLAYERS / SEATING</p><h1>자리는 뽑고,<br />이동은 가볍게.</h1><p>네 사람의 동·남·서·북을 정하고,<br />가장 적게 움직이는 배치를 찾아드립니다.</p></header>
+  <SeatPlanner client:load />
+  <noscript><p>자리 뽑기를 사용하려면 브라우저에서 JavaScript를 켜주세요.</p></noscript>
+  <aside class="seating-note"><p>동의 위치는 고정하지 않습니다. 동 → 남 → 서 → 북이 반시계 방향이 되도록 배치합니다.</p></aside>
+</Layout>

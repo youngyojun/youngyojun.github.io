@@ -1,0 +1,25 @@
+---
+import '@youngyojun/design-tokens/tokens.css';
+import '../styles/app.css';
+import { fontPreloads } from '@youngyojun/design-tokens/fonts';
+import { appPaths } from '../../../site.config.ts';
+interface Props { title: string; description: string }
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title} · Mahjong</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    {fontPreloads.map(href => <link rel="preload" as="font" type="font/woff2" href={href} crossorigin="anonymous" />)}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+    <header class="app-header shell"><a class="app-brand" href={appPaths.mahjong}>Mahjong<span>.</span></a><a href={appPaths.site}>메인 홈 ↗</a></header>
+    <main id="main" class="shell" tabindex="-1"><slot /></main>
+    <footer class="app-footer shell"><a href={appPaths.mahjong}>마작 도구 모음</a><span>Gyojun Youn</span></footer>
+  </body>
+</html>
