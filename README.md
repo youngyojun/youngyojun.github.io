@@ -6,7 +6,14 @@ Jekyll 빌드와 이전 테마의 렌더링 코드는 제거했습니다. 운영
 
 ## 개발
 
-Node 버전은 `.nvmrc`, pnpm 버전은 `package.json`에 고정합니다.
+Node 버전은 `.nvmrc`, pnpm 버전은 `package.json`에 고정합니다. 전체 사이트 빌드·검증과 마작 앱 개발에는 `rust-toolchain.toml`의 Rust 1.94.1과 wasm-bindgen CLI 0.2.130도 필요합니다. 블로그 단독 개발에는 Rust를 사용하지 않습니다.
+
+Rustup 설치 후 다음을 한 번 실행합니다.
+
+```sh
+rustup toolchain install 1.94.1 --profile minimal --component rustfmt --component clippy --target wasm32-unknown-unknown --no-self-update
+cargo install wasm-bindgen-cli --version 0.2.130 --locked
+```
 
 ```sh
 nvm use
@@ -19,21 +26,21 @@ corepack pnpm dev --host 127.0.0.1 --port 4323
 | 명령 | 동작 |
 | --- | --- |
 | `corepack pnpm dev` | 블로그 개발 서버 |
-| `corepack pnpm check` | 블로그·공용 UI·저장소 스크립트 타입 검사 |
-| `corepack pnpm test` | 단위 테스트, 블로그 빌드·내부 링크·콘텐츠·자산 검사, 산출물 조립 테스트 |
+| `corepack pnpm check` | 앱·공용 UI·스크립트 타입 검사와 Rust 포맷·Clippy 검사 |
+| `corepack pnpm test` | 앱·WASM·Rust 단위 테스트, 블로그 콘텐츠·자산 검사, 산출물 조립 테스트 |
 | `corepack pnpm build` | 독립 앱 빌드 후 루트 `dist/`로 조립 |
 | `corepack pnpm preview` | 조립된 `dist/`를 `http://localhost:4325/`에서 제공 |
-| `corepack pnpm test:e2e` | 조립된 결과의 Chromium·WebKit 데스크톱·모바일 검증 |
+| `corepack pnpm test:e2e` | Chromium·WebKit 데스크톱·모바일과 Firefox 데스크톱 검증 |
 
 브라우저 검증 전에 한 번 설치합니다.
 
 ```sh
-corepack pnpm exec playwright install chromium webkit
+corepack pnpm exec playwright install chromium firefox webkit
 corepack pnpm build
 corepack pnpm test:e2e
 ```
 
-Playwright가 설치한 전용 Chromium과 WebKit만 사용합니다. 개인 Chrome·Safari 실행 파일·프로필·기존 CDP 연결은 테스트에 사용하지 않습니다. 각 테스트는 독립 브라우저 컨텍스트를 사용하고 종료 시 정리합니다. 모바일 프로젝트는 터치와 모바일 viewport를 사용합니다. WebKit은 Safari 계열 엔진의 호환성을 확인하지만 실제 Safari 앱이나 iPhone 기기 검증을 대신하지 않습니다. Firefox는 현재 검사 대상이 아닙니다. [브라우저별 프로젝트](https://playwright.dev/docs/test-projects)는 같은 동작 검사를 각 환경에서 실행합니다.
+Playwright가 설치한 전용 Chromium·Firefox·WebKit만 사용합니다. 개인 Chrome·Safari 실행 파일·프로필·기존 CDP 연결은 테스트에 사용하지 않습니다. 각 테스트는 독립 브라우저 컨텍스트를 사용하고 종료 시 정리합니다. 모바일 프로젝트는 터치와 모바일 viewport를 사용합니다. WebKit은 Safari 계열 엔진의 호환성을 확인하지만 실제 Safari 앱이나 iPhone 기기 검증을 대신하지 않습니다. Firefox는 데스크톱 크기에서 검사합니다. [브라우저별 프로젝트](https://playwright.dev/docs/test-projects)는 같은 동작 검사를 각 환경에서 실행합니다.
 
 실패하면 `playwright-report/`에 HTML 보고서, `test-results/`에 실패 화면과 trace가 남습니다. `corepack pnpm exec playwright show-report`로 보고서를 열 수 있습니다. 이 명령은 개인 브라우저를 열 수 있으므로 에이전트는 자동 실행하지 않습니다.
 
@@ -41,6 +48,7 @@ Playwright가 설치한 전용 Chromium과 WebKit만 사용합니다. 개인 Chr
 
 ```text
 site.config.ts          # 도메인과 앱별 공개 경로 등록
+crates/mahjong-quiz/    # Rust 퀴즈 생성·판정·화료 분해와 WASM 연결
 apps/site/              # 개인 메인 홈·전역 404·robots·사이트맵 인덱스
 apps/mahjong/           # 마작 도구 목록·자리 뽑기·공통 마작패 SVG
 apps/blog/
@@ -75,6 +83,12 @@ playwright.config.ts    # Chromium·WebKit 검사와 정적 preview 설정
 `apps/mahjong/assets/tiles/`에는 [FluffyStuff의 Regular 마작패](https://github.com/FluffyStuff/riichi-mahjong-tiles) SVG 40개와 원본 CC0/퍼블릭 도메인 라이선스를 보관합니다. 가져온 리비전은 같은 폴더의 README에 기록합니다. 각 도구는 `MahjongTile` 컴포넌트로 같은 에셋을 사용하며 브라우저에서 외부 이미지 서버에 요청하지 않습니다.
 
 앱만 개발할 때는 `corepack pnpm --filter @youngyojun/mahjong dev --host 127.0.0.1 --port 4327`을 사용합니다. 전체 사이트는 기존처럼 빌드 후 조립한 preview에서 확인합니다.
+
+`/mahjong/waits/`는 청일색 대기패 퀴즈입니다. Rust가 합법적인 13장 문제 생성, 일반형·치또이츠 판정, 누락·오답 집계, 모든 고유 화료 분해를 처리합니다. 브라우저의 난수로 seed를 공급하며 같은 seed는 네이티브 Rust와 WASM에서 같은 문제를 만듭니다. 연속 정답 기록은 현재 화면에서 유지합니다. 각 문제를 제출하면 누락·오답과 패별 화료 분해를 확인할 수 있습니다.
+
+마작 앱의 dev/check/test/build는 먼저 `scripts/build-mahjong-wasm.ts`로 Rust를 빌드합니다. Rust 코드를 수정한 뒤에는 `corepack pnpm --filter @youngyojun/mahjong wasm:build`를 실행하고 페이지를 새로고침합니다. `Cargo.lock`과 도구 버전을 고정하며 생성된 `apps/mahjong/generated/`의 WASM·JS·TypeScript 정의는 Git에 넣지 않습니다. Vite가 WASM URL을 해시가 붙은 앱 에셋 경로로 처리합니다. 로딩 실패 후 재시도와 일반 콘텐츠 타입의 응답도 브라우저에서 검사합니다.
+
+Rust 검사는 `corepack pnpm rust:check`와 `corepack pnpm rust:test`로 따로 실행할 수 있습니다. 규칙 검사는 독립적인 생성 방식과 모든 합법적인 단일 수패 14장 구성을 대조합니다. CI는 Rust 의존성·컴파일 결과·wasm-bindgen 도구를 캐시합니다.
 
 ## 새 글 작성
 

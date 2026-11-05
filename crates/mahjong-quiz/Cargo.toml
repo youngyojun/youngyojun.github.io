@@ -1,0 +1,16 @@
+[package]
+name = "mahjong-quiz"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+fastrand = { version = "=2.5.0", default-features = false }
+serde = { version = "=1.0.228", features = ["derive"] }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "=0.2.130"
+serde-wasm-bindgen = "=0.6.5"

@@ -7,3 +7,5 @@ dist/
 .pnpm-store/
 playwright-report/
 test-results/
+/target/
+apps/mahjong/generated/

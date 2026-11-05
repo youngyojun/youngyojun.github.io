@@ -30,11 +30,27 @@ jobs:
         with:
           node-version-file: .nvmrc
       - run: corepack enable
+      - name: Cache Rust dependencies and WASM tooling
+        uses: actions/cache@v6.1.0
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            ~/.cargo/bin/wasm-bindgen
+            target
+          key: rust-${{ runner.os }}-1.94.1-bindgen-0.2.130-${{ hashFiles('Cargo.lock') }}
+          restore-keys: rust-${{ runner.os }}-1.94.1-bindgen-0.2.130-
+      - name: Prepare pinned Rust and WASM tooling
+        run: |
+          rustup toolchain install 1.94.1 --profile minimal --component rustfmt --component clippy --target wasm32-unknown-unknown --no-self-update
+          if [ "$(wasm-bindgen --version 2>/dev/null)" != "wasm-bindgen 0.2.130" ]; then
+            cargo install wasm-bindgen-cli --version 0.2.130 --locked --force
+          fi
       - run: corepack pnpm install --frozen-lockfile
       - run: corepack pnpm check
       - run: corepack pnpm test
       - run: corepack pnpm build
-      - run: corepack pnpm exec playwright install --with-deps chromium webkit
+      - run: corepack pnpm exec playwright install --with-deps chromium firefox webkit
       - name: Test built site in browsers
         id: browser-tests
         run: corepack pnpm test:e2e

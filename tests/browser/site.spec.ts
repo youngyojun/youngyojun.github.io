@@ -256,7 +256,7 @@ test('publishes valid blog XML and a site-wide sitemap index', async ({ page, re
     if (path === '/blog/atom.xml') expect(parsed.entries).toBe(10);
     else if (path === '/sitemap.xml') expect(parsed.urls).toEqual(['https://youngyojun.github.io/site-sitemap.xml', 'https://youngyojun.github.io/blog/sitemap.xml', 'https://youngyojun.github.io/mahjong/sitemap.xml']);
     else if (path === '/site-sitemap.xml') expect(parsed.urls).toEqual(['https://youngyojun.github.io/']);
-    else if (path === '/mahjong/sitemap.xml') expect(parsed.urls).toEqual(['https://youngyojun.github.io/mahjong/', 'https://youngyojun.github.io/mahjong/seating/']);
+    else if (path === '/mahjong/sitemap.xml') expect(parsed.urls).toEqual(['https://youngyojun.github.io/mahjong/', 'https://youngyojun.github.io/mahjong/seating/', 'https://youngyojun.github.io/mahjong/waits/']);
     else {
       expect(parsed.urls.length).toBeGreaterThan(60);
       expect(new Set(parsed.urls).size).toBe(parsed.urls.length);
@@ -272,7 +272,9 @@ test('serves real HTML for direct app navigation, reloads and browser history', 
   for (const path of routes) {
     expect(existsSync(new URL(`../../dist/${decodeURIComponent(path.slice(1))}index.html`, import.meta.url))).toBe(true);
     expect((await page.goto(path))?.status()).toBe(200);
-    expect((await page.reload())?.status()).toBe(200);
+    // Firefox exposes a successful conditional reload as 304.
+    expect([200, 304]).toContain((await page.reload())?.status());
+    await expect(page.locator('main')).toBeVisible();
     expect(new URL(page.url()).pathname).toBe(encodeURI(path));
   }
   await page.goto('/blog/');
