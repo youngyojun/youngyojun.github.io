@@ -9,7 +9,8 @@
   "sideEffects": ["**/*.css"],
   "scripts": {
     "check": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:built": "corepack pnpm test"
   },
   "dependencies": {
     "@youngyojun/design-tokens": "workspace:*"

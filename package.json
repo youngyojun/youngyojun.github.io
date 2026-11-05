@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "corepack pnpm --filter @youngyojun/blog dev",
     "check": "corepack pnpm -r check && tsc --project scripts/tsconfig.json && corepack pnpm rust:check",
-    "test": "corepack pnpm -r test && node --test scripts/*.test.ts && corepack pnpm rust:test",
+    "test": "corepack pnpm build && corepack pnpm test:built",
+    "test:built": "corepack pnpm -r test:built && node --test scripts/*.test.ts && corepack pnpm rust:test",
     "rust:check": "cargo fmt --all -- --check && cargo clippy --locked --workspace --all-targets -- -D warnings",
     "rust:test": "cargo test --locked --workspace",
     "build": "corepack pnpm -r build && node scripts/assemble-site.ts",

@@ -6,7 +6,8 @@
     "wasm:build": "node ../../scripts/build-mahjong-wasm.ts",
     "dev": "corepack pnpm wasm:build && astro dev",
     "check": "corepack pnpm wasm:build && astro check",
-    "test": "corepack pnpm wasm:build && astro build --force && node --test tests/*.test.ts",
+    "test": "corepack pnpm build && corepack pnpm test:built",
+    "test:built": "node --test tests/*.test.ts",
     "build": "corepack pnpm wasm:build && astro build --force"
   },
   "dependencies": {

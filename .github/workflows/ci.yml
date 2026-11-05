@@ -20,8 +20,10 @@ concurrency:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
+    outputs:
+      playwright_image: ${{ steps.playwright.outputs.image }}
     env:
       ASTRO_TELEMETRY_DISABLED: '1'
     steps:
@@ -38,19 +40,61 @@ jobs:
             ~/.cargo/git
             ~/.cargo/bin/wasm-bindgen
             target
-          key: rust-${{ runner.os }}-1.94.1-bindgen-0.2.130-${{ hashFiles('Cargo.lock') }}
-          restore-keys: rust-${{ runner.os }}-1.94.1-bindgen-0.2.130-
+          key: rust-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('rust-toolchain.toml', 'Cargo.lock') }}-${{ github.sha }}
+          restore-keys: rust-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('rust-toolchain.toml', 'Cargo.lock') }}-
       - name: Prepare pinned Rust and WASM tooling
         run: |
           rustup toolchain install 1.94.1 --profile minimal --component rustfmt --component clippy --target wasm32-unknown-unknown --no-self-update
-          if [ "$(wasm-bindgen --version 2>/dev/null)" != "wasm-bindgen 0.2.130" ]; then
-            cargo install wasm-bindgen-cli --version 0.2.130 --locked --force
+          bindgen_version=$(awk -F '"' '/^wasm-bindgen =/ { sub(/^=/, "", $2); print $2 }' crates/mahjong-quiz/Cargo.toml)
+          if [ "$(wasm-bindgen --version 2>/dev/null)" != "wasm-bindgen $bindgen_version" ]; then
+            archive="wasm-bindgen-$bindgen_version-x86_64-unknown-linux-musl.tar.gz"
+            release="https://github.com/wasm-bindgen/wasm-bindgen/releases/download/$bindgen_version"
+            # Upstream checksum files name archives under gh-release/.
+            mkdir -p "$RUNNER_TEMP/gh-release"
+            curl --fail --location --retry 3 --max-time 120 "$release/$archive" -o "$RUNNER_TEMP/gh-release/$archive"
+            curl --fail --location --retry 3 --max-time 120 "$release/$archive.sha256sum" -o "$RUNNER_TEMP/$archive.sha256sum"
+            (cd "$RUNNER_TEMP" && sha256sum --check "$archive.sha256sum")
+            tar -xzf "$RUNNER_TEMP/gh-release/$archive" -C "$RUNNER_TEMP"
+            install -m 755 "$RUNNER_TEMP/${archive%.tar.gz}/wasm-bindgen" "$HOME/.cargo/bin/wasm-bindgen"
           fi
       - run: corepack pnpm install --frozen-lockfile
+      - name: Select matching Playwright image
+        id: playwright
+        run: |
+          version=$(node -p "require('@playwright/test/package.json').version")
+          echo "image=mcr.microsoft.com/playwright:v$version-noble" >> "$GITHUB_OUTPUT"
       - run: corepack pnpm check
-      - run: corepack pnpm test
       - run: corepack pnpm build
-      - run: corepack pnpm exec playwright install --with-deps chromium firefox webkit
+      - run: corepack pnpm test:built
+      - uses: actions/upload-artifact@v7.0.2
+        with:
+          name: static-site
+          path: dist/
+          include-hidden-files: true
+          retention-days: 7
+          overwrite: true
+
+  browsers:
+    needs: verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    container:
+      # Browsers and system libraries are preinstalled; avoid apt downloads on each run.
+      image: ${{ needs.verify.outputs.playwright_image }}
+      options: --ipc=host
+    env:
+      ASTRO_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version-file: .nvmrc
+      - run: corepack enable
+      - run: corepack pnpm install --frozen-lockfile
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          name: static-site
+          path: dist/
       - name: Test built site in browsers
         id: browser-tests
         run: corepack pnpm test:e2e
@@ -64,13 +108,6 @@ jobs:
             test-results/
           retention-days: 7
           overwrite: true
-      - uses: actions/upload-artifact@v7.0.2
-        with:
-          name: static-site
-          path: dist/
-          include-hidden-files: true
-          retention-days: 7
-          overwrite: true
       - name: Package verified site for Pages
         if: github.ref == 'refs/heads/master' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.deploy))
         uses: actions/upload-pages-artifact@v5.0.0
@@ -81,8 +118,8 @@ jobs:
 
   deploy:
     if: github.ref == 'refs/heads/master' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.deploy))
-    needs: verify
-    runs-on: ubuntu-latest
+    needs: [verify, browsers]
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
       pages: write

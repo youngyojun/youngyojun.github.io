@@ -1,5 +1,4 @@
 import { expect, test, type Page } from '@playwright/test';
-import { readFileSync } from 'node:fs';
 
 async function seedQuiz(page: Page, seed = 2026) {
   await page.addInitScript(seed => {
@@ -85,7 +84,9 @@ test('recovers when the WASM download initially fails', async ({ page }) => {
 
 test('loads WASM when a server provides a generic content type', async ({ page }) => {
   await seedQuiz(page);
-  await page.route('**/*.wasm', route => route.fulfill({ body: readFileSync(new URL('../../apps/mahjong/generated/mahjong_quiz_bg.wasm', import.meta.url)), contentType: 'application/octet-stream' }));
+  await page.route('**/*.wasm', async route => {
+    await route.fulfill({ response: await route.fetch(), contentType: 'application/octet-stream' });
+  });
   await page.goto('/mahjong/waits/');
   await expect(page.getByRole('group', { name: '문제 손패 13장' }).getByRole('img')).toHaveCount(13);
 });

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "check": "astro check",
-    "test": "astro build --force && node --test tests/*.test.mjs",
+    "test": "corepack pnpm build && corepack pnpm test:built",
+    "test:built": "node --test tests/*.test.mjs",
     "build": "astro build --force",
     "preview": "astro preview"
   },

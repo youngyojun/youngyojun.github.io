@@ -28,6 +28,7 @@ corepack pnpm dev --host 127.0.0.1 --port 4323
 | `corepack pnpm dev` | 블로그 개발 서버 |
 | `corepack pnpm check` | 앱·공용 UI·스크립트 타입 검사와 Rust 포맷·Clippy 검사 |
 | `corepack pnpm test` | 앱·WASM·Rust 단위 테스트, 블로그 콘텐츠·자산 검사, 산출물 조립 테스트 |
+| `corepack pnpm test:built` | 이미 빌드한 산출물로 같은 검사를 실행; 먼저 `build` 필요 |
 | `corepack pnpm build` | 독립 앱 빌드 후 루트 `dist/`로 조립 |
 | `corepack pnpm preview` | 조립된 `dist/`를 `http://localhost:4325/`에서 제공 |
 | `corepack pnpm test:e2e` | Chromium·WebKit 데스크톱·모바일과 Firefox 데스크톱 검증 |
@@ -160,7 +161,7 @@ KaTeX 버전은 `pnpm-workspace.yaml`의 `catalog.katex` 한 곳에서 관리합
 
 공용 React UI는 `@youngyojun/ui`에서 가져옵니다. 현재 `Button`은 일반 버튼 props·ref·className을 지원하며 기본 `type="button"`을 사용합니다. Astro에서는 `client:*` 없이 정적 HTML로 사용할 수 있고, React 상태·이벤트가 필요할 때만 해당 컴포넌트를 hydrate합니다. 블로그 전체를 React로 실행하지 않습니다.
 
-새 앱은 `apps/<name>`에 별도 package.json과 dev/check/test/build 명령을 둡니다. `site.config.ts`의 `appPaths`에 공개 경로를 등록하고 앱 설정의 `base`가 같은 값을 사용하도록 합니다. 앱의 `dist/`는 앱 내부 경로만 포함하며 조립 단계가 등록한 공개 경로에 배치합니다. 다른 앱의 소스는 import하지 않고 실제 공유 코드만 workspace 패키지에서 가져옵니다.
+새 앱은 `apps/<name>`에 별도 package.json과 dev/check/test/build 명령을 둡니다. `test:built`는 빌드 없이 검사를 실행하고, `test`는 `build` 후 `test:built`를 호출합니다. `site.config.ts`의 `appPaths`에 공개 경로를 등록하고 앱 설정의 `base`가 같은 값을 사용하도록 합니다. 앱의 `dist/`는 앱 내부 경로만 포함하며 조립 단계가 등록한 공개 경로에 배치합니다. 다른 앱의 소스는 import하지 않고 실제 공유 코드만 workspace 패키지에서 가져옵니다.
 
 `/`의 메인 홈과 전역 404·robots·사이트맵 인덱스는 `apps/site`, `/blog/` 전체는 `apps/blog`가 소유합니다. 루트 앱이 다른 앱의 경로 아래에 파일을 만들거나 두 앱의 경로가 중첩되면 조립이 실패합니다. 앱마다 CSS·스크립트·public 파일도 자기 경로 안에 배치합니다.
 
@@ -171,6 +172,8 @@ KaTeX 버전은 `pnpm-workspace.yaml`의 `catalog.katex` 한 곳에서 관리합
 `corepack pnpm build`는 `apps/site/dist`를 루트에, `apps/blog/dist`를 `dist/blog/`에 조립하고 `.nojekyll`을 추가합니다. `scripts/assemble-site.ts`는 앱 경로의 중복·중첩·소유권 침범, 원본과 출력의 경로 중첩·심볼릭 링크·파일 충돌을 검출하며, 충돌이 있으면 기존 결과를 건드리기 전에 실패합니다. 배포 대상은 루트 `dist/`입니다. 산출물과 브라우저 테스트 결과는 Git에 넣지 않습니다.
 
 `.github/workflows/ci.yml`은 고정된 Node/pnpm으로 설치·타입·테스트·조립·브라우저 검증을 실행하고 `static-site` artifact를 업로드합니다. `master` push와 PR merge는 검증 성공 후 자동 배포합니다. PR과 배포 옵션 없는 수동 실행에서는 검증만 합니다. `master`에서 수동 실행의 `deploy`를 선택해 배포할 수도 있습니다. 같은 실행에서 검증한 `dist/`를 Pages artifact로 포장하고 별도 배포 job이 게시하며, 검증 실패 시 배포하지 않습니다. 자동·수동 배포는 같은 대기열을 사용하고 진행 중인 배포를 취소하지 않습니다. Pages 쓰기·OIDC 권한은 배포 job에만 부여합니다.
+
+`verify` job은 사이트를 한 번 빌드하고 `test:built`로 검사합니다. Rust 컴파일 결과를 다음 실행에 재사용하며, wasm-bindgen CLI는 버전이 일치하는 공식 배포 바이너리를 SHA-256 확인 후 설치합니다. `browsers` job은 같은 `static-site`를 내려받아 Chromium·Firefox·WebKit 전체 검사를 수행하며 사이트를 다시 빌드하지 않습니다. 브라우저와 시스템 라이브러리가 포함된 [공식 Playwright 이미지](https://playwright.dev/docs/docker)를 사용해 매번 Ubuntu 패키지를 설치하지 않습니다. 이미지 버전은 설치된 `@playwright/test`에서 읽으므로 의존성 업데이트 때 별도로 맞출 필요가 없습니다. 두 검증 job을 모두 통과해야 배포합니다.
 
 브라우저 검사 실패 시 `browser-failures` artifact에 HTML 보고서·실패 화면·trace를 7일간 보관합니다. 성공한 실행의 `static-site`도 7일간 보관합니다.
 
