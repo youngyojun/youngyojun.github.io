@@ -3,7 +3,7 @@ packages:
   - packages/*
 
 catalog:
-  astro: 7.4.4
+  astro: 7.4.7
   katex: 0.19.1
 
 overrides:
