@@ -11,7 +11,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/markdown-remark": "7.3.5",
+    "@astrojs/markdown-remark": "7.3.6",
     "@youngyojun/design-tokens": "workspace:*",
     "astro": "catalog:"
   },

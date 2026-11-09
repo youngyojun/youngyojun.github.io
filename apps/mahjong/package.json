@@ -11,7 +11,7 @@
     "build": "corepack pnpm wasm:build && astro build --force"
   },
   "dependencies": {
-    "@astrojs/react": "7.1.2",
+    "@astrojs/react": "7.1.4",
     "@youngyojun/design-tokens": "workspace:*",
     "@youngyojun/ui": "workspace:*",
     "astro": "catalog:",
