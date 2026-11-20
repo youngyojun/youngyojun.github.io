@@ -7,5 +7,5 @@ export default defineConfig({
   base: appPaths.site,
   srcDir: '.',
   trailingSlash: 'always',
-  markdown: { processor: unified() },
+  markdown: { processor: unified(), smartypants: false },
 });

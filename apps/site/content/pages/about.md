@@ -22,7 +22,7 @@ title: "저를 소개합니다! :D"
 
 # About Me
 
-* **2022년 ACM ICPC Seoul Regioanl [1위](http://static.icpckorea.net/20221119/scoreboard/)**
+* **2022년 ACM ICPC Seoul Regional [1위](http://static.icpckorea.net/20221119/scoreboard/)**
   * 전세계에서 **3년 연속 ICPC Regional 우승한 유일한 팀**
 * **ACM World Final 2021 Gold-medalist [4위](https://image.icpc.global/wfscoreboard/index.html)**
 * 2022년 넥슨 청소년 프로그래밍 챌린지 출제 및 검수

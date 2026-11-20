@@ -1,8 +1,22 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { test } from 'node:test';
 
 const output = file => readFileSync(new URL(`../dist/${file}`, import.meta.url), 'utf8');
+
+test('publishes the personal About page at the site root and links to it from home', () => {
+  assert.ok(existsSync(new URL('../dist/about/index.html', import.meta.url)));
+  const html = output('about/index.html');
+  assert.ok(html.includes('rel="canonical" href="https://youngyojun.github.io/about/"'));
+  assert.match(html, /<html lang="ko">/);
+  assert.match(html, /<h1\b[^>]*>저를 소개합니다! :D<\/h1>/);
+  assert.ok(html.includes('Who Am I?'));
+  assert.ok(html.includes('href="/blog/"'));
+  assert.ok(!html.includes('/blog/about/'));
+  assert.ok(!html.includes('http-equiv="refresh"'));
+  assert.ok(output('index.html').includes('href="/about/"'));
+  assert.ok(output('site-sitemap.xml').includes('<loc>https://youngyojun.github.io/about/</loc>'));
+});
 
 test('publishes a personal homepage with real writing links and its own canonical URL', () => {
   const html = output('index.html');

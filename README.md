@@ -1,6 +1,6 @@
 # youngyojun.github.io
 
-Astro 블로그와 독립 앱을 관리하는 pnpm monorepo입니다. 현재 `apps/blog`는 블로그를, `apps/site`는 개인 메인 홈·전역 404·robots·사이트맵 인덱스를, `apps/mahjong`은 마작 도구를 담당합니다.
+Astro 블로그와 독립 앱을 관리하는 pnpm monorepo입니다. 현재 `apps/blog`는 블로그를, `apps/site`는 개인 메인 홈·About·전역 404·robots·사이트맵 인덱스를, `apps/mahjong`은 마작 도구를 담당합니다.
 
 Jekyll 빌드와 이전 테마의 렌더링 코드는 제거했습니다. 운영 GitHub Pages 설정은 아직 전환하지 않았습니다. 기존 Jekyll 방식으로 이 변경을 배포하지 마세요. `master`에 push하면 검증을 통과한 정적 산출물을 자동 게시합니다. PR과 배포 옵션 없는 수동 실행에서는 검증만 수행합니다.
 
@@ -50,11 +50,12 @@ Playwright가 설치한 전용 Chromium·Firefox·WebKit만 사용합니다. 개
 ```text
 site.config.ts          # 도메인과 앱별 공개 경로 등록
 crates/mahjong-quiz/    # Rust 퀴즈 생성·판정·화료 분해와 WASM 연결
-apps/site/              # 개인 메인 홈·전역 404·robots·사이트맵 인덱스
+apps/site/              # 개인 메인 홈·About·전역 404·robots·사이트맵 인덱스
+  content/pages/        # 개인 소개 Markdown 원문
+  layouts/              # 홈과 About의 공통 헤더·푸터·문서 구조
 apps/mahjong/           # 마작 도구 목록·자리 뽑기·공통 마작패 SVG
 apps/blog/
   content/posts/        # 글 Markdown
-  content/pages/        # 소개 등 작성 콘텐츠
   pages/                # 앱 기준 경로에 상대적인 URL 진입점
   layouts/              # 문서 틀·공통 탐색·메타데이터
   components/           # 블로그 전용 UI
@@ -145,7 +146,7 @@ KaTeX 버전은 `pnpm-workspace.yaml`의 `catalog.katex` 한 곳에서 관리합
 - 분류: `/blog/categories/`, `/blog/categories/<인코딩한 이름>/`
 - 분류별 다음 페이지: 해당 주소 뒤 `page/2/`
 - 아카이브: `/blog/archives/`에서 연도별 전체 목록
-- 소개: `/blog/about/`
+- 개인 소개: `/about/` (`apps/site` 소유)
 
 글·분류·목록·수식은 JavaScript 없이 읽고 이동할 수 있습니다. 검색은 native dialog와 처음 열 때 불러오는 `/blog/search.json`을 사용합니다. 한글·영어 제목/본문을 검색하며 전체 문구의 일치를 우선합니다. Escape·닫기·배경 클릭으로 닫고, 포커스를 복원합니다. 로딩 실패는 닫았다 다시 열어 재시도할 수 있습니다. 검색 결과는 HTML로 삽입하지 않고 텍스트 노드로 구성합니다.
 
@@ -163,7 +164,7 @@ KaTeX 버전은 `pnpm-workspace.yaml`의 `catalog.katex` 한 곳에서 관리합
 
 새 앱은 `apps/<name>`에 별도 package.json과 dev/check/test/build 명령을 둡니다. `test:built`는 빌드 없이 검사를 실행하고, `test`는 `build` 후 `test:built`를 호출합니다. `site.config.ts`의 `appPaths`에 공개 경로를 등록하고 앱 설정의 `base`가 같은 값을 사용하도록 합니다. 앱의 `dist/`는 앱 내부 경로만 포함하며 조립 단계가 등록한 공개 경로에 배치합니다. 다른 앱의 소스는 import하지 않고 실제 공유 코드만 workspace 패키지에서 가져옵니다.
 
-`/`의 메인 홈과 전역 404·robots·사이트맵 인덱스는 `apps/site`, `/blog/` 전체는 `apps/blog`가 소유합니다. 루트 앱이 다른 앱의 경로 아래에 파일을 만들거나 두 앱의 경로가 중첩되면 조립이 실패합니다. 앱마다 CSS·스크립트·public 파일도 자기 경로 안에 배치합니다.
+`/`의 메인 홈·`/about/` 개인 소개와 전역 404·robots·사이트맵 인덱스는 `apps/site`, `/blog/` 전체는 `apps/blog`가 소유합니다. 소개 원문은 `apps/site/content/pages/about.md`에서 편집하며 홈과 같은 `SiteLayout`을 사용합니다. 기존 `/blog/about/`은 제거하며 자동 이동하지 않습니다. 루트 앱이 다른 앱의 경로 아래에 파일을 만들거나 두 앱의 경로가 중첩되면 조립이 실패합니다. 앱마다 CSS·스크립트·public 파일도 자기 경로 안에 배치합니다.
 
 공개 화면 주소마다 정적 진입 HTML을 생성하고 React로 필요한 상호작용을 구현하는 것을 기본으로 합니다. 새 앱은 직접 접속·새로고침·뒤로/앞으로 가기를 조립된 정적 결과에서 검증해야 합니다. 런타임 동적 라우트나 서버 기능이 필요해지면 해당 앱의 호스팅 요구를 별도로 검토합니다.
 

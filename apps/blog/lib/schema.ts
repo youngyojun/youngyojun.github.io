@@ -1,6 +1,5 @@
 import { z } from 'astro/zod';
 
-export const pageSchema = z.object({ title: z.string().trim().min(1) }).strict();
 const classification = z.string().trim().min(1).refine(value => !/[\/\\#?]/.test(value) && value !== '.' && value !== '..', 'Use a single taxonomy name without URL delimiters');
 
 export const postSchema = z.object({

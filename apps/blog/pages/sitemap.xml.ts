@@ -10,7 +10,7 @@ export function GET({ site }: APIContext) {
   if (!site) throw new Error('Sitemap requires a configured site URL');
   const pages = [
     ...paginate(posts, identity.blog).map(page => page.url),
-    ...['archives/', 'about/', 'tags/', 'categories/'].map(blogPath),
+    ...['archives/', 'tags/', 'categories/'].map(blogPath),
     ...(['tags', 'categories'] as const).flatMap(kind => groupPosts(kind).flatMap(group => paginate(group.posts, group.url).map(page => page.url))),
   ];
   const pdfs = readdirSync(publicDir, { recursive: true })

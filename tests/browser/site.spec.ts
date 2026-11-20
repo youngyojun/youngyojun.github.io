@@ -38,6 +38,29 @@ test('keeps the personal homepage navigable, responsive and linked to real artic
   await expect(page.locator('main')).toBeFocused();
 });
 
+test('opens the unchanged introduction from home and blog at its new URL', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('/');
+  await page.getByRole('navigation', { name: 'Main', exact: true }).getByRole('link', { name: 'About', exact: true }).click();
+  await expect(page).toHaveURL(/\/about\/$/);
+  await expect(page).toHaveTitle('저를 소개합니다! :D | Gyojun Youn');
+  await expect(page.locator('article > header h1')).toHaveText('저를 소개합니다! :D');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ko');
+  await expect(page.getByRole('heading', { name: 'Who Am I?', exact: true })).toBeVisible();
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://youngyojun.github.io/about/');
+  await expect(page.getByRole('link', { name: 'About', exact: true })).toHaveAttribute('aria-current', 'page');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.getByRole('navigation', { name: 'Main', exact: true }).getByRole('link', { name: 'Work', exact: true }).click();
+  await expect(page).toHaveURL(/\/#work$/);
+  await page.goto('/blog/');
+  await page.getByRole('link', { name: '소개', exact: true }).click();
+  await expect(page).toHaveURL(/\/about\/$/);
+  await page.getByRole('link', { name: 'Gyojun Youn — Home', exact: true }).click();
+  await expect(page).toHaveURL(/^https?:\/\/[^/]+\/$/);
+  expect(errors).toEqual([]);
+});
+
 test('shows the same latest articles as the blog and uses the current year', async ({ page }) => {
   await page.goto('/blog/');
   const latest = await page.locator('.post-previews h2 a').evaluateAll(links => links.slice(0, 3).map(link => link.getAttribute('href')));
@@ -211,7 +234,7 @@ test('treats indexed HTML-looking strings as text', async ({ page }) => {
 });
 
 test('returns 404 at former article and classification URLs', async ({ page }) => {
-  for (const path of ['/secmem/2022/03/20/Hunt-Szymanski/', '/tag/#/ICPC/page2', '/category/#/Linear%20Algebra', '/tags/', '/categories/', '/archives/', '/about/', '/atom.xml', '/assets/images/posts/2022-03-20-Hunt-Szymanski/1.png', '/downloadable_files/physicslab1/newton_apple_report.pdf']) {
+  for (const path of ['/secmem/2022/03/20/Hunt-Szymanski/', '/tag/#/ICPC/page2', '/category/#/Linear%20Algebra', '/tags/', '/categories/', '/archives/', '/blog/about/', '/atom.xml', '/assets/images/posts/2022-03-20-Hunt-Szymanski/1.png', '/downloadable_files/physicslab1/newton_apple_report.pdf']) {
     const response = await page.goto(path);
     expect(response?.status()).toBe(404);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('페이지를 찾을 수 없습니다.');
@@ -238,7 +261,10 @@ test('keeps navigation, article math and the root entry usable without JavaScrip
     await expect(page.locator('.mathcal').first()).toBeVisible();
     await page.goto('/');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Gyojun Youn.');
-    await page.getByRole('link', { name: 'Read the blog', exact: true }).click();
+    await page.getByRole('navigation', { name: 'Main', exact: true }).getByRole('link', { name: 'About', exact: true }).click();
+    await expect(page).toHaveURL(/\/about\/$/);
+    await expect(page.getByRole('heading', { name: 'Who Am I?', exact: true })).toBeVisible();
+    await page.getByRole('navigation', { name: 'Main', exact: true }).getByRole('link', { name: 'Blog', exact: true }).click();
     await expect(page).toHaveURL(/\/blog\/$/);
   } finally { await context.close(); }
 });
@@ -255,7 +281,7 @@ test('publishes valid blog XML and a site-wide sitemap index', async ({ page, re
     expect(parsed.errors).toBe(0);
     if (path === '/blog/atom.xml') expect(parsed.entries).toBe(10);
     else if (path === '/sitemap.xml') expect(parsed.urls).toEqual(['https://youngyojun.github.io/site-sitemap.xml', 'https://youngyojun.github.io/blog/sitemap.xml', 'https://youngyojun.github.io/mahjong/sitemap.xml']);
-    else if (path === '/site-sitemap.xml') expect(parsed.urls).toEqual(['https://youngyojun.github.io/']);
+    else if (path === '/site-sitemap.xml') expect(parsed.urls).toEqual(['https://youngyojun.github.io/', 'https://youngyojun.github.io/about/']);
     else if (path === '/mahjong/sitemap.xml') expect(parsed.urls).toEqual(['https://youngyojun.github.io/mahjong/', 'https://youngyojun.github.io/mahjong/seating/', 'https://youngyojun.github.io/mahjong/waits/']);
     else {
       expect(parsed.urls.length).toBeGreaterThan(60);
@@ -268,7 +294,7 @@ test('publishes valid blog XML and a site-wide sitemap index', async ({ page, re
 });
 
 test('serves real HTML for direct app navigation, reloads and browser history', async ({ page }) => {
-  const routes = ['/blog/', '/blog/page/2/', '/blog/posts/hunt-szymanski/', '/blog/tags/학교/', '/blog/about/'];
+  const routes = ['/blog/', '/blog/page/2/', '/blog/posts/hunt-szymanski/', '/blog/tags/학교/', '/about/'];
   for (const path of routes) {
     expect(existsSync(new URL(`../../dist/${decodeURIComponent(path.slice(1))}index.html`, import.meta.url))).toBe(true);
     expect((await page.goto(path))?.status()).toBe(200);

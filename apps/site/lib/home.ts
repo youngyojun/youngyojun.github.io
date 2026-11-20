@@ -2,9 +2,6 @@ import { appPaths } from '../../../site.config.ts';
 
 interface RecentPost { title: string; url: string; date: string; description: string }
 
-const year = document.querySelector('#copyright-year')!;
-year.textContent = String(new Date().getFullYear());
-
 const list = document.querySelector<HTMLUListElement>('#latest-posts')!;
 const status = document.querySelector<HTMLElement>('#writing-status')!;
 const postPrefix = `${appPaths.blog}posts/`;

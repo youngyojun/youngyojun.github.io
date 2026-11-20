@@ -1,0 +1,29 @@
+---
+import { getEntry, render } from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const page = await getEntry('pages', 'about');
+if (!page) throw new Error('Missing about content');
+const { Content } = await render(page);
+---
+
+<SiteLayout title={page.data.title} description="윤교준(Gyojun Youn)의 소개, 활동 이력과 연락처." lang="ko">
+  <article class="about-page">
+    <header><h1>{page.data.title}</h1></header>
+    <div class="prose"><Content /></div>
+  </article>
+</SiteLayout>
+
+<style>
+  .about-page { max-width: var(--content-width); margin: 2rem auto 4rem; font-family: "Wanted Sans Variable", sans-serif; font-size: 1.0625rem; line-height: 1.85; overflow-wrap: anywhere; }
+  header h1 { margin: 0 0 2.75rem; text-align: center; font-family: inherit; font-size: 1.875rem; font-weight: 600; line-height: 1.5; letter-spacing: -.015em; }
+  .prose :global(h1), .prose :global(h2), .prose :global(h3) { font-family: inherit; font-weight: 600; line-height: 1.5; scroll-margin-top: 2rem; }
+  .prose :global(h1) { margin: 2.75rem 0 1rem; font-size: 1.5rem; }
+  .prose :global(h2) { margin: 2.25rem 0 .875rem; font-size: 1.375rem; }
+  .prose :global(h3) { margin: 1.875rem 0 .75rem; font-size: 1.25rem; }
+  .prose :global(p), .prose :global(ul) { margin-block: 1.2em; }
+  .prose :global(ul) { padding-left: 1.5rem; }
+  .prose :global(li + li) { margin-top: .4rem; }
+  .prose :global(li > ul) { margin-block: .5rem; }
+  .prose :global(hr) { margin-block: 2rem; border: 0; border-top: 1px solid var(--home-line); }
+</style>
